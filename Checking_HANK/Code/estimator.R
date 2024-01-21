@@ -1,6 +1,7 @@
 
 
 
+
 ## Libraries -----
 required_Packages_Install <-
   c(
@@ -15,7 +16,8 @@ required_Packages_Install <-
     "fabletools",
     "AER",
     "broom",
-    "boot"
+    "stargazer",
+    "ivreg"
   )
 
 
@@ -44,10 +46,12 @@ for (i in 1:20) {
       lead(dR, i) ~
         expected_inflation * demeaned_HAWK + lag(dR, 1) + lag(dR, 2) +
         lag(dR, 3) + lag(dR, 4) +
-        lag(expected_inflation, 1)+lag(expected_inflation, 2)+lag(expected_inflation, 3)+lag(expected_inflation, 4)|
+        lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
+        lag(expected_inflation, 4) |
         expected_inflation * demeaned_HAWK_IV +  lag(dR, 1) +
         lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
-        lag(expected_inflation, 1)+lag(expected_inflation, 2)+lag(expected_inflation, 3)+lag(expected_inflation, 4),
+        lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
+        lag(expected_inflation, 4),
       data = full_dataset_ts
     )
   
@@ -91,48 +95,136 @@ ggplot(coefs_inflation, aes(x = quarter, y = estimate)) +
     alpha = 0.1,
     linetype = 0,
     color = "grey"
-  ) + 
-  labs(x = "Quarter", y = "Percentage Points") + 
+  ) +
+  labs(x = "Quarter", y = "Percentage Points") +
   geom_hline(aes(yintercept = 0)) +
   theme_light()
 
 
 
-ggplot(coefs_HAWK_inflation, aes(x = quarter, y = 2/12*estimate)) +
+ggplot(coefs_HAWK_inflation, aes(x = quarter, y = 2 / 12 * estimate)) +
   geom_line() +  geom_ribbon(
     aes(
-      ymin = 2/12*estimate - 1.96 * 2/12*std_error,
-      ymax = 2/12*estimate + 1.96 * 2/12*std_error
+      ymin = 2 / 12 * estimate - 1.96 * 2 / 12 * std_error,
+      ymax = 2 / 12 * estimate + 1.96 * 2 / 12 * std_error
     ),
     alpha = 0.1,
     linetype = 0,
     color = "grey"
   ) +
   geom_ribbon(
-    aes(ymin = 2/12*estimate - 2/12*std_error, ymax = 2/12*estimate + 2/12*std_error),
+    aes(
+      ymin = 2 / 12 * estimate - 2 / 12 * std_error,
+      ymax = 2 / 12 * estimate + 2 / 12 * std_error
+    ),
     alpha = 0.1,
     linetype = 0,
     color = "grey"
-  ) + labs(x ="Quarter", y = "Percentage Points") + 
-  geom_hline(aes(yintercept=0)) +
+  ) + labs(x = "Quarter", y = "Percentage Points") +
+  geom_hline(aes(yintercept = 0)) +
   theme_light()
 
 
 
+LP_lag_0_y <-
+  ivreg(
+    lead(dR, 2) ~
+      expected_inflation * demeaned_HAWK + lag(dR, 1) + lag(dR, 2) +
+      lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
+      lag(expected_inflation, 4) |
+      expected_inflation * demeaned_HAWK_IV +  lag(dR, 1) +
+      lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
+      lag(expected_inflation, 4),
+    data = full_dataset_ts
+  )
 
-mod_ivreg(
-  lead(dR, i) ~
-    expected_inflation * demeaned_HAWK + lag(dR, 1) + lag(dR, 2) +
-    lag(dR, 3) + lag(dR, 4) +
-    lag(expected_inflation, 1)+lag(expected_inflation, 2)+lag(expected_inflation, 3)+lag(expected_inflation, 4)|
-    expected_inflation * demeaned_HAWK_IV +  lag(dR, 1) +
-    lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
-    lag(expected_inflation, 1)+lag(expected_inflation, 2)+lag(expected_inflation, 3)+lag(expected_inflation, 4),
-  data = full_dataset_ts
+
+LP_lag_1_y <-
+  ivreg(
+    lead(dR, 4) ~
+      expected_inflation * demeaned_HAWK + lag(dR, 1) + lag(dR, 2) +
+      lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
+      lag(expected_inflation, 4) |
+      expected_inflation * demeaned_HAWK_IV +  lag(dR, 1) +
+      lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
+      lag(expected_inflation, 4),
+    data = full_dataset_ts
+  )
+
+
+LP_lag_2_y <-
+  ivreg(
+    lead(dR, 8) ~
+      expected_inflation * demeaned_HAWK + lag(dR, 1) + lag(dR, 2) +
+      lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
+      lag(expected_inflation, 4) |
+      expected_inflation * demeaned_HAWK_IV +  lag(dR, 1) +
+      lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
+      lag(expected_inflation, 4),
+    data = full_dataset_ts
+  )
+
+LP_lag_3_y <-
+  ivreg(
+    lead(dR, 12) ~
+      expected_inflation * demeaned_HAWK + lag(dR, 1) + lag(dR, 2) +
+      lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
+      lag(expected_inflation, 4) |
+      expected_inflation * demeaned_HAWK_IV +  lag(dR, 1) +
+      lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
+      lag(expected_inflation, 4),
+    data = full_dataset_ts
+  )
+
+fs_1 <-
+  lm(
+    demeaned_HAWK ~ expected_inflation * demeaned_HAWK_IV +  lag(dR, 1) +
+      lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+      lag(expected_inflation, 3) + lag(expected_inflation, 4),
+    data = full_dataset_ts
+  )
+
+
+fs_2 <-
+  lm(
+    I(demeaned_HAWK * expected_inflation) ~ expected_inflation * demeaned_HAWK_IV +  lag(dR, 1) +
+      lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+      lag(expected_inflation, 3) + lag(expected_inflation, 4),
+    data = full_dataset_ts
+  )
+
+
+
+stargazer(
+  LP_lag_0_y,
+  LP_lag_1_y,
+  LP_lag_2_y,
+  LP_lag_3_y,
+  fs_1,
+  fs_2,
+  se = list(summary(LP_lag_0.5_y, vcov = vcovHAC(LP_lag_0.5_y))$coef[, 2],
+    summary(LP_lag_1_y, vcov = vcovHAC(LP_lag_1_y))$coef[, 2],
+    summary(LP_lag_2_y, vcov = vcovHAC(LP_lag_2_y))$coef[, 2],
+  summary(LP_lag_3_y, vcov = vcovHAC(LP_lag_3_y))$coef[, 2],
+  summary(fs_1, vcov = vcovHAC(fs_1))$coef[, 2],
+  summary(fs_2, vcov = vcovHAC(fs_2))$coef[, 2])
 )
 
-output <-
-  summary(reg, vcov. = vcovHAC(reg))$coefficients 
+LP_lag_1_y |> summary(diagnostics = T)
+LP_lag_2_y |> summary(diagnostics = T)
+LP_lag_3_y |> summary(diagnostics = T)
+
+
 
 
 
@@ -154,7 +246,7 @@ size_persistence_ts <-
 size_persistence_consumption_ts <-
   inner_join(size_persistence_ts, consumption_ts)
 
-stargazer::stargazer(size_persistence_tbl|> as.data.frame(), summary = T)
+stargazer::stargazer(size_persistence_tbl |> as.data.frame(), summary = T)
 
 lm(size ~ persistence, size_persistence_ts) |> summary()
 
