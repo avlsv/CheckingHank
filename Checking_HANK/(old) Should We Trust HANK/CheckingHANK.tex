@@ -1,0 +1,265 @@
+\documentclass[12pt]{article}
+\input{preamble.tex}
+
+\title{Verifying HANK.\\ Evidence from size-persistence tradeoff}
+\author{Alexander I. Vlasov\thanks{Email: avlasov(at)nes.ru. For supplementary materials, such as replication code and datasets, see the repository \href{https://bit.ly/3xjY4Ho}{https://bit.ly/3xjY4Ho}.}}
+\date{\normalsize First version: January, 2024\\\vspace{1ex} This version: January, 2024\\ \vspace{1ex}
+\href{}{Click here for the most recent draft} }
+\begin{document}
+% \maketitlenew
+\selectlanguage{english}
+\maketitle
+
+
+
+\begin{abstract}
+    \noindent This work explores size-persistence tradeoff for monetary policy in the manner most close to its original formulation by Kaplan, Moll, and Violante (2018). 
+    Specifically I am exploring the dependence of elasticity of consumption on the persistence of monetary policy. providing evidence that timing of monetary policy is very important for the consumption response. This finding, in turn, indirectly confirms the importance of considering monetary policy in the HANK framework.
+    \\
+    \noindent\textbf{Keywords:} Monetary Policy, Heterogeneous Agents, New Keynesian, Consumption
+    \\
+    \noindent\textbf{JEL Codes:} E21, E52, E12 \\
+    \bigskip
+\end{abstract}
+
+\section{Introduction}
+
+The prerequisite for the successful conduction of monetary response to a shock is the good understanding of Monetary Transmission Mechanism (MTM) -- the way that external changes in short term rate translate into the economy. 
+Traditionally, macroeconomic models assumed away all of the heterogeneity in agents, replacing each with a representative one \cite{Gali2018}.
+This representative agent models\footnote{Further referred to under abbreviated name RANK, what stands for Representative Agent New Keynesian (model).} are distinguished by the fact that they show the economy in a much more compact and tractable manner than heterogeneous ones.
+Although, assumption of insignificance of differences between households looks quite unrealistic, it is still not immediately obvious, whether heterogeneity in a particular agent traits actually enhances the predictive powers of Representative-Agent New Keynesian (RANK) models\footnote{For example, \citet{Krusell1998} argue that  ``the behavior of the macroeconomic aggregates can be almost perfectly described using only the mean of the wealth distribution''.} 
+and whether this result would hold to the data.
+
+This paper conduct an econometric check of one of distinct outcomes of Heterogeneous-Agent New Keynesian (HANK) model by \citet[henceforth, KMV]{KMV2018}, namely size-persistence tradeoff. 
+We denote  it presence, it is statistically significant, and behaves itself as it would be prognosed by HANK -- in quadratic manner.
+% The increase in identified shock autocorrelation, measured as first lag coefficient in 
+
+
+
+One of the most important problem in RANK is that, in equilibrium all of the agents are neither savers nor borrowers, even in the absence of financial frictions \cite{Gali2018}. 
+This happens because every agent in the model is identical, and therefore, the only possible channel through which monetary policy could work, in theory, is the intertemporal substitution channel.
+But this this questioned by the fact that aggregated time-series data on consumption finds a small sensitivity of consumption to changes in the interest rate after controlling for income changes \cite{Campbell1989, Canzoneri2007} -- ``imperfect consumption insurance''. 
+Although by itself, it cannot be concluded from this evidence that the effect of intertemporal substitution is small, because indirect effects can almost completely compensate for changes caused by substitution.
+
+
+\citet{KMV2018}, of the most significant work in monetary economics in post Great Financial Crisis decade, served as a way to answer the accumulated questions about modeling the economy in a neo-Keynesian manner. 
+The key idea is that some of the households face financial frictions i.e borrowing limit, which make them more sensitive to income change and less sensitive to shock of interest rate, since household cannot smooth the unexpected temporal income shock with the increase in credit.
+
+
+
+
+\subsection{Trade-offs in HANK}
+
+HANK, since it was not reversely-engineered, requires not only a ``check for inputs''\footnote{The Hand-to-Mouth household existence, which was done in  \citet{KVW2014}, and in \citet{Cloyne2019}.} but also a ``check for outputs'' -- the monetary policy outcomes.
+HANK, as formulated by KMV has two main monetary policy tradeoffs:
+tradeoff between size and persistence of monetary shock, and inflation-activity tradeoff.
+In this work we focus on the former tradeoff.
+It could be summarized as following: the higher the autocorrelation of monetary shock, the lower the elasticity of consumption to the expected path deviation of the rate of interest from its natural value.\footnote{Further we sometimes  refer to a difference between real rate and neutral (natural) rates of interest as the excess rate}
+Intuitively, persistence of highly autocorrelated shock is indifferent to non-HtMs, as it is in RANK, since the only channel of monetary transmission is intertemporal substitution, but it matters for HtM households, whose response may be dampened by the persistence of monetary shock. 
+This effect stems from failure of Ricardian equivalence, since when it fails, then ``not only timing of fiscal policy but timing of monetary policy matters as well.'' \cite{KMV2018}. 
+
+
+
+
+
+\subsection{Related literature}
+
+
+First, this work provides additional empirical support for models focused on the role of heterogeneity in household portfolio in MTM.\footnote{For example \citet{KMV2018}, \citet{Auclert2019}, \citet{Luetticke2021} and successors.}
+There were several studies, which empirically support HANK. 
+
+The closest works to mine is the article done by \citet{HolmPaulTischbirek2020}, which explores the norwegian individual-level dataset in trying to investigate the full process of the transmission of monetary policy.
+They find that the low-liquidity households (\citeauthor{KMV2018} would call them hand-to-mouth households) show strong responce to monetary shock estimated with \cite{RomerRomer2004} identification strategy.
+Another work lying in the same field is \citet{Cloyne2019}, which  shows that aggregate response of consumption to interest rate is mostly driven by households with a mortgage -- balance sheet driven heterogeneity plays a key role in monetary policy transmission.
+It finds, that, in response to a negative monetary shock, the expenditure rise is highly significant for mortgagors\footnote{As \citet{Cloyne2019} shows, mortgagors and Wealthy HtMs as defined by \citet{KVW2014} are extremely overlapping groups.}, less significant for renters, and insignificant for owners with controls for different characteristics.
+Another empirical contribution to of literature is done by \citet{Gross2020}, in this work, they show that MPC change over economic cycle.
+
+
+
+Another part of the literature devoted to HANK is exploring (and modeling) the investment channel of monetary policy in HANK models literature. 
+It is highly interesting part of the HANK modeling research, since original KMV work is dedicated mostly to to consumption and indirect chanel does not include Fisher channel, which argued to be an important part of the amplification of monetary shock by \citet{Luetticke2021}, \citet{OttonelloWinberry2020}, \citet{AuclertRognlieStraub2020}, \citet{BilbiieKanzigSurico2021}.
+
+
+
+
+
+This work contribute to the discussion with conformation of the size-persistence tradeoff existence, and confirmation that it has a quadratic form.
+Since this trade-off is the first of two KMV HANK's outcomes, this work gives us additional confidence to believe in the validity of this model essentials -- the importance and significance of indirect effects of monetary policy on consumption.
+At the same time this work does focus on the overall effect, not trying to disentangle the direct and different indirect channels\footnote{which could give additional multiplicative effect of the monetary policy shock}, since the total effect is what actually we need to verify first.
+Additionally we this work is one of the first, that uses newly developed way of monetary shock identification by \citet{BRW2021}, which allows us to estimate the aforementioned overall effect of the monetary shock, without controlling for any income related covariates -- without possible .\footnote{As it is usually done in works, that use local projection methods as in \citet{HolmPaulTischbirek2020}}
+
+
+
+
+
+The remainder of the paper proceeds as follows: 
+the next section thoroughly discloses our empirical strategy for estimating the tradeoff and the difference between various new keynesian models.
+Than we describe data being used, further on we discuss the result , and at the end we conclude.
+
+
+
+
+
+
+
+\newpage
+\references
+\newpage
+\appendix
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+
+\section{Summary statistics}
+\label{sec:SummaryStatistics}
+\begin{table}[!h]
+    \begin{threeparttable}[t]
+    \caption{ Summary Statistics} 
+    \label{tab:Summary} 
+    \footnotesize
+    \begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+        \\[-1.8ex]\hline 
+        \hline \\[-1.8ex] 
+        Statistic & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{St. Dev.} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Pctl(25)} & \multicolumn{1}{c}{Pctl(75)} & \multicolumn{1}{c}{Max} \\ 
+        \hline \\[-1.8ex] 
+        Identified Monetary Shocks\tnote{a} & 348 & $-$0.003 & 0.086 & $-$0 & 0 & 0 & 1 \\
+        $\hat{R}$ & 514 & $-$1.273 & 0.929 & $-$3 & $-$2.2 & $-$0.6 & 0 \\ 
+        Consumption & 171 & 101.202 & 6.622 & 89.544 & 95.518 & 106.610 & 113.121 \\ 
+        Inflation\tnote{b} & 514 & 2.924 & 1.905 & 1.119 & 1.628 & 3.737 & 8.545 \\ 
+        \\
+        \multicolumn{8}{l}{\textit{Treasuty Rates}}\\
+        DGS1 & 514 & 4.959 & 3.836 & 0.097 & 1.545 & 7.313 & 16.719 \\ 
+        DGS2 & 514 & 5.254 & 3.793 & 0.211 & 1.774 & 7.751 & 16.458 \\ 
+        DGS5 & 514 & 5.749 & 3.530 & 0.620 & 2.687 & 8.021 & 15.930 \\ 
+        DGS7 & 514 & 6.001 & 3.403 & 0.984 & 3.072 & 8.219 & 15.648 \\ 
+        DGS10 & 514 & 6.182 & 3.271 & 1.504 & 3.564 & 8.282 & 15.324 \\ 
+        DGS20 & 514 & 6.536 & 3.063 & 1.822 & 4.343 & 8.377 & 15.130 \\ 
+        DGS30 & 514 & 6.562 & 2.956 & 2.119 & 4.396 & 8.448 & 14.684 \\ 
+        \\
+        \multicolumn{8}{l}{\textit{Natural(neutral) Rate estimation by \citet{HLW2017}}}\\
+        Neutral Rate& 74 & 1.234 & 0.945 & 0.029 & 0.469 & 2.346 & 2.967 \\ 
+        Neutral Rate monthly & 171 & 0.855 & 0.681 & 0.029 & 0.420 & 0.854 & 2.520 \\ 
+        \\
+
+        Deviation\tnote{b} & 171 & 0.666 & 0.953 & $-$0.721 & $-$0.081 & 1.141 & 2.819\\
+        Consumption Elasticity & 348 & $-$0.012 & 0.051 & $-$0.214 & $-$0.028 & 0.012 & 0.073 \\ 
+
+
+        \hline \\[-1.8ex] 
+        \end{tabular} 
+        \begin{tablenotes}[flushleft]\scriptsize
+            \item Some of the variables start from 1977-04-01. We estimate main relations above starting from 1990-01-01 to keep the monetary well-identified.
+            \item[a] \cite{BRW2021} style identified monetary shocks.
+         \item[b] We use smoothed PCEPILFE monthly change to estimate inflation
+         \item[b] $R_{DSG2}-$
+        \end{tablenotes}
+    \end{threeparttable}
+  \end{table} 
+
+
+\begin{figure}[h!]\centering
+    \begin{minipage}{\textwidth}
+    \caption{Deviation of DGS2 interest rate from Natural rate of interest and its components} 
+    \label{fig:Deviation}
+    \includegraphics[width=\linewidth]{deviation.pdf}
+    {\raggedleft\scriptsize Natural rate of interest estimated by {\protect\citet{HLW2017}}.  US recessions are shaded.} 
+    \end{minipage}
+\end{figure}
+
+
+\begin{figure}[!htbp]\centering
+    \begin{minipage}{0.6\textwidth}
+    \caption{Hausman test of sum of monetary shocks as IV P-statistic}
+    \label{fig:Hausman}
+    \includegraphics[width=\linewidth]{HausmanIVplot.pdf}\\
+    {\raggedleft\scriptsize This figure provides Hausman test p-values}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[!htbp]\centering
+    \begin{minipage}{\textwidth}
+    \caption{ARMA$(p,q)$ contemporaneously estimated in a window }
+    \vspace{2ex}
+    \begin{minipage}{\textwidth}
+    \includegraphics[width=0.32\textwidth]{ar1Plot.pdf}  \includegraphics[width=0.32\textwidth]{ar2Plot.pdf} \includegraphics[width=0.32\textwidth]{ar3Plot.pdf}
+\end{minipage}
+    \\
+    \begin{minipage}{\textwidth}
+    \includegraphics[width=0.32\textwidth]{ar4Plot.pdf}
+    \includegraphics[width=0.32\textwidth]{ma1Plot.pdf}
+    \includegraphics[width=0.32\textwidth]{ma2Plot.pdf}
+\end{minipage}
+\begin{flushleft}\scriptsize
+    This figure show the decomposition of the unrestricted estimated ARMA$(p,q)$ model over \citet{BRW2021} identified monetary shock. 
+\end{flushleft}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[!htbp]\centering
+    \begin{minipage}{\textwidth}
+    \caption{Unit root and stationarity tests suggested order of difference. In-window estimation}
+    \vspace{1.5ex}
+    \begin{minipage}{\textwidth}
+        \includegraphics[width=0.32\textwidth]{integratedKPSS0.1Plot.pdf}
+        \includegraphics[width=0.32\textwidth]{integratedKPSS0.05Plot.pdf}
+        \includegraphics[width=0.32\textwidth]{integratedKPSS0.01Plot.pdf}
+    \end{minipage}
+    \begin{minipage}{\textwidth}
+        \includegraphics[width=0.32\textwidth]{integratedADF0.1Plot.pdf}
+        \includegraphics[width=0.32\textwidth]{integratedADF0.05Plot.pdf}
+        \includegraphics[width=0.32\textwidth]{integratedADF0.01Plot.pdf}
+    \end{minipage}
+    \begin{minipage}{\textwidth}
+        \includegraphics[width=0.32\textwidth]{integratedPP0.1Plot.pdf}
+        \includegraphics[width=0.32\textwidth]{integratedPP0.05Plot.pdf}
+        \includegraphics[width=0.32\textwidth]{integratedPP0.01Plot.pdf}
+    \end{minipage}
+    \vspace{1ex}
+    \begin{flushleft}\scriptsize
+        This figure shows the different tests we use to figure out, whether the monetary shock series is stationary or integrated process.
+        \emph{KPSS} stands for Kwiatkowski–Phillips–Schmidt–Shin stationarity test; \emph{ADF} stands for Argumented Dickey-Fuller unit root test,  and \emph{PP} stands for Phillips–Perron unit root test. Each column contains the test suggested in the name of the panel with different level of confidence.
+    \end{flushleft}
+\end{minipage}
+\end{figure}
+
+
+\section{The estimation in Local Projection model framework}
+
+\citet{Jorda2005}
+
+
+In the LP framework, the estimation described in section \ref{sec:Size-PersistenceTradeoffEstimation} can be reformulated as 
+\begin{align}
+    \log\textit{Consumption}_{t+h}&=-\eta (r-r^*)+\beta()\log\textit{Consumption}_{t+h}+\varepsilon\\
+    (r-r^*)&=\hat{R}+\xi,
+\end{align}
+where $\beta(h)$ is the impulse response estimator of interest.
+
+where $\hat{R}=\sum e$.
+
+
+\citet{}
+
+\begin{figure}[!htbp]\centering
+    \begin{minipage}{\textwidth}
+        \caption{Local Projection estimation}
+        \vspace{1ex}
+        \includegraphics[width=0.49\textwidth]{LPIVIRF_consumption_elasticity}\\
+        \includegraphics[width=0.49\textwidth]{LPIVIRF_consumption_elasticity_OLS.pdf}
+        \includegraphics[width=0.49\textwidth]{LPIVIRF_consumption_elasticity_first_stage}
+\begin{flushleft}\scriptsize 
+\end{flushleft}
+    \end{minipage}
+\end{figure}
+
+
+
+\subsection{}
+
+This subsubsection uses time varying coefficient local projection with the Identification with BRW style generated monetary shock.
+
+
+
+
+
+
+\end{document}
