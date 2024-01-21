@@ -133,7 +133,7 @@ I estimate the following state-dependent local projection model
 \begin{equation}
     r_{t+h}-\rho_{t+h}=\alpha^h+\beta^h \hat\pi_t+\gamma^h \hat\pi_t\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)+\delta^h\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)+\zeta^hZ+e_{t+h}^h,
 \end{equation}
-for $h=0,\dots, H$ forecast horizons. $r_{t+h}$ is federal funds rate and $\rho_{t+h}$ is the \citet{LW2003} natural interest rate.\footnote{I use \citet{HLW2023} updated version of the \citet{LW2003} natural rate estimation.}
+for $h=0,\dots, H$ forecast horizons. $r_{t+h}$ is federal funds rate (bridged with \citet{WuXia2016} in ZLB period) and $\rho_{t+h}$ is the \citet{LW2003} natural interest rate.\footnote{I use \citet{HLW2023} updated version of the \citet{LW2003} natural rate estimation.}
 $\hat\pi_t$ is the measure of the FED expectation of future inflation. I use the average of the one- and two-quarters  tealbook inflation forecast forecast following \citet{CoibionGorodnichenko2011}. 
 $\mathit{Hawk}_t$ is the quarterly Hawk-Dove index of \citet{HIM2023}, which is based on the \citet{Istrefi2019,BordoIstrefi2023} estimation of individual policy preference of FOMC members, and $\overline{\mathit{Hawk}}$ stand for the mean of this variable.
 This variable is instrumented with $\left(\mathit{Hawk}_{t}^\mathit{IV}-\overline{\mathit{Hawk}}^\mathit{IV}\right)$. The instrument is based on the rotation of FOMC board membership among 11 FRB presidents, which follows mechanical scheme and thus independent of the economic situation.
@@ -164,6 +164,7 @@ and
 
 
 Note that since the estimates of coefficients of in models \vrefrange{eq:linear}{eq:quadratic} are derived based on other estimates, the tests need to be based on bootstrap percentile-type confidence intervals and p-values.
+I use block bootstrap with block lengths having a geometric distribution with mean $16$.
 
 
 
@@ -190,6 +191,51 @@ The estimated mean and differential response to a unit increase in inflation can
 \end{figure}
 
 
+\begin{table}[!htbp] \centering \footnotesize
+    \begin{threeparttable}
+    \caption{} 
+    \label{} 
+    \begin{tabular}{@{\extracolsep{5pt}}lcc} 
+      \\[-1.8ex]\hline 
+      \hline \\[-1.8ex] 
+       & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+      \cline{2-3} 
+      \\[-1.8ex] & \multicolumn{2}{c}{$\log(\mathit{consumption})$} \\ 
+      \\[-1.8ex] & (1) & (2)\\ 
+      \hline \\[-1.8ex] 
+       Size $(R_0)$  & $-$0.687 & $-$0.114 \\ 
+        & ($-$1.141, $-$0.125) & ($-$1.495, 1.078)    \\ 
+        & & \\ 
+       Persistence $(\nu)$ & $-$0.100 & 1.223 \\ 
+        & ($-$0.682, 0.680)& ($-$3.598, 4.968)    \\ 
+        & & \\ 
+        $\nu^2$ &  & $-$1.042 \\ 
+        &  &  ($-$4.271, 4.336) \\ 
+        & & \\ 
+       $R_0\times \nu$ & 0.765 & $-$1.628 \\ 
+        & ($-$0.187, 1.527) &   ($-$6.095,  4.186)     \\ 
+        & & \\ 
+        $R_0\times \nu^2$ &  & 2.435 \\ 
+        &  &  ($-$4.017, 6.784) \\ 
+        & & \\ 
+       Constant & 10.608 & 10.224 \\ 
+        & (10.06, 10.96) & (9.13, 11.33)    \\ 
+        & & \\ 
+      \hline \\[-1.8ex] 
+      Observations & 198 & 198 \\ 
+      R$^{2}$ & 0.338 & 0.343 \\ 
+      Adjusted R$^{2}$ & 0.328 & 0.326 \\ 
+      Residual Std. Error & 0.245 & 0.245 \\ 
+      F Statistic & 33.062$^{***}$ & 20.067$^{***}$ \\ 
+      \hline 
+      \hline \\[-1.8ex] 
+      \end{tabular} 
+    \begin{tablenotes}[flushleft]
+    \item[] \textit{Note:} 95\% percentile intervals are in parenthesis for 10,000 replications of Block bootstrap with block lengths having a geometric distribution with mean $16$.
+  \end{tablenotes}
+\end{threeparttable}
+  \end{table} 
+
 
 
 
@@ -204,9 +250,6 @@ The estimated mean and differential response to a unit increase in inflation can
 \appendix
 \numberwithin{table}{section}
 \numberwithin{figure}{section}
-\section{Data} 
-
-\textbf{Consumption}
 
 \section{Additional Results}
 
@@ -214,62 +257,68 @@ The estimated mean and differential response to a unit increase in inflation can
     \begin{threeparttable}
     \caption{Responce of FOMC to increase in expected inflation} 
     \label{tab:full_coef} 
-  \begin{tabular}{@{\extracolsep{5pt}}lcccccc} 
+  \begin{tabular}{@{\extracolsep{0pt}}lccccccc} 
   \\[-1.8ex]\hline 
   \hline \\[-1.8ex] 
-   & \multicolumn{6}{c}{\textit{Dependent variable:}} \\ 
+   & \multicolumn{7}{c}{\textit{Dependent variable:}} \\ 
   \cline{2-7} 
-  \\[-1.8ex]  & \multicolumn{4}{c}{$r_{t+h}-\rho_{t+h}$}&\multicolumn{2}{c}{First Stage}\\ 
-  \\[-1.8ex] & $h=2$&$h=4$ & $h=8$ & $h=12$ &  $\mathit{HAWK}_t-\overline{\mathit{HAWK}}$&  $\left(\mathit{HAWK}_t-\overline{\mathit{HAWK}}\right)$ \\ &&&&&& $\times\hat\pi$ \\
+  \\[-1.8ex]  & \multicolumn{5}{c}{$r_{t+h}-\rho_{t+h}$}&\multicolumn{2}{c}{First Stage}\\ 
+  \\[-1.8ex] & $h=2$&$h=4$ & $h=6$ & $h=8$& $h=10$ &  $\mathit{HAWK}_t-\overline{\mathit{HAWK}}$& ---''--- \\ &&&&&&& $\times\hat\pi$ \\
   \\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6)\\ 
   \hline \\[-1.8ex] 
-   $\hat\pi_t$ & 0.968$^{***}$ & 1.114$^{***}$ & 1.127$^{*}$ & 0.678 & 0.054 & 0.121 \\ 
-    & (0.232) & (0.275) & (0.613) & (0.501) & (0.036) & (0.090) \\ 
+   $\hat\pi_t$ & 0.968$^{***}$ & 1.114$^{***}$ & 1.220$^{***}$ & 1.127$^{*}$ & 0.657 & 0.054 & 0.121 \\ 
+   & (0.232) & (0.275) & (0.392) & (0.613) & (0.476) & (0.036) & (0.090) \\ 
     & & & & & & \\ 
-    $\left(\mathit{HAWK}_t-\overline{\mathit{HAWK}}\right)$ & $-$2.071 & $-$2.344 & $-$1.612 & 1.833 &  &  \\ 
-    & (1.314) & (1.753) & (2.657) & (2.871) &  &  \\ 
+    $\left(\mathit{HAWK}_t-\overline{\mathit{HAWK}}\right)$ & $-$2.071 & $-$2.344 & $-$3.686$^{*}$ & $-$1.612 & 0.537 &  &  \\ 
+    & (1.314) & (1.753) & (2.214) & (2.657) & (2.791) &  &  \\ 
     & & & & & & \\ 
-    $\left(\mathit{HAWK}_t^\mathit{IV}-\overline{\mathit{HAWK}}^\mathit{IV}\right)$ &  &  &  &  & 0.738$^{***}$ & 0.803$^{***}$ \\ 
-    &  &  &  &  & (0.069) & (0.170) \\ 
+    $\left(\mathit{HAWK}_t^\mathit{IV}-\overline{\mathit{HAWK}}^\mathit{IV}\right)$ &  &  &  &  &  & 0.738$^{***}$ & 0.803$^{***}$ \\ 
+    &  &  &  &  &  & (0.069) & (0.170) \\ 
+    & & & & & & & \\ 
+    $\hat\pi_t (\mathit{HAWK}_{t}-\overline{\mathit{HAWK}})$ & 0.999 & 1.470$^{**}$ & 2.552$^{***}$ & 2.077$^{**}$ & 1.029 &  &  \\ 
+    & (0.653) & (0.748) & (0.885) & (1.054) & (1.140) &  &  \\ 
     & & & & & & \\ 
-    $\hat\pi_t\times (\mathit{HAWK}_{t}-\overline{\mathit{HAWK}})$ & 0.999 & 1.470$^{**}$ & 2.077$^{**}$ & 0.153 &  &  \\ 
-    & (0.653) & (0.748) & (1.054) & (1.328) &  &  \\ 
+
+    $\hat\pi_t \left(\mathit{HAWK}_{t}^\mathit{IV}-\overline{\mathit{HAWK}}^\mathit{IV}\right)$ &  &  &  &  &  & $-$0.101$^{***}$ & 0.148$^{***}$ \\ 
+    &  &  &  &  &  & (0.021) & (0.051) \\ 
     & & & & & & \\ 
-    $\hat\pi_t\times \left(\mathit{HAWK}_{t}^\mathit{IV}-\overline{\mathit{HAWK}}^\mathit{IV}\right)$ &  &  &  &  & $-$0.101$^{***}$ & 0.148$^{***}$ \\ 
-    &  &  &  &  & (0.021) & (0.051) \\ 
     & & & & & & \\ 
-   $t_{t-1}-\rho_{t-1}$ & 0.779$^{***}$ & 0.747$^{***}$ & 0.310$^{**}$ & $-$0.132 & 0.010 & $-$0.007 \\ 
-    & (0.125) & (0.169) & (0.151) & (0.123) & (0.018) & (0.045) \\ 
+   $r_{t-1}-\rho_{t-1}$ & 0.779$^{***}$ & 0.747$^{***}$ & 0.252 & 0.310$^{**}$ & $-$0.059 & 0.010 & $-$0.007 \\ 
+   & (0.125) & (0.169) & (0.167) & (0.151) & (0.147) & (0.018) & (0.045) \\ 
     & & & & & & \\ 
-    $t_{t-2}-\rho_{t-2}$& $-$0.068 & $-$0.124 & $-$0.003 & $-$0.062 & $-$0.011 & $-$0.073 \\ 
-    & (0.135) & (0.221) & (0.189) & (0.207) & (0.026) & (0.065) \\ 
+    $r_{t-2}-\rho_{t-2}$ & $-$0.068 & $-$0.124 & 0.133 & $-$0.003 & 0.015 & $-$0.011 & $-$0.073 \\ 
+    & (0.135) & (0.221) & (0.163) & (0.189) & (0.144) & (0.026) & (0.065) \\ 
     & & & & & & \\ 
-    $t_{t-3}-\rho_{t-3}$ & 0.244$^{***}$ & $-$0.208 & $-$0.345$^{***}$ & $-$0.289 & 0.005 & 0.033 \\ 
-    & (0.078) & (0.156) & (0.122) & (0.209) & (0.026) & (0.064) \\ 
+    $r_{t-3}-\rho_{t-3}$  & $-$0.208 & $-$0.002 & $-$0.345$^{***}$ & $-$0.206$^{**}$ & 0.005 & 0.033 \\ 
+    & (0.078) & (0.156) & (0.104) & (0.122) & (0.091) & (0.026) & (0.064) \\ 
+    & & & & & & & \\ 
+    $r_{t-4}-\rho_{t-4}$ &  $-$0.141 & 0.216 & 0.147 & 0.265 & 0.139 & 0.019 & $-$0.014 \\ 
+    & (0.105) & (0.147) & (0.221) & (0.189) & (0.196) & (0.018) & (0.043) \\ 
     & & & & & & \\ 
-    $t_{t-4}-\rho_{t-4}$ & $-$0.141 & 0.216 & 0.265 & 0.122 & 0.019 & $-$0.014 \\ 
-    & (0.105) & (0.147) & (0.189) & (0.209) & (0.018) & (0.043) \\ 
+  $\hat\pi_{t-1}$ & 0.070 & $-$0.156 & 0.002 & $-$0.258 & 0.040 & $-$0.026 & $-$0.133 \\ 
+  & (0.371) & (0.204) & (0.351) & (0.249) & (0.216) & (0.053) & (0.129) \\ 
     & & & & & & \\ 
-  $\hat\pi_{t-1}$ & 0.070 & $-$0.156 & $-$0.258 & $-$0.167 & $-$0.026 & $-$0.133 \\ 
-    & (0.371) & (0.204) & (0.249) & (0.290) & (0.053) & (0.129) \\ 
+    $\hat\pi_{t-2}$ & $-$0.420$^{*}$ & $-$0.161 & $-$0.369 & $-$0.521 & $-$0.039 & 0.005 & 0.082 \\ 
+    & (0.240) & (0.442) & (0.302) & (0.343) & (0.222) & (0.053) & (0.130) \\ 
     & & & & & & \\ 
-    $\hat\pi_{t-2}$ & $-$0.420$^{*}$ & $-$0.161 & $-$0.521 & $-$0.067 & 0.005 & 0.082 \\ 
-    & (0.240) & (0.442) & (0.343) & (0.273) & (0.053) & (0.130) \\ 
+    $\hat\pi_{t-3}$  & $-$0.323 & $-$0.175 & $-$0.377 & $-$0.074 & $-$0.196 & $-$0.014 & $-$0.046 \\ 
+    & (0.431) & (0.215) & (0.276) & (0.164) & (0.255) & (0.053) & (0.130) \\ 
     & & & & & & \\ 
-    $\hat\pi_{t-3}$ & $-$0.323 & $-$0.175 & $-$0.074 & 0.024 & $-$0.014 & $-$0.046 \\ 
-    & (0.431) & (0.215) & (0.164) & (0.094) & (0.053) & (0.130) \\ 
+    $\hat\pi_{t-4}$  & $-$0.230 & $-$0.500 & $-$0.550 & 0.024 & 0.478 & 0.040 & 0.337$^{***}$ \\ 
+    & (0.327) & (0.361) & (0.551) & (0.486) & (0.411) & (0.038) & (0.094) \\ 
     & & & & & & \\ 
-    $\hat\pi_{t-4}$ & $-$0.230 & $-$0.500 & 0.024 & 1.017$^{***}$ & 0.040 & 0.337$^{***}$ \\ 
-    & (0.327) & (0.361) & (0.486) & (0.311) & (0.038) & (0.094) \\ 
-    & & & & & & \\ 
-   Constant & $-$0.185 & $-$0.176 & $-$0.152 & $-$2.080$^{*}$ & $-$0.223$^{***}$ & $-$0.747$^{***}$ \\ 
-    & (0.640) & (0.826) & (1.073) & (1.210) & (0.037) & (0.091) \\ 
+   Constant  & $-$0.185 & $-$0.176 & 0.264 & $-$0.152 & $-$1.160 & $-$0.223$^{***}$ & $-$0.747$^{***}$ \\ 
+   & (0.640) & (0.826) & (0.949) & (1.073) & (1.115) & (0.037) & (0.091) \\ 
     & & & & & & \\ 
   \hline \\[-1.8ex] 
-  Observations & 192 & 190 & 186 & 182 & 194 & 194 \\ 
-  R$^{2}$ & 0.841 & 0.751 & 0.597 & 0.592 & 0.669 & 0.794 \\ 
-  Residual Std. Error & 1.465  & 1.845  & 2.371 & 2.404 & 0.211 & 0.520  \\ 
-  F Statistic &  &  &  &  & 33.438$^{***}$ & 63.673$^{***}$ \\ 
+  Observations & 192 & 190 & 188 & 186 & 184 & 194 & 194 \\ 
+  R$^{2}$ & 0.841 & 0.751 & 0.650 & 0.597 & 0.576 & 0.669 & 0.794 \\ 
+  Adjusted R$^{2}$ & 0.832 & 0.735 & 0.628 & 0.571 & 0.549 & 0.649 & 0.781 \\ 
+  Residual Std. Error & 1.465 & 1.845 & 2.195 & 2.371 & 2.438 & 0.211 & 0.520 \\ 
+  F Statistic &  &  &  &  &  & 33.438$^{***}$ & 63.673$^{***}$ \\ 
+  Weak Instrument F & 74.0$^{***}$&73.4 $^{***}$&73.2$^{***}$ & 66.2$^{***}$& 58.7$^{***}$\\
+    &  81.5$^{***}$&80.8$^{***}$ & 80.7$^{***}$&78.3$^{***}$& 74.62$^{***}$\\
+  Wu-Hausman & 2.252 & 1.914& 10.0$^{***}$&8.8$^{***}$& 2.0\\
   \hline 
   \hline \\[-1.8ex] 
   \end{tabular} 
@@ -278,6 +327,26 @@ The estimated mean and differential response to a unit increase in inflation can
 \end{tablenotes}
 \end{threeparttable}
   \end{table} 
+
+
+\newpage
+
+\section{Data} 
+
+\noindent\textbf{FRED.} I measure consumption expenditure by chained 2017 dollars, seasonally adjusted personal consumption expenditures per capita (A794RX0Q048SBEA) calculated by the U.S. Bureau of Economic Analysis (quarterly). 
+One of the components of use effective federal funds rate (DFF)
+is used in combination with the shadow rate of \citet{WuXia2016}. 
+To measure $r_t$ I take the minimum of me 
+
+\noindent\textbf{Shadow Rate.}
+
+\noindent\textbf{Natural Rate Estimates.}
+
+
+
+
+\noindent\textbf{Tealbook Inflation Expectations.} 
+
 
 
 % \textbf{}

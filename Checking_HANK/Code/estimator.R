@@ -2,6 +2,7 @@
 
 
 
+
 ## Libraries -----
 required_Packages_Install <-
   c(
@@ -17,7 +18,8 @@ required_Packages_Install <-
     "AER",
     "broom",
     "stargazer",
-    "ivreg"
+    "ivreg",
+    "car"
   )
 
 
@@ -40,7 +42,7 @@ full_dataset_ts <-
 coefs_inflation <- tibble()
 coefs_HAWK_inflation <- tibble()
 
-for (i in 1:20) {
+for (i in 1:16) {
   reg <-
     AER::ivreg(
       lead(dR, i) ~
@@ -67,6 +69,16 @@ for (i in 1:20) {
   coefs_HAWK_inflation <-
     bind_rows(coefs_HAWK_inflation, output |> slice(2))
   
+  se_plus <-
+    sqrt(vcovHAC(reg)[1, 1] + (2 / 12) ^ 2 * vcovHAC(reg)[length(reg$coefficients), length(reg$coefficients)] +
+           2 * 2 / 12 * vcovHAC(reg)[1, length(reg$coefficients)])
+  
+  se_minus <-
+    sqrt(vcovHAC(reg)[1, 1] + (2 / 12) ^ 2 * vcovHAC(reg)[length(reg$coefficients), length(reg$coefficients)] -
+           2 * 2 / 12 * vcovHAC(reg)[1, length(reg$coefficients)])
+  
+  
+  
 }
 
 
@@ -80,7 +92,8 @@ coefs_HAWK_inflation <-
 
 
 
-ggplot(coefs_inflation, aes(x = quarter, y = estimate)) +
+average_responce_plot <-
+  ggplot(coefs_inflation, aes(x = quarter, y = estimate)) +
   geom_line() +  geom_ribbon(
     aes(
       ymin = estimate - 1.96 * std_error,
@@ -97,12 +110,37 @@ ggplot(coefs_inflation, aes(x = quarter, y = estimate)) +
     color = "grey"
   ) +
   labs(x = "Quarter", y = "Percentage Points") +
-  geom_hline(aes(yintercept = 0)) +
+  geom_hline(aes(yintercept = 0),  color = "darkred") +
+  theme_light()
+
+
+differential_responce_plot <-
+  ggplot(coefs_HAWK_inflation, aes(x = quarter, y = 2 / 12 * estimate)) +
+  geom_line() +  geom_ribbon(
+    aes(
+      ymin = 2 / 12 * estimate - 1.96 * 2 / 12 * std_error,
+      ymax = 2 / 12 * estimate + 1.96 * 2 / 12 * std_error
+    ),
+    alpha = 0.1,
+    linetype = 0,
+    color = "grey"
+  ) +
+  geom_ribbon(
+    aes(
+      ymin = 2 / 12 * estimate - 2 / 12 * std_error,
+      ymax = 2 / 12 * estimate + 2 / 12 * std_error
+    ),
+    alpha = 0.1,
+    linetype = 0,
+    color = "grey"
+  ) + labs(x = "Quarter", y = "Percentage Points") +
+  geom_hline(aes(yintercept = 0), color = "darkred") +
   theme_light()
 
 
 
-ggplot(coefs_HAWK_inflation, aes(x = quarter, y = 2 / 12 * estimate)) +
+differential_responce_plot <-
+  ggplot(coefs_HAWK_inflation, aes(x = quarter, y = 2 / 12 * estimate)) +
   geom_line() +  geom_ribbon(
     aes(
       ymin = 2 / 12 * estimate - 1.96 * 2 / 12 * std_error,
@@ -126,7 +164,7 @@ ggplot(coefs_HAWK_inflation, aes(x = quarter, y = 2 / 12 * estimate)) +
 
 
 
-LP_lag_0_y <-
+LP_2 <-
   ivreg(
     lead(dR, 2) ~
       expected_inflation * demeaned_HAWK + lag(dR, 1) + lag(dR, 2) +
@@ -141,7 +179,7 @@ LP_lag_0_y <-
   )
 
 
-LP_lag_1_y <-
+LP_4 <-
   ivreg(
     lead(dR, 4) ~
       expected_inflation * demeaned_HAWK + lag(dR, 1) + lag(dR, 2) +
@@ -156,7 +194,21 @@ LP_lag_1_y <-
   )
 
 
-LP_lag_2_y <-
+LP_6 <-
+  ivreg(
+    lead(dR, 6) ~
+      expected_inflation * demeaned_HAWK + lag(dR, 1) + lag(dR, 2) +
+      lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
+      lag(expected_inflation, 4) |
+      expected_inflation * demeaned_HAWK_IV +  lag(dR, 1) +
+      lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
+      lag(expected_inflation, 4),
+    data = full_dataset_ts
+  )
+
+LP_8 <-
   ivreg(
     lead(dR, 8) ~
       expected_inflation * demeaned_HAWK + lag(dR, 1) + lag(dR, 2) +
@@ -170,9 +222,9 @@ LP_lag_2_y <-
     data = full_dataset_ts
   )
 
-LP_lag_3_y <-
+LP_10 <-
   ivreg(
-    lead(dR, 12) ~
+    lead(dR, 10) ~
       expected_inflation * demeaned_HAWK + lag(dR, 1) + lag(dR, 2) +
       lag(dR, 3) + lag(dR, 4) +
       lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
@@ -206,23 +258,30 @@ fs_2 <-
 
 
 stargazer(
-  LP_lag_0_y,
-  LP_lag_1_y,
-  LP_lag_2_y,
-  LP_lag_3_y,
+  LP_2,
+  LP_4,
+  LP_6,
+  LP_8,
+  LP_10,
   fs_1,
   fs_2,
-  se = list(summary(LP_lag_0.5_y, vcov = vcovHAC(LP_lag_0.5_y))$coef[, 2],
-    summary(LP_lag_1_y, vcov = vcovHAC(LP_lag_1_y))$coef[, 2],
-    summary(LP_lag_2_y, vcov = vcovHAC(LP_lag_2_y))$coef[, 2],
-  summary(LP_lag_3_y, vcov = vcovHAC(LP_lag_3_y))$coef[, 2],
-  summary(fs_1, vcov = vcovHAC(fs_1))$coef[, 2],
-  summary(fs_2, vcov = vcovHAC(fs_2))$coef[, 2])
+  se = list(
+    summary(LP_2, vcov = vcovHAC(LP_2))$coef[, 2],
+    summary(LP_4, vcov = vcovHAC(LP_4))$coef[, 2],
+    summary(LP_6, vcov = vcovHAC(LP_6))$coef[, 2],
+    summary(LP_8, vcov = vcovHAC(LP_8))$coef[, 2],
+    summary(LP_10, vcov = vcovHAC(LP_10))$coef[, 2],
+    summary(fs_1, vcov = vcovHAC(fs_1))$coef[, 2],
+    summary(fs_2, vcov = vcovHAC(fs_2))$coef[, 2]
+  ),
+  df = F
 )
 
-LP_lag_1_y |> summary(diagnostics = T)
-LP_lag_2_y |> summary(diagnostics = T)
-LP_lag_3_y |> summary(diagnostics = T)
+LP_2 |> summary(diagnostics = T)
+LP_4 |> summary(diagnostics = T)
+LP_6 |> summary(diagnostics = T)
+LP_8 |> summary(diagnostics = T)
+LP_10 |> summary(diagnostics = T)
 
 
 

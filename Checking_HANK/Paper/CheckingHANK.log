@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.3.6)  21 JAN 2024 19:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.3.6)  21 JAN 2024 22:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/vlasov/Documents/Checking_HANK/Paper/CheckingHANK.tex
-(/Users/vlasov/Documents/Checking_HANK/Paper/CheckingHANK.tex
+**/Users/vlasov/Documents/CheckingHank/Checking_HANK/Paper/CheckingHANK.tex
+(/Users/vlasov/Documents/CheckingHank/Checking_HANK/Paper/CheckingHANK.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-02-24> (/usr/local/texlive/2021/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
@@ -1078,36 +1078,31 @@ Package hyperref Warning: Suppressing link with empty target on input line 13.
 [1
 
 {/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5]
-<./../Figures/AverageResponce.pdf, id=230, 597.23125pt x 420.57124pt>
+<./../Figures/AverageResponce.pdf, id=233, 597.23125pt x 420.57124pt>
 File: ./../Figures/AverageResponce.pdf Graphic file (type pdf)
 <use ./../Figures/AverageResponce.pdf>
-Package pdftex.def Info: ./../Figures/AverageResponce.pdf  used on input line 180.
+Package pdftex.def Info: ./../Figures/AverageResponce.pdf  used on input line 181.
 (pdftex.def)             Requested size: 237.01411pt x 166.90353pt.
-<./../Figures/DifferentialResponce.pdf, id=231, 597.23125pt x 420.57124pt>
+<./../Figures/DifferentialResponce.pdf, id=234, 597.23125pt x 420.57124pt>
 File: ./../Figures/DifferentialResponce.pdf Graphic file (type pdf)
 <use ./../Figures/DifferentialResponce.pdf>
-Package pdftex.def Info: ./../Figures/DifferentialResponce.pdf  used on input line 187.
+Package pdftex.def Info: ./../Figures/DifferentialResponce.pdf  used on input line 188.
 (pdftex.def)             Requested size: 237.01411pt x 166.90353pt.
- [6] [7 <./../Figures/AverageResponce.pdf> <./../Figures/DifferentialResponce.pdf>] (./CheckingHANK.bbl<<ot1tt.cmap>> [8]) [9]
-Overfull \hbox (18.93271pt too wide) in paragraph at lines 215--280
- [] 
- []
-
-[10] (./CheckingHANK.aux)
+ [6] [7] [8 <./../Figures/AverageResponce.pdf> <./../Figures/DifferentialResponce.pdf>] (./CheckingHANK.bbl<<ot1tt.cmap>> [9]) [10] [11] [12] (./CheckingHANK.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `CheckingHANK.out' has not changed.
-(rerunfilecheck)             Checksum: E4404B3686C7BF5725BE426E5401C6CE;1581.
+(rerunfilecheck)             Checksum: 43196235FA3175CB5B9D8813D9C16C9E;1581.
  ) 
 Here is how much of TeX's memory you used:
- 39377 strings out of 478276
- 891879 string characters out of 5846497
- 1375636 words of memory out of 5000000
- 56734 multiletter control sequences out of 15000+600000
+ 39386 strings out of 478276
+ 892029 string characters out of 5846497
+ 1381706 words of memory out of 5000000
+ 56738 multiletter control sequences out of 15000+600000
  494634 words of font info for 120 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 104i,14n,106p,793b,671s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 104i,14n,106p,806b,671s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{Hfootnote.11} has been referenced but does not exist, replaced by a fixed one
 
 pdfTeX warning (dest): name{Hfootnote.10} has been referenced but does not exist, replaced by a fixed one
@@ -1131,10 +1126,10 @@ pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist,
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist, replaced by a fixed one
 
 {/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on CheckingHANK.pdf (10 pages, 333695 bytes).
+Output written on CheckingHANK.pdf (12 pages, 342260 bytes).
 PDF statistics:
- 418 PDF objects out of 1000 (max. 8388607)
- 362 compressed objects within 4 object streams
- 66 named destinations out of 1000 (max. 500000)
+ 435 PDF objects out of 1000 (max. 8388607)
+ 377 compressed objects within 4 object streams
+ 71 named destinations out of 1000 (max. 500000)
  135 words of extra memory for PDF output out of 10000 (max. 10000000)
 

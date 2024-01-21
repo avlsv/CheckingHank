@@ -3,6 +3,7 @@
 
 
 
+
 ## Libraries -----
 required_Packages_Install <-
   c(
@@ -17,7 +18,8 @@ required_Packages_Install <-
     "fabletools",
     "AER",
     "broom",
-    "boot"
+    "boot",
+    "stargazer"
   )
 
 
@@ -94,25 +96,29 @@ estimator <- function(full_dataset_df) {
     size_persistence_tbl |> mutate(consumption = full_dataset_tbl$consumption)
   
   
-  
-  a <-
-    lm(size ~ persistence, size_persistence_consumption_tbl)$coefficients
-  
-  b <- lm(log(consumption) ~ size * persistence,
+ 
+  a <- lm(log(consumption) ~ size * persistence,
           size_persistence_consumption_tbl)$coefficients
+  
+  b <- lm(
+    log(consumption) ~ size * persistence + size : I(persistence ^ 2),
+    size_persistence_consumption_tbl
+  )$coefficients
   
   c <- lm(
     log(consumption) ~ size * persistence + size * I(persistence ^ 2),
     size_persistence_consumption_tbl
   )$coefficients
   
-  ret_vect <- c(a, b, c) |> as.vector()
+  retr <- c(a, b, c)
+  ret_vect <- retr |> as.vector()
   
   
   
   return(ret_vect)
 }
 
+names(retr)
 
 full_dataset_ts <- full_dataset_tbl |> as.ts()
 bootstrapped <-
@@ -125,6 +131,12 @@ bootstrapped <-
     parallel =  "multicore",
     ncpus = 4
   ) # parallel does not work in windows
+
+
+save(bootstrapped, file = "data/boot1.Rdata")
+
+#load("data/boot.Rdata")
+
 boot.ci(
   bootstrapped,
   type = "perc",
@@ -151,7 +163,7 @@ boot.ci(
 )
 boot.ci(
   bootstrapped,
-  type = "perc",
+  type = "basic",
   index = 6,
   conf =  c(0.90, 0.95, 0.99)
 )
@@ -159,6 +171,18 @@ boot.ci(
   bootstrapped,
   type = "perc",
   index = 7,
+  conf =  c(0.90, 0.95, 0.99)
+)
+boot.ci(
+  bootstrapped,
+  type = "perc",
+  index = 8,
+  conf =  c(0.90, 0.95, 0.99)
+)
+boot.ci(
+  bootstrapped,
+  type = "perc",
+  index = 9,
   conf =  c(0.90, 0.95, 0.99)
 )
 boot.ci(
@@ -173,12 +197,23 @@ boot.ci(
   index = 11,
   conf =  c(0.90, 0.95, 0.99)
 )
+boot.ci(
+  bootstrapped,
+  type = "perc",
+  index = 12,
+  conf =  c(0.90, 0.95, 0.99)
+)
 
 
 
 plot(bootstrapped, index = 6, nclass = 15)
 
-mean(bootstrapped$t[, 6] > 0)
+w_b <- bootstrapped$t[, 12]-bootstrapped$t0[12]
+quantile(w_b, 0.95)
+w <- bootstrapped$t0[12]
+mean(abs(w_b)> abs(w))
+
+
 
 mean(bootstrapped$t[, 12] > 0)
 
@@ -188,3 +223,15 @@ bootstrapped$t0[6]
 
 
 bootstrapped |> tidy() |> mutate(stat_name =  names(c(a, b, c)))
+
+
+
+m1 <-
+  lm(log(consumption) ~ size * persistence,
+     size_persistence_consumption_tbl)
+m2 <-
+  lm(
+    log(consumption) ~ size * persistence + size * I(persistence ^ 2),
+    size_persistence_consumption_tbl
+  )
+stargazer(m1, m2, df=F)
