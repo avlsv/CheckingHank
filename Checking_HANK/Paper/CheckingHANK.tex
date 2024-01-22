@@ -2,9 +2,9 @@
 \input{preamble.tex}
 
 \title{Verifying HANK.\\ Evidence from size-persistence tradeoff}
-\author{Alexander I. Vlasov\thanks{Email: avlasov(at)nes.ru. For supplementary materials, such as replication code and datasets, see the repository \href{https://bit.ly/3xjY4Ho}{https://bit.ly/3xjY4Ho}.}}
+\author{Alexander I. Vlasov\thanks{Email: avlasov(at)nes.ru. For supplementary materials, such as replication code and datasets, see the repository \href{https://rb.gy/jzhch9}{rb.gy/jzhch9}.}}
 \date{\normalsize First version: January, 2024\\\vspace{1ex} This version: January, 2024\\ \vspace{1ex}
-\href{}{Click here for the most recent draft}}
+\href{https://github.com/alvlsv/CheckingHank/blob/6906f23fcb1a16aa4fc9997532f52c1659e9c29f/Checking_HANK/Paper/CheckingHANK.pdf}{Click here for the most recent draft}}
 \numberwithin{equation}{section}
 \begin{document}
 
@@ -16,7 +16,6 @@
 
 \begin{abstract}
     \noindent This work explores size-persistence tradeoff for monetary policy in the manner most close to its original formulation by Kaplan, Moll, and Violante (2018). 
-    Specifically I am exploring the dependence of elasticity of consumption on the persistence of monetary policy. providing evidence that timing of monetary policy is very important for the consumption response. This finding, in turn, indirectly confirms the importance of considering monetary policy in the HANK framework.
     \\
     \noindent\textbf{Keywords:} Monetary Policy, Heterogeneous Agents, New Keynesian, Consumption
     \\
@@ -157,7 +156,7 @@ If size and persistence are calculated, we can then inspect the relationship bet
     \log \mathit{Consumption}&=\alpha_0+\alpha_1 R_0+\alpha_2\nu+\beta_1 R_0\nu \label{eq:linear}\\
     \log \mathit{Consumption}&=\alpha_0'+\alpha_1' R_0+\alpha_2'\nu+\beta_1' R_0\nu + \beta_2' R_0\nu^2\label{eq:quadratic}
 \end{align} 
-The hypotheses of models in equations \vrefrange{eq:SizePersistenceRANK}{eq:SizePersistenceHANK} map into the tests of the signs of coefficients as follows:\footnote{Note that the elasticity of consumption with respect to size, $R_0$, is $-d\log \mathit{Consumption}/d R_0$, so the } 
+The hypotheses of models in equations \vrefrange{eq:SizePersistenceRANK}{eq:SizePersistenceHANK} map into the tests of the signs of coefficients as follows:\footnote{Note that the elasticity of consumption with respect to size, $R_0$, is $-d\log \mathit{Consumption}/d R_0$, so positive coefficients in the regressions are equivalent to negative effects on log consumption.} 
 \begin{multline*}\mathbb{H}_0:\beta_1=0\quad\mathit{vs}\quad \mathbb{H}_a:\beta_1>0\quad\iff\\  \text{RANK or TANK with $B^g$ adjustment}\quad\mathit{vs}\quad \text{TANK with $T$ adjustment or HANK}.\end{multline*}
 and
 \[\mathbb{H}_0:\beta_2'=0\quad\mathit{vs}\quad \mathbb{H}_a:\beta_2'>0\quad\iff \text{RANK or TANK}\quad\mathit{vs}\quad \text{HANK}.\]
@@ -167,7 +166,7 @@ Note that since the estimates of coefficients of in models \vrefrange{eq:linear}
 I use block bootstrap with block lengths having a geometric distribution with mean $16$.
 
 The bootstrap p-values are calculated for the non-studentized statistic $T=\hat\theta-\theta_0$, where $\hat\theta$ is the coefficient estimate and $\theta_0$ is its hypothesized value. 
-The bootstrap version of this statistic is $T^*=\hat\theta^*-\hat\theta$. Then the bootstrap two-sided test p-value is
+The bootstrap version of this statistic is $T^*(b)=\hat\theta^*(b)-\hat\theta$, where $b$ is the bootstrap index and $\hat\theta^*(b)$ is the individual bootstrap estimate. Then the bootstrap two-sided test p-value is
 \[p^*=\frac{1}{B}\sum_{b=1}^B\mathbf{1}\left\{\left|\hat\theta^*(b)-\hat\theta\right|>\left|\hat\theta-\theta_0\right|\right\},\]
 and bootstrap p-value for one-sided test $\mathbb{H}_0\theta=\theta_0$ against the alternative $\mathbb{H}_0\theta>\theta_0$ is 
 \[p^*=\frac{1}{B}\sum_{b=1}^B\mathbf{1}\left\{\hat\theta^*(b)-\hat\theta >\hat\theta-\theta_0\right\}.\]
@@ -184,7 +183,7 @@ The estimated mean and differential response to a unit increase in inflation can
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
         \caption{Average Response $(\beta^h)$}
-        \label{fig:y equals x}
+        \label{fig:AverageResponce}
         \includegraphics[width=\linewidth]{Average.pdf}
     \end{subfigure}
     \hfill
@@ -194,15 +193,15 @@ The estimated mean and differential response to a unit increase in inflation can
         \label{fig:DifferentialResponce}
         \includegraphics[width=\linewidth]{Differential.pdf}
     \end{subfigure}
-        {\begin{flushleft}\scriptsize\textit{Notes}: The figure reports the responses of the $r_t-\rho_t$ to an increase in the Tealbook inflation forecast of 1 p.p. above sample average. The shaded areas correspond to 68\%, 90\% and 95\% confidence bands calculated with Newey-West HAC estimator with Andrews-selected truncation parameter.\end{flushleft}}
+        {\begin{flushleft}\scriptsize\textit{Notes}: This figure reports the responses of the $r_t-\rho_t$ to an increase in the Tealbook inflation forecast of 1 p.p. above sample average. The subfigure \ref{fig:AverageResponce} reports the response for the $\mathit{HAWK}$ index equal to the sample average and \ref{fig:DifferentialResponce} is the addition to the response in case there are 2 (out of 12 in total) additional consistent hawks in the FOMC. The shaded areas correspond to 68\%, 90\% and 95\% confidence bands calculated with Newey-West HAC estimator with Andrews-selected truncation parameter.\end{flushleft}}
 \end{figure}
 
 
-\begin{table}[!htb] \centering \footnotesize
+\begin{table}[!htb] \centering \scriptsize
     \begin{threeparttable}
     \caption{Size-Persistence Tradeoff} 
     \label{tab:Size-Persistence} 
-    \begin{tabular}{@{\extracolsep{50pt}}lcc} 
+    \begin{tabular}{@{\extracolsep{10pt}}lcc} 
       \\[-1.8ex]\hline 
       \hline \\[-1.8ex] 
        & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
@@ -250,7 +249,7 @@ The estimated mean and differential response to a unit increase in inflation can
 
 
 \newpage 
-\newpage 
+
 \section{Robustness}
 tba
 
@@ -339,8 +338,6 @@ tba
 \end{threeparttable}
   \end{table} 
 
-
-\newpage
 
 \section{Data} 
 
