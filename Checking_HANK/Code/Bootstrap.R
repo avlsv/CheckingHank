@@ -99,18 +99,12 @@ estimator <- function(full_dataset_df) {
  
   a <- lm(log(consumption) ~ size * persistence,
           size_persistence_consumption_tbl)$coefficients
-  
   b <- lm(
-    log(consumption) ~ size * persistence + size : I(persistence ^ 2),
-    size_persistence_consumption_tbl
-  )$coefficients
-  
-  c <- lm(
     log(consumption) ~ size * persistence + size * I(persistence ^ 2),
     size_persistence_consumption_tbl
   )$coefficients
   
-  retr <- c(a, b, c)
+  retr <- c(a, b)
   ret_vect <- retr |> as.vector()
   
   
@@ -119,6 +113,7 @@ estimator <- function(full_dataset_df) {
 }
 
 names(retr)
+
 
 full_dataset_ts <- full_dataset_tbl |> as.ts()
 bootstrapped <-
@@ -133,10 +128,16 @@ bootstrapped <-
   ) # parallel does not work in windows
 
 
-save(bootstrapped, file = "data/boot1.Rdata")
+save(bootstrapped, file = "data/boot.Rdata")
+#load("data/boot1.Rdata")
 
-#load("data/boot.Rdata")
 
+boot.ci(
+  bootstrapped,
+  type = "perc",
+  index = 1,
+  conf = c(0.90, 0.95, 0.99)
+)
 boot.ci(
   bootstrapped,
   type = "perc",
@@ -191,31 +192,20 @@ boot.ci(
   index = 10,
   conf =  c(0.90, 0.95, 0.99)
 )
-boot.ci(
-  bootstrapped,
-  type = "perc",
-  index = 11,
-  conf =  c(0.90, 0.95, 0.99)
-)
-boot.ci(
-  bootstrapped,
-  type = "perc",
-  index = 12,
-  conf =  c(0.90, 0.95, 0.99)
-)
 
 
 
 plot(bootstrapped, index = 6, nclass = 15)
+matrix(v, nrow=2, ncol=length(v), byrow=TRUE)
 
-w_b <- bootstrapped$t[, 12]-bootstrapped$t0[12]
-quantile(w_b, 0.95)
-w <- bootstrapped$t0[12]
-mean(abs(w_b)> abs(w))
+w_b <- as.matrix(bootstrapped$t)-matrix(t(bootstrapped$t0), nrow=10000, ncol=length(t(bootstrapped$t0)), byrow=T)
+
+w <- matrix(t(bootstrapped$t0), nrow=10000, ncol=length(t(bootstrapped$t0)), byrow=T)
+colMeans(abs(w_b)>abs(w))
+colMeans(w_b>w)
 
 
-
-mean(bootstrapped$t[, 12] > 0)
+mean(bootstrapped$t[, 4] > 0)
 
 
 bootstrapped$t0[6]

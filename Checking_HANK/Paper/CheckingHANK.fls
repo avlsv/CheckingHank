@@ -1471,6 +1471,10 @@ INPUT ./../Figures/DifferentialResponce.pdf
 INPUT ./../Figures/DifferentialResponce.pdf
 INPUT ./../Figures/DifferentialResponce.pdf
 INPUT ./../Figures/DifferentialResponce.pdf
+INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/base/omscmr.fd
+INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/base/omscmr.fd
+INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/base/omscmr.fd
+INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/base/omscmr.fd
 INPUT ./CheckingHANK.bbl
 INPUT CheckingHANK.bbl
 INPUT ./CheckingHANK.bbl
