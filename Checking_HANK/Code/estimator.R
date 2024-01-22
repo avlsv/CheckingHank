@@ -1,5 +1,8 @@
-
-
+## Checking HANK.
+## The main estimation procedure (without bootstrap) 
+## Author: Alexander Vlasov
+##
+##
 
 
 
@@ -109,6 +112,15 @@ average_responce_plot <-
     linetype = 0,
     color = "grey"
   ) +
+  geom_ribbon(
+    aes(
+      ymin = estimate - 1.644 * std_error,
+      ymax = estimate + 1.644 * std_error
+    ),
+    alpha = 0.1,
+    linetype = 0,
+    color = "grey"
+  ) +
   labs(x = "Quarter", y = "Percentage Points") +
   geom_hline(aes(yintercept = 0),  color = "darkred") +
   theme_light()
@@ -133,35 +145,37 @@ differential_responce_plot <-
     alpha = 0.1,
     linetype = 0,
     color = "grey"
-  ) + labs(x = "Quarter", y = "Percentage Points") +
-  geom_hline(aes(yintercept = 0), color = "darkred") +
-  theme_light()
-
-
-
-differential_responce_plot <-
-  ggplot(coefs_HAWK_inflation, aes(x = quarter, y = 2 / 12 * estimate)) +
-  geom_line() +  geom_ribbon(
+  ) +
+  geom_ribbon(
     aes(
-      ymin = 2 / 12 * estimate - 1.96 * 2 / 12 * std_error,
-      ymax = 2 / 12 * estimate + 1.96 * 2 / 12 * std_error
+      ymin = 2 / 12 * estimate - 1.644 * 2 / 12 * std_error,
+      ymax = 2 / 12 * estimate + 1.644 * 2 / 12 * std_error
     ),
     alpha = 0.1,
     linetype = 0,
     color = "grey"
   ) +
-  geom_ribbon(
-    aes(
-      ymin = 2 / 12 * estimate - 2 / 12 * std_error,
-      ymax = 2 / 12 * estimate + 2 / 12 * std_error
-    ),
-    alpha = 0.1,
-    linetype = 0,
-    color = "grey"
-  ) + labs(x = "Quarter", y = "Percentage Points") +
-  geom_hline(aes(yintercept = 0)) +
+  labs(x = "Quarter", y = "Percentage Points") +
+  geom_hline(aes(yintercept = 0), color = "darkred") +
   theme_light()
 
+ggsave(
+  "Average.pdf",
+  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
+  average_responce_plot,
+  width = 148.5 / 2*1.5,
+  height =  210 / 4*1.5,
+  units = "mm"
+)
+
+ggsave(
+  "Differential.pdf",
+  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
+  differential_responce_plot,
+  width = 148.5 / 2 *1.5 ,
+  height = 210 / 4*1.5 ,
+  units = "mm"
+)
 
 
 LP_2 <-

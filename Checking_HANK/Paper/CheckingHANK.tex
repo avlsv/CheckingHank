@@ -138,7 +138,7 @@ $\hat\pi_t$ is the measure of the FED expectation of future inflation. I use the
 $\mathit{Hawk}_t$ is the quarterly Hawk-Dove index of \citet{HIM2023}, which is based on the \citet{Istrefi2019,BordoIstrefi2023} estimation of individual policy preference of FOMC members, and $\overline{\mathit{Hawk}}$ stand for the mean of this variable.
 This variable is instrumented with $\left(\mathit{Hawk}_{t}^\mathit{IV}-\overline{\mathit{Hawk}}^\mathit{IV}\right)$. The instrument is based on the rotation of FOMC board membership among 11 FRB presidents, which follows mechanical scheme and thus independent of the economic situation.
 
-The vector of controls, $Z$, consists of the 4 lags of the dependent variable, $r_{t+h}-\rho_{t+h}$, and 4 lags of the FED expected inflation, $\hat\pi_t$.
+The vector of controls, $Z$, consists of the 4 lags of the dependent variable, $r_{t+h}-\rho_{t+h}$, and 4 lags of the Tealbook expected inflation, $\hat\pi_t$.
 
 \subsection{Size-Persistence Tradeoff Estimation}
 
@@ -166,36 +166,43 @@ and
 Note that since the estimates of coefficients of in models \vrefrange{eq:linear}{eq:quadratic} are derived based on other estimates, the tests need to be based on bootstrap percentile-type confidence intervals and p-values.
 I use block bootstrap with block lengths having a geometric distribution with mean $16$.
 
+The bootstrap p-values are calculated for the non-studentized statistic $T=\hat\theta-\theta_0$, where $\hat\theta$ is the coefficient estimate and $\theta_0$ is its hypothesized value. 
+The bootstrap version of this statistic is $T^*=\hat\theta^*-\hat\theta$. Then the bootstrap two-sided test p-value is
+\[p^*=\frac{1}{B}\sum_{b=1}^B\mathbf{1}\left\{\left|\hat\theta^*(b)-\hat\theta\right|>\left|\hat\theta-\theta_0\right|\right\},\]
+and bootstrap p-value for one-sided test $\mathbb{H}_0\theta=\theta_0$ against the alternative $\mathbb{H}_0\theta>\theta_0$ is 
+\[p^*=\frac{1}{B}\sum_{b=1}^B\mathbf{1}\left\{\hat\theta^*(b)-\hat\theta >\hat\theta-\theta_0\right\}.\]
+
+
 
 
 \section{Results}
-The estimated mean and differential response to a unit increase in inflation can be found in \vref{fig:LP}. The differential response is shown under the deviation of $\mathit{Hawk}_t$ from its mean equal to $2/12$, which is slightly higher than one standard deviation, and a standard choice in \citet{HIM2023}. The average and differential responses of  $r_t-\rho_t$ tend to be smaller compared to the estimation for federal funds rate of \citet{HIM2023}. However, they still are larger than zero up to 8th quarter. The coefficients for several selected quarters can be seen in 
+The estimated mean and differential response to a unit increase in inflation can be found in \vref{fig:LP}. The differential response is shown under the deviation of $\mathit{Hawk}_t$ from its mean equal to $2/12$, which is slightly higher than one standard deviation, and a standard choice in \citet{HIM2023}. The average and differential responses of  $r_t-\rho_t$ tend to be smaller compared to the estimations for federal funds rate of \citet{HIM2023}. However, they still are larger than zero up to 8th quarter. The coefficients for several selected quarters can be seen in Table \vref{tab:fullcoef}. 
 
-\begin{figure}[!ht]\centering
-    \caption{Policy Response to Inflation and FOMC Hawkishness}\vspace{1ex}
+\begin{figure}[!htbp]\centering
+    \caption{Policy Response to Inflation and FOMC Hawkishness}\vspace{2ex}
     \label{fig:LP}
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
         \caption{Average Response $(\beta^h)$}
         \label{fig:y equals x}
-        \includegraphics[width=\linewidth]{AverageResponce.pdf}
+        \includegraphics[width=\linewidth]{Average.pdf}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
         \caption{Differential Response $(\gamma^h)$}
         \label{fig:DifferentialResponce}
-        \includegraphics[width=\linewidth]{DifferentialResponce.pdf}
+        \includegraphics[width=\linewidth]{Differential.pdf}
     \end{subfigure}
-        {\begin{flushleft}\scriptsize\textit{Notes}: The figure reports the responses of the $r_t-\rho_t$ to the Tealbook inflation forecast that is above a sample average by 1p.p. The shaded areas correspond to 68\% and 95\% confidence bands of Newey-West HAC estimator with Andrews-selected truncation parameter.\end{flushleft}}
+        {\begin{flushleft}\scriptsize\textit{Notes}: The figure reports the responses of the $r_t-\rho_t$ to an increase in the Tealbook inflation forecast of 1 p.p. above sample average. The shaded areas correspond to 68\%, 90\% and 95\% confidence bands calculated with Newey-West HAC estimator with Andrews-selected truncation parameter.\end{flushleft}}
 \end{figure}
 
 
-\begin{table}[!htbp] \centering \footnotesize
+\begin{table}[!htb] \centering \footnotesize
     \begin{threeparttable}
-    \caption{} 
-    \label{} 
-    \begin{tabular}{@{\extracolsep{5pt}}lcc} 
+    \caption{Size-Persistence Tradeoff} 
+    \label{tab:Size-Persistence} 
+    \begin{tabular}{@{\extracolsep{50pt}}lcc} 
       \\[-1.8ex]\hline 
       \hline \\[-1.8ex] 
        & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
@@ -205,43 +212,47 @@ The estimated mean and differential response to a unit increase in inflation can
       \hline \\[-1.8ex] 
        Size $(R_0)$  & $-$0.687 & $-$0.114 \\ 
         & ($-$1.141, $-$0.125) & ($-$1.495, 1.078)    \\ 
+        &[0.011]\{0.997\} & [0.857]\{0.578\}\\ 
         & & \\ 
        Persistence $(\nu)$ & $-$0.100 & 1.223 \\ 
-        & ($-$0.682, 0.680)& ($-$3.598, 4.968)    \\ 
+        & ($-$0.694,  0.691)   & ($-$3.598, 4.968)    \\ 
+        &[0.746]\{0.673\} & [0.517]\{0.246\}\\ 
         & & \\ 
         $\nu^2$ &  & $-$1.042 \\ 
         &  &  ($-$4.271, 4.336) \\ 
+        & &[0.517]\{0.766\} \\ 
         & & \\ 
        $R_0\times \nu$ & 0.765 & $-$1.628 \\ 
-        & ($-$0.187, 1.527) &   ($-$6.095,  4.186)     \\ 
+        & ($-$0.175,  1.526)    &   ($-$6.095,  4.186)     \\ 
+        &[0.0754]\{0.0247\} & [0.522]\{0.759\}\\ 
         & & \\ 
         $R_0\times \nu^2$ &  & 2.435 \\ 
         &  &  ($-$4.017, 6.784) \\ 
+        & & [0.340]\{0.145\}\\ 
         & & \\ 
        Constant & 10.608 & 10.224 \\ 
         & (10.06, 10.96) & (9.13, 11.33)    \\ 
-        & & \\ 
+        & [0.0]\{0.0\}& [0.0]\{0.0\}\\ 
+        & & \\[-1.8ex] 
       \hline \\[-1.8ex] 
       Observations & 198 & 198 \\ 
       R$^{2}$ & 0.338 & 0.343 \\ 
       Adjusted R$^{2}$ & 0.328 & 0.326 \\ 
       Residual Std. Error & 0.245 & 0.245 \\ 
-      F Statistic & 33.062$^{***}$ & 20.067$^{***}$ \\ 
       \hline 
       \hline \\[-1.8ex] 
       \end{tabular} 
     \begin{tablenotes}[flushleft]
-    \item[] \textit{Note:} 95\% percentile intervals are in parenthesis for 10,000 replications of Block bootstrap with block lengths having a geometric distribution with mean $16$.
+    \item[] \scriptsize \textit{Note:} The inference is derived from Block bootstrap with 10,000 replications and block lengths having a geometric distribution with mean $16$. 95\% percentile intervals are in parenthesis. Bootstrap p-values for the two-sided hypothesis ($\mathbb{H}_0:\theta=0$ vs $\mathbb{H}_0:\theta\ne 0$) are in square brackets, p-values for the one-sided hypothesis ($\mathbb{H}_0:\theta=0$ vs $\mathbb{H}_0:\theta>0$) are in curly brackets. 
   \end{tablenotes}
 \end{threeparttable}
   \end{table} 
 
 
-
-
-
+\newpage 
+\newpage 
 \section{Robustness}
-
+tba
 
 
 \newpage
@@ -255,9 +266,9 @@ The estimated mean and differential response to a unit increase in inflation can
 
 \begin{table}[!htbp] \centering \scriptsize
     \begin{threeparttable}
-    \caption{Responce of FOMC to increase in expected inflation} 
-    \label{tab:full_coef} 
-  \begin{tabular}{@{\extracolsep{0pt}}lccccccc} 
+    \caption{Response of FOMC to increase in expected inflation} 
+    \label{tab:fullcoef} 
+  \begin{tabular}{@{\extracolsep{2pt}}lccccccc} 
   \\[-1.8ex]\hline 
   \hline \\[-1.8ex] 
    & \multicolumn{7}{c}{\textit{Dependent variable:}} \\ 
@@ -289,7 +300,7 @@ The estimated mean and differential response to a unit increase in inflation can
     $r_{t-2}-\rho_{t-2}$ & $-$0.068 & $-$0.124 & 0.133 & $-$0.003 & 0.015 & $-$0.011 & $-$0.073 \\ 
     & (0.135) & (0.221) & (0.163) & (0.189) & (0.144) & (0.026) & (0.065) \\ 
     & & & & & & \\ 
-    $r_{t-3}-\rho_{t-3}$  & $-$0.208 & $-$0.002 & $-$0.345$^{***}$ & $-$0.206$^{**}$ & 0.005 & 0.033 \\ 
+    $r_{t-3}-\rho_{t-3}$ & 0.244$^{***}$ & $-$0.208 & $-$0.002 & $-$0.345$^{***}$ & $-$0.206$^{**}$ & 0.005 & 0.033 \\ 
     & (0.078) & (0.156) & (0.104) & (0.122) & (0.091) & (0.026) & (0.064) \\ 
     & & & & & & & \\ 
     $r_{t-4}-\rho_{t-4}$ &  $-$0.141 & 0.216 & 0.147 & 0.265 & 0.139 & 0.019 & $-$0.014 \\ 
@@ -315,9 +326,9 @@ The estimated mean and differential response to a unit increase in inflation can
   R$^{2}$ & 0.841 & 0.751 & 0.650 & 0.597 & 0.576 & 0.669 & 0.794 \\ 
   Adjusted R$^{2}$ & 0.832 & 0.735 & 0.628 & 0.571 & 0.549 & 0.649 & 0.781 \\ 
   Residual Std. Error & 1.465 & 1.845 & 2.195 & 2.371 & 2.438 & 0.211 & 0.520 \\ 
-  F Statistic &  &  &  &  &  & 33.438$^{***}$ & 63.673$^{***}$ \\ 
-  Weak Instrument F & 74.0$^{***}$&73.4 $^{***}$&73.2$^{***}$ & 66.2$^{***}$& 58.7$^{***}$\\
-    &  81.5$^{***}$&80.8$^{***}$ & 80.7$^{***}$&78.3$^{***}$& 74.62$^{***}$\\
+  F Statistic &  &  &  &  &  & 33.438& 63.673 \\ 
+  Weak Instrument F & 74.0&73.4 &73.2 & 66.2& 58.7\\
+    &  81.5 &80.8& 80.7 &78.3 & 74.62\\
   Wu-Hausman & 2.252 & 1.914& 10.0$^{***}$&8.8$^{***}$& 2.0\\
   \hline 
   \hline \\[-1.8ex] 
@@ -333,19 +344,13 @@ The estimated mean and differential response to a unit increase in inflation can
 
 \section{Data} 
 
-\noindent\textbf{FRED.} I measure consumption expenditure by chained 2017 dollars, seasonally adjusted personal consumption expenditures per capita (A794RX0Q048SBEA) calculated by the U.S. Bureau of Economic Analysis (quarterly). 
-One of the components of use effective federal funds rate (DFF)
-is used in combination with the shadow rate of \citet{WuXia2016}. 
-To measure $r_t$ I take the minimum of me 
-
-\noindent\textbf{Shadow Rate.}
+\noindent\textbf{FRED.} I measure consumption expenditure as chained 2017 dollars, seasonally adjusted personal consumption expenditures per capita (A794RX0Q048SBEA) calculated by the U.S. Bureau of Economic Analysis (quarterly). 
+To measure $r_t$ I take the minimum of the shadow federal funds rate \citep{WuXia2016} and effective federal funds rate (DFF).
 
 \noindent\textbf{Natural Rate Estimates.}
+Natural rate of interest used is estimated by \citet{LW2003} and re-estimated by \citet{HLW2023} to bridge the Covid period.
 
-
-
-
-\noindent\textbf{Tealbook Inflation Expectations.} 
+% \noindent\textbf{Tealbook Inflation Expectations.} 
 
 
 
