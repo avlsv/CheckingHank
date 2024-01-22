@@ -166,36 +166,43 @@ and
 Note that since the estimates of coefficients of in models \vrefrange{eq:linear}{eq:quadratic} are derived based on other estimates, the tests need to be based on bootstrap percentile-type confidence intervals and p-values.
 I use block bootstrap with block lengths having a geometric distribution with mean $16$.
 
+The bootstrap p-values are calculated for the non-studentized statistic $T=\hat\theta-\theta_0$, where $\hat\theta$ is the coefficient estimate and $\theta_0$ is its hypothesized value. 
+The bootstrap version of this statistic is $T^*=\hat\theta^*-\hat\theta$. Then the bootstrap two-sided test p-value is
+\[p^*=\frac{1}{B}\sum_{b=1}^B\mathbf{1}\left\{\left|\hat\theta^*(b)-\hat\theta\right|>\left|\hat\theta-\theta_0\right|\right\},\]
+and bootstrap p-value for one-sided test $\mathbb{H}_0\theta=\theta_0$ against the alternative $\mathbb{H}_0\theta>\theta_0$ is 
+\[p^*=\frac{1}{B}\sum_{b=1}^B\mathbf{1}\left\{\hat\theta^*(b)-\hat\theta >\hat\theta-\theta_0\right\}.\]
+
+
 
 
 \section{Results}
-The estimated mean and differential response to a unit increase in inflation can be found in \vref{fig:LP}. The differential response is shown under the deviation of $\mathit{Hawk}_t$ from its mean equal to $2/12$, which is slightly higher than one standard deviation, and a standard choice in \citet{HIM2023}. The average and differential responses of  $r_t-\rho_t$ tend to be smaller compared to the estimation for federal funds rate of \citet{HIM2023}. However, they still are larger than zero up to 8th quarter. The coefficients for several selected quarters can be seen in 
+The estimated mean and differential response to a unit increase in inflation can be found in \vref{fig:LP}. The differential response is shown under the deviation of $\mathit{Hawk}_t$ from its mean equal to $2/12$, which is slightly higher than one standard deviation, and a standard choice in \citet{HIM2023}. The average and differential responses of  $r_t-\rho_t$ tend to be smaller compared to the estimations for federal funds rate of \citet{HIM2023}. However, they still are larger than zero up to 8th quarter. The coefficients for several selected quarters can be seen in Table \vref{tab:fullcoef}. 
 
-\begin{figure}[!ht]\centering
-    \caption{Policy Response to Inflation and FOMC Hawkishness}\vspace{1ex}
+\begin{figure}[!htbp]\centering
+    \caption{Policy Response to Inflation and FOMC Hawkishness}\vspace{2ex}
     \label{fig:LP}
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
         \caption{Average Response $(\beta^h)$}
         \label{fig:y equals x}
-        \includegraphics[width=\linewidth]{AverageResponce.pdf}
+        \includegraphics[width=\linewidth]{Average.pdf}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
         \caption{Differential Response $(\gamma^h)$}
         \label{fig:DifferentialResponce}
-        \includegraphics[width=\linewidth]{DifferentialResponce.pdf}
+        \includegraphics[width=\linewidth]{Differential.pdf}
     \end{subfigure}
-        {\begin{flushleft}\scriptsize\textit{Notes}: The figure reports the responses of the $r_t-\rho_t$ to the Tealbook inflation forecast that is above a sample average by 1p.p. The shaded areas correspond to 68\% and 95\% confidence bands of Newey-West HAC estimator with Andrews-selected truncation parameter.\end{flushleft}}
+        {\begin{flushleft}\scriptsize\textit{Notes}: The figure reports the responses of the $r_t-\rho_t$ to an increase in the Tealbook inflation forecast of 1 p.p. above sample average. The shaded areas correspond to 68\%, 90\% and 95\% confidence bands calculated with Newey-West HAC estimator with Andrews-selected truncation parameter.\end{flushleft}}
 \end{figure}
 
 
-\begin{table}[!htbp] \centering \footnotesize
+\begin{table}[!htb] \centering \footnotesize
     \begin{threeparttable}
     \caption{Size-Persistence Tradeoff} 
     \label{tab:Size-Persistence} 
-    \begin{tabular}{@{\extracolsep{6pt}}lcc} 
+    \begin{tabular}{@{\extracolsep{50pt}}lcc} 
       \\[-1.8ex]\hline 
       \hline \\[-1.8ex] 
        & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
@@ -236,14 +243,14 @@ The estimated mean and differential response to a unit increase in inflation can
       \hline \\[-1.8ex] 
       \end{tabular} 
     \begin{tablenotes}[flushleft]
-    \item[] \textit{Note:} The inference is derived from Block bootstrap with 10,000 replications and block lengths having a geometric distribution with mean $16$. 95\% percentile intervals are in parenthesis. Bootstrap p-values for the two-sided hypothesis ($\mathbb{H}_0:\theta=0$ vs $\mathbb{H}_0:\theta\ne 0$) are in square brackets, p-values for the one-sided hypothesis ($\mathbb{H}_0:\theta=0$ vs $\mathbb{H}_0:\theta>0$) are in curly brackets. 
+    \item[] \scriptsize \textit{Note:} The inference is derived from Block bootstrap with 10,000 replications and block lengths having a geometric distribution with mean $16$. 95\% percentile intervals are in parenthesis. Bootstrap p-values for the two-sided hypothesis ($\mathbb{H}_0:\theta=0$ vs $\mathbb{H}_0:\theta\ne 0$) are in square brackets, p-values for the one-sided hypothesis ($\mathbb{H}_0:\theta=0$ vs $\mathbb{H}_0:\theta>0$) are in curly brackets. 
   \end{tablenotes}
 \end{threeparttable}
   \end{table} 
 
 
-
-
+\newpage 
+\newpage 
 \section{Robustness}
 tba
 
@@ -260,7 +267,7 @@ tba
 \begin{table}[!htbp] \centering \scriptsize
     \begin{threeparttable}
     \caption{Response of FOMC to increase in expected inflation} 
-    \label{tab:full_coef} 
+    \label{tab:fullcoef} 
   \begin{tabular}{@{\extracolsep{2pt}}lccccccc} 
   \\[-1.8ex]\hline 
   \hline \\[-1.8ex] 
