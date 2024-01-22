@@ -79,7 +79,7 @@ every node/.style={color=black},
 % \addbibresource{references.bib}
 
 \def\references{
-    \bibliography{references.bib}
+    \bibliography{{../references.bib}}
     \bibliographystyle{econ}
 }
 
@@ -137,3 +137,9 @@ every node/.style={color=black},
 % \usepackage{caption}
 \usepackage{subcaption}
 \captionsetup{labelfont=bf, labelsep=period, skip=0pt}
+
+
+\graphicspath{{./../Figures}}
+
+
+\usepackage{makecell}

@@ -1,6 +1,7 @@
 ##
-##
+## The general coding enviroment
 ## Author: Alexander Vlasov
+##
 ##
 
 ## Libraries -----
