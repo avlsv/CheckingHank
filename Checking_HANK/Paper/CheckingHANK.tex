@@ -101,7 +101,7 @@ And the aforementioned size is defined as
 \begin{equation}
     R_0=\int_0^\infty \left(r_s-\rho\right)\,ds,\label{eq:KMVsize}
 \end{equation}
-which is essentially the planned (since there are no expectation, it will come into fruition with certainty) excess of interest rate\footnote{In words of authors ``cumulative deviation of the real interest rate $r_t$ from the natural rate $\rho$''.} And one can easily note that from the Euler equation in RANK that elasticity of consumption with respect to size is 
+which is essentially the planned (since there are no expectation, it will come into fruition with certainty) excess of interest rate\footnote{In words of authors ``cumulative deviation of the real interest rate $r_t$ from the natural rate $\rho$'' \citep{KMV2018}.} And one can easily note that from the Euler equation in RANK that elasticity of consumption with respect to size is 
 \[\frac{-d \log C_0}{dR_0}=\frac{1}{\gamma},\]
 and it is independent of particular interest rate path, assuming that the size is identical. 
 
@@ -147,9 +147,9 @@ The coefficient $\beta^h$ captures the average response of monetary authority to
 for the IV-LP estimated estimated vectors of coefficients $\beta_t^h$ and $\gamma_t^h$. It is also a marginal response of ``excess interest rate'', $r_t-\rho_t$, to an increase in inflation. 
 That is, $\tilde \phi_t$ is the predicted response of FOMC to a unit increase in $\hat\pi_t$ is 
 \begin{equation}
-   \widehat{\left(r_{t+h}-\rho_{t+h}\right)}=\hat \beta_t^h+\hat\gamma^h \left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)+\bar\phi,\qquad\qquad h=1,2,\dots, H
+   \widehat{\left(r_{t+h}-\rho_{t+h}\right)}=\hat \beta_t^h+\hat\gamma^h \left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)+\bar\phi,\qquad\qquad h=1,2,\dots, H\label{eq:pred_policy}
 \end{equation}
-Then, based on the estimated impulse-response function we can calculate analogues of size and persistence as follows: size, $R_0$ is the mean of predicted responses,\footnote{Note that \cite{KMV2018} use another definition of size, they use an integral shown in \vref{eq:KMVsize}. I modify it by using a discrete-time analog, limiting the timespan of desired rate path by $H$, and scaling it by $H$.} and persistence, $e^{-\mu}=\nu$, is the first sample autocorrelation of $\widehat{\left(r_{t+h}-\rho_{t+h}\right)}$.
+Then, based on the estimated impulse-response function we can calculate analogues of size and persistence as follows: size, $R_0$, is the mean of predicted responses,\footnote{Note that \cite{KMV2018} use another definition of size, they use an integral shown in \vref{eq:KMVsize}. I modify it by using a discrete-time analog, limiting the timespan of desired rate path by $H$, and scaling it by $H$. This transformation increases the associated coefficient by $H$, which is done in order to obtain the coefficients comparable for different choices of $H$.} and persistence, $e^{-\mu}=\nu$, is the first sample autocorrelation of $\widehat{\left(r_{t+h}-\rho_{t+h}\right)}$.
 
 If size and persistence are calculated, we can then inspect the relationship between them. Namely, I estimate the following linear models 
 \begin{align}
@@ -163,7 +163,7 @@ and
 
 
 Note that since the estimates of coefficients of in models \vrefrange{eq:linear}{eq:quadratic} are derived based on other estimates, the tests need to be based on bootstrap percentile-type confidence intervals and p-values.
-I use block bootstrap with block lengths having a geometric distribution with mean $16$.
+I use block bootstrap with geometrically distributed block lengths with mean $16$. The geometric distribution of block length decreases the dependence of block-bootstrap procedure on the block length, at the same time it does not deprive it from the main advantage, it still preserves heteroskedasticity-autocorrelation structure of data.
 
 The bootstrap p-values are calculated for the non-studentized statistic $T=\hat\theta-\theta_0$, where $\hat\theta$ is the coefficient estimate and $\theta_0$ is its hypothesized value. 
 The bootstrap version of this statistic is $T^*(b)=\hat\theta^*(b)-\hat\theta$, where $b$ is the bootstrap index and $\hat\theta^*(b)$ is the individual bootstrap estimate. Then the bootstrap two-sided test p-value is
@@ -196,8 +196,9 @@ The estimated mean and differential response to a unit increase in inflation can
         {\begin{flushleft}\scriptsize\textit{Notes}: This figure reports the responses of the $r_t-\rho_t$ to an increase in the Tealbook inflation forecast of 1 p.p. above sample average. The subfigure \ref{fig:AverageResponce} reports the response for the $\mathit{HAWK}$ index equal to the sample average and \ref{fig:DifferentialResponce} is the addition to the response in case there are 2 (out of 12 in total) additional consistent hawks in the FOMC. The shaded areas correspond to 68\%, 90\% and 95\% confidence bands calculated with Newey-West HAC estimator with Andrews-selected truncation parameter.\end{flushleft}}
 \end{figure}
 
+Based on the impulse responses above I restrict the horizon for the size and persistence calculation to the 8th quarter, i.e. in equation \vref{eq:pred_policy} I set $H$ to be equal to 8. The estimates of coefficients of the models \eqref{eq:linear} and \eqref{eq:quadratic} can be seen in table \vref{tab:Size-Persistence}.
 
-\begin{table}[!htb] \centering \scriptsize
+\begin{table}[!htb] \centering \footnotesize
     \begin{threeparttable}
     \caption{Size-Persistence Tradeoff} 
     \label{tab:Size-Persistence} 
@@ -242,7 +243,7 @@ The estimated mean and differential response to a unit increase in inflation can
       \hline \\[-1.8ex] 
       \end{tabular} 
     \begin{tablenotes}[flushleft]
-    \item[] \scriptsize \textit{Note:} The inference is derived from Block bootstrap with 10,000 replications and block lengths having a geometric distribution with mean $16$. 95\% percentile intervals are in parenthesis. Bootstrap p-values for the two-sided hypothesis ($\mathbb{H}_0:\theta=0$ vs $\mathbb{H}_0:\theta\ne 0$) are in square brackets, p-values for the one-sided hypothesis ($\mathbb{H}_0:\theta=0$ vs $\mathbb{H}_0:\theta>0$) are in curly brackets. 
+    \item[] \scriptsize \textit{Note:} The inference is derived from Block bootstrap with 10,000 replications and block lengths geometrically distributed with mean $16$. 95\% percentile intervals are in parenthesis. Bootstrap p-values for the two-sided hypothesis ($\mathbb{H}_0:\theta=0$ vs $\mathbb{H}_0:\theta\ne 0$) are in square brackets, p-values for the one-sided hypothesis ($\mathbb{H}_0:\theta=0$ vs $\mathbb{H}_0:\theta>0$) are in curly brackets. 
   \end{tablenotes}
 \end{threeparttable}
   \end{table} 

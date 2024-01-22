@@ -40,7 +40,7 @@ full_dataset_df <- as.data.frame(full_dataset_tbl)
 
 
 
-estimator <- function(full_dataset_df) {
+estimator <- function(full_dataset_df, horizon) {
   ## LP-IV ----
   ##
   ##
@@ -50,7 +50,7 @@ estimator <- function(full_dataset_df) {
   coefs_inflation <- tibble()
   coefs_HAWK_inflation <- tibble()
   
-  for (i in 1:8) {
+  for (i in 1:horizon) {
     reg <-
       AER::ivreg(
         lead(dR, i) ~
@@ -119,7 +119,7 @@ full_dataset_ts <- full_dataset_tbl |> as.ts()
 bootstrapped <-
   tsboot(
     full_dataset_ts,
-    estimator,
+    \(x) estimator(x,10),
     R = 10000,
     sim = "geom",
     l = 16,
@@ -128,7 +128,7 @@ bootstrapped <-
   ) # parallel does not work in windows
 
 
-save(bootstrapped, file = "data/boot.Rdata")
+save(bootstrapped, file = "data/boot1.Rdata")
 #load("data/boot1.Rdata")
 
 
