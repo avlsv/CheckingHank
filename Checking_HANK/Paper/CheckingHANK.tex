@@ -163,7 +163,7 @@ and
 
 
 Note that since the estimates of coefficients of in models \vrefrange{eq:linear}{eq:quadratic} are derived based on other estimates, the tests need to be based on bootstrap percentile-type confidence intervals and p-values.
-I use block bootstrap with geometrically distributed block lengths with mean $16$. The geometric distribution of block length decreases the dependence of block-bootstrap procedure on the block length, at the same time it does not deprive it from the main advantage, it still preserves heteroskedasticity-autocorrelation structure of data.
+I use block bootstrap with geometrically distributed block lengths with mean $16$. The geometric distribution of block length decreases the dependence of block-bootstrap procedure on the block length, at the same time it does not deprive it from the main advantage, it still preserves heteroskedasticity-and autocorrelation-structure of data.
 
 The bootstrap p-values are calculated for the non-studentized statistic $T=\hat\theta-\theta_0$, where $\hat\theta$ is the coefficient estimate and $\theta_0$ is its hypothesized value. 
 The bootstrap version of this statistic is $T^*(b)=\hat\theta^*(b)-\hat\theta$, where $b$ is the bootstrap index and $\hat\theta^*(b)$ is the individual bootstrap estimate. Then the bootstrap two-sided test p-value is

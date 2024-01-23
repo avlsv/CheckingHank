@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.3.6)  22 JAN 2024 21:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.3.6)  23 JAN 2024 10:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1100,7 +1100,7 @@ Package rerunfilecheck Info: File `CheckingHANK.out' has not changed.
 Here is how much of TeX's memory you used:
  39414 strings out of 478276
  892355 string characters out of 5846497
- 1382922 words of memory out of 5000000
+ 1381922 words of memory out of 5000000
  56762 multiletter control sequences out of 15000+600000
  494634 words of font info for 120 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
