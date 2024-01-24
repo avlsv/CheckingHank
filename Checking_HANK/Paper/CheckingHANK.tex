@@ -169,7 +169,7 @@ I use block bootstrap with geometrically distributed block lengths with mean $16
 The bootstrap p-values are calculated for the non-studentized statistic $T=\hat\theta-\theta_0$, where $\hat\theta$ is the coefficient estimate and $\theta_0$ is its hypothesized value. 
 The bootstrap version of this statistic is $T^*(b)=\hat\theta^*(b)-\hat\theta$, where $b$ is the bootstrap index and $\hat\theta^*(b)$ is the individual bootstrap estimate. Then the bootstrap two-sided test p-value is
 \[p^*=\frac{1}{B}\sum_{b=1}^B\mathbf{1}\left\{\left|\hat\theta^*(b)-\hat\theta\right|>\left|\hat\theta-\theta_0\right|\right\},\]
-and bootstrap p-value for one-sided test $\mathbb{H}_0\theta=\theta_0$ against the alternative $\mathbb{H}_0\theta>\theta_0$ is 
+and bootstrap p-value for one-sided test $\mathbb{H}_0:\theta=\theta_0$ against the alternative $\mathbb{H}_a:\theta>\theta_0$ is 
 \[p^*=\frac{1}{B}\sum_{b=1}^B\mathbf{1}\left\{\hat\theta^*(b)-\hat\theta >\hat\theta-\theta_0\right\}.\]
 
 
@@ -208,7 +208,7 @@ Based on the impulse responses above I restrict the horizon for the size and per
       \hline \\[-1.8ex] 
        & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
       \cline{2-3} 
-      \\[-1.8ex] & \multicolumn{2}{c}{$\log(\mathit{consumption})$} \\ 
+      \\[-1.8ex] & \multicolumn{2}{c}{$\log(\mathit{consumption})$} \\  \\[-1.8ex]   &\multicolumn{2}{c}{$H=8$}\\
       \\[-1.8ex] & (1) & (2)\\ 
       \hline \\[-1.8ex] 
        Size $(R_0)$  & $-$0.687 & $-$0.114 \\ 
@@ -244,7 +244,7 @@ Based on the impulse responses above I restrict the horizon for the size and per
       \hline \\[-1.8ex] 
       \end{tabular} 
     \begin{tablenotes}[flushleft]
-    \item[] \scriptsize \textit{Note:} The inference is derived from Block bootstrap with 10,000 replications and block lengths geometrically distributed with mean $16$. 95\% percentile intervals are in parenthesis. Bootstrap p-values for the two-sided hypothesis ($\mathbb{H}_0:\theta=0$ vs $\mathbb{H}_0:\theta\ne 0$) are in square brackets, p-values for the one-sided hypothesis ($\mathbb{H}_0:\theta=0$ vs $\mathbb{H}_0:\theta>0$) are in curly brackets. 
+    \item[] \scriptsize \textit{Note:} The inference is derived from Block bootstrap with 10,000 replications and block lengths geometrically distributed with mean $16$. 95\% percentile intervals are in parenthesis. Bootstrap p-values for the two-sided hypothesis ($\mathbb{H}_0:\theta=0$ vs $\mathbb{H}_a:\theta\ne 0$) are in square brackets, p-values for the one-sided hypothesis ($\mathbb{H}_0:\theta=0$ vs $\mathbb{H}_a:\theta>0$) are in curly brackets. 
   \end{tablenotes}
 \end{threeparttable}
   \end{table} 
