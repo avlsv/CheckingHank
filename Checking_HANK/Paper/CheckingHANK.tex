@@ -75,7 +75,7 @@ Another empirical contribution to of literature is done by \citet{Gross2020}, th
 
 This work contribute to the discussion with conformation of the size-persistence tradeoff existence, and confirmation that it has a quadratic form.
 Since this trade-off is the first of two KMV HANK's outcomes, this work gives us additional confidence to believe in the validity of this model essentials -- the importance and significance of indirect effects of monetary policy on consumption.
-At the same time this work does focus on the overall effect, not trying to disentangle the direct and different indirect channels\footnote{which could give additional multiplicative effect of the monetary policy shock}, since the total effect is what actually we need to verify first.
+At the same time this work does focus on the overall effect, not trying to disentangle the direct and different indirect channels\footnote{Which could give additional multiplicative effect of the monetary policy shock}, since the total effect is what actually we need to verify first.
 Additionally we this work is one of the first, that uses newly developed way of identification of systematic monetary policy  by , which allows us to estimate the aforementioned overall effect of the monetary shock, without controlling for any income related covariates -- without possible .
 
 
@@ -93,7 +93,7 @@ Than we describe data being used, further on we discuss the result , and at the 
 \begin{equation}
     r_t=\rho+e^{-\eta t}(r_0-\rho).\label{eq:InterestRatePath}
 \end{equation}
-That is, in period $0$ there is a shock of $r$ equal to $r_0$ which mean-reverts with time to $\rho$ at rate $\eta$. This is a continuous-time AR(1) equivalent with coefficient equal to $\exp(-\eta)<1$.
+That is, in period $0$ there is a shock of $r$ equal to $r_0$ which mean-reverts with time to $\rho$\footnote{$\rho$ here is the discount rate. Note that in NK models without productivity growth, it is equal to the natural rate of interest, i.e. the rate at which $\pi_t=0$} at rate $\eta$. This is a continuous-time AR(1) equivalent with coefficient equal to $\exp(-\eta)<1$.
 
 The Euler equation in the continuous-time representative new keynesian model is 
 \[C_0=\bar C\exp\left(-\frac{1}{\gamma}\int_0^\infty \left(r_s-\rho\right)\,ds\right).\]
@@ -105,17 +105,18 @@ which is essentially the planned (since there are no expectation, it will come i
 \[\frac{-d \log C_0}{dR_0}=\frac{1}{\gamma},\]
 and it is independent of particular interest rate path, assuming that the size is identical. 
 
-Using numerical methods \citet{KMV2018} deduce that under tax adjustment the elasticity of consumption with respect to size is dependent on the persistence of the interest rate path, $e^{-\eta}$, and it is is decreasing with it in linear fashion for TANK model and decreasing in concave fashion for HANK. Under the public debt adjustment the elasticity of consumption with respect to size is non-constant only in HANK and it decreases with persistence in concave fashion.
+Using numerical methods \citet{KMV2018} deduce that under tax adjustment the elasticity of consumption with respect to size is dependent on the persistence of the interest rate path, $e^{-\eta}=\nu$, and it is is decreasing with it in linear fashion for TANK model and decreasing in concave fashion for HANK. Under the public debt adjustment the elasticity of consumption with respect to size is non-constant only in HANK and it decreases with persistence in concave fashion.
 
 The fundamental difference between models in Size-Persistence tradeoff can formally be written as follows:
 \begin{align}
-    \textit{RANK:}&\qquad& \frac{d}{d\rho}\frac{-d\log C_0}{dR_0}&=0     \label{eq:SizePersistenceRANK}\\
-\textit{TANK with $B^g$ adjustment:}&\qquad& \frac{d}{d\rho}\frac{-d\log C_0}{dR_0}&= 0     \label{eq:SizePersistenceTANK_B}\\
-\textit{TANK with $T$ adjustment:}&\qquad& \frac{d}{d\rho}\frac{-d\log C_0}{dR_0}&< 0     \label{eq:SizePersistenceTANK_B}\\
+    \textit{RANK:}&\qquad& \frac{d}{d\nu}\frac{-d\log C_0}{dR_0}&=0     \label{eq:SizePersistenceRANK}\\
+\textit{TANK with $B^g$ adjustment:}&\qquad& \frac{d}{d\nu}\frac{-d\log C_0}{dR_0}&= 0     \label{eq:SizePersistenceTANK_B}\\
+\textit{TANK with $T$ adjustment:}&\qquad& \frac{d}{d\nu}\frac{-d\log C_0}{dR_0}&< 0     \label{eq:SizePersistenceTANK_B}\\
 \textit{HANK:}& \qquad& 
-    \frac{d^2}{d\rho^2}\frac{-d\log C_0}{dR_0}&<0
+    \frac{d^2}{d\nu ^2}\frac{-d\log C_0}{dR_0}&<0
     \label{eq:SizePersistenceHANK}
 \end{align}
+where $\nu=e^{\eta}$ is the AR(1) analog measure of $r_t-r^*$ persistency. 
 This inequalities are tested further.
 
 
@@ -124,13 +125,13 @@ This inequalities are tested further.
 
 I follow \citet{HIM2023} approach of systematic monetary policy identification that is based on the use of Hawk-Dove balance as a measure of systematic monetary policy. 
 I assume that the monetary policy rule is 
-\[r_t-\rho_t=\tilde\phi_t\mathbb{E}\left[\pi_{t+1}\mid \mathcal{I}_t\right]+\varepsilon_t,\]
+\[r_t-r_t^*=\tilde\phi_t\mathbb{E}\left[\pi_{t+1}\mid \mathcal{I}_t\right]+\varepsilon_t,\]
 where $r_t$ is the real rate of interest, $\rho_t$ is the natural rate of interest, $\tilde \phi_t=\phi+\phi_t$ is the systematic monetary policy -- that is, the response of the monetary authority to the expected change in inflation and $\mathbb{E}_t\pi_{t+1}$ is the expectations of monetary authority about the inflation in period $t+h$. 
 This simple monetary policy rule can be viewed as simplified time-varying version of \citet{RomerRomer2004} regression rule, or as modified by introducing time-variability \citet{McKayWolf2023} ``simple Taylor rule''.\footnote{\citet{McKayWolf2023} use $r_t=\phi\pi_t+v_{0,t}+v_{1,t-1}$ where $v_{0,t}$ is a conventional contemporaneous monetary policy shock and $v_{1,t-1}$ is a pre-announced ``news shock'', as the base monetary policy rule.} 
 
 I estimate the following state-dependent local projection model 
 \begin{equation}
-    r_{t+h}-\rho_{t+h}=\alpha^h+\beta^h \hat\pi_t+\gamma^h \hat\pi_t\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)+\delta^h\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)+\zeta^hZ+e_{t+h}^h,
+    r_{t+h}-r^*_{t+h}=\alpha^h+\beta^h \hat\pi_t+\gamma^h \hat\pi_t\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)+\delta^h\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)+\zeta^hZ+e_{t+h}^h,
 \end{equation}
 for $h=0,\dots, H$ forecast horizons. $r_{t+h}$ is federal funds rate (bridged with \citet{WuXia2016} in ZLB period) and $\rho_{t+h}$ is the \citet{LW2003} natural interest rate.\footnote{I use \citet{HLW2023} updated version of the \citet{LW2003} natural rate estimation.}
 $\hat\pi_t$ is the measure of the FED expectation of future inflation. I use the average of the one- and two-quarters  tealbook inflation forecast forecast following \citet{CoibionGorodnichenko2011}. 
@@ -147,14 +148,14 @@ The coefficient $\beta^h$ captures the average response of monetary authority to
 for the IV-LP estimated estimated vectors of coefficients $\beta_t^h$ and $\gamma_t^h$. It is also a marginal response of ``excess interest rate'', $r_t-\rho_t$, to an increase in inflation. 
 That is, $\tilde \phi_t$ is the predicted response of FOMC to a unit increase in $\hat\pi_t$ is 
 \begin{equation}
-   \widehat{\left(r_{t+h}-\rho_{t+h}\right)}=\hat \beta_t^h+\hat\gamma^h \left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)+\bar\phi,\qquad\qquad h=1,2,\dots, H\label{eq:pred_policy}
+   \widehat{\left(r_{t+h}-r^*_{t+h}\right)}=\hat \beta_t^h+\hat\gamma^h \left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)+\bar\phi,\qquad\qquad h=1,2,\dots, H\label{eq:pred_policy}
 \end{equation}
-Then, based on the estimated impulse-response function we can calculate analogues of size and persistence as follows: size, $R_0$, is the mean of predicted responses,\footnote{Note that \cite{KMV2018} use another definition of size, they use an integral shown in \vref{eq:KMVsize}. I modify it by using a discrete-time analog, limiting the timespan of desired rate path by $H$, and scaling it by $H$. This transformation increases the associated coefficient by $H$, which is done in order to obtain the coefficients comparable for different choices of $H$.} and persistence, $e^{-\mu}=\nu$, is the first sample autocorrelation of $\widehat{\left(r_{t+h}-\rho_{t+h}\right)}$.
+Then, based on the estimated impulse-response function we can calculate analogues of size and persistence as follows: size, $R_0$, is the mean of predicted responses,\footnote{Note that \cite{KMV2018} use another definition of size, they use an integral shown in \vref{eq:KMVsize}. I modify it by using a discrete-time analog, limiting the timespan of desired rate path by $H$, and scaling it by $H$. This transformation increases the associated coefficient by $H$, which is done in order to obtain the coefficients comparable for different choices of $H$.} and persistence, $e^{-\mu}=\rho$, is the first sample autocorrelation of $\widehat{\left(r_{t+h}-\rho_{t+h}\right)}$.
 
 If size and persistence are calculated, we can then inspect the relationship between them. Namely, I estimate the following linear models 
 \begin{align}
-    \log \mathit{Consumption}&=\alpha_0+\alpha_1 R_0+\alpha_2\nu+\beta_1 R_0\nu \label{eq:linear}\\
-    \log \mathit{Consumption}&=\alpha_0'+\alpha_1' R_0+\alpha_2'\nu+\beta_1' R_0\nu + \beta_2' R_0\nu^2\label{eq:quadratic}
+    \log \mathit{Consumption}&=\alpha_0+\alpha_1 R_0+\alpha_2\rho+\beta_1 R_0\nu \label{eq:linear}\\
+    \log \mathit{Consumption}&=\alpha_0'+\alpha_1' R_0+\alpha_2'\rho+\beta_1' R_0\nu + \beta_2' R_0\nu^2\label{eq:quadratic}
 \end{align} 
 The hypotheses of models in equations \vrefrange{eq:SizePersistenceRANK}{eq:SizePersistenceHANK} map into the tests of the signs of coefficients as follows:\footnote{Note that the elasticity of consumption with respect to size, $R_0$, is $-d\log \mathit{Consumption}/d R_0$, so positive coefficients in the regressions are equivalent to negative effects on log consumption.} 
 \begin{multline*}\mathbb{H}_0:\beta_1=0\quad\mathit{vs}\quad \mathbb{H}_a:\beta_1>0\quad\iff\\  \text{RANK or TANK with $B^g$ adjustment}\quad\mathit{vs}\quad \text{TANK with $T$ adjustment or HANK}.\end{multline*}
@@ -166,7 +167,7 @@ Note that since the estimates of coefficients of in models \vrefrange{eq:linear}
 
 I use block bootstrap with geometrically distributed block lengths with mean $16$. The geometric distribution of block length decreases the dependence of block-bootstrap procedure on the block length, at the same time it does not deprive it from the main advantage, it still preserves heteroskedasticity and autocorrelation structures of data.
 
-The bootstrap p-values are calculated for the non-studentized statistic $T=\hat\theta-\theta_0$, where $\hat\theta$ is the coefficient estimate and $\theta_0$ is its hypothesized value. 
+The bootstrap p-values are calculated for the non-studentized statistic $T=\hat\theta-\theta_0$, where $\hat\theta$ is the coefficient estimate, i.e. $\alpha_i$ or $\beta_i$, and $\theta_0$ is the hypothesized value of the coefficient. 
 The bootstrap version of this statistic is $T^*(b)=\hat\theta^*(b)-\hat\theta$, where $b$ is the bootstrap index and $\hat\theta^*(b)$ is the individual bootstrap estimate. Then the bootstrap two-sided test p-value is
 \[p^*=\frac{1}{B}\sum_{b=1}^B\mathbf{1}\left\{\left|\hat\theta^*(b)-\hat\theta\right|>\left|\hat\theta-\theta_0\right|\right\},\]
 and bootstrap p-value for one-sided test $\mathbb{H}_0:\theta=\theta_0$ against the alternative $\mathbb{H}_a:\theta>\theta_0$ is 
