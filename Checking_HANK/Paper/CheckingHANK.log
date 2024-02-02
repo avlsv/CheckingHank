@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.3.6)  25 JAN 2024 15:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.3.6)  2 FEB 2024 14:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -942,7 +942,7 @@ Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 \c@nlinenum=\count347
 \TeXr@lab=\toks55
 ) (./CheckingHANK.aux
-LaTeX Font Info:    Trying to load font information for T2A+cmr on input line 25.
+LaTeX Font Info:    Trying to load font information for T2A+cmr on input line 24.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/cyrillic/t2acmr.fd
 File: t2acmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )<<t2a.cmap>>
@@ -1074,12 +1074,12 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 ) [1
 
 {/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6]
-<./../Figures/Average.pdf, id=250, 316.18124pt x 223.83624pt>
+<./../Figures/Average.pdf, id=243, 316.18124pt x 223.83624pt>
 File: ./../Figures/Average.pdf Graphic file (type pdf)
 <use ./../Figures/Average.pdf>
 Package pdftex.def Info: ./../Figures/Average.pdf  used on input line 189.
 (pdftex.def)             Requested size: 237.01411pt x 167.79478pt.
-<./../Figures/Differential.pdf, id=251, 316.18124pt x 223.83624pt>
+<./../Figures/Differential.pdf, id=244, 316.18124pt x 223.83624pt>
 File: ./../Figures/Differential.pdf Graphic file (type pdf)
 <use ./../Figures/Differential.pdf>
 Package pdftex.def Info: ./../Figures/Differential.pdf  used on input line 196.
@@ -1090,23 +1090,21 @@ File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 217.
- [7 <./../Figures/Average.pdf> <./../Figures/Differential.pdf>] [8] (./CheckingHANK.bbl<<ot1tt.cmap>> [9]) [10] [11] [12] (./CheckingHANK.aux)
+ [7] (./CheckingHANK.bbl<<ot1tt.cmap>> [8 <./../Figures/Average.pdf> <./../Figures/Differential.pdf>] [9]) [10] [11] [12] (./CheckingHANK.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `CheckingHANK.out' has not changed.
-(rerunfilecheck)             Checksum: 43196235FA3175CB5B9D8813D9C16C9E;1581.
+(rerunfilecheck)             Checksum: 3EF1F0CB4A278A041627FACAD099A9F9;1487.
  ) 
 Here is how much of TeX's memory you used:
- 39415 strings out of 478276
- 892367 string characters out of 5846497
+ 39412 strings out of 478276
+ 892335 string characters out of 5846497
  1382922 words of memory out of 5000000
- 56762 multiletter control sequences out of 15000+600000
+ 56761 multiletter control sequences out of 15000+600000
  494634 words of font info for 120 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  104i,14n,106p,806b,671s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{Hfootnote.12} has been referenced but does not exist, replaced by a fixed one
-
 pdfTeX warning (dest): name{Hfootnote.11} has been referenced but does not exist, replaced by a fixed one
 
 pdfTeX warning (dest): name{Hfootnote.10} has been referenced but does not exist, replaced by a fixed one
@@ -1130,10 +1128,10 @@ pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist,
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist, replaced by a fixed one
 
 {/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on CheckingHANK.pdf (12 pages, 349296 bytes).
+Output written on CheckingHANK.pdf (12 pages, 349287 bytes).
 PDF statistics:
- 454 PDF objects out of 1000 (max. 8388607)
- 396 compressed objects within 4 object streams
- 72 named destinations out of 1000 (max. 500000)
- 135 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 445 PDF objects out of 1000 (max. 8388607)
+ 387 compressed objects within 4 object streams
+ 70 named destinations out of 1000 (max. 500000)
+ 127 words of extra memory for PDF output out of 10000 (max. 10000000)
 
