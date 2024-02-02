@@ -170,7 +170,7 @@ I use block bootstrap with geometrically distributed block lengths with mean $16
 The bootstrap p-values are calculated for the non-studentized statistic $T=\hat\theta-\theta_0$, where $\hat\theta$ is the coefficient estimate, i.e. $\alpha_i$ or $\beta_i$, and $\theta_0$ is the hypothesized value of the coefficient. 
 The bootstrap version of this statistic is $T^*(b)=\hat\theta^*(b)-\hat\theta$, where $b$ is the bootstrap index and $\hat\theta^*(b)$ is the individual bootstrap estimate. Then the bootstrap two-sided test p-value is
 \[p^*=\frac{1}{B}\sum_{b=1}^B\mathbf{1}\left\{\left|\hat\theta^*(b)-\hat\theta\right|>\left|\hat\theta-\theta_0\right|\right\},\]
-and bootstrap p-value for one-sided test $\mathbb{H}_0:\theta=\theta_0$ against the alternative $\mathbb{H}_a:\theta>\theta_0$ is 
+and bootstrap p-value for one-sided test $\mathbb{H}_0:\theta=\theta_0$ against the alternative $\mathbb{H}_a:\theta>\theta_0$ is calculated as
 \[p^*=\frac{1}{B}\sum_{b=1}^B\mathbf{1}\left\{\hat\theta^*(b)-\hat\theta >\hat\theta-\theta_0\right\}.\]
 
 
@@ -251,6 +251,9 @@ Based on the impulse responses above I restrict the horizon for the size and per
   \end{table} 
 
 
+\newpage 
+~ ~
+\newpage ~
 \newpage 
 
 % \section{Robustness}
