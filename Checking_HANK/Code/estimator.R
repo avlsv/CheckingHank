@@ -317,7 +317,7 @@ size_persistence_ts <-
   size_persistence_tbl |> mutate(year_quarter = full_dataset_ts$year_quarter) |> as_tsibble(index = year_quarter)
 
 size_persistence_consumption_ts <-
-  inner_join(size_persistence_ts, consumption_ts)
+  inner_join(size_persistence_ts, full_dataset_tbl$consumption)
 
 stargazer::stargazer(size_persistence_tbl |> as.data.frame(), summary = T)
 
