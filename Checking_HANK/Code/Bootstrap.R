@@ -107,8 +107,7 @@ estimator <- function(full_dataset_df, horizon) {
   retr <- c(a, b)
   ret_vect <- retr |> as.vector()
   
-  
-  
+
   return(ret_vect)
 }
 
@@ -116,11 +115,39 @@ names(retr)
 
 
 full_dataset_ts <- full_dataset_tbl |> as.ts()
-bootstrapped <-
+
+bootstrapped_8 <-
+  tsboot(
+    full_dataset_ts,
+    \(x) estimator(x,8),
+    R = 1e4,
+    sim = "geom",
+    l = 16,
+    parallel =  "multicore",
+    ncpus = 4
+  ) # parallel does not work in windows
+
+save(bootstrapped_8, file = "data/boot_8.Rdata")
+
+bootstrapped_10 <-
   tsboot(
     full_dataset_ts,
     \(x) estimator(x,10),
-    R = 10000,
+    R = 1e4,
+    sim = "geom",
+    l = 16,
+    parallel =  "multicore",
+    ncpus = 4
+  ) # parallel does not work in windows
+
+save(bootstrapped_10, file = "data/boot_10.Rdata")
+
+
+bootstrapped_12 <-
+  tsboot(
+    full_dataset_ts,
+    \(x) estimator(x,12),
+    R = 1e4,
     sim = "geom",
     l = 16,
     parallel =  "multicore",
@@ -128,7 +155,8 @@ bootstrapped <-
   ) # parallel does not work in windows
 
 
-save(bootstrapped, file = "data/boot1.Rdata")
+save(bootstrapped_12, file = "data/boot_12.Rdata")
+
 #load("data/boot1.Rdata")
 
 

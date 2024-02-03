@@ -9,7 +9,7 @@
 \begin{document}
 
 % \maketitlenew
-\selectlanguage{english}
+% \selectlanguage{english}
 \maketitle
 
 
@@ -135,7 +135,7 @@ I estimate the following state-dependent local projection model
 \end{equation}
 for $h=0,\dots, H$ forecast horizons. $r_{t+h}$ is federal funds rate (bridged with \citet{WuXia2016} in ZLB period) and $\rho_{t+h}$ is the \citet{LW2003} natural interest rate.\footnote{I use \citet{HLW2023} updated version of the \citet{LW2003} natural rate estimation.}
 $\hat\pi_t$ is the measure of the FED expectation of future inflation. I use the average of the one- and two-quarters  tealbook inflation forecast forecast following \citet{CoibionGorodnichenko2011}. 
-$\mathit{Hawk}_t$ is the quarterly Hawk-Dove index of \citet{HIM2023}, which is based on the \citet{Istrefi2019,BordoIstrefi2023} estimation of individual policy preference of FOMC members, and $\overline{\mathit{Hawk}}$ stand for the mean of this variable.
+$\mathit{Hawk}_t$ is the quarterly Hawk-Dove index of \citet{HIM2023}, which is based on the \citet{Istrefi2019}and \citet{BordoIstrefi2023} estimation of individual policy preference of FOMC members made before , and $\overline{\mathit{Hawk}}$ stand for the mean of this variable.
 This variable is instrumented with $\left(\mathit{Hawk}_{t}^\mathit{IV}-\overline{\mathit{Hawk}}^\mathit{IV}\right)$. The instrument is based on the rotation of FOMC board membership among 11 FRB presidents, which follows mechanical scheme and thus independent of the economic situation.
 
 The vector of controls, $Z$, consists of the 4 lags of the dependent variable, $r_{t+h}-\rho_{t+h}$, and 4 lags of the Tealbook expected inflation, $\hat\pi_t$.
@@ -154,8 +154,8 @@ Then, based on the estimated impulse-response function we can calculate analogue
 
 If size and persistence are calculated, we can then inspect the relationship between them. Namely, I estimate the following linear models 
 \begin{align}
-    \log \mathit{Consumption}&=\alpha_0+\alpha_1 R_0+\alpha_2\rho+\beta_1 R_0\nu \label{eq:linear}\\
-    \log \mathit{Consumption}&=\alpha_0'+\alpha_1' R_0+\alpha_2'\rho+\beta_1' R_0\nu + \beta_2' R_0\nu^2\label{eq:quadratic}
+    \log \mathit{Consumption}&=\alpha_0+\alpha_1 R_0+\alpha_2\nu+\beta_1 R_0\nu \label{eq:linear}\\
+    \log \mathit{Consumption}&=\alpha_0'+\alpha_1' R_0+\alpha_2'\nu+\beta_1' R_0\nu + \beta_2' R_0\nu^2\label{eq:quadratic}
 \end{align} 
 The hypotheses of models in equations \vrefrange{eq:SizePersistenceRANK}{eq:SizePersistenceHANK} map into the tests of the signs of coefficients as follows:\footnote{Note that the elasticity of consumption with respect to size, $R_0$, is $-d\log \mathit{Consumption}/d R_0$, so positive coefficients in the regressions are equivalent to negative effects on log consumption.} 
 \begin{multline*}\mathbb{H}_0:\beta_1=0\quad\mathit{vs}\quad \mathbb{H}_a:\beta_1>0\quad\iff\\  \text{RANK or TANK with $B^g$ adjustment}\quad\mathit{vs}\quad \text{TANK with $T$ adjustment or HANK}.\end{multline*}
@@ -177,7 +177,7 @@ and bootstrap p-value for one-sided test $\mathbb{H}_0:\theta=\theta_0$ against 
 
 
 \section{Results}
-The estimated mean and differential response to a unit increase in inflation can be found in \vref{fig:LP}. The differential response is shown under the deviation of $\mathit{Hawk}_t$ from its mean equal to $2/12$, which is slightly higher than one standard deviation, and a standard choice in \citet{HIM2023}. The average and differential responses of  $r_t-\rho_t$ tend to be smaller compared to the estimations for federal funds rate of \citet{HIM2023}. However, they still are larger than zero up to 8th quarter. The coefficients for several selected quarters can be seen in Table \vref{tab:fullcoef}. 
+The estimated mean and differential response to a unit increase in inflation can be found in \vref{fig:LP}. The differential response is shown under the deviation of $\mathit{Hawk}_t$ from its mean equal to $2/12$, which is slightly higher than one standard deviation, and a standard choice in \citet{HIM2023}. The average and differential responses of  $r_t-\rho_t$ tend to be smaller compared to the estimations for federal funds rate of \citet{HIM2023}. However, they still are larger than zero up to 8th quarter. The coefficients for several selected quarters can be seen in \vref{tab:fullcoef}. 
 
 \begin{figure}[!htbp]\centering
     \caption{Policy Response to Inflation and FOMC Hawkishness}\vspace{2ex}
@@ -198,7 +198,7 @@ The estimated mean and differential response to a unit increase in inflation can
         {\begin{flushleft}\scriptsize\textit{Notes}: This figure reports the responses of the $r_t-\rho_t$ to an increase in the Tealbook inflation forecast of 1 p.p. above sample average. The subfigure \ref{fig:AverageResponce} reports the response for the $\mathit{HAWK}$ index equal to the sample average and \ref{fig:DifferentialResponce} is the addition to the response in case there are 2 (out of 12 in total) additional consistent hawks in the FOMC. The shaded areas correspond to 68\%, 90\% and 95\% confidence bands calculated with Newey-West HAC estimator with Andrews-selected truncation parameter.\end{flushleft}}
 \end{figure}
 
-Based on the impulse responses above I restrict the horizon for the size and persistence calculation to the 8th quarter, i.e. in equation \vref{eq:pred_policy} I set $H$ to be equal to 8. The estimates of coefficients of the models \eqref{eq:linear} and \eqref{eq:quadratic} can be seen in table \vref{tab:Size-Persistence}.
+Based on the impulse responses above I restrict the horizon for the size and persistence calculation to the 8th quarter, i.e. in equation \eqref{eq:pred_policy} I set $H$ to be equal to 8. The estimates of coefficients of the models \vref{eq:linear,eq:quadratic} can be seen in \vref{tab:Size-Persistence}.
 
 \begin{table}[!htb] \centering \footnotesize
     \begin{threeparttable}
@@ -352,6 +352,8 @@ To measure $r_t$ I take the minimum of the shadow federal funds rate \citep{WuXi
 
 \noindent\textbf{Natural Rate Estimates.}
 Natural rate of interest used is estimated by \citet{LW2003} and re-estimated by \citet{HLW2023} to bridge the Covid period.
+
+\noindent\textbf{HAWK Index.} \citet{Istrefi2019} estimate the 
 
 % \noindent\textbf{Tealbook Inflation Expectations.} 
 
