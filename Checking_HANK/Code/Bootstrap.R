@@ -4,6 +4,7 @@
 
 
 
+
 ## Libraries -----
 required_Packages_Install <-
   c(
@@ -34,12 +35,12 @@ for (Package in required_Packages_Install) {
 
 full_dataset_tbl <- read_csv("data/full_dataset.csv")
 full_dataset_ts <-
-  full_dataset_tbl |> mutate(year_quarter = yearquarter(year_quarter)) |> tsibble()
+  full_dataset_tbl |> mutate(year_quarter = yearquarter(year_quarter)) |> select(-...1) |> tsibble()
 
 full_dataset_df <- as.data.frame(full_dataset_tbl)
 
 
-
+# horizon <- 8
 estimator <- function(full_dataset_df, horizon) {
   ## LP-IV ----
   ##
@@ -80,7 +81,6 @@ estimator <- function(full_dataset_df, horizon) {
   
   
   
-  
   ## Size-Persistence Estimation ----
   size_persistence_tbl <- tibble()
   for (t in 1:dim(full_dataset_tbl)[1]) {
@@ -93,21 +93,21 @@ estimator <- function(full_dataset_df, horizon) {
   }
   
   size_persistence_consumption_tbl <-
-    size_persistence_tbl |> mutate(consumption = full_dataset_tbl$consumption)
+    size_persistence_tbl |> mutate(consumption = full_dataset_tbl$consumption, size_dmnd = size-mean(size),  persistence_dmnd = persistence-mean(persistence))
   
   
- 
-  a <- lm(log(consumption) ~ size * persistence,
+  
+  a <- lm(log(consumption) ~ size_dmnd * persistence_dmnd,
           size_persistence_consumption_tbl)$coefficients
   b <- lm(
-    log(consumption) ~ size * persistence + size * I(persistence ^ 2),
+    log(consumption) ~ size_dmnd * persistence_dmnd + size_dmnd : I(persistence_dmnd ^ 2),
     size_persistence_consumption_tbl
   )$coefficients
   
   retr <- c(a, b)
   ret_vect <- retr |> as.vector()
   
-
+  
   return(ret_vect)
 }
 
@@ -119,12 +119,12 @@ full_dataset_ts <- full_dataset_tbl |> as.ts()
 bootstrapped_8 <-
   tsboot(
     full_dataset_ts,
-    \(x) estimator(x,8),
+    \(x) estimator(x, 8),
     R = 1e4,
     sim = "geom",
     l = 16,
     parallel =  "multicore",
-    ncpus = 4
+    ncpus = 3
   ) # parallel does not work in windows
 
 save(bootstrapped_8, file = "data/boot_8.Rdata")
@@ -132,12 +132,12 @@ save(bootstrapped_8, file = "data/boot_8.Rdata")
 bootstrapped_10 <-
   tsboot(
     full_dataset_ts,
-    \(x) estimator(x,10),
+    \(x) estimator(x, 10),
     R = 1e4,
     sim = "geom",
     l = 16,
     parallel =  "multicore",
-    ncpus = 4
+    ncpus = 3 #4
   ) # parallel does not work in windows
 
 save(bootstrapped_10, file = "data/boot_10.Rdata")
@@ -146,110 +146,13 @@ save(bootstrapped_10, file = "data/boot_10.Rdata")
 bootstrapped_12 <-
   tsboot(
     full_dataset_ts,
-    \(x) estimator(x,12),
+    \(x) estimator(x, 12),
     R = 1e4,
     sim = "geom",
     l = 16,
     parallel =  "multicore",
-    ncpus = 4
+    ncpus = 3 #4
   ) # parallel does not work in windows
-
 
 save(bootstrapped_12, file = "data/boot_12.Rdata")
 
-#load("data/boot1.Rdata")
-
-
-boot.ci(
-  bootstrapped,
-  type = "perc",
-  index = 1,
-  conf = c(0.90, 0.95, 0.99)
-)
-boot.ci(
-  bootstrapped,
-  type = "perc",
-  index = 2,
-  conf = c(0.90, 0.95, 0.99)
-)
-boot.ci(
-  bootstrapped,
-  type = "perc",
-  index = 3,
-  conf = c(0.90, 0.95, 0.99)
-)
-boot.ci(
-  bootstrapped,
-  type = "perc",
-  index = 4,
-  conf =  c(0.90, 0.95, 0.99)
-)
-boot.ci(
-  bootstrapped,
-  type = "perc",
-  index = 5,
-  conf =  c(0.90, 0.95, 0.99)
-)
-boot.ci(
-  bootstrapped,
-  type = "basic",
-  index = 6,
-  conf =  c(0.90, 0.95, 0.99)
-)
-boot.ci(
-  bootstrapped,
-  type = "perc",
-  index = 7,
-  conf =  c(0.90, 0.95, 0.99)
-)
-boot.ci(
-  bootstrapped,
-  type = "perc",
-  index = 8,
-  conf =  c(0.90, 0.95, 0.99)
-)
-boot.ci(
-  bootstrapped,
-  type = "perc",
-  index = 9,
-  conf =  c(0.90, 0.95, 0.99)
-)
-boot.ci(
-  bootstrapped,
-  type = "perc",
-  index = 10,
-  conf =  c(0.90, 0.95, 0.99)
-)
-
-
-
-plot(bootstrapped, index = 6, nclass = 15)
-matrix(v, nrow=2, ncol=length(v), byrow=TRUE)
-
-w_b <- as.matrix(bootstrapped$t)-matrix(t(bootstrapped$t0), nrow=10000, ncol=length(t(bootstrapped$t0)), byrow=T)
-
-w <- matrix(t(bootstrapped$t0), nrow=10000, ncol=length(t(bootstrapped$t0)), byrow=T)
-colMeans(abs(w_b)>abs(w))
-colMeans(w_b>w)
-
-
-mean(bootstrapped$t[, 4] > 0)
-
-
-bootstrapped$t0[6]
-
-
-
-bootstrapped |> tidy() |> mutate(stat_name =  names(c(a, b, c)))
-
-
-
-m1 <-
-  lm(log(consumption) ~ size * persistence,
-     size_persistence_consumption_tbl)
-m2 <-
-  lm(
-    log(consumption) ~ size * persistence + size * I(persistence ^ 2),
-    size_persistence_consumption_tbl
-  )
-stargazer(m1, m2, df=F)
