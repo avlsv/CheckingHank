@@ -97,67 +97,70 @@ coefs_HAWK_inflation <-
 
 average_responce_plot <-
   ggplot(coefs_inflation, aes(x = quarter, y = estimate)) +
-  geom_line() +  geom_ribbon(
+  geom_hline(aes(yintercept = 0),  color = "darkred") +
+  geom_ribbon(
     aes(
-      ymin = estimate - 1.96 * std_error,
-      ymax = estimate + 1.96 * std_error
+      ymin = estimate - qnorm(1-0.05/2) * std_error,
+      ymax = estimate + qnorm(1-0.05/2) * std_error
     ),
-    alpha = 0.1,
+    alpha = 0.13,
     linetype = 0,
-    color = "grey"
+    fill = "#477998"
   ) +
   geom_ribbon(
     aes(ymin = estimate - std_error, ymax = estimate + std_error),
-    alpha = 0.1,
+    alpha = 0.13,
     linetype = 0,
-    color = "grey"
+    fill = "#477998"
   ) +
   geom_ribbon(
     aes(
-      ymin = estimate - 1.644 * std_error,
-      ymax = estimate + 1.644 * std_error
+      ymin = estimate - qnorm(1-.10/2) * std_error,
+      ymax = estimate + qnorm(1-.10/2) * std_error
     ),
-    alpha = 0.1,
+    alpha = 0.123,
     linetype = 0,
-    color = "grey"
-  ) +
+    fill = "#477998"
+  ) +  geom_line() + 
   labs(x = "Quarter", y = "Percentage Points") +
-  geom_hline(aes(yintercept = 0),  color = "darkred") +
   theme_light()
 
 
+average_responce_plot
+
 differential_responce_plot <-
-  ggplot(coefs_HAWK_inflation, aes(x = quarter, y = 2 / 12 * estimate)) +
-  geom_line() +  geom_ribbon(
+  ggplot(coefs_HAWK_inflation, aes(x = quarter, y = 2 / 12 * estimate)) +  geom_ribbon(
     aes(
-      ymin = 2 / 12 * estimate - 1.96 * 2 / 12 * std_error,
-      ymax = 2 / 12 * estimate + 1.96 * 2 / 12 * std_error
+      ymin = 2 / 12 * estimate - qnorm(1-0.05/2) * 2 / 12 * std_error,
+      ymax = 2 / 12 * estimate + qnorm(1-0.05/2)* 2 / 12 * std_error
     ),
-    alpha = 0.1,
+    alpha = 0.13,
     linetype = 0,
-    color = "grey"
+    fill = "#477998"
   ) +
   geom_ribbon(
     aes(
       ymin = 2 / 12 * estimate - 2 / 12 * std_error,
       ymax = 2 / 12 * estimate + 2 / 12 * std_error
     ),
-    alpha = 0.1,
+    alpha = 0.13,
     linetype = 0,
-    color = "grey"
+    fill = "#477998"
   ) +
   geom_ribbon(
     aes(
       ymin = 2 / 12 * estimate - 1.644 * 2 / 12 * std_error,
       ymax = 2 / 12 * estimate + 1.644 * 2 / 12 * std_error
     ),
-    alpha = 0.1,
+    alpha = 0.13,
     linetype = 0,
-    color = "grey"
+    fill = "#477998"
   ) +
   labs(x = "Quarter", y = "Percentage Points") +
-  geom_hline(aes(yintercept = 0), color = "darkred") +
+  geom_hline(aes(yintercept = 0), color = "darkred") +  geom_line() +
   theme_light()
+
+differential_responce_plot
 
 ggsave(
   "Average.pdf",
@@ -172,10 +175,11 @@ ggsave(
   "Differential.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   differential_responce_plot,
-  width = 148.5 / 2 *1.5 ,
-  height = 210 / 4*1.5 ,
+  width = 148.5 / 2 * 1.5 ,
+  height = 210 / 4 * 1.5 ,
   units = "mm"
 )
+
 
 
 LP_2 <-
@@ -304,29 +308,34 @@ LP_10 |> summary(diagnostics = T)
 
 ## Size-Persistence Estimation ----
 size_persistence_tbl <- tibble()
+irf_t_list <- c()
 for (t in 1:dim(full_dataset_ts)[1]) {
-  irf_t = coefs_inflation$estimate + full_dataset_ts$demeaned_HAWK[t] * coefs_HAWK_inflation$estimate
-  size = sum(irf_t)
-  persistence = ar(irf_t, order = 1)$ar
+  irf_t = coefs_inflation$estimate[1:12] + full_dataset_ts$demeaned_HAWK[t] * coefs_HAWK_inflation$estimate[1:12] 
+  irf_t_list <- c(irf_t_list, irf_t)
+  size = mean(irf_t)
+  persistence = acf(irf_t, lag = 1, plot = F)$acf[2]
   size_persistence_tbl <-
     bind_rows(size_persistence_tbl,
               tibble(size = size, persistence = persistence))
 }
 
-size_persistence_ts <-
-  size_persistence_tbl |> mutate(year_quarter = full_dataset_ts$year_quarter) |> as_tsibble(index = year_quarter)
-
-size_persistence_consumption_ts <-
-  inner_join(size_persistence_ts, full_dataset_tbl$consumption)
-
-stargazer::stargazer(size_persistence_tbl |> as.data.frame(), summary = T)
-
-lm(size ~ persistence, size_persistence_ts) |> summary()
 
 
-lm(log(consumption) ~ size * persistence,
-   size_persistence_consumption_ts) |> summary()
-lm(
-  log(consumption) ~ size * persistence + size * I(persistence ^ 2),
-  size_persistence_consumption_ts
-) |> summary()
+
+irfs <-
+  tibble(
+    irf = irf_t_list,
+    quart = rep(1:12, dim(full_dataset_ts)[1]),
+    time = rep(yq(full_dataset_ts$year_quarter), each = 12)
+  )
+
+size_persistence_consumption_tbl <-
+  size_persistence_tbl |> 
+  mutate(
+    consumption = full_dataset_tbl$consumption, 
+    size_dmnd = size - mean(size),  
+    persistence_dmnd = persistence - mean(persistence), 
+    year_quarter = yearquarter(full_dataset_tbl$year_quarter))
+
+write.csv(size_persistence_consumption_tbl, file = "data/size_persistence_consumption.csv")
+write.csv(irfs, file = "data/irfs.csv")

@@ -2,78 +2,39 @@
 
 
 ##[1] "(Intercept)"                     
-##[2]"size_dmnd"                      
+##[2] "size_dmnd"                      
 ##[3] "persistence_dmnd"                
-##[4] "size_dmnd:persistence_dmnd"     
+##[4] "size_dmnd:persistence_dmnd"  
+##   
 ##[5] "(Intercept)"                     
 ##[6] "size_dmnd"                      
 ##[7] "persistence_dmnd"                
 ##[8] "size_dmnd:persistence_dmnd"     
 ##[9] "size_dmnd:I(persistence_dmnd^2)"
 
+library(boot)
+
 load("data/boot_8.Rdata")
 load("data/boot_10.Rdata")
 load("data/boot_12.Rdata")
 
+bootstrapped_8$t0|> stargazer()
 
-boot.ci(
-  bootstrapped_12,
-  type = "perc",
-  index = 1,
-  conf = 0.95
-)
-boot.ci(
-  bootstrapped_8,
-  type = "perc",
-  index = 2,
-  conf = 0.95
-)
-boot.ci(
-  bootstrapped,
-  type = "perc",
-  index = 3,
-  conf = 0.95
-)
-boot.ci(
-  bootstrapped_8,
-  type = "perc",
-  index = 8,
-  conf = 0.95
-)
-boot.ci(
-  bootstrapped,
-  type = "perc",
-  index = 5,
-  conf =  0.95
-)
-boot.ci(
-  bootstrapped,
-  type = "perc",
-  index = 6,
-  conf = 0.95
-)
-boot.ci(
-  bootstrapped,
-  type = "perc",
-  index = 7,
-  conf = 0.95
-)
-boot.ci(
-  bootstrapped,
-  type = "perc",
-  index = 8,
-  conf = 0.95 
-)
-boot.ci(
-  bootstrapped_10,
-  type = "perc",
-  index = 9,
-  conf =  0.95
-)
+intervals_list <- c()
+for (i in 1:9) {
+  m <-
+    boot.ci(
+      bootstrapped_8,
+      type = "perc",
+      index = i,
+      conf = 0.95
+    )
+  intervals_list <- append(intervals_list,m$percent[1,4:5])
+}
 
-
-
-plot(bootstrapped_12, index =4, nclass = 15)
+intervals_mat <- intervals_list |> matrix(nrow = 9, byrow = T)
+bootstrapped_8$t0
+intervals_mat |> stargazer()
 
 
 w_b <- matrix(
