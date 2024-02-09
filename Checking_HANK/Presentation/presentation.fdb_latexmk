@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex presentation"] 1707479552 "presentation.aux" "presentation.bbl" "presentation" 1707479554
+["bibtex presentation"] 1707479797 "presentation.aux" "presentation.bbl" "presentation" 1707479937
   "../misc/econ.bst.bst" 0 -1 0 ""
   "../misc/references.bib" 1707476844 52592 f5ff9b55b4a495bfe09d6d8707eca805 ""
-  "presentation.aux" 1707479554 6501 f7be52724635c2771e01ada2abc5df85 "pdflatex"
+  "presentation.aux" 1707479936 6797 971cdc28c05897f03532048c56e54221 "pdflatex"
   (generated)
   "presentation.bbl"
   "presentation.blg"
-["pdflatex"] 1707479552 "/Users/vlasov/Documents/CheckingHank/Checking_HANK/Presentation/presentation.tex" "presentation.pdf" "presentation" 1707479554
-  "/Users/vlasov/Documents/CheckingHank/Checking_HANK/Presentation/presentation.tex" 1707479549 10142 e63a6d0140f3d2051e49e37bbbe13836 ""
+["pdflatex"] 1707479934 "/Users/vlasov/Documents/CheckingHank/Checking_HANK/Presentation/presentation.tex" "presentation.pdf" "presentation" 1707479937
+  "/Users/vlasov/Documents/CheckingHank/Checking_HANK/Presentation/presentation.tex" 1707479934 9800 607337b3caf499fd8be4ff57f3f7a70a ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -30,7 +30,6 @@
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmss9.tfm" 1136768653 1320 49357c421c0d469f88b867dd0c3d10e8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmssi10.tfm" 1136768653 1520 ca2bb4b78ac9800bd686e30c6d19ef95 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmssi8.tfm" 1136768653 1500 7f49257eca65a87057f17452e9fe3ef5 ""
-  "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmssi9.tfm" 1136768653 1524 db4bb1dddb7b51420776d94a5c70c2a5 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm" 1136768653 1124 6c73e740cf17375f03eec0ee63599741 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm" 1136768653 1116 933a60c408fc0a863a92debe84b2d294 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1136768653 1120 8b7d695260f3cff42e636090a8002094 ""
@@ -237,12 +236,12 @@
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1646577410 2797749 81b5e45ac95007631cb34e1b4129a7cf ""
   "/usr/local/texlive/2021/texmf.cnf" 1646577368 577 4c1911a7228e554c6032256d3cf5567d ""
   "Size_Persistence_KMV.png" 1695991309 121458 dd85ce817d87faaf4a2ce7286787e4c5 ""
-  "presentation.aux" 1707479554 6501 f7be52724635c2771e01ada2abc5df85 "pdflatex"
-  "presentation.bbl" 1707479552 2840 3970f8a24b72c56889c4f4d74b23d1f6 "bibtex presentation"
-  "presentation.nav" 1707479554 2511 c6f3184cc939f2c1bef44d91437c2c44 "pdflatex"
-  "presentation.out" 1707479554 541 9a7ea4e86a33c5fed1a5f6e012d50624 "pdflatex"
-  "presentation.tex" 1707479549 10142 e63a6d0140f3d2051e49e37bbbe13836 ""
-  "presentation.vrb" 1707479553 11 03cba00f6b70749ac61ba0e15a6279e7 "pdflatex"
+  "presentation.aux" 1707479936 6797 971cdc28c05897f03532048c56e54221 "pdflatex"
+  "presentation.bbl" 1707479797 3429 79120cbd0807f35380b8f1512445aec2 "bibtex presentation"
+  "presentation.nav" 1707479936 2603 7948338e7a27227a80e460b6ae24598d "pdflatex"
+  "presentation.out" 1707479936 541 9a7ea4e86a33c5fed1a5f6e012d50624 "pdflatex"
+  "presentation.tex" 1707479934 9800 607337b3caf499fd8be4ff57f3f7a70a ""
+  "presentation.vrb" 1707479935 11 03cba00f6b70749ac61ba0e15a6279e7 "pdflatex"
   (generated)
   "presentation.aux"
   "presentation.log"

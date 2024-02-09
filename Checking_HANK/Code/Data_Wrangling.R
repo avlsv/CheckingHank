@@ -80,7 +80,7 @@ natural_rate_ts <-
 
 
 
-getSymbols(c("A794RX0Q048SBEA", "DGS1", "DFF", "PCEPILFE"), src = "FRED")
+getSymbols(c("A794RX0Q048SBEA", "DFF", "PCEPILFE"), src = "FRED")
 
 consumption_raw <- A794RX0Q048SBEA
 consumption_ts <-
