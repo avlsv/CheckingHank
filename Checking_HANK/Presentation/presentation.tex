@@ -18,9 +18,15 @@
 \usepackage{threeparttable}
 \usepackage{natbib}
 \usepackage{mathrsfs}
+\usepackage[nospace]{varioref}	
+\usepackage{cleveref}
+
 \setlength{\parskip}{\baselineskip} 
 \graphicspath{{./../Figures}}
+\setlength\itemsep{2em}
 
+\usepackage{caption}
+\usepackage{subcaption}
 
 
 \title{Checking HANK.}
@@ -157,10 +163,11 @@ I estimate the following State-Dependent LP-IV.
 
 \section{Data}
 \begin{frame}\frametitle{Data}
-\begin{itemize}
+\begin{itemize}\setlength\itemsep{1em}
         \item Natural rate of interest by \citet{HLW2017,HLW2023}
         \item Short-term rate ($r$) is by \citet{WuXia2016} and Fed Funds Rate 
-        \item Consumption is U.S. Bureau of Economic Analysis``Real personal consumption expenditures per capita ''  (FRED A794RX0Q048SBEA) 
+        \item Consumption is U.S. Bureau of Economic Analysis``Real personal consumption expenditures per capita ''  (FRED A794RX0Q048SBEA).
+        \item FED inflation forecast is from Tealbook (average of 1 and 2 quarter ahead + average per quarter).
     \end{itemize}
 \end{frame}
 
@@ -173,80 +180,120 @@ I estimate the following State-Dependent LP-IV.
 
 \section{Results}
 
-\begin{frame}{Results: Monetary Shock Identification I}
-    \begin{table}[ht] \centering \tiny
-        \begin{threeparttable}
-        \caption{Monetary Shock Identification.  First step} 
-        \label{tab:Betas} 
-      \begin{tabular}{@{\extracolsep{1pt}}lcccccc} 
-        \\[-1.8ex]\hline 
-        \hline \\[-1.8ex] 
-         & \multicolumn{6}{c}{\textit{Dependent variable:}} \\ 
-        \cline{2-7} 
-        \\[-1.8ex] & DGS1 & DGS5 & DGS7 & DGS10 & DGS20 & DGS30 \\ 
-        \\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6)\\ 
-        \hline \\[-1.8ex] 
-         DGS2 & 0.727$^{***}$ & 1.029$^{***}$ & 0.921$^{***}$ & 0.743$^{***}$ & 0.316$^{**}$ & 0.202 \\ 
-          & (0.071) & (0.090) & (0.110) & (0.112) & (0.127) & (0.130) \\ 
-          & & & & & & \\ 
-         Constant & $-$0.005$^{***}$ & $-$0.001 & $-$0.0002 & 0.0002 & $-$0.001 & $-$0.001 \\ 
-          & (0.001) & (0.002) & (0.002) & (0.002) & (0.003) & (0.003) \\ 
-          & & & & & & \\ 
-        \hline \\[-1.8ex] 
-        Observations & 382 & 382 & 382 & 382 & 382 & 382 \\ 
-        R$^{2}$ & 0.634 & 0.766 & 0.666 & 0.583 & 0.327 & 0.206 \\ 
-        Adjusted R$^{2}$ & 0.633 & 0.765 & 0.665 & 0.582 & 0.325 & 0.204 \\ 
-        Res. Std. Error & 0.028 & 0.035 & 0.043 & 0.044 & 0.049 & 0.051 \\ 
-        Wald test & 103.9$^{***}$&129.9$^{***}$& 70.49$^{***}$&43.71$^{***}$& 6.201$^{**}$&2.406\\
-        Wu-Hausman& 3.699$^{*}$& 0.002&0.259&0.847& 9.345 $^{***}$ & 8.707$^{***}$\\
-        \hline 
-        \hline \\[-1.8ex] 
-      \end{tabular} 
-      \begin{tablenotes}[flushleft]
-    \item\tiny{}This table reports first stage of \citet{BRW2021} monetary shock identification procedure for the FOMC announcement from 1994 to the most recent event 2021-04-28 (191 monetary events). OLS standard errors in the parenthesis. F-statistics on instrument insignificance is 44.030$^{***}$. Wu-Hausman stands for Hausman specification test for the endogeneity of a instrument $\left(\Delta R_{2,t}^{\textit{M}},-\Delta R_{2,t}^{\textit{NM}}\right)'$. $^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01. 
-      \end{tablenotes}
-    \end{threeparttable}
-      \end{table} 
-      
+\begin{frame}{Results I}{Policy Response to Inflation and FOMC Hawkishness}
+
+    \begin{figure}[!htbp]\centering
+        \label{fig:LP}
+        \begin{subfigure}[b]{0.49\textwidth}
+            \centering
+            \caption{Average Response $(\beta^h)$}
+            \label{fig:AverageResponce}
+            \includegraphics[width=\linewidth]{Average.pdf}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.49\textwidth}
+            \centering
+            \caption{Differential Response $(\gamma^h)$}
+            \label{fig:DifferentialResponce}
+            \includegraphics[width=\linewidth]{Differential.pdf}
+        \end{subfigure}\vspace{-4ex}
+            {\begin{flushleft}\tiny\textit{Notes}: This figure reports the responses of the $r_t-\rho_t$ to an increase in the Tealbook inflation forecast of 1 p.p. The subfigure \ref{fig:AverageResponce} reports the response for the $\mathit{HAWK}$ index equal to the sample average and \ref{fig:DifferentialResponce} is the addition to the response in case there are 2 (out of 12 in total) additional consistent hawks in the FOMC. The shaded areas correspond to 68\%, 90\% and 95\% confidence bands calculated with Newey-West HAC estimator with Andrews-selected truncation parameter.\end{flushleft}}
+    \end{figure}
+    
 \end{frame}
 
 
 
-\begin{frame}{Results: Elasticity of consumprion}
+\begin{frame}{Results}{Predicted IRFs}
+    \begin{figure}[!htbp]\centering
+        \begin{minipage}{0.7\textwidth}
+          \caption{Predicted IRFs in each of the state} 
+          \label{fig:predicted_IRF}
+          \includegraphics[width=\linewidth]{irfs_plot.pdf}
+          {\begin{flushleft}\tiny \textit{Notes:} This figure shows the Impulse Response functions in each state calculated as in equation \eqref{eq:InterestRatePath}.\end{flushleft}} 
+          \end{minipage}
+      \end{figure}
+\end{frame}
+
+
+\begin{frame}{Results}{}
+    \begin{figure}[!hpbt]\centering
+        \begin{minipage}{0.8\textwidth}
+          \caption{Estimates of Size and Persistence} 
+          \label{fig:size_persistence}
+          \includegraphics[width=\linewidth]{size_vs_persistence.pdf}
+        %   {\begin{flushleft}\scriptsize \textit{Notes:} \end{flushleft}} 
+          \end{minipage}
+      
+      \end{figure}
     
-\begin{table}[!htbp] \centering \tiny
+\end{frame}
+
+
+\begin{frame}{Results}{Size and Persistence over time}
+    \begin{figure}[!htbp]\centering
+        \vspace{-2ex}
+        \label{fig:Size_Persistence_Dynamics}
+        \begin{subfigure}[b]{0.49\textwidth}
+            \centering
+            \caption{Size Dynamics}
+            \label{fig:AverageResponce}
+            \includegraphics[width=\linewidth]{size_plot.pdf}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.49\textwidth}
+            \centering
+            \caption{Persistence Dynamics}
+            \label{fig:DifferentialResponce}
+            \includegraphics[width=\linewidth]{persistence_plot.pdf}
+        \end{subfigure} \vspace{-5ex}
+            {\begin{flushleft}\tiny\textit{Notes}: This figure presents the size and persistence, calculated as mean and the first autocorrelation of impulse-response function in each state, constructed as described in \vref{eq:InterestRatePath}, over time. \end{flushleft}}
+      \end{figure}
+      
+\end{frame}
+
+\begin{frame}{Results:}{Size-Persistence Tradeoff}\tiny\vspace{-2ex}
+\begin{table}[!htb] \centering 
     \begin{threeparttable}
-    \caption{Elasticity of consumption to $(r-r^*)$.} 
-    \label{tab:TotalElasticityofConsumption} 
-  \begin{tabular}{@{\extracolsep{5pt}}lcc} 
-  \\[-1.8ex]\hline 
-  \hline \\[-1.8ex] 
-   & \multicolumn{2}{c}{\textit{Dependent variable: $\log\,$Consumption}} \\ 
-  \cline{2-3} 
-  \\[-1.8ex] & \textit{OLS} & \textit{IV} \\ 
-  \\[-1.8ex] & (1) & (2)\\ 
-  \hline \\[-1.8ex] 
-   $(r-r^*)$ & 0.092$^{***}$ & 0.197$^{***}$ \\ 
-   & (0.008) & (0.013) \\ 
-   & & \\ 
-  Constant & 9.095$^{***}$ & 9.050$^{***}$ \\ 
-   & (0.011) & (0.014) \\ 
-   & & \\ 
- \hline \\[-1.8ex] 
- Observations & 361 & 361 \\ 
- R$^{2}$ & 0.255 & $-$0.079 \\ 
- Adjusted R$^{2}$ & 0.253 & $-$0.082 \\ 
- Residual Std. Error  & 0.207 & 0.249 \\ 
- F Statistic & 122.922$^{***}$& \\
-  Weak instrument& &508.1$^{***}$\\
-  Wu-Hausman & &622.3$^{***}$\\
-  \hline 
-  \hline \\[-1.8ex] 
-  \end{tabular} 
-  \begin{tablenotes}[flushleft]
-\item\tiny This table reports the results of estimation of  consumption elasticity to the deviation of rate from its neutral (natural) value, $(r-r^*)$.  Weak instrument stands for first stage F-statisitic, that indicate, whether the $\hat{R}$ is a strong instrument.
-Wu-Hausman stands for Hausman specification test for the endogeneity of a instrument  $\hat{R}$.
-$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01  
+    \begin{tabular}{@{\extracolsep{10pt}}lcc} 
+      \\[-1.8ex]\hline 
+      \hline \\[-1.8ex] 
+       & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+      \cline{2-3} 
+      \\[-1.8ex] & \multicolumn{2}{c}{$\log(\mathit{consumption})$} \\  \\[-1.8ex]   &\multicolumn{2}{c}{$H=8$}\\
+      \\[-1.8ex] & (1) & (2)\\ 
+      \hline \\[-1.8ex] 
+       Size $(R_0)$  & $-$0.687 & $-$0.451 \\ 
+        & ($-$1.149, $-$0.133) & ($-$1.495, 1.078)    \\ 
+        &[0.011]\{0.997\} & [0.857]\{0.578\}\\ 
+        & & \\ 
+       Persistence $(\nu)$ & $-$0.100 & 1.223 \\ 
+        & ($-$0.693,  0.691)   & ($-$3.598, 4.968)    \\ 
+        &[0.746]\{0.673\} & [0.517]\{0.246\}\\ 
+        & & \\ 
+        $\nu^2$ &  & $-$1.042 \\ 
+        &  &  ($-$4.271, 4.336) \\ 
+        & &[0.517]\{0.766\} \\ 
+        & & \\ 
+       $R_0\times \nu$ & 0.765 & $-$1.628 \\ 
+        & ($-$0.177,  1.526)    &   ($-$3.159,  2.748)     \\ 
+        &[0.0754]\{0.0247\} & [0.522]\{0.759\}\\ 
+        & & \\ 
+        $R_0\times \nu^2$ &  & 2.435 \\ 
+        &  &  ($-$1.852, 3.838) \\ 
+        & & [0.340]\{0.145\}\\ 
+        & & \\ 
+       Constant & 10.6 &10.5 \\ 
+        & (10.1, 11.0) & (9.8, 11.0)    \\ 
+        & [0.0]\{0.0\}& [0.0]\{0.0\}\\ 
+        & & \\[-1.8ex] 
+      \hline \\[-1.8ex] 
+      Observations & 198 & 198 \\ 
+      \hline 
+      \hline \\[-1.8ex] 
+      \end{tabular} 
+    \begin{tablenotes}[flushleft]
+    \item[] \tiny \textit{Note:} The inference is derived from Block bootstrap with 10,000 replications and block lengths geometrically distributed with mean $16$. 95\% percentile intervals are in parenthesis. Bootstrap p-values for the two-sided hypothesis ($\mathbb{H}_0:\theta=0$ vs $\mathbb{H}_a:\theta\ne 0$) are in square brackets, p-values for the one-sided hypothesis ($\mathbb{H}_0:\theta=0$ vs $\mathbb{H}_a:\theta>0$) are in curly brackets. 
   \end{tablenotes}
 \end{threeparttable}
   \end{table} 
@@ -254,15 +301,11 @@ $^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01
 \end{frame}
 
 
-
 \section{Conclusion}
 \begin{frame}\frametitle{Conclusions}
     \begin{block}{So, should we believe in HANK?}
-
         The evidence above suggests that, we should. 
-        At least we have found that consumption behaviour in size-persistent tradeoff corresponds to the HANK model.
-
-
+        At least we have found that consumption behaviour in size-persistent tradeoff corresponds to the TANK model.
     \end{block}
 \end{frame}
 

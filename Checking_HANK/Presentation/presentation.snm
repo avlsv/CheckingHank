@@ -6,5 +6,15 @@
 \beamer@slide {eq:SizePersistenceHANK}{5}
 \beamer@slide {eq:linear}{8}
 \beamer@slide {eq:quadratic}{8}
-\beamer@slide {tab:Betas}{10}
-\beamer@slide {tab:TotalElasticityofConsumption}{11}
+\beamer@slide {fig:LP}{10}
+\beamer@slide {fig:AverageResponce}{10}
+\beamer@slide {sub@fig:AverageResponce}{10}
+\beamer@slide {fig:DifferentialResponce}{10}
+\beamer@slide {sub@fig:DifferentialResponce}{10}
+\beamer@slide {fig:predicted_IRF}{11}
+\beamer@slide {fig:size_persistence}{12}
+\beamer@slide {fig:Size_Persistence_Dynamics}{13}
+\beamer@slide {fig:AverageResponce}{13}
+\beamer@slide {sub@fig:AverageResponce}{13}
+\beamer@slide {fig:DifferentialResponce}{13}
+\beamer@slide {sub@fig:DifferentialResponce}{13}

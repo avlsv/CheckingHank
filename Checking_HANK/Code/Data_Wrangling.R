@@ -134,7 +134,8 @@ expected_inflation_ts <-
 
 
 full_dataset_ts <-
-  inner_join(fed_funds_rate_ts, natural_rate_ts, by = "year_quarter") |> select(-date) |>
+  inner_join(fed_funds_rate_ts, natural_rate_ts, by = "year_quarter") |> 
+  select(-date) |>
   inner_join(HAWK_ts, by = "year_quarter") |> select(-date) |>
   inner_join(inflation_ts, by = "year_quarter") |>
   inner_join(consumption_ts, by = "year_quarter") |>

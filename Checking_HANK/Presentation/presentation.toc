@@ -2,4 +2,4 @@
 \beamer@sectionintoc {2}{Approach}{7}{0}{2}
 \beamer@sectionintoc {3}{Data}{9}{0}{3}
 \beamer@sectionintoc {4}{Results}{10}{0}{4}
-\beamer@sectionintoc {5}{Conclusion}{12}{0}{5}
+\beamer@sectionintoc {5}{Conclusion}{15}{0}{5}
