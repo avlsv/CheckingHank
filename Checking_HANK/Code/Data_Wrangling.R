@@ -151,3 +151,6 @@ full_dataset_tbl <- full_dataset_ts |> as_tibble()
 
 write.csv(full_dataset_tbl, file = "data/full_dataset.csv")
 
+
+
+full_dataset_ts |> autoplot(HAWK)

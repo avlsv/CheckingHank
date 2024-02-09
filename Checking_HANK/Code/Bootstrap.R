@@ -97,10 +97,10 @@ estimator <- function(full_dataset_df, horizon) {
   
   
   
-  a <- lm(log(consumption) ~ size_dmnd * persistence_dmnd,
+  a <- lm(log(consumption) ~ size * persistence,
           size_persistence_consumption_tbl)$coefficients
   b <- lm(
-    log(consumption) ~ size_dmnd * persistence_dmnd + size_dmnd : I(persistence_dmnd ^ 2),
+    log(consumption) ~ size * persistence + size : I(persistence ^ 2),
     size_persistence_consumption_tbl
   )$coefficients
   
@@ -124,7 +124,7 @@ bootstrapped_8 <-
     sim = "geom",
     l = 16,
     parallel =  "multicore",
-    ncpus = 3
+    ncpus = 4
   ) # parallel does not work in windows
 
 save(bootstrapped_8, file = "data/boot_8.Rdata")
@@ -137,7 +137,7 @@ bootstrapped_10 <-
     sim = "geom",
     l = 16,
     parallel =  "multicore",
-    ncpus = 3 #4
+    ncpus = 4 #4
   ) # parallel does not work in windows
 
 save(bootstrapped_10, file = "data/boot_10.Rdata")
@@ -151,7 +151,7 @@ bootstrapped_12 <-
     sim = "geom",
     l = 16,
     parallel =  "multicore",
-    ncpus = 3 #4
+    ncpus = 4 #4
   ) # parallel does not work in windows
 
 save(bootstrapped_12, file = "data/boot_12.Rdata")

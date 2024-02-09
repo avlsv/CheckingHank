@@ -339,3 +339,4 @@ size_persistence_consumption_tbl <-
 
 write.csv(size_persistence_consumption_tbl, file = "data/size_persistence_consumption.csv")
 write.csv(irfs, file = "data/irfs.csv")
+
