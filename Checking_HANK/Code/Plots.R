@@ -55,8 +55,8 @@ ggsave(
   "size_vs_persistence.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   size_vs_persistence,
-  width = 220,
-  height = 140,
+  width = 220/1.2,
+  height = 140/1.2,
   units = "mm"
 )
 
@@ -109,8 +109,8 @@ ggsave(
   "size_plot.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   size_plot,
-  width = 220,
-  height = 140,
+  width = 220/1.7,
+  height = 140/1.7,
   units = "mm"
 )
 
@@ -140,8 +140,8 @@ ggsave(
   "persistence_plot.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   persistence_plot,
-  width = 220,
-  height = 140,
+  width = 220/1.7,
+  height = 140/1.7,
   units = "mm"
 )
 

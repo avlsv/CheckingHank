@@ -1,0 +1,56 @@
+This is BibTeX, Version 0.99d (TeX Live 2021)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: presentation.aux
+The style file: ../misc/econ.bst.bst
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: ../misc/references.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--empty institution in HIM2023
+You've used 7 entries,
+            6826 wiz_defined-function locations,
+            1353 strings with 11319 characters,
+and the built_in function-call counts, 9672 in all, are:
+= -- 1654
+> -- 384
+< -- 21
++ -- 129
+- -- 152
+* -- 581
+:= -- 1213
+add.period$ -- 7
+call.type$ -- 7
+change.case$ -- 48
+chr.to.int$ -- 7
+cite$ -- 8
+duplicate$ -- 234
+empty$ -- 425
+format.name$ -- 128
+if$ -- 2599
+int.to.chr$ -- 0
+int.to.str$ -- 0
+missing$ -- 0
+newline$ -- 34
+num.names$ -- 65
+pop$ -- 66
+preamble$ -- 1
+purify$ -- 48
+quote$ -- 0
+skip$ -- 734
+stack$ -- 0
+substring$ -- 746
+swap$ -- 53
+text.length$ -- 31
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 119
+warning$ -- 1
+while$ -- 56
+width$ -- 0
+write$ -- 121
+(There was 1 warning)

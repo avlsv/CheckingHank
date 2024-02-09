@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.3.6)  9 FEB 2024 12:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.3.6)  9 FEB 2024 14:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -737,6 +737,30 @@ LaTeX Warning: Label `eq:SizePersistenceTANK_B' multiply defined.
 
 LaTeX Warning: Label `eq:SizePersistenceTANK_B@cref' multiply defined.
 
+
+LaTeX Warning: Label `fig:AverageResponce' multiply defined.
+
+
+LaTeX Warning: Label `fig:AverageResponce@cref' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:AverageResponce' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:AverageResponce@cref' multiply defined.
+
+
+LaTeX Warning: Label `fig:DifferentialResponce' multiply defined.
+
+
+LaTeX Warning: Label `fig:DifferentialResponce@cref' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:DifferentialResponce' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:DifferentialResponce@cref' multiply defined.
+
 )
 \openout1 = `CheckingHANK.aux'.
 
@@ -875,7 +899,27 @@ File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 217.
- [7] [8 <./../Figures/Average.pdf> <./../Figures/Differential.pdf>] [9] (./CheckingHANK.bbl<<ot1tt.cmap>> [10]) [11] [12] [13] (./CheckingHANK.aux)
+<./../Figures/size_vs_persistence.pdf, id=252, 520.94624pt x 331.2375pt>
+File: ./../Figures/size_vs_persistence.pdf Graphic file (type pdf)
+<use ./../Figures/size_vs_persistence.pdf>
+Package pdftex.def Info: ./../Figures/size_vs_persistence.pdf  used on input line 257.
+(pdftex.def)             Requested size: 386.95897pt x 246.04189pt.
+<./../Figures/size_plot.pdf, id=253, 367.3725pt x 233.87375pt>
+File: ./../Figures/size_plot.pdf Graphic file (type pdf)
+<use ./../Figures/size_plot.pdf>
+Package pdftex.def Info: ./../Figures/size_plot.pdf  used on input line 275.
+(pdftex.def)             Requested size: 239.42758pt x 152.42651pt.
+<./../Figures/persistence_plot.pdf, id=254, 367.3725pt x 233.87375pt>
+File: ./../Figures/persistence_plot.pdf Graphic file (type pdf)
+<use ./../Figures/persistence_plot.pdf>
+Package pdftex.def Info: ./../Figures/persistence_plot.pdf  used on input line 282.
+(pdftex.def)             Requested size: 239.42758pt x 152.42651pt.
+<./../Figures/irfs_plot.pdf, id=257, 625.33624pt x 397.485pt>
+File: ./../Figures/irfs_plot.pdf Graphic file (type pdf)
+<use ./../Figures/irfs_plot.pdf>
+Package pdftex.def Info: ./../Figures/irfs_plot.pdf  used on input line 292.
+(pdftex.def)             Requested size: 386.95897pt x 245.97113pt.
+ [7] [8 <./../Figures/Average.pdf> <./../Figures/Differential.pdf> <./../Figures/size_vs_persistence.pdf>] [9 <./../Figures/size_plot.pdf> <./../Figures/persistence_plot.pdf> <./../Figures/irfs_plot.pdf>] (./CheckingHANK.bbl<<ot1tt.cmap>> [10] [11]) [12] [13] [14] (./CheckingHANK.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -883,10 +927,10 @@ Package rerunfilecheck Info: File `CheckingHANK.out' has not changed.
 (rerunfilecheck)             Checksum: 3EF1F0CB4A278A041627FACAD099A9F9;1487.
  ) 
 Here is how much of TeX's memory you used:
- 39143 strings out of 478276
- 904266 string characters out of 5846497
- 1380101 words of memory out of 5000000
- 56518 multiletter control sequences out of 15000+600000
+ 39189 strings out of 478276
+ 905643 string characters out of 5846497
+ 1380373 words of memory out of 5000000
+ 56556 multiletter control sequences out of 15000+600000
  493832 words of font info for 119 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  104i,14n,106p,806b,695s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -913,10 +957,10 @@ pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist,
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist, replaced by a fixed one
 
 {/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on CheckingHANK.pdf (13 pages, 349446 bytes).
+Output written on CheckingHANK.pdf (14 pages, 381399 bytes).
 PDF statistics:
- 454 PDF objects out of 1000 (max. 8388607)
- 396 compressed objects within 4 object streams
- 71 named destinations out of 1000 (max. 500000)
- 123 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 500 PDF objects out of 1000 (max. 8388607)
+ 430 compressed objects within 5 object streams
+ 75 named destinations out of 1000 (max. 500000)
+ 143 words of extra memory for PDF output out of 10000 (max. 10000000)
 

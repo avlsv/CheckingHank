@@ -130,6 +130,6 @@ colMeans(t_b_12 > t_12)
 
 mean(bootstrapped_12$t[, 4] > 0)
 
-bootstrapped$t0[6]
+bootstrapped_12$t0[6]
 
 

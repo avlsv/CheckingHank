@@ -143,12 +143,12 @@ The vector of controls, $Z$, consists of the 4 lags of the dependent variable, $
 \subsection{Size-Persistence Tradeoff Estimation}
 
 
-The coefficient $\beta^h$ captures the average response of monetary authority to an increase in its expected inflation, $\gamma^h$ captures the differential response depending on the preferences of the FOMC. The systematic part of monetary policy can then be written as 
-\[\tilde \phi_t=\phi_t+\bar\phi=\hat \beta_t^h+\hat\gamma^h \left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)+\bar\phi,\]
+The coefficient $\beta^h$ captures the average response of monetary authority to an increase in its expected inflation, $\gamma^h$ captures the differential response depending on the preferences of the FOMC. The prediction of systematic part of monetary policy, i.e. can then be written as 
+\[\tilde \phi_t=\phi_t+\bar\phi=\hat \beta_t^h+\hat\gamma^h \left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right),\]
 for the IV-LP estimated estimated vectors of coefficients $\beta_t^h$ and $\gamma_t^h$. It is also a marginal response of ``excess interest rate'', $r_t-\rho_t$, to an increase in inflation. 
 That is, $\tilde \phi_t$ is the predicted response of FOMC to a unit increase in $\hat\pi_t$ is 
 \begin{equation}
-   \widehat{\left(r_{t+h}-r^*_{t+h}\right)}=\hat \beta_t^h+\hat\gamma^h \left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)+\bar\phi,\qquad\qquad h=1,2,\dots, H\label{eq:pred_policy}
+   \widehat{\left(r-r^*\right)}_{t+h}=\hat \beta_t^h+\hat\gamma^h \left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right),\qquad\qquad h=1,2,\dots, H\label{eq:pred_policy}
 \end{equation}
 Then, based on the estimated impulse-response function we can calculate analogues of size and persistence as follows: size, $R_0$, is the mean of predicted responses,\footnote{Note that \cite{KMV2018} use another definition of size, they use an integral shown in \vref{eq:KMVsize}. I modify it by using a discrete-time analog, limiting the timespan of desired rate path by $H$, and scaling it by $H$. This transformation increases the associated coefficient by $H$, which is done in order to obtain the coefficients comparable for different choices of $H$.} and persistence, $e^{-\mu}=\rho$, is the first sample autocorrelation of $\widehat{\left(r_{t+h}-\rho_{t+h}\right)}$.
 
@@ -212,7 +212,7 @@ Based on the impulse responses above I restrict the horizon for the size and per
       \\[-1.8ex] & \multicolumn{2}{c}{$\log(\mathit{consumption})$} \\  \\[-1.8ex]   &\multicolumn{2}{c}{$H=8$}\\
       \\[-1.8ex] & (1) & (2)\\ 
       \hline \\[-1.8ex] 
-       Size $(R_0)$  & $-$0.687 & $-$0.114 \\ 
+       Size $(R_0)$  & $-$0.687 & $-$0.451 \\ 
         & ($-$1.149, $-$0.133) & ($-$1.495, 1.078)    \\ 
         &[0.011]\{0.997\} & [0.857]\{0.578\}\\ 
         & & \\ 
@@ -232,8 +232,8 @@ Based on the impulse responses above I restrict the horizon for the size and per
         &  &  ($-$1.852, 3.838) \\ 
         & & [0.340]\{0.145\}\\ 
         & & \\ 
-       Constant & 10.608 &10.224 \\ 
-        & (10.06, 10.97) & (9.77, 10.99)    \\ 
+       Constant & 10.6 &10.5 \\ 
+        & (10.1, 11.0) & (9.8, 11.0)    \\ 
         & [0.0]\{0.0\}& [0.0]\{0.0\}\\ 
         & & \\[-1.8ex] 
       \hline \\[-1.8ex] 
@@ -250,10 +250,51 @@ Based on the impulse responses above I restrict the horizon for the size and per
   \end{table} 
 
 
-\newpage 
-~ ~
-\newpage ~
-\newpage 
+  \begin{figure}[!hpbt]\centering
+    \begin{minipage}{0.8\textwidth}
+      \caption{Estimates of Size and Persistence} 
+      \label{fig:size_persistence}
+      \includegraphics[width=\linewidth]{size_vs_persistence.pdf}
+      {\raggedleft\scriptsize \textit{Notes:} This figure } 
+      \end{minipage}
+  
+  \end{figure}
+
+
+
+
+
+\begin{figure}[!htbp]\centering
+  \caption{Size and Persistence Dynamics}
+  \vspace{2ex}
+  \label{fig:Size_Persistence_Dynamics}
+  \begin{subfigure}[b]{0.495\textwidth}
+      \centering
+      \caption{Size Dynamics}
+      \label{fig:AverageResponce}
+      \includegraphics[width=\linewidth]{size_plot.pdf}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.495\textwidth}
+      \centering
+      \caption{Persistence Dynamics}
+      \label{fig:DifferentialResponce}
+      \includegraphics[width=\linewidth]{persistence_plot.pdf}
+  \end{subfigure}
+      {\begin{flushleft}\scriptsize\textit{Notes}: This figure presents the size and persistence, calculated as mean and the first autocorrelation of impulse-response function in each state, constructed as described in \vref{eq:pred_policy}, over time. \end{flushleft}}
+\end{figure}
+
+
+\begin{figure}[!htbp]\centering
+  \begin{minipage}{0.8\textwidth}
+    \caption{Predicted IRFs in each of the state} 
+    \label{fig:predicted_IRF}
+    \includegraphics[width=\linewidth]{irfs_plot.pdf}
+    {\raggedleft\scriptsize \textit{Notes:} This figure shows the Impulse Response functions in each state calculated as \vref{eq:pred_policy}.} 
+    \end{minipage}
+
+\end{figure}
+
 
 % \section{Robustness}
 % tba
@@ -298,16 +339,16 @@ Based on the impulse responses above I restrict the horizon for the size and per
     &  &  &  &  &  & (0.021) & (0.051) \\ 
     & & & & & & \\ 
     & & & & & & \\ 
-   $r_{t-1}-\rho_{t-1}$ & 0.779$^{***}$ & 0.747$^{***}$ & 0.252 & 0.310$^{**}$ & $-$0.059 & 0.010 & $-$0.007 \\ 
+   $r_{t-1}-r_{t-1}^*$ & 0.779$^{***}$ & 0.747$^{***}$ & 0.252 & 0.310$^{**}$ & $-$0.059 & 0.010 & $-$0.007 \\ 
    & (0.125) & (0.169) & (0.167) & (0.151) & (0.147) & (0.018) & (0.045) \\ 
     & & & & & & \\ 
-    $r_{t-2}-\rho_{t-2}$ & $-$0.068 & $-$0.124 & 0.133 & $-$0.003 & 0.015 & $-$0.011 & $-$0.073 \\ 
+    $r_{t-2}-r_{t-2}^*$ & $-$0.068 & $-$0.124 & 0.133 & $-$0.003 & 0.015 & $-$0.011 & $-$0.073 \\ 
     & (0.135) & (0.221) & (0.163) & (0.189) & (0.144) & (0.026) & (0.065) \\ 
     & & & & & & \\ 
-    $r_{t-3}-\rho_{t-3}$ & 0.244$^{***}$ & $-$0.208 & $-$0.002 & $-$0.345$^{***}$ & $-$0.206$^{**}$ & 0.005 & 0.033 \\ 
+    $r_{t-3}-r_{t-3}^*$ & 0.244$^{***}$ & $-$0.208 & $-$0.002 & $-$0.345$^{***}$ & $-$0.206$^{**}$ & 0.005 & 0.033 \\ 
     & (0.078) & (0.156) & (0.104) & (0.122) & (0.091) & (0.026) & (0.064) \\ 
     & & & & & & & \\ 
-    $r_{t-4}-\rho_{t-4}$ &  $-$0.141 & 0.216 & 0.147 & 0.265 & 0.139 & 0.019 & $-$0.014 \\ 
+    $r_{t-4}-r_{t-4}^*$ &  $-$0.141 & 0.216 & 0.147 & 0.265 & 0.139 & 0.019 & $-$0.014 \\ 
     & (0.105) & (0.147) & (0.221) & (0.189) & (0.196) & (0.018) & (0.043) \\ 
     & & & & & & \\ 
   $\hat\pi_{t-1}$ & 0.070 & $-$0.156 & 0.002 & $-$0.258 & 0.040 & $-$0.026 & $-$0.133 \\ 

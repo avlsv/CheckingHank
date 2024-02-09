@@ -1,0 +1,58 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  This bbl file is created by econ.bst ver.3.1.1
+%  The latest econ.bst is available at
+%  <https://github.com/ShiroTakeda/econ-bst>
+
+%%% Definition of \bysame
+\ifx\undefined\bysame
+\newcommand{\bysame}{\hskip.3em \leavevmode\rule[.5ex]{3em}{.3pt}\hskip0.5em}
+\fi
+
+\begin{thebibliography}{xxx}
+
+\harvarditem[Bu et~al.]{Bu, Rogers and Wu}{2021}{BRW2021}
+Bu, Chunya, John Rogers, and Wenbin Wu (2021) ``A unified measure of {Fed}
+  monetary policy shocks,'' \textit{Journal of Monetary Economics}, 118,
+  331--349,
+  \href{http://dx.doi.org/https://doi.org/10.1016/j.jmoneco.2020.11.002}{\urlstyle{rm}
+  \nolinkurl{https://doi.org/10.1016/j.jmoneco.2020.11.002}}.
+
+\harvarditem[Gross et~al.]{Gross, Notowidigdo and Wang}{2020}{Gross2020}
+Gross, Tal, Matthew~J. Notowidigdo, and Jialan Wang (2020) ``The Marginal
+  Propensity to Consume over the Business Cycle,'' \textit{American Economic
+  Journal: Macroeconomics}, 12 (2),  351--84,
+  \href{http://dx.doi.org/10.1257/mac.20160287}{\urlstyle{rm}
+  \nolinkurl{10.1257/mac.20160287}}.
+
+\harvarditem[Hack et~al.]{Hack, Istrefi and Meier}{2023}{HIM2023}
+Hack, Lukas, Klodiana Istrefi, and Matthias Meier (2023) ``Identification of
+  Systematic Monetary Policy,'' CEPR Discussion Paper 17999.
+
+\harvarditem[Holm et~al.]{Holm, Paul and Tischbirek}{2021}{HolmBlomhoff2021}
+Holm, Martin~Blomhoff, Pascal Paul, and Andreas Tischbirek (2021) ``The
+  Transmission of Monetary Policy under the Microscope,'' \textit{Journal of
+  Political Economy}, 129 (10),  2861--2904,
+  \href{http://dx.doi.org/10.1086/715416}{\urlstyle{rm}
+  \nolinkurl{10.1086/715416}}.
+
+\harvarditem[Holston et~al.]{Holston, Laubach and Williams}{2017}{HLW2017}
+Holston, Kathryn, Thomas Laubach, and John~C. Williams (2017) ``Measuring the
+  natural rate of interest: International trends and determinants,''
+  \textit{Journal of International Economics}, 108,  S59--S75,
+  \href{http://dx.doi.org/https://doi.org/10.1016/j.jinteco.2017.01.004}{\urlstyle{rm}
+  \nolinkurl{https://doi.org/10.1016/j.jinteco.2017.01.004}}, 39th Annual NBER
+  International Seminar on Macroeconomics.
+
+\harvarditem[Kaplan et~al.]{Kaplan, Moll and Violante}{2018}{KMV2018}
+Kaplan, Greg, Benjamin Moll, and Giovanni~L. Violante (2018) ``Monetary Policy
+  According to HANK,'' \textit{American Economic Review}, 108 (3),  697--743,
+  \href{http://dx.doi.org/10.1257/aer.20160042}{\urlstyle{rm}
+  \nolinkurl{10.1257/aer.20160042}}.
+
+\harvarditem[Luetticke]{Luetticke}{2021}{Luetticke2021}
+Luetticke, Ralph (2021) ``Transmission of Monetary Policy with Heterogeneity in
+  Household Portfolios,'' \textit{American Economic Journal: Macroeconomics},
+  13 (2),  1--25, \href{http://dx.doi.org/10.1257/mac.20190064}{\urlstyle{rm}
+  \nolinkurl{10.1257/mac.20190064}}.
+
+\end{thebibliography}

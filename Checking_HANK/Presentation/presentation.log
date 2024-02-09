@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.3.6)  26 JAN 2024 12:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.3.6)  9 FEB 2024 14:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex
-(/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex
+**/Users/vlasov/Documents/CheckingHank/Checking_HANK/Presentation/presentation.tex
+(/Users/vlasov/Documents/CheckingHank/Checking_HANK/Presentation/presentation.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-02-24> (/usr/local/texlive/2021/texmf-dist/tex/latex/beamer/beamer.cls
 Document Class: beamer 2022/02/08 v3.66 A class for typesetting presentations
@@ -558,45 +558,46 @@ Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
 \WF@box=\box77
 \WF@everypar=\toks46
 Package: wrapfig 2003/01/31  v 3.6
-) (/usr/local/texlive/2021/texmf-dist/tex/latex/apacite/apacite.sty
-Package: apacite 2013/07/21 v6.03 APA citation
-\c@BibCnt=\count338
-\bibleftmargin=\skip66
-\bibindent=\skip67
-\bibparsep=\skip68
-\bibitemsep=\skip69
-\biblabelsep=\skip70
 ) (/usr/local/texlive/2021/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
 ) (/usr/local/texlive/2021/texmf-dist/tex/latex/threeparttable/threeparttable.sty
 Package: threeparttable 2003/06/13  v 3.0
 \@tempboxb=\box78
+) (/usr/local/texlive/2021/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip66
+\bibsep=\skip67
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count338
+) (/usr/local/texlive/2021/texmf-dist/tex/latex/jknapltx/mathrsfs.sty
+Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
+\symrsfs=\mathgroup6
 ) (/usr/local/texlive/2021/texmf-dist/tex/latex/beamer/beamerthemeMadrid.sty (/usr/local/texlive/2021/texmf-dist/tex/latex/beamer/beamercolorthemewhale.sty) (/usr/local/texlive/2021/texmf-dist/tex/latex/beamer/beamercolorthemeorchid.sty) (/usr/local/texlive/2021/texmf-dist/tex/latex/beamer/beamerinnerthemerounded.sty) (/usr/local/texlive/2021/texmf-dist/tex/latex/beamer/beamerouterthemeinfolines.sty)) (/usr/local/texlive/2021/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count339
 \l__pdf_internal_box=\box79
-)
-No file presentation.aux.
+) (./presentation.aux)
 \openout1 = `presentation.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -650,7 +651,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/local/texlive/2021/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 37.
+Package hyperref Info: Link coloring OFF on input line 40.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (/usr/local/texlive/2021/texmf-dist/tex/latex/refcount/refcount.sty
@@ -660,61 +661,62 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count346
 )
-LaTeX Info: Redefining \ref on input line 37.
-LaTeX Info: Redefining \pageref on input line 37.
-LaTeX Info: Redefining \nameref on input line 37.
+LaTeX Info: Redefining \ref on input line 40.
+LaTeX Info: Redefining \pageref on input line 40.
+LaTeX Info: Redefining \nameref on input line 40.
+ (./presentation.out) (./presentation.out)
 \@outlinefile=\write5
 \openout5 = `presentation.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 37.
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 40.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 37.
-\symnumbers=\mathgroup6
-\sympureletters=\mathgroup7
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 40.
+\symnumbers=\mathgroup7
+\sympureletters=\mathgroup8
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 37.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 37.
+(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 40.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 37.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 37.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 37.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 40.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 37.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 37.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 37.
+(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 40.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 37.
+(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 37.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 37.
+(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 40.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 37.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 37.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 40.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 37.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 40.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 37.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/cmr/b/n on input line 37.
+(Font)                  OT1/cmss/b/n --> OT1/cmr/b/n on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/cmss/b/n on input line 37.
+(Font)                  OT1/cmss/b/n --> OT1/cmss/b/n on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 37.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 37.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/b/n on input line 37.
-LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 37.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/b/n on input line 40.
+LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 40.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `normal'
-(Font)                  OT1/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 37.
+(Font)                  OT1/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 40.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/cmss/b/it --> OT1/mathkerncmss/m/sl on input line 37.
+(Font)                  OT1/cmss/b/it --> OT1/mathkerncmss/m/sl on input line 40.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/mathkerncmss/m/sl --> OT1/mathkerncmss/bx/sl on input line 37.
+(Font)                  OT1/mathkerncmss/m/sl --> OT1/mathkerncmss/bx/sl on input line 40.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
 Dictionary: translator-basic-dictionary, Language: English 
 ) (/usr/local/texlive/2021/texmf-dist/tex/latex/translator/translator-bibliography-dictionary-English.dict
@@ -727,570 +729,65 @@ Dictionary: translator-months-dictionary, Language: English
 Dictionary: translator-numbers-dictionary, Language: English 
 ) (/usr/local/texlive/2021/texmf-dist/tex/latex/translator/translator-theorem-dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
-)
-\c@maskedRefs=\count347
- (/usr/local/texlive/2021/texmf-dist/tex/latex/apacite/english.apc
-File: english.apc 2013/07/21 v6.03 apacite language file
-LaTeX Info: Redefining \BPBI on input line 129.
-LaTeX Info: Redefining \BHBI on input line 130.
-) (/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.nav)
+) (./presentation.nav)
 \openout4 = `presentation.vrb'.
 
- (/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.vrb) [1
+ (./presentation.vrb) [1
 
-{/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 55.
+{/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
+
+]
+LaTeX Font Info:    Trying to load font information for U+msa on input line 81.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 55.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 81.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on input line 55.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 81.
+ (/usr/local/texlive/2021/texmf-dist/tex/latex/jknapltx/ursfs.fd
+File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
+)
+LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on input line 81.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
 File: ot1mathkerncmss.fd 2020/01/31 Fontinst v1.933 font definitions for OT1/mathkerncmss.
-)
-
-LaTeX Warning: Citation `KMV2018' undefined on input line 55.
-
-
-Overfull \hbox (11.39647pt too wide) detected at line 55
-[][] \OT1/cmss/m/n/10.95 = [] + [] = [] + []
- []
-
-
-LaTeX Warning: Citation `Gali2018' undefined on input line 55.
-
-[2
+) [3
 
 ]
+<Size_Persistence_KMV.png, id=156, 676.5275pt x 307.1475pt>
+File: Size_Persistence_KMV.png Graphic file (type png)
+<use Size_Persistence_KMV.png>
+Package pdftex.def Info: Size_Persistence_KMV.png  used on input line 88.
+(pdftex.def)             Requested size: 317.96796pt x 144.35934pt.
+ [4
 
-LaTeX Warning: Citation `KMV2018' undefined on input line 68.
+ <./Size_Persistence_KMV.png>] [5
 
+] [6
 
-LaTeX Warning: Citation `KMV2018' undefined on input line 68.
+] [7
 
-[3
+] [8
 
-]
+] [9
 
-LaTeX Warning: File `SizePersistence.png' not found on input line 75.
+] [10
 
+] [11
 
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:75: Package pdftex.def Error: File `SizePersistence.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.75 \end{frame}
-                
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: Citation `KMV2018' undefined on input line 75.
-
-[4
-
-]
-
-LaTeX Warning: Citation `KMV2018' undefined on input line 88.
-
-[5
-
-]
-
-LaTeX Warning: Citation `KMV2018' undefined on input line 110.
-
-
-LaTeX Warning: Citation `HolmPaulTischbirek2020' undefined on input line 110.
-
-
-LaTeX Warning: Citation `Gross2020' undefined on input line 110.
-
-[6
-
-]
-
-LaTeX Warning: Citation `BRW2021' undefined on input line 121.
-
-
-LaTeX Warning: Citation `FamaMacBeth1973' undefined on input line 121.
-
-
-LaTeX Warning: Citation `RigobonSack2004' undefined on input line 121.
-
-[7
-
-]
-
-LaTeX Warning: Reference `eq:2' on page 8 undefined on input line 138.
-
-
-LaTeX Warning: Reference `eq:1' on page 8 undefined on input line 138.
-
-
-LaTeX Warning: Citation `RigobonSack2004' undefined on input line 138.
-
-[8
-
-]
-
-LaTeX Warning: Reference `eq:LinearLag' on page 9 undefined on input line 161.
-
-
-LaTeX Warning: Reference `eq:QuadraticLag' on page 9 undefined on input line 161.
-
-[9
-
-]
-
-LaTeX Warning: Citation `HLW2017' undefined on input line 181.
-
-[10
-
-]
-
-LaTeX Warning: Citation `BRW2021' undefined on input line 227.
-
-[11
-
-]
-
-LaTeX Warning: File `Identified monetary shock.pdf' not found on input line 240.
-
-
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:240: Package pdftex.def Error: File `Identified monetary shock.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.240 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: Citation `BRW2021' undefined on input line 240.
-
-
-Overfull \vbox (90.7763pt too high) detected at line 240
- []
-
-[12
+] [12
 
 ] [13
 
-]
+] (./presentation.bbl
 
-LaTeX Warning: File `consumption elasticity.pdf' not found on input line 300.
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\translate ' on input line 11.
 
+) [14
 
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:300: Package pdftex.def Error: File `consumption elasticity.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.300 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `FirstStageElasticityPlot.pdf' not found on input line 300.
-
-
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:300: Package pdftex.def Error: File `FirstStageElasticityPlot.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.300 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `WeakIV.pdf' not found on input line 300.
-
-
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:300: Package pdftex.def Error: File `WeakIV.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.300 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Overfull \vbox (34.25201pt too high) detected at line 300
- []
-
-[14
-
-]
-
-LaTeX Warning: File `moneary_shocks_autocorr_plot.pdf' not found on input line 314.
-
-
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:314: Package pdftex.def Error: File `moneary_shocks_autocorr_plot.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.314 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: Citation `BRW2021' undefined on input line 314.
-
-
-Overfull \vbox (60.3748pt too high) detected at line 314
- []
-
-[15
-
-]
-
-LaTeX Warning: File `Linear regression coefficient.pdf' not found on input line 328.
-
-
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:328: Package pdftex.def Error: File `Linear regression coefficient.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.328 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Overfull \vbox (54.4365pt too high) detected at line 328
- []
-
-[16
-
-]
-
-LaTeX Warning: File `Quadratic regression coefficient 1.pdf' not found on input line 344.
-
-
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:344: Package pdftex.def Error: File `Quadratic regression coefficient 1.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.344 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `Quadratic regression coefficient 2.pdf' not found on input line 344.
-
-
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:344: Package pdftex.def Error: File `Quadratic regression coefficient 2.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.344 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Overfull \hbox (2.43333pt too wide) in paragraph at lines 344--344
-[][] [] 
- []
-
-
-LaTeX Warning: Reference `eq:LinearLag' on page 17 undefined on input line 344.
-
-
-LaTeX Warning: Reference `eq:QuadraticLag' on page 17 undefined on input line 344.
-
-[17
-
-] [18
-
-]
-
-LaTeX Warning: Citation `KMV2018' undefined on input line 399.
-
-
-LaTeX Warning: File `SizePersistence.png' not found on input line 399.
-
-
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:399: Package pdftex.def Error: File `SizePersistence.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.399 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `DotPlot.pdf' not found on input line 399.
-
-
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:399: Package pdftex.def Error: File `DotPlot.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.399 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[19
-
-]
-
-LaTeX Warning: File `GrangerTestPlot.pdf' not found on input line 418.
-
-
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:418: Package pdftex.def Error: File `GrangerTestPlot.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.418 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Overfull \vbox (51.12564pt too high) detected at line 418
- []
-
-[20
-
-]
-
-LaTeX Warning: File `Linear regression coefficient.Strong.pdf' not found on input line 436.
-
-
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:436: Package pdftex.def Error: File `Linear regression coefficient.Strong.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.436 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `Quadratic regression coefficient 1.Strong.pdf' not found on input line 436.
-
-
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:436: Package pdftex.def Error: File `Quadratic regression coefficient 1.Strong.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.436 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `Quadratic regression coefficient 2.Strong.pdf' not found on input line 436.
-
-
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:436: Package pdftex.def Error: File `Quadratic regression coefficient 2.Strong.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.436 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: Reference `eq:LinearLag' on page 21 undefined on input line 436.
-
-
-LaTeX Warning: Reference `eq:QuadraticLag' on page 21 undefined on input line 436.
-
-[21
-
-]
-
-LaTeX Warning: Reference `eq:LinearLag' on page 22 undefined on input line 456.
-
-
-LaTeX Warning: Reference `eq:QuadraticLag' on page 22 undefined on input line 456.
-
-
-LaTeX Warning: File `IRF0.pdf' not found on input line 456.
-
-
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:456: Package pdftex.def Error: File `IRF0.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.456 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `IRF1.pdf' not found on input line 456.
-
-
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:456: Package pdftex.def Error: File `IRF1.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.456 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `IRF2.pdf' not found on input line 456.
-
-
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:456: Package pdftex.def Error: File `IRF2.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.456 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: Reference `eq:VAR1' on page 22 undefined on input line 456.
-
-
-LaTeX Warning: Reference `eq:VAR2' on page 22 undefined on input line 456.
-
-[22
-
-] [23
-
-]
-
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:490: LaTeX Error: File `LPIVIRF_consumption_elasticity' not found.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.490 \end{frame}
-                 
-I could not locate the file with any of these extensions:
-.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `LPIVIRF_consumption_elasticity_OLS.pdf' not found on input line 490.
-
-
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:490: Package pdftex.def Error: File `LPIVIRF_consumption_elasticity_OLS.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.490 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:490: LaTeX Error: File `LPIVIRF_consumption_elasticity_first_stage' not found.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.490 \end{frame}
-                 
-I could not locate the file with any of these extensions:
-.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 490--490
-
- []
-
-[24
-
-]
-
-LaTeX Warning: Citation `Ruisi2019' undefined on input line 503.
-
-
-/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.tex:503: LaTeX Error: File `Time-varying LP' not found.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.503 \end{frame}
-                 
-I could not locate the file with any of these extensions:
-.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: Reference `eq:LinearLag' on page 25 undefined on input line 503.
-
-
-LaTeX Warning: Reference `eq:QuadraticLag' on page 25 undefined on input line 503.
-
-[25
-
-] [26
-
-] (/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.bbl) [27
-
-] [28
-
-
-] [29
-
-
-] [30
+] [15
 
 
 ]
@@ -1303,39 +800,23 @@ LaTeX Warning: Reference `eq:QuadraticLag' on page 25 undefined on input line 50
 \tf@snm=\write8
 \openout8 = `presentation.snm'.
 
- (/Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.aux)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `presentation.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `presentation.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  9A7EA4E86A33C5FED1A5F6E012D50624;541.
+ (./presentation.aux)
+Package rerunfilecheck Info: File `presentation.out' has not changed.
+(rerunfilecheck)             Checksum: 9A7EA4E86A33C5FED1A5F6E012D50624;541.
  ) 
 Here is how much of TeX's memory you used:
- 23643 strings out of 478276
- 474376 string characters out of 5846497
- 712808 words of memory out of 5000000
- 41221 multiletter control sequences out of 15000+600000
- 484816 words of font info for 83 fonts, out of 8000000 for 9000
+ 22865 strings out of 478276
+ 448828 string characters out of 5846497
+ 702556 words of memory out of 5000000
+ 40512 multiletter control sequences out of 15000+600000
+ 485690 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,15n,122p,582b,684s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{eq:VAR2} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{eq:VAR1} has been referenced but does not exist, replaced by a fixed one
-
-</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on /Users/vlasov/Documents/CheckingHANK/Checking_HANK/presentation.pdf (30 pages, 305005 bytes).
+ 128i,15n,122p,595b,689s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on presentation.pdf (15 pages, 311713 bytes).
 PDF statistics:
- 1150 PDF objects out of 1200 (max. 8388607)
- 1018 compressed objects within 11 object streams
- 95 named destinations out of 1000 (max. 500000)
- 277 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 678 PDF objects out of 1000 (max. 8388607)
+ 571 compressed objects within 6 object streams
+ 54 named destinations out of 1000 (max. 500000)
+ 294 words of extra memory for PDF output out of 10000 (max. 10000000)
 
