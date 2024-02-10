@@ -1,19 +1,19 @@
 # Fdb version 3
-["bibtex presentation"] 1707482319 "presentation.aux" "presentation.bbl" "presentation" 1707482323
+["bibtex presentation"] 1707482319 "presentation.aux" "presentation.bbl" "presentation" 1707482522
   "../misc/econ.bst.bst" 0 -1 0 ""
   "../misc/references.bib" 1707476844 52592 f5ff9b55b4a495bfe09d6d8707eca805 ""
-  "presentation.aux" 1707482322 10115 c54e44042ad228a9c6bc486544b79a32 "pdflatex"
+  "presentation.aux" 1707482521 10115 c54e44042ad228a9c6bc486544b79a32 "pdflatex"
   (generated)
   "presentation.bbl"
   "presentation.blg"
-["pdflatex"] 1707482320 "/Users/vlasov/Documents/CheckingHank/Checking_HANK/Presentation/presentation.tex" "presentation.pdf" "presentation" 1707482323
+["pdflatex"] 1707482516 "/Users/vlasov/Documents/CheckingHank/Checking_HANK/Presentation/presentation.tex" "presentation.pdf" "presentation" 1707482522
   "../Figures/Average.pdf" 1707421884 5614 724055082a80ecd971cd990be830407a ""
   "../Figures/Differential.pdf" 1707421884 5437 909a4805214bf86964f3a5234cb8b4a3 ""
   "../Figures/irfs_plot.pdf" 1707421895 11036 dff540a92ce191eaf10305b05ddb57f2 ""
   "../Figures/persistence_plot.pdf" 1707473293 5956 a34f477f6358764e0011c0a999770f2f ""
   "../Figures/size_plot.pdf" 1707473295 5961 a72b39a93af10c30a98e0ebf5cbf1e43 ""
   "../Figures/size_vs_persistence.pdf" 1707473265 11081 b705dd50c99709d6d621fdd79e00ba03 ""
-  "/Users/vlasov/Documents/CheckingHank/Checking_HANK/Presentation/presentation.tex" 1707482315 11663 87306eaee22e5f35c2991dae433885bc ""
+  "/Users/vlasov/Documents/CheckingHank/Checking_HANK/Presentation/presentation.tex" 1707482520 11662 88d1c63ebb7cd5fdaaa9f07ad90f8354 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -246,12 +246,12 @@
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1646577410 2797749 81b5e45ac95007631cb34e1b4129a7cf ""
   "/usr/local/texlive/2021/texmf.cnf" 1646577368 577 4c1911a7228e554c6032256d3cf5567d ""
   "Size_Persistence_KMV.png" 1695991309 121458 dd85ce817d87faaf4a2ce7286787e4c5 ""
-  "presentation.aux" 1707482322 10115 c54e44042ad228a9c6bc486544b79a32 "pdflatex"
+  "presentation.aux" 1707482521 10115 c54e44042ad228a9c6bc486544b79a32 "pdflatex"
   "presentation.bbl" 1707482320 3061 4a7b074d7cb65b0310624d6724a823b8 "bibtex presentation"
-  "presentation.nav" 1707482322 2787 eae6db696ed5590940f001ecbbd4e447 "pdflatex"
-  "presentation.out" 1707482322 541 9a7ea4e86a33c5fed1a5f6e012d50624 "pdflatex"
-  "presentation.tex" 1707482315 11663 87306eaee22e5f35c2991dae433885bc ""
-  "presentation.vrb" 1707482321 11 03cba00f6b70749ac61ba0e15a6279e7 "pdflatex"
+  "presentation.nav" 1707482521 2787 eae6db696ed5590940f001ecbbd4e447 "pdflatex"
+  "presentation.out" 1707482521 541 9a7ea4e86a33c5fed1a5f6e012d50624 "pdflatex"
+  "presentation.tex" 1707482520 11662 88d1c63ebb7cd5fdaaa9f07ad90f8354 ""
+  "presentation.vrb" 1707482519 11 03cba00f6b70749ac61ba0e15a6279e7 "pdflatex"
   (generated)
   "presentation.aux"
   "presentation.log"

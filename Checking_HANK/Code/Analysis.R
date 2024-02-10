@@ -132,4 +132,3 @@ mean(bootstrapped_12$t[, 4] > 0)
 
 bootstrapped_12$t0[6]
 
-

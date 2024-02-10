@@ -70,7 +70,7 @@ natural_rate_raw <-
 natural_rate_ts <-
   natural_rate_raw |>
   select(Date, rstar...3) |>
-  mutate(date = ymd(Date)) |>
+  mutate(date = yearquarter(Date)) |>
   as_tsibble(index = date) |>
   select(rstar...3) |>
   rename(r_star = rstar) |>
@@ -118,7 +118,7 @@ inflation_ts <-
 
 
 expected_inflation_raw <-
-  read_xlsx("data/TealBook.xlsx", sheet = "gPGDP") |>
+  read_xlsx("data/Tealbook Row Format.xlsx", sheet = "gPGDP") |>
   select(DATE, gPGDPF1, gPGDPF2) |> na.omit() |>
   mutate(expected_inflation_at_event = (gPGDPF1 + gPGDPF2) / 2) |>
   select(-gPGDPF1, -gPGDPF2) |>
@@ -133,6 +133,21 @@ expected_inflation_ts <-
 
 
 
+expected_gdp_raw <-
+  read_xlsx("data/Tealbook Row Format.xlsx", sheet = "gRGDP") |>
+  select(DATE, gRGDPF1, gRGDPF2) |> na.omit() |>
+  mutate(expected_gdp_at_event = (gRGDPF1+gRGDPF2)/2 ) |>
+  select(-gRGDPF1, -gRGDPF2) |>
+  mutate(year_quarter = yearquarter(as.yearqtr((DATE)))) |> select(-DATE)
+
+expected_gdp_tbl <-
+  expected_gdp_raw |> group_by(year_quarter) |> summarize(expected_gdp = mean(expected_gdp_at_event))
+
+expected_gdp_ts <-
+  expected_gdp_tbl |> as_tsibble() |> fill_gaps() |> fill(expected_gdp, .direction = "down")
+
+
+
 full_dataset_ts <-
   inner_join(fed_funds_rate_ts, natural_rate_ts, by = "year_quarter") |> 
   select(-date) |>
@@ -140,6 +155,7 @@ full_dataset_ts <-
   inner_join(inflation_ts, by = "year_quarter") |>
   inner_join(consumption_ts, by = "year_quarter") |>
   inner_join(expected_inflation_ts, by = "year_quarter") |>
+  inner_join(expected_gdp_ts, by = "year_quarter") |>
   mutate(
     dR = fed_funds_rate - r_star,
     demeaned_HAWK = HAWK - mean(HAWK),
@@ -152,6 +168,3 @@ full_dataset_tbl <- full_dataset_ts |> as_tibble()
 
 write.csv(full_dataset_tbl, file = "data/full_dataset.csv")
 
-
-
-full_dataset_ts |> autoplot(HAWK)

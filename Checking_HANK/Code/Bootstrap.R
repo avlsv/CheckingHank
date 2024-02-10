@@ -93,20 +93,31 @@ estimator <- function(full_dataset_df, horizon) {
   }
   
   size_persistence_consumption_tbl <-
-    size_persistence_tbl |> mutate(consumption = full_dataset_tbl$consumption, size_dmnd = size-mean(size),  persistence_dmnd = persistence-mean(persistence))
+    size_persistence_tbl |> 
+    mutate(
+      consumption = full_dataset_tbl$consumption,
+      size_dmnd = size - mean(size),
+      persistence_dmnd = persistence - mean(persistence),
+      time = 1:length(full_dataset_tbl$consumption),
+      log_consumption = log(consumption),
+      delta_log_consumption = difference(log_consumption)
+    )
   
   
+  model_1 <-
+    lm(delta_log_consumption ~ size +size:persistence,
+     size_persistence_consumption_tbl)
+  model_2 <-
+    lm(delta_log_consumption ~ size + persistence :size +size: I(persistence ^ 2),
+     size_persistence_consumption_tbl
+     )
   
-  a <- lm(log(consumption) ~ size * persistence,
-          size_persistence_consumption_tbl)$coefficients
-  b <- lm(
-    log(consumption) ~ size * persistence + size : I(persistence ^ 2),
-    size_persistence_consumption_tbl
-  )$coefficients
+  a <- model_1$coefficients
+  b <- model_2$coefficients
+  
   
   retr <- c(a, b)
   ret_vect <- retr |> as.vector()
-  
   
   return(ret_vect)
 }

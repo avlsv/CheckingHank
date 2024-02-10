@@ -49,20 +49,18 @@ for (i in 1:16) {
   reg <-
     AER::ivreg(
       lead(dR, i) ~
-        expected_inflation * demeaned_HAWK + lag(dR, 1) + lag(dR, 2) +
-        lag(dR, 3) + lag(dR, 4) +
-        lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
-        lag(expected_inflation, 4) |
-        expected_inflation * demeaned_HAWK_IV +  lag(dR, 1) +
-        lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
-        lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
-        lag(expected_inflation, 4),
+        expected_inflation * demeaned_HAWK + expected_gdp * demeaned_HAWK+
+        lag(dR, 1) + lag(dR, 2) +lag(dR, 3) +lag(dR, 4)+
+        lag(expected_inflation, 1) + lag(expected_inflation, 2)+lag(expected_inflation, 3) + lag(expected_inflation, 4)+ lag(expected_gdp, 1) + lag(expected_gdp, 2)+lag(expected_gdp, 3) + lag(expected_gdp, 4)|
+        expected_inflation * demeaned_HAWK_IV+expected_gdp*demeaned_HAWK_IV+
+          lag(dR, 1) + lag(dR, 2) +lag(dR, 3) + lag(dR, 4) + 
+        lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) + lag(expected_inflation, 4)+ lag(expected_gdp, 1) + lag(expected_gdp, 2)+lag(expected_gdp, 3) + lag(expected_gdp, 4),
       data = full_dataset_ts
     )
   
   output <-
     summary(reg, vcov. = vcovHAC(reg))$coefficients |> as_tibble() |>
-    slice(c(2, length(reg$coefficients)))
+    slice(c(2, length(reg$coefficients)-1))
   
   names(output) <- c("estimate", "std_error", "t_value", "p_ratio")
   
@@ -192,7 +190,7 @@ LP_2 <-
       expected_inflation * demeaned_HAWK_IV +  lag(dR, 1) +
       lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
       lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
-      lag(expected_inflation, 4),
+      lag(expected_inflation, 4)+expected_inflation * I(demeaned_HAWK_IV^2),
     data = full_dataset_ts
   )
 
