@@ -2,10 +2,9 @@
 
 
 
-
-
-
 ## Libraries -----
+##
+
 required_Packages_Install <-
   c(
     "tidyverse",
@@ -39,13 +38,12 @@ full_dataset_ts <-
 
 full_dataset_df <- as.data.frame(full_dataset_tbl)
 
-
+# Estimator Definition -----
 # horizon <- 8
 estimator <- function(full_dataset_df, horizon) {
   ## LP-IV ----
   ##
-  ##
-  
+
   full_dataset_tbl <- as_tibble(full_dataset_df)
   
   coefs_inflation <- tibble()
@@ -85,32 +83,34 @@ estimator <- function(full_dataset_df, horizon) {
   size_persistence_tbl <- tibble()
   for (t in 1:dim(full_dataset_tbl)[1]) {
     irf_t = coefs_inflation$estimate + full_dataset_tbl$demeaned_HAWK[t] * coefs_HAWK_inflation$estimate
-    size = mean(irf_t)
-    persistence = acf(irf_t, plot = F, lag.max = 1)$acf[2]
+    irf_t_cond <- if_else(irf_t < 0, 0, irf_t)
+    size = mean(irf_t_cond)
+    persistence = acf(irf_t_cond, plot = F, lag.max = 1)$acf[2]
     size_persistence_tbl <-
       bind_rows(size_persistence_tbl,
                 tibble(size = size, persistence = persistence))
   }
   
   size_persistence_consumption_tbl <-
-    size_persistence_tbl |> 
+    size_persistence_tbl |>
     mutate(
       consumption = full_dataset_tbl$consumption,
       size_dmnd = size - mean(size),
       persistence_dmnd = persistence - mean(persistence),
-      time = 1:length(full_dataset_tbl$consumption),
-      log_consumption = log(consumption),
-      delta_log_consumption = difference(log_consumption)
+      time = full_dataset_tbl$...1,
+      log_consumption = full_dataset_tbl$log_consumption,
+      delta_log_consumption = full_dataset_tbl$delta_log_consumption
     )
   
   
   model_1 <-
-    lm(delta_log_consumption ~ size +size:persistence,
-     size_persistence_consumption_tbl)
+    lm(delta_log_consumption ~ size + size:persistence,
+       size_persistence_consumption_tbl)
   model_2 <-
-    lm(delta_log_consumption ~ size + persistence :size +size: I(persistence ^ 2),
-     size_persistence_consumption_tbl
-     )
+    lm(
+      delta_log_consumption ~ size + persistence:size + size:I(persistence ^ 2),
+      size_persistence_consumption_tbl
+    )
   
   a <- model_1$coefficients
   b <- model_2$coefficients
@@ -124,6 +124,7 @@ estimator <- function(full_dataset_df, horizon) {
 
 names(retr)
 
+# Bootstrap Sample Creation  -----
 
 full_dataset_ts <- full_dataset_tbl |> as.ts()
 
@@ -167,3 +168,6 @@ bootstrapped_12 <-
 
 save(bootstrapped_12, file = "data/boot_12.Rdata")
 
+
+
+as<-lm(log(consumption)~ X, size_persistence_consumption)$residuals

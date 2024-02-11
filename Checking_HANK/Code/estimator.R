@@ -309,9 +309,10 @@ size_persistence_tbl <- tibble()
 irf_t_list <- c()
 for (t in 1:dim(full_dataset_ts)[1]) {
   irf_t = coefs_inflation$estimate[1:12] + full_dataset_ts$demeaned_HAWK[t] * coefs_HAWK_inflation$estimate[1:12] 
-  irf_t_list <- c(irf_t_list, irf_t)
-  size = mean(irf_t)
-  persistence = acf(irf_t, lag = 1, plot = F)$acf[2]
+  irf_t_cond <- if_else(irf_t < 0, 0, irf_t)
+  irf_t_list <- c(irf_t_list, irf_t_cond)
+  size = mean(irf_t_cond)
+  persistence = acf(irf_t_cond, lag = 1, plot = F)$acf[2]
   size_persistence_tbl <-
     bind_rows(size_persistence_tbl,
               tibble(size = size, persistence = persistence))
@@ -324,16 +325,17 @@ irfs <-
   tibble(
     irf = irf_t_list,
     quart = rep(1:12, dim(full_dataset_ts)[1]),
-    time = rep(yq(full_dataset_ts$year_quarter), each = 12)
+    time = rep(full_dataset_ts$year_quarter, each = 12)
   )
 
 size_persistence_consumption_tbl <-
   size_persistence_tbl |> 
   mutate(
-    consumption = full_dataset_tbl$consumption, 
+    delta_log_consumption = full_dataset_tbl$delta_log_consumption, 
     size_dmnd = size - mean(size),  
     persistence_dmnd = persistence - mean(persistence), 
-    year_quarter = yearquarter(full_dataset_tbl$year_quarter))
+    year_quarter = yearquarter(full_dataset_tbl$year_quarter), 
+    )
 
 write.csv(size_persistence_consumption_tbl, file = "data/size_persistence_consumption.csv")
 write.csv(irfs, file = "data/irfs.csv")

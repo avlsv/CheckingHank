@@ -147,6 +147,8 @@ expected_gdp_ts <-
   expected_gdp_tbl |> as_tsibble() |> fill_gaps() |> fill(expected_gdp, .direction = "down")
 
 
+## Final Dataset Compilation ------
+
 
 full_dataset_ts <-
   inner_join(fed_funds_rate_ts, natural_rate_ts, by = "year_quarter") |> 
@@ -160,7 +162,9 @@ full_dataset_ts <-
     dR = fed_funds_rate - r_star,
     demeaned_HAWK = HAWK - mean(HAWK),
     demeaned_HAWK_IV = HAWK_IV - mean(HAWK_IV),
-    stance = dR >= 0
+    stance = dR >= 0,
+    log_consumption = log(consumption), 
+    delta_log_consumption = difference(log_consumption)
   )
 
 full_dataset_tbl <- full_dataset_ts |> as_tibble()
