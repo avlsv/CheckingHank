@@ -4,11 +4,12 @@ library(scales)
 library(tsibble)
 
 size_persistence_consumption_tbl <-
-  read.csv("data/size_persistence_consumption.csv") |> 
+  read.csv("data/size_persistence_consumption1.csv") |> 
   tibble() |> 
   mutate(year_quarter = yearquarter(year_quarter))
 
-irfs <- read.csv("data/irfs.csv") |> tibble()
+irfs <- read.csv("data/irfs1.csv") |> tibble()|> 
+  mutate(time = yearquarter(time))
 
 
 size_persistence_consumption_ts <-
@@ -60,7 +61,7 @@ ggsave(
 )
 
 
-mean(size_persistence_consumption_tbl$size < 0)
+mean(size_persistence_consumption_tbl$size <= 0)
 
 
 

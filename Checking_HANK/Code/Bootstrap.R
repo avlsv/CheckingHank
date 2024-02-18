@@ -104,11 +104,11 @@ estimator <- function(full_dataset_df, horizon) {
   
   
   model_1 <-
-    lm(delta_log_consumption ~ size + size:persistence,
+    lm(delta_log_consumption ~ size+size:persistence+inflation+expected_inflation ,
        size_persistence_consumption_tbl)
-  model_2 <-
+model_2 <-
     lm(
-      delta_log_consumption ~ size + persistence:size + size:I(persistence ^ 2),
+      delta_log_consumption ~ size + persistence*size + size:I(persistence ^ 2),
       size_persistence_consumption_tbl
     )
   
@@ -121,6 +121,7 @@ estimator <- function(full_dataset_df, horizon) {
   
   return(ret_vect)
 }
+
 
 names(retr)
 

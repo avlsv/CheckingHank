@@ -44,31 +44,38 @@ full_dataset_ts <-
 
 coefs_inflation <- tibble()
 coefs_HAWK_inflation <- tibble()
-
+coefs_intercept <- tibble()
+coefs_HAWK <- tibble()
 for (i in 1:16) {
   reg <-
     AER::ivreg(
       lead(dR, i) ~
-        expected_inflation * demeaned_HAWK + expected_gdp * demeaned_HAWK+
+        expected_inflation * demeaned_HAWK +
         lag(dR, 1) + lag(dR, 2) +lag(dR, 3) +lag(dR, 4)+
-        lag(expected_inflation, 1) + lag(expected_inflation, 2)+lag(expected_inflation, 3) + lag(expected_inflation, 4)+ lag(expected_gdp, 1) + lag(expected_gdp, 2)+lag(expected_gdp, 3) + lag(expected_gdp, 4)|
-        expected_inflation * demeaned_HAWK_IV+expected_gdp*demeaned_HAWK_IV+
+        lag(expected_inflation, 1) + lag(expected_inflation, 2)+lag(expected_inflation, 3) + lag(expected_inflation, 4)|
+        expected_inflation * demeaned_HAWK_IV+
           lag(dR, 1) + lag(dR, 2) +lag(dR, 3) + lag(dR, 4) + 
-        lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) + lag(expected_inflation, 4)+ lag(expected_gdp, 1) + lag(expected_gdp, 2)+lag(expected_gdp, 3) + lag(expected_gdp, 4),
+        lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) + lag(expected_inflation, 4),
       data = full_dataset_ts
     )
   
   output <-
     summary(reg, vcov. = vcovHAC(reg))$coefficients |> as_tibble() |>
-    slice(c(2, length(reg$coefficients)-1))
+    slice(c(1, 2, 3, length(reg$coefficients)))
   
   names(output) <- c("estimate", "std_error", "t_value", "p_ratio")
   
+  coefs_intercept <- 
+    bind_rows(coefs_intercept, output |> slice(1))
+  
   coefs_inflation <-
-    bind_rows(coefs_inflation, output |> slice(1))
+    bind_rows(coefs_inflation, output |> slice(2))
+  
+  coefs_HAWK <- bind_rows(coefs_HAWK, output |> slice(3))
   
   coefs_HAWK_inflation <-
-    bind_rows(coefs_HAWK_inflation, output |> slice(2))
+    bind_rows(coefs_HAWK_inflation, output |> slice(4))
+
   
   se_plus <-
     sqrt(vcovHAC(reg)[1, 1] + (2 / 12) ^ 2 * vcovHAC(reg)[length(reg$coefficients), length(reg$coefficients)] +
@@ -86,11 +93,14 @@ for (i in 1:16) {
 
 coefs_inflation$estimate
 coefs_HAWK_inflation$estimate
-coefs_inflation <- coefs_inflation |> mutate(quarter = row_number())
+coefs_inflation <- 
+  coefs_inflation |> mutate(quarter = row_number())
 coefs_HAWK_inflation <-
   coefs_HAWK_inflation |> mutate(quarter = row_number())
-
-
+coefs_HAWK <-
+  coefs_HAWK |> mutate(quarter = row_number())
+coefs_intercept <-
+  coefs_intercept |> mutate(quarter = row_number())
 
 
 average_responce_plot <-
@@ -190,7 +200,7 @@ LP_2 <-
       expected_inflation * demeaned_HAWK_IV +  lag(dR, 1) +
       lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
       lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
-      lag(expected_inflation, 4)+expected_inflation * I(demeaned_HAWK_IV^2),
+      lag(expected_inflation, 4),
     data = full_dataset_ts
   )
 
@@ -227,11 +237,11 @@ LP_6 <-
 LP_8 <-
   ivreg(
     lead(dR, 8) ~
-      expected_inflation * demeaned_HAWK + lag(dR, 1) + lag(dR, 2) +
+      expected_inflation * demeaned_HAWK +I(demeaned_HAWK^2)*expected_inflation+ lag(dR, 1) + lag(dR, 2) +
       lag(dR, 3) + lag(dR, 4) +
       lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
       lag(expected_inflation, 4) |
-      expected_inflation * demeaned_HAWK_IV +  lag(dR, 1) +
+      expected_inflation * demeaned_HAWK_IV+I(demeaned_HAWK_IV^2)*expected_inflation +  lag(dR, 1) +
       lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
       lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
       lag(expected_inflation, 4),
@@ -301,18 +311,18 @@ LP_10 |> summary(diagnostics = T)
 
 
 
-
-
-
 ## Size-Persistence Estimation ----
 size_persistence_tbl <- tibble()
 irf_t_list <- c()
+len = 15
+
 for (t in 1:dim(full_dataset_ts)[1]) {
-  irf_t = coefs_inflation$estimate[1:12] + full_dataset_ts$demeaned_HAWK[t] * coefs_HAWK_inflation$estimate[1:12] 
-  irf_t_cond <- if_else(irf_t < 0, 0, irf_t)
-  irf_t_list <- c(irf_t_list, irf_t_cond)
-  size = mean(irf_t_cond)
-  persistence = acf(irf_t_cond, lag = 1, plot = F)$acf[2]
+  irf_t = (coefs_inflation$estimate[1:len] + full_dataset_ts$demeaned_HAWK[t] * coefs_HAWK_inflation$estimate[1:len])*full_dataset_ts$expected_inflation[t] + full_dataset_ts$demeaned_HAWK[t] * coefs_HAWK$estimate[1:len]
+  irf_t_cond <- irf_t[1:(ifelse(which.min(irf_t[3:len] >= -0.1)+2 == 1,len+1,which.min(irf_t >= 0.05))-1)]
+  irf_t_cond_f <- c(irf_t_cond, rep(NaN, len-length(irf_t_cond)))
+  irf_t_list <- c(irf_t_list, irf_t_cond_f)
+  size = sum(irf_t_cond)
+  persistence = length(irf_t_cond)#acf(irf_t_cond, lag = 1, plot = F)$acf[2]
   size_persistence_tbl <-
     bind_rows(size_persistence_tbl,
               tibble(size = size, persistence = persistence))
@@ -324,19 +334,22 @@ for (t in 1:dim(full_dataset_ts)[1]) {
 irfs <-
   tibble(
     irf = irf_t_list,
-    quart = rep(1:12, dim(full_dataset_ts)[1]),
-    time = rep(full_dataset_ts$year_quarter, each = 12)
+    quart = rep(1:len, dim(full_dataset_ts)[1]),
+    time = rep(full_dataset_ts$year_quarter, each = len)
   )
 
 size_persistence_consumption_tbl <-
   size_persistence_tbl |> 
   mutate(
-    delta_log_consumption = full_dataset_tbl$delta_log_consumption, 
+    delta_log_consumption = full_dataset_tbl$delta_log_consumption,
+    log_consumption = full_dataset_tbl$log_consumption,
     size_dmnd = size - mean(size),  
     persistence_dmnd = persistence - mean(persistence), 
-    year_quarter = yearquarter(full_dataset_tbl$year_quarter), 
+    year_quarter = yearquarter(full_dataset_tbl$year_quarter),
+    inflation = full_dataset_tbl$core_inflation,
+    expected_inflation = full_dataset_tbl$expected_inflation
     )
 
-write.csv(size_persistence_consumption_tbl, file = "data/size_persistence_consumption.csv")
-write.csv(irfs, file = "data/irfs.csv")
+write.csv(size_persistence_consumption_tbl, file = "data/size_persistence_consumption1.csv")
+write.csv(irfs, file = "data/irfs1.csv")
 
