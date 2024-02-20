@@ -1,5 +1,8 @@
-
-
+## Checking HANK.
+## Size-Persistence tradeoff estimation
+## Author: Alexander Vlasov
+##
+##
 
 
 ## Libraries -----

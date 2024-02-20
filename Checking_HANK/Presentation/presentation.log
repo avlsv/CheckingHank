@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.3.6)  9 FEB 2024 15:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.3.6)  19 FEB 2024 19:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -961,7 +961,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  128i,15n,122p,684b,701s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on presentation.pdf (18 pages, 339818 bytes).
+Output written on presentation.pdf (18 pages, 343450 bytes).
 PDF statistics:
  816 PDF objects out of 1000 (max. 8388607)
  695 compressed objects within 7 object streams

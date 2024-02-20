@@ -1,3 +1,9 @@
+## Checking HANK
+## Plots creation
+## Author: Alexander Vlasov
+##
+##
+
 
 library(tidyverse)
 library(scales)
