@@ -4,7 +4,6 @@
 ##
 ##
 
-
 library(tidyverse)
 library(scales)
 library(tsibble)
@@ -14,7 +13,7 @@ size_persistence_consumption_tbl <-
   tibble() |> 
   mutate(year_quarter = yearquarter(year_quarter))
 
-irfs <- read.csv("data/irfs1.csv") |> tibble()|> 
+irfs <- read.csv("data/irfs1.csv") |> tibble() |> 
   mutate(time = yearquarter(time))
 
 
