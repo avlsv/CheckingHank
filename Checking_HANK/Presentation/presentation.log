@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.3.6)  19 FEB 2024 19:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.3.6)  20 MAR 2024 16:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -621,28 +621,10 @@ File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
 \l__pdf_internal_box=\box79
 ) (./presentation.aux
 
-LaTeX Warning: Label `fig:AverageResponce' multiply defined.
+LaTeX Warning: Label `fig:LP' multiply defined.
 
 
-LaTeX Warning: Label `fig:AverageResponce@cref' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:AverageResponce' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:AverageResponce@cref' multiply defined.
-
-
-LaTeX Warning: Label `fig:DifferentialResponce' multiply defined.
-
-
-LaTeX Warning: Label `fig:DifferentialResponce@cref' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:DifferentialResponce' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:DifferentialResponce@cref' multiply defined.
+LaTeX Warning: Label `fig:LP@cref' multiply defined.
 
 )
 \openout1 = `presentation.aux'.
@@ -840,96 +822,104 @@ Package pdftex.def Info: Size_Persistence_KMV.png  used on input line 94.
 
 ] [7
 
-] [8
+]
+<./../Figures/HAWK_plot.pdf, id=331, 367.3725pt x 233.87375pt>
+File: ./../Figures/HAWK_plot.pdf Graphic file (type pdf)
+<use ./../Figures/HAWK_plot.pdf>
+Package pdftex.def Info: ./../Figures/HAWK_plot.pdf  used on input line 152.
+(pdftex.def)             Requested size: 273.83627pt x 174.33784pt.
+ [8
 
-] [9
+ <./../Figures/HAWK_plot.pdf>] [9
+
+] [10
 
 ]
-<./../Figures/Average.pdf, id=389, 316.18124pt x 223.83624pt>
-File: ./../Figures/Average.pdf Graphic file (type pdf)
-<use ./../Figures/Average.pdf>
-Package pdftex.def Info: ./../Figures/Average.pdf  used on input line 203.
-(pdftex.def)             Requested size: 167.72595pt x 118.74193pt.
-<./../Figures/Differential.pdf, id=390, 316.18124pt x 223.83624pt>
-File: ./../Figures/Differential.pdf Graphic file (type pdf)
-<use ./../Figures/Differential.pdf>
-Package pdftex.def Info: ./../Figures/Differential.pdf  used on input line 203.
-(pdftex.def)             Requested size: 167.72595pt x 118.74193pt.
- [10
-
- <./../Figures/Average.pdf> <./../Figures/Differential.pdf>]
-<./../Figures/irfs_plot.pdf, id=448, 625.33624pt x 397.485pt>
-File: ./../Figures/irfs_plot.pdf Graphic file (type pdf)
-<use ./../Figures/irfs_plot.pdf>
-Package pdftex.def Info: ./../Figures/irfs_plot.pdf  used on input line 216.
-(pdftex.def)             Requested size: 239.60477pt x 152.30135pt.
+<./../Figures/average_inflation.pdf, id=429, 316.18124pt x 223.83624pt>
+File: ./../Figures/average_inflation.pdf Graphic file (type pdf)
+<use ./../Figures/average_inflation.pdf>
+Package pdftex.def Info: ./../Figures/average_inflation.pdf  used on input line 213.
+(pdftex.def)             Requested size: 164.29967pt x 116.31354pt.
+<./../Figures/differential_inflation.pdf, id=430, 316.18124pt x 223.83624pt>
+File: ./../Figures/differential_inflation.pdf Graphic file (type pdf)
+<use ./../Figures/differential_inflation.pdf>
+Package pdftex.def Info: ./../Figures/differential_inflation.pdf  used on input line 213.
+(pdftex.def)             Requested size: 164.29967pt x 116.31354pt.
  [11
 
- <./../Figures/irfs_plot.pdf>]
-<./../Figures/size_vs_persistence.pdf, id=484, 520.94624pt x 331.2375pt>
-File: ./../Figures/size_vs_persistence.pdf Graphic file (type pdf)
-<use ./../Figures/size_vs_persistence.pdf>
-Package pdftex.def Info: ./../Figures/size_vs_persistence.pdf  used on input line 230.
-(pdftex.def)             Requested size: 273.83627pt x 174.11456pt.
+ <./../Figures/average_inflation.pdf> <./../Figures/differential_inflation.pdf>]pdfTeX warning (ext4): destination with the same identifier (name{fig:LP}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.236 \end{frame}
+                 
+<./../Figures/average_unemployment.pdf, id=488, 316.18124pt x 223.83624pt>
+File: ./../Figures/average_unemployment.pdf Graphic file (type pdf)
+<use ./../Figures/average_unemployment.pdf>
+Package pdftex.def Info: ./../Figures/average_unemployment.pdf  used on input line 236.
+(pdftex.def)             Requested size: 167.72595pt x 118.74193pt.
+<./../Figures/differential_unemployment.pdf, id=489, 316.18124pt x 223.83624pt>
+File: ./../Figures/differential_unemployment.pdf Graphic file (type pdf)
+<use ./../Figures/differential_unemployment.pdf>
+Package pdftex.def Info: ./../Figures/differential_unemployment.pdf  used on input line 236.
+(pdftex.def)             Requested size: 167.72595pt x 118.74193pt.
  [12
 
- <./../Figures/size_vs_persistence.pdf>]pdfTeX warning (ext4): destination with the same identifier (name{fig:AverageResponce}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.253 \end{frame}
-                 pdfTeX warning (ext4): destination with the same identifier (name{sub@fig:AverageResponce}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.253 \end{frame}
-                 
-<./../Figures/size_plot.pdf, id=520, 367.3725pt x 233.87375pt>
-File: ./../Figures/size_plot.pdf Graphic file (type pdf)
-<use ./../Figures/size_plot.pdf>
-Package pdftex.def Info: ./../Figures/size_plot.pdf  used on input line 253.
-(pdftex.def)             Requested size: 167.72595pt x 106.7767pt.
-pdfTeX warning (ext4): destination with the same identifier (name{fig:DifferentialResponce}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.253 \end{frame}
-                 pdfTeX warning (ext4): destination with the same identifier (name{sub@fig:DifferentialResponce}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.253 \end{frame}
-                 
-<./../Figures/persistence_plot.pdf, id=521, 367.3725pt x 233.87375pt>
-File: ./../Figures/persistence_plot.pdf Graphic file (type pdf)
-<use ./../Figures/persistence_plot.pdf>
-Package pdftex.def Info: ./../Figures/persistence_plot.pdf  used on input line 253.
-(pdftex.def)             Requested size: 167.72595pt x 106.7767pt.
+ <./../Figures/average_unemployment.pdf> <./../Figures/differential_unemployment.pdf>]
+<./../Figures/irfs_plot.pdf, id=542, 625.33624pt x 397.485pt>
+File: ./../Figures/irfs_plot.pdf Graphic file (type pdf)
+<use ./../Figures/irfs_plot.pdf>
+Package pdftex.def Info: ./../Figures/irfs_plot.pdf  used on input line 249.
+(pdftex.def)             Requested size: 239.60477pt x 152.30135pt.
  [13
 
+ <./../Figures/irfs_plot.pdf>]
+<./../Figures/size_vs_persistence.pdf, id=579, 520.94624pt x 331.2375pt>
+File: ./../Figures/size_vs_persistence.pdf Graphic file (type pdf)
+<use ./../Figures/size_vs_persistence.pdf>
+Package pdftex.def Info: ./../Figures/size_vs_persistence.pdf  used on input line 263.
+(pdftex.def)             Requested size: 273.83627pt x 174.11456pt.
+ [14
+
+ <./../Figures/size_vs_persistence.pdf>]
+<./../Figures/size_plot.pdf, id=614, 367.3725pt x 233.87375pt>
+File: ./../Figures/size_plot.pdf Graphic file (type pdf)
+<use ./../Figures/size_plot.pdf>
+Package pdftex.def Info: ./../Figures/size_plot.pdf  used on input line 286.
+(pdftex.def)             Requested size: 167.72595pt x 106.7767pt.
+<./../Figures/persistence_plot.pdf, id=615, 367.3725pt x 233.87375pt>
+File: ./../Figures/persistence_plot.pdf Graphic file (type pdf)
+<use ./../Figures/persistence_plot.pdf>
+Package pdftex.def Info: ./../Figures/persistence_plot.pdf  used on input line 286.
+(pdftex.def)             Requested size: 167.72595pt x 106.7767pt.
+ [15
+
  <./../Figures/size_plot.pdf> <./../Figures/persistence_plot.pdf>]
-LaTeX Font Info:    Trying to load font information for OMS+cmss on input line 301.
-LaTeX Font Info:    No file OMScmss.fd. on input line 301.
+LaTeX Font Info:    Trying to load font information for OMS+cmss on input line 334.
+LaTeX Font Info:    No file OMScmss.fd. on input line 334.
 
 
 LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbraceleft' on input line 301.
+(Font)              for symbol `textbraceleft' on input line 334.
 
 
-Overfull \vbox (53.09433pt too high) detected at line 301
+Overfull \vbox (53.09433pt too high) detected at line 334
  []
 
-[14
+[16
 
-] [15
+] [17
 
-] [16
+] [18
 
 ] (./presentation.bbl
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\translate ' on input line 11.
 
-) [17
+) [19
 
-] [18
+] [20
 
 
 ]
@@ -953,18 +943,18 @@ Package rerunfilecheck Info: File `presentation.out' has not changed.
 (rerunfilecheck)             Checksum: 9A7EA4E86A33C5FED1A5F6E012D50624;541.
  ) 
 Here is how much of TeX's memory you used:
- 26097 strings out of 478276
- 518909 string characters out of 5846497
- 762112 words of memory out of 5000000
- 43704 multiletter control sequences out of 15000+600000
+ 26153 strings out of 478276
+ 520816 string characters out of 5846497
+ 762944 words of memory out of 5000000
+ 43745 multiletter control sequences out of 15000+600000
  482503 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,15n,122p,684b,701s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on presentation.pdf (18 pages, 343450 bytes).
+ 128i,15n,122p,697b,701s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on presentation.pdf (20 pages, 369124 bytes).
 PDF statistics:
- 816 PDF objects out of 1000 (max. 8388607)
- 695 compressed objects within 7 object streams
- 67 named destinations out of 1000 (max. 500000)
- 324 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 922 PDF objects out of 1000 (max. 8388607)
+ 789 compressed objects within 8 object streams
+ 79 named destinations out of 1000 (max. 500000)
+ 339 words of extra memory for PDF output out of 10000 (max. 10000000)
 

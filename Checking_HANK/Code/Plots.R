@@ -34,15 +34,6 @@ irfs_plot <-
   scale_x_continuous(breaks = pretty_breaks())
 irfs_plot
 
-ggsave(
-  "irfs_plot.pdf",
-  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  irfs_plot,
-  width = 220,
-  height = 140,
-  units = "mm"
-)
-
 
 
 size_vs_persistence <- 
@@ -54,16 +45,6 @@ size_vs_persistence <-
 
 
 size_vs_persistence
-
-
-ggsave(
-  "size_vs_persistence.pdf",
-  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  size_vs_persistence,
-  width = 220/1.2,
-  height = 140/1.2,
-  units = "mm"
-)
 
 
 mean(size_persistence_consumption_tbl$size <= 0)
@@ -110,15 +91,6 @@ size_plot <-
 size_plot
 
 
-ggsave(
-  "size_plot.pdf",
-  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  size_plot,
-  width = 220/1.7,
-  height = 140/1.7,
-  units = "mm"
-)
-
 
 
 persistence_plot <-
@@ -138,7 +110,67 @@ persistence_plot <-
     alpha = 0.2
   )
 
+
 persistence_plot
+
+
+
+
+
+
+HAWK_plot <-
+  ggplot(full_dataset_ts, aes(x = yq(year_quarter))) +
+  geom_line(aes(y = HAWK, color = "HAWK")) +
+  geom_line(aes(y = HAWK_IV, color = "HAWK IV")) +
+  theme_light() +
+  labs(x = "", y = "HAWK", color = "") +
+  geom_rect(
+    data = rec_data,
+    inherit.aes = F,
+    aes(
+      xmin = start,
+      xmax = end,
+      ymin = -Inf,
+      ymax = Inf
+    ),
+    fill = '#155F83FF' ,
+    alpha = 0.2
+  ) +
+  scale_y_continuous(breaks = breaks_extended()) +
+  theme_bw() +
+  theme(legend.position = "bottom") +
+  scale_x_date(breaks = breaks_pretty(n = 6)) 
+
+
+
+
+ggsave(
+  "irfs_plot.pdf",
+  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
+  irfs_plot,
+  width = 220,
+  height = 140,
+  units = "mm"
+)
+
+
+ggsave(
+  "size_vs_persistence.pdf",
+  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
+  size_vs_persistence,
+  width = 220/1.2,
+  height = 140/1.2,
+  units = "mm"
+)
+
+ggsave(
+  "size_plot.pdf",
+  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
+  size_plot,
+  width = 220/1.7,
+  height = 140/1.7,
+  units = "mm"
+)
 
 
 ggsave(
@@ -149,6 +181,17 @@ ggsave(
   height = 140/1.7,
   units = "mm"
 )
+
+
+ggsave(
+  "HAWK_plot.pdf",
+  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
+  HAWK_plot,
+  width = 220/1.7,
+  height = 140/1.7,
+  units = "mm"
+)
+
 
 
 

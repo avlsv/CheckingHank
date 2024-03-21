@@ -1,19 +1,19 @@
 # Fdb version 3
-["bibtex CheckingHANK"] 1707475256 "CheckingHANK.aux" "CheckingHANK.bbl" "CheckingHANK" 1707481174
-  "CheckingHANK.aux" 1707481173 9589 246d93f3c9b3a844148e04ea32ac0e87 "pdflatex"
+["bibtex CheckingHANK"] 1707475256 "CheckingHANK.aux" "CheckingHANK.bbl" "CheckingHANK" 1710879662
+  "CheckingHANK.aux" 1710879662 9589 246d93f3c9b3a844148e04ea32ac0e87 "pdflatex"
   "misc/econ.bst" 0 -1 0 ""
   "misc/references.bib" 0 -1 0 ""
   (generated)
   "CheckingHANK.bbl"
   "CheckingHANK.blg"
-["pdflatex"] 1707481171 "/Users/vlasov/Documents/CheckingHank/Checking_HANK/Paper/CheckingHANK.tex" "CheckingHANK.pdf" "CheckingHANK" 1707481174
+["pdflatex"] 1710879660 "/Users/vlasov/Documents/CheckingHank/Checking_HANK/Paper/CheckingHANK.tex" "CheckingHANK.pdf" "CheckingHANK" 1710879662
   "../Figures/Average.pdf" 1707421884 5614 724055082a80ecd971cd990be830407a ""
   "../Figures/Differential.pdf" 1707421884 5437 909a4805214bf86964f3a5234cb8b4a3 ""
-  "../Figures/irfs_plot.pdf" 1707421895 11036 dff540a92ce191eaf10305b05ddb57f2 ""
+  "../Figures/irfs_plot.pdf" 1710851514 9948 5ee2d301176a474da25fdcc4872ae99f ""
   "../Figures/persistence_plot.pdf" 1707473293 5956 a34f477f6358764e0011c0a999770f2f ""
-  "../Figures/size_plot.pdf" 1707473295 5961 a72b39a93af10c30a98e0ebf5cbf1e43 ""
-  "../Figures/size_vs_persistence.pdf" 1707473265 11081 b705dd50c99709d6d621fdd79e00ba03 ""
-  "/Users/vlasov/Documents/CheckingHank/Checking_HANK/Paper/CheckingHANK.tex" 1707481170 32685 f882b378a3b847cc03c000fb24a02a7e ""
+  "../Figures/size_plot.pdf" 1708102380 6104 aace2cf2ff892397a3adf13edc03ebe8 ""
+  "../Figures/size_vs_persistence.pdf" 1707946145 11175 0fde8a37cdc195a51cf6bf05b0de573a ""
+  "/Users/vlasov/Documents/CheckingHank/Checking_HANK/Paper/CheckingHANK.tex" 1710879659 32706 a84bee1a710fd3e920c8dae7874c914c ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/jknappen/ec/tcrm0700.tfm" 1136768653 1536 73da8e8f1d2a4c957d51ca133585586b ""
@@ -318,10 +318,10 @@
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1646577379 4410336 9a0a29906eb859c2474e81197df54e3a ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1646577410 2797749 81b5e45ac95007631cb34e1b4129a7cf ""
   "/usr/local/texlive/2021/texmf.cnf" 1646577368 577 4c1911a7228e554c6032256d3cf5567d ""
-  "CheckingHANK.aux" 1707481173 9589 246d93f3c9b3a844148e04ea32ac0e87 "pdflatex"
+  "CheckingHANK.aux" 1710879662 9589 246d93f3c9b3a844148e04ea32ac0e87 "pdflatex"
   "CheckingHANK.bbl" 1707474125 6880 32ad8e23cdb22964b44ab9b893e0900e "bibtex CheckingHANK"
-  "CheckingHANK.out" 1707481173 1487 3ef1f0cb4a278a041627facad099a9f9 "pdflatex"
-  "CheckingHANK.tex" 1707481170 32685 f882b378a3b847cc03c000fb24a02a7e ""
+  "CheckingHANK.out" 1710879662 1487 3ef1f0cb4a278a041627facad099a9f9 "pdflatex"
+  "CheckingHANK.tex" 1710879659 32706 a84bee1a710fd3e920c8dae7874c914c ""
   "preamble.tex" 1707475264 3356 4bdf9f6ca0304d15d8ab778b65a7d5ff ""
   (generated)
   "CheckingHANK.aux"

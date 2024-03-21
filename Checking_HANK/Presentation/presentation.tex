@@ -31,7 +31,7 @@
 
 \title{Checking HANK}
 \subtitle{Evidence from size-persistence tradeoff.}   
-\author{\href{mailto://avlasov@nes.ru}{Vlasov Alexander}} 
+\author{\href{mailto://avlasov@nes.ru}{Alexander Vlasov}} 
 \institute{NES}
 \usetheme{Madrid}
 % \usecolortheme{}
@@ -131,28 +131,36 @@ Size:
 
 \section{Approach}
 
-\begin{frame}\frametitle{Empirical approach:}
+\begin{frame}{Empirical approach}{Systematic Monetary Policy Identification}
 Based on method of \citet{HIM2023}.
 
 I assume that the monetary policy rule is 
-\[\left(r-r^*\right)_{t+h}=\tilde\phi_t\mathbb{E}\left[\pi_{t+1}\mid \mathcal{I}_t\right]+\varepsilon_t.\]
-$\mathbb{E}_t\pi_{t+1}$ is the expectations of monetary authority about the inflation in quarter $t+1$.
+\[\left(r-r^*\right)_{t+h}=\phi_t^h\mathbb{E}\left[\pi_{t+1}\mid \mathcal{I}_t\right]+\psi_t^h\mathbb{E}\left[u_{t+1}\mid \mathcal{I}_t\right]+\varepsilon_t.\]
+$\mathbb{E}_t\pi_{t+1}$ and $\mathbb{E}_t u_{t+1}$ are the expectations of monetary authority about the inflation and unemployment at quarter $t+1$.
 
 I estimate the following State-Dependent LP-IV.
 \begin{multline*}
-    \left(r-r^*\right)_{t+h}=\alpha^h+\beta^h \hat\pi_t+\gamma^h \hat\pi_t\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)\\ +\delta^h\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)+\zeta^hZ+e_{t+h}^h,
+    \left(r-r^*\right)_{t+h}=\alpha^h+\beta_\pi^h \hat\pi_t+\gamma_\pi^h \hat\pi_t\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)\\ \beta_u^h \hat u_t+\gamma_u^h \hat u_t\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)\\ +\delta^h\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)+\zeta^hZ+e_{t+h}^h,
 \end{multline*}
+\end{frame}
+
+\begin{frame}{}
+    \begin{figure}[h!]
+        \caption{HAWK and HAWK IV indexes from \citet{HIM2023}}
+        \includegraphics[width=0.8\textwidth]{HAWK_plot.pdf}
+    \end{figure}
 \end{frame}
 
 \begin{frame}{Empirical approach }
 
-    \[\tilde \phi_{t+h}=\bar\phi+\phi_t=\hat \beta^h+\hat\gamma^h \left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right).\]
-    \[R_{0t}=\frac{1}{H}\sum_{h=1}^{H} \tilde \phi_{t+h}=\mathbb{E}_h \tilde \phi_{t+h}.\]
-    \[\nu_t=\mathbb{E}_{h}\left[\left(\phi_{t+h}-\bar \phi\right)\left(\phi_{t+h-1}-\bar \phi\right)\right]\]
+    \begin{multline*}\hat \phi_{t+h}=\left(\hat \beta_\pi^h+\hat\gamma^h_\pi \left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)\right)\bar\pi\\ +\left(\hat \beta_u^h+\hat\gamma^h_u \left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)\right)\bar u\\+\hat\delta^h\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)
+    \end{multline*}
+    \[R_{0t}=\sum_{h=1}^{H} \hat \phi_{t+h}\]
+    \[\nu_t=\mathbb{E}_{h}\left[\left(\hat\phi_{t+h}-\bar \phi\right)\left(\hat \phi_{t+h-1}-\bar \phi\right)\right]\]
 
     \begin{align}
-        \log \mathit{Consumption}&=\alpha_0+\alpha_1 R_0+\alpha_2\nu+\beta_1 R_0\nu \label{eq:linear}\\
-        \log \mathit{Consumption}&=\alpha_0'+\alpha_1' R_0+\alpha_2'\nu+\beta_1' R_0\nu + \beta_2' R_0\nu^2\label{eq:quadratic}
+        \log \mathit{Consumption}&=\alpha_0+\alpha_1 R_0+\beta_1 R_0\nu \label{eq:linear}\\
+        \log \mathit{Consumption}&=\alpha_0'+\alpha_1' R_0+\beta_1' R_0\nu + \beta_2' R_0\nu^2\label{eq:quadratic}
     \end{align} 
 \end{frame}
 
@@ -167,7 +175,8 @@ I estimate the following State-Dependent LP-IV.
         \item Natural rate of interest by \citet{HLW2017,HLW2023}
         \item Short-term rate ($r$) is by \citet{WuXia2016} and Fed Funds Rate 
         \item Consumption is U.S. Bureau of Economic Analysis``Real personal consumption expenditures per capita ''  (FRED A794RX0Q048SBEA).
-        \item FED inflation forecast is from Tealbook (average of 1 and 2 quarter ahead + average per quarter).
+        \item FED inflation (deflator) and unemployment forecast is from Tealbook (average of 1 and 2 quarter ahead + average per quarter).
+        \item HAWK index from \citet{HIM2023}.
     \end{itemize}
 \end{frame}
 
@@ -184,20 +193,44 @@ I estimate the following State-Dependent LP-IV.
 
     \begin{figure}[!htbp]\centering
         \label{fig:LP}
+        \begin{subfigure}[b]{0.48\textwidth}
+            \centering
+            \caption{Average Response to Inflation $\left(\beta_\pi^h\right)$}
+            \label{fig:average_inflation}
+            \includegraphics[width=\linewidth]{average_inflation.pdf}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.48\textwidth}
+            \centering 
+            \caption{Differential Response to Inflation $\left(\gamma_\pi^h\right)$}
+            \label{fig:differential_inflation}
+            \includegraphics[width=\linewidth]{differential_inflation.pdf}
+        \end{subfigure}\vspace{-4ex}
+            {\begin{flushleft}\tiny\textit{Notes}: This figure reports the responses of the $r_t-\rho_t$ to an increase in the Tealbook inflation forecast of 1 p.p. (calculated as a predicted change in GDP deflator). 
+            The subfigure \ref{fig:average_inflation} reports the response for the $\mathit{HAWK}$ index equal to the sample average and \ref{fig:differential_inflation} is the addition to the response in case there are 2 (out of 12 in total) additional consistent hawks in the FOMC. The shaded areas correspond to 68\%, 90\% and 95\% confidence bands calculated with Newey-West HAC estimator with Andrews-selected truncation parameter.\end{flushleft}}
+    \end{figure}
+    
+\end{frame}
+
+
+\begin{frame}{Results I}{Policy Response to Unemployment and FOMC Hawkishness}
+
+    \begin{figure}[!htbp]\centering
+        \label{fig:LP}
         \begin{subfigure}[b]{0.49\textwidth}
             \centering
-            \caption{Average Response $(\beta^h)$}
-            \label{fig:AverageResponce}
-            \includegraphics[width=\linewidth]{Average.pdf}
+            \caption{Average Response to Unempl. $\left(\beta_u^h\right)$}
+            \label{fig:average_unemployment}
+            \includegraphics[width=\linewidth]{average_unemployment.pdf}
         \end{subfigure}
         \hfill
         \begin{subfigure}[b]{0.49\textwidth}
             \centering
-            \caption{Differential Response $(\gamma^h)$}
-            \label{fig:DifferentialResponce}
-            \includegraphics[width=\linewidth]{Differential.pdf}
+            \caption{Differential Response to Unempl. $\left(\gamma_u^h\right)$}
+            \label{fig:differential_unemployment}
+            \includegraphics[width=\linewidth]{differential_unemployment.pdf}
         \end{subfigure}\vspace{-4ex}
-            {\begin{flushleft}\tiny\textit{Notes}: This figure reports the responses of the $r_t-\rho_t$ to an increase in the Tealbook inflation forecast of 1 p.p. The subfigure \ref{fig:AverageResponce} reports the response for the $\mathit{HAWK}$ index equal to the sample average and \ref{fig:DifferentialResponce} is the addition to the response in case there are 2 (out of 12 in total) additional consistent hawks in the FOMC. The shaded areas correspond to 68\%, 90\% and 95\% confidence bands calculated with Newey-West HAC estimator with Andrews-selected truncation parameter.\end{flushleft}}
+            {\begin{flushleft}\tiny\textit{Notes}: This figure reports the responses of the $r_t-\rho_t$ to an increase in the Tealbook unemployment forecast of 1 p.p. The subfigure \ref{fig:average_unemployment} reports the response for the $\mathit{HAWK}$ index equal to the sample average and \ref{fig:differential_unemployment} is the addition to the response in case there are 2 (out of 12 in total) additional consistent hawks in the FOMC. The shaded areas correspond to 68\%, 90\% and 95\% confidence bands calculated with Newey-West HAC estimator with Andrews-selected truncation parameter.\end{flushleft}}
     \end{figure}
     
 \end{frame}

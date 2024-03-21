@@ -1,5 +1,5 @@
 ## Checking HANK.
-## Size-Persistence tradeoff estimation
+## Size-Persistence trade off estimation
 ## Author: Alexander Vlasov
 ##
 ##
@@ -42,61 +42,110 @@ full_dataset_ts <-
 full_dataset_df <- as.data.frame(full_dataset_tbl)
 
 # Estimator Definition -----
-# horizon <- 8
-estimator <- function(full_dataset_df, horizon) {
+
+
+estimator <- function(full_dataset_df) {
   ## LP-IV ----
   ##
-
-  full_dataset_tbl <- as_tibble(full_dataset_df)
+  horizon <- 12
+  full_dataset_tbl <- full_dataset_df |> as_tibble()
+  
   
   coefs_inflation <- tibble()
   coefs_HAWK_inflation <- tibble()
+  coefs_unemployment <- tibble()
+  coefs_HAWK_unemployment <- tibble()
+  coefs_intercept <- tibble()
+  coefs_HAWK <- tibble()
   
   for (i in 1:horizon) {
     reg <-
       AER::ivreg(
         lead(dR, i) ~
-          expected_inflation * demeaned_HAWK + lag(dR, 1) + lag(dR, 2) +
-          lag(dR, 3) + lag(dR, 4) +
-          lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
-          lag(expected_inflation, 4) |
-          expected_inflation * demeaned_HAWK_IV +  lag(dR, 1) +
-          lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
-          lag(expected_inflation, 1) + lag(expected_inflation, 2) + lag(expected_inflation, 3) +
-          lag(expected_inflation, 4),
-        data = full_dataset_ts
+          expected_inflation * demeaned_HAWK + expected_unemployment * demeaned_HAWK +
+          lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+          lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+          lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+          lag(expected_unemployment, 1) + lag(expected_unemployment, 2) +
+          lag(expected_unemployment, 3) + lag(expected_unemployment, 4) |
+          expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV +
+          lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+          lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+          lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+          lag(expected_unemployment, 1) + lag(expected_unemployment, 2) +
+          lag(expected_unemployment, 3) + lag(expected_unemployment, 4),
+        data = full_dataset_tbl
       )
     
-    output <- reg$coefficients |> as_tibble() |>
-      slice(c(2, length(reg$coefficients)))
+    output <-
+      summary(reg)$coefficients |> as_tibble() |>
+      slice(c(
+        1,
+        2,
+        3,
+        4,
+        length(reg$coefficients) - 1,
+        length(reg$coefficients)
+      ))
+    # expected_inflation, demeaned_HAWK, expected_unemployment
     
-    names(output) <- c("estimate")
+    names(output) <- c("estimate", "std_error", "t_stat", "p_value")
+    coefs_intercept <-
+      bind_rows(coefs_intercept, output |> slice(1))
     
     coefs_inflation <-
-      bind_rows(coefs_inflation, output |> slice(1))
+      bind_rows(coefs_inflation, output |> slice(2))
+    
+    coefs_HAWK <-
+      bind_rows(coefs_HAWK, output |> slice(3))
+    
+    coefs_unemployment <-
+      bind_rows(coefs_unemployment, output |> slice(4))
+    
     
     coefs_HAWK_inflation <-
-      bind_rows(coefs_HAWK_inflation, output |> slice(2))
+      bind_rows(coefs_HAWK_inflation, output |> slice(5))
+    
+    coefs_HAWK_unemployment <-
+      bind_rows(coefs_HAWK_unemployment, output |> slice(6))
+    
+    
     
   }
   
   
   
   ## Size-Persistence Estimation ----
+  len = 12
   size_persistence_tbl <- tibble()
   for (t in 1:dim(full_dataset_tbl)[1]) {
-    irf_t = coefs_inflation$estimate + full_dataset_tbl$demeaned_HAWK[t] * coefs_HAWK_inflation$estimate
-    irf_t_cond <- if_else(irf_t < 0, 0, irf_t)
-    size = mean(irf_t_cond)
-    persistence = acf(irf_t_cond, plot = F, lag.max = 1)$acf[2]
+    irf_t = coefs_intercept$estimate[1:len] +
+      (
+        coefs_inflation$estimate[1:len] +
+          full_dataset_tbl$demeaned_HAWK[t] * coefs_HAWK_inflation$estimate[1:len]
+      ) * (2.01) +
+      (
+        coefs_unemployment$estimate[1:len] +
+          full_dataset_tbl$demeaned_HAWK[t] * coefs_HAWK_unemployment$estimate[1:len]
+      ) * (-0.0950) + coefs_HAWK$estimate[1:len] * full_dataset_ts$demeaned_HAWK[t]
+    
+    irf_t_cond <-  irf_t[1:which.min(pmax(0, irf_t))]
+    
+    #irf_t_cond_f <- c(irf_t_cond, rep(NaN, len - length(irf_t_cond)))
+    #irf_t_list <- c(irf_t_list, irf_t_cond_f)
+    
+    size = sum(irf_t_cond[irf_t_cond > 0], na.rm = T)
+    persistence = acf(irf_t[1:10], lag = 1, plot = F)$acf[2] #length(irf_t_cond[irf_t_cond > 0]) #length(irf_t_cond)#  # 
     size_persistence_tbl <-
       bind_rows(size_persistence_tbl,
                 tibble(size = size, persistence = persistence))
+    
   }
   
   size_persistence_consumption_tbl <-
     size_persistence_tbl |>
     mutate(
+      year_quarter=yearquarter(full_dataset_tbl$year_quarter),
       consumption = full_dataset_tbl$consumption,
       size_dmnd = size - mean(size),
       persistence_dmnd = persistence - mean(persistence),
@@ -105,73 +154,52 @@ estimator <- function(full_dataset_df, horizon) {
       delta_log_consumption = full_dataset_tbl$delta_log_consumption
     )
   
+  model_0 <- lm(log_consumption ~ size ,
+                size_persistence_consumption_tbl)
   
   model_1 <-
-    lm(delta_log_consumption ~ size+size:persistence+inflation+expected_inflation ,
+    lm(log_consumption ~ size + size:persistence,
        size_persistence_consumption_tbl)
-model_2 <-
+  
+  model_2 <-
     lm(
-      delta_log_consumption ~ size + persistence*size + size:I(persistence ^ 2),
+      log_consumption ~ size + size:persistence + size:I(persistence ^ 2),
       size_persistence_consumption_tbl
     )
   
-  a <- model_1$coefficients
-  b <- model_2$coefficients
+  a <-
+    model_0$coefficients |> tidy()  
+  b <-
+    model_1$coefficients |> tidy() #> filter( !grepl( 'lag', names))
+  c <-
+    model_2$coefficients |> tidy() #> filter(!grepl('lag', names))
   
   
-  retr <- c(a, b)
+  retr <- c(a$x, b$x, c$x)
   ret_vect <- retr |> as.vector()
   
   return(ret_vect)
 }
 
-
-names(retr)
+#names(retr)
 
 # Bootstrap Sample Creation  -----
 
-full_dataset_ts <- full_dataset_tbl |> as.ts()
 
-bootstrapped_8 <-
+bootstrapped <-
   tsboot(
-    full_dataset_ts,
-    \(x) estimator(x, 8),
-    R = 1e4,
+    ts(full_dataset_df),
+    estimator,
+    R = 1000,
     sim = "geom",
     l = 16,
     parallel =  "multicore",
     ncpus = 4
   ) # parallel does not work in windows
 
-save(bootstrapped_8, file = "data/boot_8.Rdata")
-
-bootstrapped_10 <-
-  tsboot(
-    full_dataset_ts,
-    \(x) estimator(x, 10),
-    R = 1e4,
-    sim = "geom",
-    l = 16,
-    parallel =  "multicore",
-    ncpus = 4 #4
-  ) # parallel does not work in windows
-
-save(bootstrapped_10, file = "data/boot_10.Rdata")
+#bootstrapped$t
 
 
-bootstrapped_12 <-
-  tsboot(
-    full_dataset_ts,
-    \(x) estimator(x, 12),
-    R = 1e4,
-    sim = "geom",
-    l = 16,
-    parallel =  "multicore",
-    ncpus = 4 #4
-  ) # parallel does not work in windows
+save(bootstrapped, file = "data/boot_1k.Rdata")
 
-save(bootstrapped_12, file = "data/boot_12.Rdata")
-
-
-
-as<-lm(log(consumption)~ X, size_persistence_consumption)$residuals
+#save(bootstrapped, file = "data/boot_10k.Rdata")

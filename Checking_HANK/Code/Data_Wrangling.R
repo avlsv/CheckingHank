@@ -87,7 +87,9 @@ consumption_ts <-
   consumption_raw |> fortify.zoo(melt = TRUE) |>
   select(-Series) |>
   mutate(year_quarter = yearquarter(Index)) |>
-  as_tsibble(index = year_quarter) |> select(-Index) |> rename(consumption = Value)
+  as_tsibble(index = year_quarter) |> 
+  select(-Index) |> 
+  rename(consumption = Value)
 
 
 
@@ -104,7 +106,9 @@ effective_ffr_ts <- effective_ffr  |>
 
 fed_funds_rate_ts <-
   full_join(effective_ffr_ts, shadow_rate_ts, by = "year_quarter") |>
-  mutate(fed_funds_rate = pmin(ffr, Shadow_Rate, na.rm = T)) |> select(year_quarter, fed_funds_rate)
+  mutate(fed_funds_rate = pmin(ffr, Shadow_Rate, na.rm = T)) |> 
+  select(year_quarter, fed_funds_rate)
+
 
 inflation_ts <-
   PCEPILFE |>
@@ -116,7 +120,6 @@ inflation_ts <-
   mutate(core_inflation = 100 * (log(price) - log(lag(price, 12)))) |> select(-price)
 
 
-
 expected_inflation_raw <-
   read_xlsx("data/Tealbook Row Format.xlsx", sheet = "gPGDP") |>
   select(DATE, gPGDPF1, gPGDPF2) |> na.omit() |>
@@ -124,13 +127,37 @@ expected_inflation_raw <-
   select(-gPGDPF1, -gPGDPF2) |>
   mutate(year_quarter = yearquarter(as.yearqtr((DATE)))) |> select(-DATE)
 
+
 expected_inflation_tbl <-
-  expected_inflation_raw |> group_by(year_quarter) |> summarize(expected_inflation = mean(expected_inflation_at_event))
+  expected_inflation_raw |>
+  group_by(year_quarter) |> 
+  summarize(expected_inflation = mean(expected_inflation_at_event))
 
 expected_inflation_ts <-
-  expected_inflation_tbl |> as_tsibble() |> fill_gaps() |> fill(expected_inflation, .direction = "down")
+  expected_inflation_tbl |> 
+  as_tsibble() |> 
+  fill_gaps() |> 
+  fill(expected_inflation, .direction = "down")
 
 
+
+expected_unemployment_raw <-
+  read_xlsx("data/Tealbook Row Format.xlsx", sheet = "gRGDP") |>
+  select(DATE, UNEMPB1, UNEMPB2) |> na.omit() |>
+  mutate(expected_unemployment_at_event = (UNEMPB1 + UNEMPB2) / 2) |>
+  select(-UNEMPB1, -UNEMPB2) |>
+  mutate(year_quarter = yearquarter(as.yearqtr((DATE)))) |> select(-DATE)
+
+expected_unemployment_tbl <-
+  expected_unemployment_raw |>
+  group_by(year_quarter) |> 
+  summarize(expected_unemployment = mean(expected_unemployment_at_event))
+
+expected_unemployment_ts <-
+  expected_unemployment_tbl |> 
+  as_tsibble() |> 
+  fill_gaps() |> 
+  fill(expected_unemployment, .direction = "down")
 
 
 expected_gdp_raw <-
@@ -157,6 +184,7 @@ full_dataset_ts <-
   inner_join(inflation_ts, by = "year_quarter") |>
   inner_join(consumption_ts, by = "year_quarter") |>
   inner_join(expected_inflation_ts, by = "year_quarter") |>
+  inner_join(expected_unemployment_ts, by = "year_quarter") |>
   inner_join(expected_gdp_ts, by = "year_quarter") |>
   mutate(
     dR = fed_funds_rate - r_star,
