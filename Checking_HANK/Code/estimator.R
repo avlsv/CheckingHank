@@ -34,6 +34,7 @@ for (Package in required_Packages_Install) {
   library(Package, character.only = TRUE)
 }
 
+# Datasets ----
 
 full_dataset_tbl <- read_csv("data/full_dataset.csv")
 full_dataset_ts <-
@@ -52,59 +53,53 @@ for (i in 1:20) {
   reg <-
     AER::ivreg(
       lead(dR, i) ~
-        expected_inflation * demeaned_HAWK + expected_unemployment * demeaned_HAWK +
-      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) + 
-        lag(expected_inflation, 1) + lag(expected_inflation, 2) + 
-        lag(expected_inflation, 3) + lag(expected_inflation, 4) + 
-        lag(expected_unemployment, 1) + lag(expected_unemployment, 2) + 
-        lag(expected_unemployment, 3) + lag(expected_unemployment, 4) |
-        expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV + 
-        lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) + 
-        lag(expected_inflation, 1) + lag(expected_inflation, 2) + 
-        lag(expected_inflation, 3) + lag(expected_inflation, 4) +  
-        lag(expected_unemployment, 1) + lag(expected_unemployment, 2) + 
-        lag(expected_unemployment, 3) + lag(expected_unemployment, 4),
+        demeaned_expected_inflation * demeaned_HAWK +  demeaned_expected_unemployment * demeaned_HAWK +
+        lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+        lag(demeaned_expected_inflation, 1) + lag(demeaned_expected_inflation, 2) +
+        lag(demeaned_expected_inflation, 3) + lag(demeaned_expected_inflation, 4) +
+        lag(demeaned_expected_unemployment, 1) + lag(demeaned_expected_unemployment, 2) +
+        lag(demeaned_expected_unemployment, 3) + lag(demeaned_expected_unemployment, 4) |
+        demeaned_expected_inflation * demeaned_HAWK_IV + demeaned_expected_unemployment * demeaned_HAWK_IV +
+        lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+        lag(demeaned_expected_inflation, 1) + lag(demeaned_expected_inflation, 2) +
+        lag(demeaned_expected_inflation, 3) + lag(demeaned_expected_inflation, 4) +
+        lag(demeaned_expected_unemployment, 1) + lag(demeaned_expected_unemployment, 2) +
+        lag(demeaned_expected_unemployment, 3) + lag(demeaned_expected_unemployment, 4),
       data = full_dataset_ts
     )
   
   output <-
     summary(reg, vcov. = vcovHAC(reg))$coefficients |> as_tibble() |>
-    slice(c(1,2,3, 4, length(reg$coefficients)-1, length(reg$coefficients)))
+    slice(c(
+      1,
+      2,
+      3,
+      4,
+      length(reg$coefficients) - 1,
+      length(reg$coefficients)
+    ))
   # expected_inflation, demeaned_HAWK, expected_unemployment
   
   names(output) <- c("estimate", "std_error", "t_stat", "p_value")
+  
   coefs_intercept <-
     bind_rows(coefs_intercept, output |> slice(1))
   
   coefs_inflation <-
     bind_rows(coefs_inflation, output |> slice(2))
   
-  coefs_HAWK <-  
+  coefs_HAWK <-
     bind_rows(coefs_HAWK, output |> slice(3))
   
   coefs_unemployment <-
     bind_rows(coefs_unemployment, output |> slice(4))
-
-
+  
   
   coefs_HAWK_inflation <-
     bind_rows(coefs_HAWK_inflation, output |> slice(5))
   
   coefs_HAWK_unemployment <-
     bind_rows(coefs_HAWK_unemployment, output |> slice(6))
-  
-
-
-  
-  se_plus <-
-    sqrt(vcovHAC(reg)[1, 1] + (2 / 12) ^ 2 * vcovHAC(reg)[length(reg$coefficients), length(reg$coefficients)] +
-           2 * 2 / 12 * vcovHAC(reg)[1, length(reg$coefficients)])
-  
-  se_minus <-
-    sqrt(vcovHAC(reg)[1, 1] + (2 / 12) ^ 2 * vcovHAC(reg)[length(reg$coefficients), length(reg$coefficients)] -
-           2 * 2 / 12 * vcovHAC(reg)[1, length(reg$coefficients)])
-  
-  
   
 }
 
@@ -117,20 +112,37 @@ coefs_HAWK_inflation$estimate
 coefs_unemployment$estimate
 coefs_HAWK_unemployment$estimate
 
-coefs_inflation <- 
-  coefs_inflation |> mutate(quarter = row_number())
+
+### Saving and transforming coefficients -----
+
+coefs_intercept <-
+  coefs_intercept |>  mutate(quarter = row_number())
+
 coefs_HAWK <-
   coefs_HAWK |> mutate(quarter = row_number())
+
+
+coefs_inflation <-
+  coefs_inflation |> mutate(quarter = row_number())
 coefs_HAWK_inflation <-
   coefs_HAWK_inflation |> mutate(quarter = row_number())
+
 coefs_unemployment <-
   coefs_unemployment |> mutate(quarter = row_number())
 coefs_HAWK_unemployment <-
   coefs_HAWK_unemployment |> mutate(quarter = row_number())
 
-save(coefs_inflation, coefs_HAWK, coefs_HAWK_inflation, coefs_unemployment, coefs_HAWK_unemployment, file = "coefs.RData")
 
+save(
+  coefs_inflation,
+  coefs_HAWK,
+  coefs_HAWK_inflation,
+  coefs_unemployment,
+  coefs_HAWK_unemployment,
+  file = "coefs.RData"
+)
 
+## LP-IV coefficient plots -----
 
 average_inflation_responce_plot <-
   ggplot(coefs_inflation, aes(x = quarter, y = estimate)) +
@@ -177,8 +189,8 @@ differential_inflation_responce_plot <-
   ) +
   geom_ribbon(
     aes(
-      ymin = 2 / 12 * estimate - 2 / 12 * std_error,
-      ymax = 2 / 12 * estimate + 2 / 12 * std_error
+      ymin = 2 / 12 * estimate - qnorm(1 - 0.1 / 2) / 12 * std_error,
+      ymax = 2 / 12 * estimate + qnorm(1 - 0.1 / 2) / 12 * std_error
     ),
     alpha = 0.13,
     linetype = 0,
@@ -186,8 +198,8 @@ differential_inflation_responce_plot <-
   ) +
   geom_ribbon(
     aes(
-      ymin = 2 / 12 * estimate - 1.644 * 2 / 12 * std_error,
-      ymax = 2 / 12 * estimate + 1.644 * 2 / 12 * std_error
+      ymin = 2 / 12 * estimate -   2 / 12 * std_error,
+      ymax = 2 / 12 * estimate +  2 / 12 * std_error
     ),
     alpha = 0.13,
     linetype = 0,
@@ -238,27 +250,44 @@ average_unemployment_responce_plot
 
 
 differential_unemployment_responce_plot <-
-  ggplot(coefs_HAWK_unemployment, aes(x = quarter, y = estimate)) +
-  geom_hline(aes(yintercept = 0),  color = "darkred") +
+  ggplot(coefs_HAWK_unemployment, 
+         aes(x = quarter, y =  2 / 12 * estimate)) +
+  geom_hline(
+    aes(yintercept = 0),  color = "darkred") +
   geom_ribbon(
     aes(
-      ymin = estimate - qnorm(1 - 0.05 / 2) * std_error,
-      ymax = estimate + qnorm(1 - 0.05 / 2) * std_error
+      ymin = 
+        2 / 12 * estimate - 
+        2 / 12 * qnorm(1 - 0.05 / 2) * std_error,
+      ymax =  
+        2 / 12 * estimate +  
+        2 / 12 * qnorm(1 - 0.05 / 2) * std_error
     ),
     alpha = 0.13,
     linetype = 0,
     fill = "#477998"
   ) +
   geom_ribbon(
-    aes(ymin = estimate - std_error, ymax = estimate + std_error),
+    aes(
+      ymin = 
+        2 / 12 * estimate - 
+        2 / 12 * std_error,
+      ymax = 
+        2 / 12 * estimate + 
+        2 / 12 * std_error
+    ),
     alpha = 0.13,
     linetype = 0,
     fill = "#477998"
   ) +
   geom_ribbon(
     aes(
-      ymin = estimate - qnorm(1 - .10 / 2) * std_error,
-      ymax = estimate + qnorm(1 - .10 / 2) * std_error
+      ymin = 
+        2 / 12 * estimate - 
+        2 / 12 * qnorm(1 - .10 / 2) * std_error,
+      ymax = 
+        2 / 12 * estimate + 
+        2 / 12 * qnorm(1 - .10 / 2) * std_error
     ),
     alpha = 0.123,
     linetype = 0,
@@ -270,13 +299,14 @@ differential_unemployment_responce_plot <-
 differential_unemployment_responce_plot
 
 
+### Saving plots -----
 
 ggsave(
   "average_inflation.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   average_inflation_responce_plot,
-  width = 148.5 / 2*1.5,
-  height =  210 / 4*1.5,
+  width = 148.5 / 2 * 1.5,
+  height =  210 / 4 * 1.5,
   units = "mm"
 )
 
@@ -294,8 +324,8 @@ ggsave(
   "average_unemployment.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   average_unemployment_responce_plot,
-  width = 148.5 / 2*1.5,
-  height =  210 / 4*1.5,
+  width = 148.5 / 2 * 1.5,
+  height =  210 / 4 * 1.5,
   units = "mm"
 )
 
@@ -308,22 +338,23 @@ ggsave(
   units = "mm"
 )
 
+## LP-IV coefficient tables -----
 
 
 LP_2 <-
   ivreg(
     lead(dR, 2) ~
       expected_inflation * demeaned_HAWK + expected_unemployment * demeaned_HAWK +
-      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) + 
-      lag(expected_inflation, 1) + lag(expected_inflation, 2) + 
-      lag(expected_inflation, 3) + lag(expected_inflation, 4) + 
-      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) + 
+      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+      lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) +
       lag(expected_unemployment, 3) + lag(expected_unemployment, 4) |
-      expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV + 
-      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) + 
-      lag(expected_inflation, 1) + lag(expected_inflation, 2) + 
-      lag(expected_inflation, 3) + lag(expected_inflation, 4) +  
-      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) + 
+      expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV +
+      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+      lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) +
       lag(expected_unemployment, 3) + lag(expected_unemployment, 4),
     data = full_dataset_ts
   )
@@ -333,16 +364,16 @@ LP_4 <-
   ivreg(
     lead(dR, 4) ~
       expected_inflation * demeaned_HAWK + expected_unemployment * demeaned_HAWK +
-      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) + 
-      lag(expected_inflation, 1) + lag(expected_inflation, 2) + 
-      lag(expected_inflation, 3) + lag(expected_inflation, 4) + 
-      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) + 
+      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+      lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) +
       lag(expected_unemployment, 3) + lag(expected_unemployment, 4) |
-      expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV + 
-      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) + 
-      lag(expected_inflation, 1) + lag(expected_inflation, 2) + 
-      lag(expected_inflation, 3) + lag(expected_inflation, 4) +  
-      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) + 
+      expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV +
+      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+      lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) +
       lag(expected_unemployment, 3) + lag(expected_unemployment, 4),
     data = full_dataset_ts
   )
@@ -352,16 +383,16 @@ LP_6 <-
   ivreg(
     lead(dR, 6) ~
       expected_inflation * demeaned_HAWK + expected_unemployment * demeaned_HAWK +
-      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) + 
-      lag(expected_inflation, 1) + lag(expected_inflation, 2) + 
-      lag(expected_inflation, 3) + lag(expected_inflation, 4) + 
-      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) + 
+      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+      lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) +
       lag(expected_unemployment, 3) + lag(expected_unemployment, 4) |
-      expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV + 
-      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) + 
-      lag(expected_inflation, 1) + lag(expected_inflation, 2) + 
-      lag(expected_inflation, 3) + lag(expected_inflation, 4) +  
-      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) + 
+      expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV +
+      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+      lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) +
       lag(expected_unemployment, 3) + lag(expected_unemployment, 4),
     data = full_dataset_ts
   )
@@ -370,16 +401,16 @@ LP_8 <-
   ivreg(
     lead(dR, 8) ~
       expected_inflation * demeaned_HAWK + expected_unemployment * demeaned_HAWK +
-      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) + 
-      lag(expected_inflation, 1) + lag(expected_inflation, 2) + 
-      lag(expected_inflation, 3) + lag(expected_inflation, 4) + 
-      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) + 
+      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+      lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) +
       lag(expected_unemployment, 3) + lag(expected_unemployment, 4) |
-      expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV + 
-      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) + 
-      lag(expected_inflation, 1) + lag(expected_inflation, 2) + 
-      lag(expected_inflation, 3) + lag(expected_inflation, 4) +  
-      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) + 
+      expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV +
+      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+      lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) +
       lag(expected_unemployment, 3) + lag(expected_unemployment, 4),
     data = full_dataset_ts
   )
@@ -388,16 +419,16 @@ LP_10 <-
   ivreg(
     lead(dR, 10) ~
       expected_inflation * demeaned_HAWK + expected_unemployment * demeaned_HAWK +
-      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) + 
-      lag(expected_inflation, 1) + lag(expected_inflation, 2) + 
-      lag(expected_inflation, 3) + lag(expected_inflation, 4) + 
-      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) + 
+      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+      lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) +
       lag(expected_unemployment, 3) + lag(expected_unemployment, 4) |
-      expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV + 
-      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) + 
-      lag(expected_inflation, 1) + lag(expected_inflation, 2) + 
-      lag(expected_inflation, 3) + lag(expected_inflation, 4) +  
-      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) + 
+      expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV +
+      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+      lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) +
       lag(expected_unemployment, 3) + lag(expected_unemployment, 4),
     data = full_dataset_ts
   )
@@ -407,27 +438,27 @@ LP_12 <-
   ivreg(
     lead(dR, 12) ~
       expected_inflation * demeaned_HAWK + expected_unemployment * demeaned_HAWK +
-      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) + 
-      lag(expected_inflation, 1) + lag(expected_inflation, 2) + 
-      lag(expected_inflation, 3) + lag(expected_inflation, 4) + 
-      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) + 
+      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+      lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) +
       lag(expected_unemployment, 3) + lag(expected_unemployment, 4) |
-      expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV + 
-      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) + 
-      lag(expected_inflation, 1) + lag(expected_inflation, 2) + 
-      lag(expected_inflation, 3) + lag(expected_inflation, 4) +  
-      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) + 
+      expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV +
+      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+      lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) +
       lag(expected_unemployment, 3) + lag(expected_unemployment, 4),
     data = full_dataset_ts
   )
 
 fs_1 <-
   lm(
-    demeaned_HAWK ~ expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV + 
-      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) + 
-      lag(expected_inflation, 1) + lag(expected_inflation, 2) + 
-      lag(expected_inflation, 3) + lag(expected_inflation, 4) +  
-      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) + 
+    demeaned_HAWK ~ expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV +
+      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+      lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) +
       lag(expected_unemployment, 3) + lag(expected_unemployment, 4),
     data = full_dataset_ts
   )
@@ -435,33 +466,33 @@ fs_1 <-
 
 fs_2 <-
   lm(
-    I(demeaned_HAWK * expected_inflation) ~ expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV + 
-      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) + 
-      lag(expected_inflation, 1) + lag(expected_inflation, 2) + 
-      lag(expected_inflation, 3) + lag(expected_inflation, 4) +  
-      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) + 
+    I(demeaned_HAWK * expected_inflation) ~ expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV +
+      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+      lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) +
       lag(expected_unemployment, 3) + lag(expected_unemployment, 4),
     data = full_dataset_ts
   )
 
 fs_3 <-
   lm(
-    expected_unemployment ~ expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV + 
-      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) + 
-      lag(expected_inflation, 1) + lag(expected_inflation, 2) + 
-      lag(expected_inflation, 3) + lag(expected_inflation, 4) +  
-      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) + 
+    expected_unemployment ~ expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV +
+      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+      lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) +
       lag(expected_unemployment, 3) + lag(expected_unemployment, 4),
     data = full_dataset_ts
   )
 
 fs_4 <-
   lm(
-    I(demeaned_HAWK * expected_unemployment) ~ expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV + 
-      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) + 
-      lag(expected_inflation, 1) + lag(expected_inflation, 2) + 
-      lag(expected_inflation, 3) + lag(expected_inflation, 4) +  
-      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) + 
+    I(demeaned_HAWK * expected_unemployment) ~ expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV +
+      lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+      lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+      lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+      lag(expected_unemployment, 1) + lag(expected_unemployment, 2) +
       lag(expected_unemployment, 3) + lag(expected_unemployment, 4),
     data = full_dataset_ts
   )
@@ -473,15 +504,15 @@ stargazer(
   LP_8,
   LP_10,
   LP_12,
-  se = 
+  se =
     list(
-    summary(LP_2, vcov = vcovHAC(LP_2))$coef[, 2],
-    summary(LP_4, vcov = vcovHAC(LP_4))$coef[, 2],
-    summary(LP_6, vcov = vcovHAC(LP_6))$coef[, 2],
-    summary(LP_8, vcov = vcovHAC(LP_8))$coef[, 2],
-    summary(LP_10, vcov = vcovHAC(LP_10))$coef[, 2],
-    summary(LP_12, vcov = vcovHAC(LP_10))$coef[, 2]
-  ),
+      summary(LP_2, vcov = vcovHAC(LP_2))$coef[, 2],
+      summary(LP_4, vcov = vcovHAC(LP_4))$coef[, 2],
+      summary(LP_6, vcov = vcovHAC(LP_6))$coef[, 2],
+      summary(LP_8, vcov = vcovHAC(LP_8))$coef[, 2],
+      summary(LP_10, vcov = vcovHAC(LP_10))$coef[, 2],
+      summary(LP_12, vcov = vcovHAC(LP_10))$coef[, 2]
+    ),
   df = F
 )
 
@@ -502,9 +533,6 @@ stargazer(
 LP_2 |> summary(diagnostics = T)
 LP_4 |> summary(diagnostics = T)
 LP_6 |> summary(diagnostics = T)
-LP_8 |> summary(diagnostics = T)
+LP_8 |> summary(diagnostics = T) 
 LP_10 |> summary(diagnostics = T)
 LP_12 |> summary(diagnostics = T)
-
-
-

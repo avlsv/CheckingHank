@@ -73,11 +73,10 @@ natural_rate_raw <-
 natural_rate_ts <-
   natural_rate_raw |>
   select(Date, rstar...3) |>
-  mutate(date = yearquarter(Date)) |>
-  as_tsibble(index = date) |>
+  mutate(year_quarter = yearquarter(Date)) |>
+  as_tsibble(index = year_quarter) |>
   select(rstar...3) |>
-  rename(r_star = rstar) |>
-  index_by(year_quarter = ~ yearquarter(.))
+  rename(r_star = rstar) 
 
 
 
@@ -184,28 +183,28 @@ expected_unemployment_ts <-
 
 
 
-### GDP growth ------
+### CIP Inflation ------
 ### gRGDP	Greenbook projections for Q/Q growth in real GDP, chain weight (annualized percentage points)
 
 
-expected_gdp_raw <-
-  read_xlsx("data/Tealbook Row Format.xlsx", sheet = "gRGDP") |>
-  select(DATE, gRGDPF1, gRGDPF2)  |>
-  mutate(expected_gdp_at_event = if_else(
-    is.na(gRGDPF2), 
-    gRGDPF1, 
-    (gRGDPF1 + gRGDPF2) / 2
+expected_CIP_inflation_raw <-
+  read_xlsx("data/Tealbook Row Format.xlsx", sheet = "gPCPI") |>
+  select(DATE, gPCPIF1, gPCPIF2)  |>
+  mutate(expected_cpi_inflation_at_event = if_else(
+    is.na(gPCPIF2), 
+    gPCPIF1, 
+    (gPCPIF1 + gPCPIF2) / 2
   )) |>
   na.omit() |>
-  select(-gRGDPF1, -gRGDPF2) |>
+  select(-gPCPIF1, -gPCPIF2) |>
   mutate(year_quarter = yearquarter(yq((DATE)))) |> select(-DATE)
 
-expected_gdp_tbl <-
-  expected_gdp_raw |> 
+expected_CIP_inflation_tbl <-
+  expected_CIP_inflation_raw |> 
   group_by(year_quarter) |> 
-  summarize(expected_gdp = mean(expected_gdp_at_event))
+  summarize(expected_CPI_inflation = mean(expected_cpi_inflation_at_event))
 
-expected_gdp_ts <-
+expected_CIP_inflation_ts <-
   expected_gdp_tbl |> 
   as_tsibble() |> 
   fill_gaps() |> 
@@ -217,20 +216,22 @@ expected_gdp_ts <-
 # Final Dataset Compilation ------
 
 full_dataset_ts <-
-  inner_join(fed_funds_rate_ts, natural_rate_ts, by = "year_quarter") |> 
-  select(-date) |>
-  inner_join(HAWK_ts, by = "year_quarter") |> select(-date) |>
-  inner_join(inflation_ts, by = "year_quarter") |>
-  inner_join(consumption_ts, by = "year_quarter") |>
-  inner_join(expected_inflation_ts, by = "year_quarter") |>
-  inner_join(expected_unemployment_ts, by = "year_quarter") |>
-  inner_join(expected_gdp_ts, by = "year_quarter") |>
+  full_join(fed_funds_rate_ts, natural_rate_ts, by = "year_quarter") |> 
+  full_join(HAWK_ts, by = "year_quarter") |> select(-date) |>
+  full_join(inflation_ts, by = "year_quarter") |>
+  full_join(consumption_ts, by = "year_quarter") |>
+  full_join(expected_inflation_ts, by = "year_quarter") |>
+  full_join(expected_unemployment_ts, by = "year_quarter") |>
+  full_join(expected_gdp_ts, by = "year_quarter") |>
+  filter_index( "1968 Q1"~"2020 Q4") |>
   mutate(
     row_number = 1:n(),
     dR = fed_funds_rate - r_star,
-    demeaned_HAWK = HAWK - mean(HAWK),
-    demeaned_HAWK_IV = HAWK_IV - mean(HAWK_IV),
-    stance = dR >= 0,
+    demeaned_HAWK = HAWK - mean(HAWK, na.rm = T),
+    demeaned_HAWK_IV = HAWK_IV - mean(HAWK_IV, na.rm = T),
+    demeaned_expected_inflation = expected_inflation - mean(expected_inflation, na.rm = T),
+    demeaned_expected_unemployment = expected_unemployment - mean(expected_unemployment, na.rm = T),
+    stance = dR >= 0, 
     log_consumption = log(consumption), 
     delta_log_consumption = difference(log_consumption), 
     delta_expected_inflation = difference(expected_inflation),

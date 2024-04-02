@@ -142,6 +142,7 @@ estimator <- function(full_dataset_df) {
     
   }
   
+
   size_persistence_consumption_tbl <-
     size_persistence_tbl |>
     mutate(
@@ -154,16 +155,16 @@ estimator <- function(full_dataset_df) {
       delta_log_consumption = full_dataset_tbl$delta_log_consumption
     )
   
-  model_0 <- lm(log_consumption ~ size ,
+  model_0 <- lm(delta_log_consumption ~ size,
                 size_persistence_consumption_tbl)
   
   model_1 <-
-    lm(log_consumption ~ size + size:persistence,
+    lm(delta_log_consumption ~ size + size:persistence,
        size_persistence_consumption_tbl)
   
   model_2 <-
     lm(
-      log_consumption ~ size + size:persistence + size:I(persistence ^ 2),
+      delta_log_consumption ~ size + size:persistence + size:I(persistence ^ 2),
       size_persistence_consumption_tbl
     )
   
