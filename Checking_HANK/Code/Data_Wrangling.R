@@ -187,7 +187,7 @@ expected_unemployment_ts <-
 ### gRGDP	Greenbook projections for Q/Q growth in real GDP, chain weight (annualized percentage points)
 
 
-expected_CIP_inflation_raw <-
+expected_cpi_inflation_raw <-
   read_xlsx("data/Tealbook Row Format.xlsx", sheet = "gPCPI") |>
   select(DATE, gPCPIF1, gPCPIF2)  |>
   mutate(expected_cpi_inflation_at_event = if_else(
@@ -199,17 +199,99 @@ expected_CIP_inflation_raw <-
   select(-gPCPIF1, -gPCPIF2) |>
   mutate(year_quarter = yearquarter(yq((DATE)))) |> select(-DATE)
 
-expected_CIP_inflation_tbl <-
-  expected_CIP_inflation_raw |> 
+expected_cpi_inflation_tbl <-
+  expected_cpi_inflation_raw |> 
   group_by(year_quarter) |> 
-  summarize(expected_CPI_inflation = mean(expected_cpi_inflation_at_event))
+  summarize(expected_cpi_inflation = mean(expected_cpi_inflation_at_event))
 
-expected_CIP_inflation_ts <-
-  expected_gdp_tbl |> 
+expected_cpi_inflation_ts <-
+  expected_cpi_inflation_tbl |> 
   as_tsibble() |> 
   fill_gaps() |> 
-  fill(expected_gdp, .direction = "down")
+  fill(expected_cpi_inflation, .direction = "down")
 
+
+
+### Expected GDP Gap ------
+
+
+expected_output_gap_ts <-
+  read_xlsx("data/Output Gap DH Web.xlsx") |>
+  select(...1, last_col()) |>
+  mutate(year_quarter = yearquarter(yq(...1))) |>
+  select(-...1) |>
+  rename(expected_gap = GBgap_181207) |>
+  tsibble(index = year_quarter)
+
+expected_output_gap_raw <-
+  read_xlsx("data/Output Gap DH Web.xlsx") |>
+  mutate(year_quarter = yearquarter(yq(...1))) |> relocate(year_quarter) |>
+  select(-...1)
+
+expected_output_gap_tr <-
+  as_tibble(cbind(event = names(expected_output_gap_raw), t(expected_output_gap_raw)))[-1,]
+names(expected_output_gap_tr) <-
+  c("event", as.character(expected_output_gap_raw$year_quarter))
+expected_output_gap_tr_1 <-
+  expected_output_gap_tr |>
+  mutate(event_quarter = as.character(yearquarter(ymd(substr(
+    event, 7, 20
+  ))))) |>
+  select(-event) |>
+  group_by(event_quarter) |>
+  summarize_all( ~ mean(as.numeric(.), na.rm = T))
+
+
+
+
+expected_gap_long <-
+  expected_output_gap_tr_1 |>
+  pivot_longer(c(-event_quarter)) |>
+  rename(projection_quarter = name) |>
+  mutate(
+    event_quarter = yearquarter(event_quarter),
+    projection_quarter = yearquarter(projection_quarter)
+  )
+
+
+expected_gap_96 <-
+  expected_gap_long |>
+  filter(projection_quarter == event_quarter + 1 |
+           projection_quarter == event_quarter + 2) |>
+  group_by(event_quarter) |>
+  summarise(expected_gap = mean(value)) |>
+  rename(year_quarter = event_quarter)
+
+expected_gap_87 <-
+  read_xlsx("data/Output Gap Greenbook.xlsx",
+            sheet = "Output Gap",
+            skip = 2) |>
+  select(3, `T+1`, `T+2`) |>
+  rename(year_quarter = T...3) |>
+  mutate(year_quarter = yearquarter(year_quarter)) |>
+  mutate(expected_gap = (`T+1` + `T+2`) / 2) |>
+  select(-c(`T+1`, `T+2`)) |>
+  group_by(year_quarter) |>
+  summarize(expected_gap = mean(expected_gap)) |>
+  tsibble() |> filter_index(. ~ "1995 Q4")
+
+
+
+expected_gap_75 <-
+  expected_gap_long |>
+  na.omit() |>
+  filter(yq(projection_quarter) < yq("1987Q3") &
+           yq(event_quarter) == yq("1996 Q2")) |>
+  select(-event_quarter) |>
+  rename(year_quarter = projection_quarter,
+         expected_gap = value)
+
+
+expected_gap_ts <-
+  bind_rows(
+    as_tibble(expected_gap_87),
+            as_tibble(expected_gap_96)) |>
+  tsibble()
 
 
 
@@ -222,10 +304,11 @@ full_dataset_ts <-
   full_join(consumption_ts, by = "year_quarter") |>
   full_join(expected_inflation_ts, by = "year_quarter") |>
   full_join(expected_unemployment_ts, by = "year_quarter") |>
-  full_join(expected_gdp_ts, by = "year_quarter") |>
+  full_join(expected_cpi_inflation_ts, by = "year_quarter") |>
+  full_join(expected_gap_ts, by = "year_quarter") |>
   filter_index( "1968 Q1"~"2020 Q4") |>
   mutate(
-    row_number = 1:n(),
+    row_number = row_number(),
     dR = fed_funds_rate - r_star,
     demeaned_HAWK = HAWK - mean(HAWK, na.rm = T),
     demeaned_HAWK_IV = HAWK_IV - mean(HAWK_IV, na.rm = T),
@@ -235,7 +318,9 @@ full_dataset_ts <-
     log_consumption = log(consumption), 
     delta_log_consumption = difference(log_consumption), 
     delta_expected_inflation = difference(expected_inflation),
-    delta_expected_unemployment = difference(expected_unemployment)
+    delta_expected_unemployment = difference(expected_unemployment),
+    delta_cpi_expected_inflation = difference(expected_cpi_inflation),
+    delta_expected_gap = difference(expected_gap)
   )
 
 full_dataset_tbl <- full_dataset_ts |> as_tibble()

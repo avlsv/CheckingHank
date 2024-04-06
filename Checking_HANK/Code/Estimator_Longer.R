@@ -47,24 +47,24 @@ coefs_inflation <- tibble()
 coefs_HAWK_inflation <- tibble()
 coefs_unemployment <- tibble()
 coefs_HAWK_unemployment <- tibble()
-coefs_intercept <- tibble()
-coefs_HAWK <- tibble()
-for (i in 1:20) {
+#coefs_intercept <- tibble()
+#coefs_HAWK <- tibble()
+for (i in 0:20) {
   reg <-
     AER::ivreg(
       lead(dR, i) ~
-        demeaned_expected_inflation * demeaned_HAWK +  demeaned_expected_unemployment * demeaned_HAWK +
+        expected_inflation * demeaned_HAWK +  demeaned_expected_unemployment * demeaned_HAWK +
         lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
-        lag(demeaned_expected_inflation, 1) + lag(demeaned_expected_inflation, 2) +
-        lag(demeaned_expected_inflation, 3) + lag(demeaned_expected_inflation, 4) +
-        lag(demeaned_expected_unemployment, 1) + lag(demeaned_expected_unemployment, 2) +
-        lag(demeaned_expected_unemployment, 3) + lag(demeaned_expected_unemployment, 4) |
-        demeaned_expected_inflation * demeaned_HAWK_IV + demeaned_expected_unemployment * demeaned_HAWK_IV +
+        lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+        lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+        lag(expected_unemployment, 1) + lag(expected_unemployment, 2) +
+        lag(expected_unemployment, 3) + lag(expected_unemployment, 4) |
+        expected_inflation * demeaned_HAWK_IV + expected_unemployment * demeaned_HAWK_IV +
         lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
-        lag(demeaned_expected_inflation, 1) + lag(demeaned_expected_inflation, 2) +
-        lag(demeaned_expected_inflation, 3) + lag(demeaned_expected_inflation, 4) +
-        lag(demeaned_expected_unemployment, 1) + lag(demeaned_expected_unemployment, 2) +
-        lag(demeaned_expected_unemployment, 3) + lag(demeaned_expected_unemployment, 4),
+        lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+        lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+        lag(expected_unemployment, 1) + lag(expected_unemployment, 2) +
+        lag(expected_unemployment, 3) + lag(expected_unemployment, 4),
       data = full_dataset_ts
     )
   
@@ -82,14 +82,14 @@ for (i in 1:20) {
   
   names(output) <- c("estimate", "std_error", "t_stat", "p_value")
   
-  coefs_intercept <-
-    bind_rows(coefs_intercept, output |> slice(1))
+  #coefs_intercept <-
+  #  bind_rows(coefs_intercept, output |> slice(1))
   
   coefs_inflation <-
     bind_rows(coefs_inflation, output |> slice(2))
   
-  coefs_HAWK <-
-    bind_rows(coefs_HAWK, output |> slice(3))
+  #coefs_HAWK <-
+  #  bind_rows(coefs_HAWK, output |> slice(3))
   
   coefs_unemployment <-
     bind_rows(coefs_unemployment, output |> slice(4))
@@ -104,7 +104,6 @@ for (i in 1:20) {
 }
 
 
-coefs_intercept$estimate
 
 coefs_inflation$estimate
 coefs_HAWK_inflation$estimate
@@ -115,31 +114,30 @@ coefs_HAWK_unemployment$estimate
 
 ### Saving and transforming coefficients -----
 
-coefs_intercept <-
-  coefs_intercept |>  mutate(quarter = row_number())
+#coefs_intercept <-
+#  coefs_intercept |>  mutate(quarter = row_number())
 
-coefs_HAWK <-
-  coefs_HAWK |> mutate(quarter = row_number())
+#coefs_HAWK <-
+#  coefs_HAWK |> mutate(quarter = row_number())
 
 
 coefs_inflation <-
-  coefs_inflation |> mutate(quarter = row_number())
+  coefs_inflation |> mutate(quarter = row_number()-1)
 coefs_HAWK_inflation <-
-  coefs_HAWK_inflation |> mutate(quarter = row_number())
+  coefs_HAWK_inflation |> mutate(quarter = row_number()-1)
 
 coefs_unemployment <-
-  coefs_unemployment |> mutate(quarter = row_number())
+  coefs_unemployment |> mutate(quarter = row_number()-1)
 coefs_HAWK_unemployment <-
-  coefs_HAWK_unemployment |> mutate(quarter = row_number())
+  coefs_HAWK_unemployment |> mutate(quarter = row_number()-1)
 
 
 save(
   coefs_inflation,
-  coefs_HAWK,
   coefs_HAWK_inflation,
   coefs_unemployment,
   coefs_HAWK_unemployment,
-  file = "coefs.RData"
+  file = "coefs_longer.RData"
 )
 
 ## LP-IV coefficient plots -----
@@ -189,8 +187,8 @@ differential_inflation_responce_plot <-
   ) +
   geom_ribbon(
     aes(
-      ymin = 2 / 12 * estimate - qnorm(1 - 0.1 / 2) / 12 * std_error,
-      ymax = 2 / 12 * estimate + qnorm(1 - 0.1 / 2) / 12 * std_error
+      ymin = 2 / 12 * estimate - qnorm(1 - 0.1 / 2) * 2 / 12 * std_error,
+      ymax = 2 / 12 * estimate + qnorm(1 - 0.1 / 2) * 2 / 12 * std_error
     ),
     alpha = 0.13,
     linetype = 0,
@@ -250,17 +248,16 @@ average_unemployment_responce_plot
 
 
 differential_unemployment_responce_plot <-
-  ggplot(coefs_HAWK_unemployment, 
+  ggplot(coefs_HAWK_unemployment,
          aes(x = quarter, y =  2 / 12 * estimate)) +
-  geom_hline(
-    aes(yintercept = 0),  color = "darkred") +
+  geom_hline(aes(yintercept = 0),  color = "darkred") +
   geom_ribbon(
     aes(
-      ymin = 
-        2 / 12 * estimate - 
+      ymin =
+        2 / 12 * estimate -
         2 / 12 * qnorm(1 - 0.05 / 2) * std_error,
-      ymax =  
-        2 / 12 * estimate +  
+      ymax =
+        2 / 12 * estimate +
         2 / 12 * qnorm(1 - 0.05 / 2) * std_error
     ),
     alpha = 0.13,
@@ -269,11 +266,11 @@ differential_unemployment_responce_plot <-
   ) +
   geom_ribbon(
     aes(
-      ymin = 
-        2 / 12 * estimate - 
+      ymin =
+        2 / 12 * estimate -
         2 / 12 * std_error,
-      ymax = 
-        2 / 12 * estimate + 
+      ymax =
+        2 / 12 * estimate +
         2 / 12 * std_error
     ),
     alpha = 0.13,
@@ -282,11 +279,11 @@ differential_unemployment_responce_plot <-
   ) +
   geom_ribbon(
     aes(
-      ymin = 
-        2 / 12 * estimate - 
+      ymin =
+        2 / 12 * estimate -
         2 / 12 * qnorm(1 - .10 / 2) * std_error,
-      ymax = 
-        2 / 12 * estimate + 
+      ymax =
+        2 / 12 * estimate +
         2 / 12 * qnorm(1 - .10 / 2) * std_error
     ),
     alpha = 0.123,
@@ -302,7 +299,7 @@ differential_unemployment_responce_plot
 ### Saving plots -----
 
 ggsave(
-  "average_inflation.pdf",
+  "average_deflator_inflation_longer.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   average_inflation_responce_plot,
   width = 148.5 / 2 * 1.5,
@@ -311,7 +308,7 @@ ggsave(
 )
 
 ggsave(
-  "differential_inflation.pdf",
+  "differential_deflator_inflation_longer.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   differential_inflation_responce_plot,
   width = 148.5 / 2 * 1.5 ,
@@ -321,7 +318,7 @@ ggsave(
 
 
 ggsave(
-  "average_unemployment.pdf",
+  "average_unemployment_longer.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   average_unemployment_responce_plot,
   width = 148.5 / 2 * 1.5,
@@ -330,7 +327,7 @@ ggsave(
 )
 
 ggsave(
-  "differential_unemployment.pdf",
+  "differential_unemployment_longer.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   differential_unemployment_responce_plot,
   width = 148.5 / 2 * 1.5 ,
@@ -533,6 +530,6 @@ stargazer(
 LP_2 |> summary(diagnostics = T)
 LP_4 |> summary(diagnostics = T)
 LP_6 |> summary(diagnostics = T)
-LP_8 |> summary(diagnostics = T) 
+LP_8 |> summary(diagnostics = T)
 LP_10 |> summary(diagnostics = T)
 LP_12 |> summary(diagnostics = T)

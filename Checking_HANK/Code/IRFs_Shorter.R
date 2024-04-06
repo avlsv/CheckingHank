@@ -1,5 +1,5 @@
 ## Checking HANK.
-## The IRF
+## The IRF predictions
 ## Author: Alexander Vlasov
 ##
 ##
@@ -38,19 +38,20 @@ for (Package in required_Packages_Install) {
 
 # Datasets ---- 
 
-load("coefs.RData")
+load("coefs_shorter.RData")
 full_dataset_tbl <- read_csv("data/full_dataset.csv")
 full_dataset_ts <-
   full_dataset_tbl |> mutate(year_quarter = yearquarter(year_quarter)) |> tsibble()
 
 # Looking at the data -----
 
-full_dataset_ts$delta_expected_inflation |> mean(na.rm = T)
-full_dataset_ts$delta_expected_unemployment |> mean(na.rm = T)
-full_dataset_ts |> autoplot(vars(expected_inflation, expected_unemployment))
+
+full_dataset_ts |> autoplot(vars(expected_cpi_inflation, expected_gap))
 full_dataset_ts |> filter_index("2007"~"2011") |> autoplot(vars(expected_inflation, expected_unemployment))
+full_dataset_ts |> filter_index("2007"~"2011") |> autoplot(vars(delta_cpi_expected_inflation, delta_expected_gap))
 
-
+# 2008Q4
+full_dataset_ts |> filter_index("2008Q4") |> select(delta_cpi_expected_inflation, delta_expected_gap)
 #  2.01 -0.0950 
 #
 ## IRFs preditions ----
@@ -58,15 +59,15 @@ full_dataset_ts |> filter_index("2007"~"2011") |> autoplot(vars(expected_inflati
 
 size_persistence_tbl <- tibble()
 irf_t_list <- c()
-len = 13
+len = 20
 for (t in 1:dim(full_dataset_ts)[1]) {
   irf_t = (
-    coefs_inflation$estimate[1:len] +
-      full_dataset_ts$demeaned_HAWK[t] * coefs_HAWK_inflation$estimate[1:len]
-  ) *  (0.575) + (
-    coefs_unemployment$estimate[1:len] +
-      full_dataset_ts$demeaned_HAWK[t] * coefs_HAWK_unemployment$estimate[1:len]
-  ) *  (-1.12)
+    coefs_cpi_inflation$estimate[1:len] +
+      full_dataset_ts$demeaned_HAWK[t] * coefs_HAWK_cpi_inflation$estimate[1:len]
+  ) *  (0.85) + (
+    coefs_gap$estimate[1:len] +
+      full_dataset_ts$demeaned_HAWK[t] * coefs_HAWK_gap$estimate[1:len]
+  ) *  (2.14)
   
   
   
@@ -110,5 +111,6 @@ size_persistence_consumption_tbl <-
 
 
 
-write.csv(size_persistence_consumption_tbl, file = "data/size_persistence_consumption1.csv")
-write.csv(irfs, file = "data/irfs1.csv")
+write.csv(size_persistence_consumption_tbl, file = "data/size_persistence_consumption_shorter.csv")
+write.csv(irfs, file = "data/irfs_shorter.csv")
+

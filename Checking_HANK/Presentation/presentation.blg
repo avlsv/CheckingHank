@@ -12,45 +12,45 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Warning--empty institution in HIM2023
-You've used 8 entries,
+You've used 9 entries,
             6826 wiz_defined-function locations,
-            1361 strings with 11459 characters,
-and the built_in function-call counts, 10586 in all, are:
-= -- 1799
-> -- 419
-< -- 24
-+ -- 138
-- -- 161
-* -- 633
-:= -- 1337
-add.period$ -- 8
-call.type$ -- 8
-change.case$ -- 56
-chr.to.int$ -- 8
-cite$ -- 9
-duplicate$ -- 260
-empty$ -- 473
+            1370 strings with 11603 characters,
+and the built_in function-call counts, 11475 in all, are:
+= -- 1931
+> -- 441
+< -- 27
++ -- 143
+- -- 159
+* -- 668
+:= -- 1482
+add.period$ -- 9
+call.type$ -- 9
+change.case$ -- 64
+chr.to.int$ -- 9
+cite$ -- 10
+duplicate$ -- 291
+empty$ -- 525
 format.name$ -- 138
-if$ -- 2837
+if$ -- 3046
 int.to.chr$ -- 0
 int.to.str$ -- 0
 missing$ -- 0
-newline$ -- 37
-num.names$ -- 74
-pop$ -- 80
+newline$ -- 40
+num.names$ -- 89
+pop$ -- 97
 preamble$ -- 1
-purify$ -- 56
+purify$ -- 64
 quote$ -- 0
-skip$ -- 797
+skip$ -- 856
 stack$ -- 0
-substring$ -- 812
-swap$ -- 54
-text.length$ -- 32
+substring$ -- 903
+swap$ -- 59
+text.length$ -- 33
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 136
+type$ -- 154
 warning$ -- 1
-while$ -- 62
+while$ -- 74
 width$ -- 0
-write$ -- 136
+write$ -- 152
 (There was 1 warning)
