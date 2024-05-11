@@ -32,8 +32,8 @@ for (Package in required_Packages_Install) {
 
 ## HAWK and HAWK_IV data from Hack, Isterfi, Meier (2024) ------
 HAWK <- merge(
-  read_csv("Data/HAWK.csv", col_names = F),
-  read_csv("Data/HAWKIV.csv", col_names = F),
+  read_csv("Data/Initial_Data/HAWK.csv", col_names = F),
+  read_csv("Data/Initial_Data/HAWKIV.csv", col_names = F),
   "X1"
 ) |> as_tibble()
 
@@ -64,7 +64,7 @@ shadow_rate_ts <-
 
 natural_rate_raw <-
   read_xlsx(
-    "data/Natural Rate Estimates.xlsx",
+    "data/Initial_Data/Natural Rate Estimates.xlsx",
     sheet = "data",
     skip = 5,
     col_names = T
@@ -129,7 +129,7 @@ inflation_ts <-
 ### chain weight (annualized percentage points)
 
 expected_inflation_raw <-
-  read_xlsx("data/Tealbook Row Format.xlsx", sheet = "gPGDP") |>
+  read_xlsx("data/Initial_Data/Tealbook Row Format.xlsx", sheet = "gPGDP") |>
   select(DATE, gPGDPF1, gPGDPF2) |>
   mutate(expected_inflation_at_event =
            if_else(is.na(gPGDPF2),
@@ -152,12 +152,12 @@ expected_inflation_ts <-
   fill(expected_inflation, .direction = "down")
 
 
-### Expected Unemployment Growth ------
+### Expected Unemployment ------
 ### UNEMP Greenbook projections for the unemployment rate (percentage points).
 
 
 expected_unemployment_raw <-
-  read_xlsx("data/Tealbook Row Format.xlsx", sheet = "UNEMP") |>
+  read_xlsx("data/Initial_Data/Tealbook Row Format.xlsx", sheet = "UNEMP") |>
   select(DATE, UNEMPF1, UNEMPF2) |>
   mutate(
     expected_unemployment_at_event = 
@@ -183,12 +183,29 @@ expected_unemployment_ts <-
 
 
 
-### CIP Inflation ------
+### NAIRU ------
+### UNEMP Greenbook projections for the unemployment rate (percentage points).
+
+
+nairu_raw <-
+  read_xlsx("data/Initial_Data/NAIRU 1997-Recent Web.xlsx") 
+
+nairu_raw|>
+mutate(projection_quarter = yearquarter(Date)) |>
+select(-date1, -Date) |>
+pivot_longer(-projection_quarter) |>
+mutate(event =
+       substr(name, 7, 12))
+
+
+
+
+### CPI Inflation ------
 ### gRGDP	Greenbook projections for Q/Q growth in real GDP, chain weight (annualized percentage points)
 
 
 expected_cpi_inflation_raw <-
-  read_xlsx("data/Tealbook Row Format.xlsx", sheet = "gPCPI") |>
+  read_xlsx("data/Initial_Data/Tealbook Row Format.xlsx", sheet = "gPCPI") |>
   select(DATE, gPCPIF1, gPCPIF2)  |>
   mutate(expected_cpi_inflation_at_event = if_else(
     is.na(gPCPIF2), 
@@ -216,7 +233,7 @@ expected_cpi_inflation_ts <-
 
 
 expected_output_gap_ts <-
-  read_xlsx("data/Output Gap DH Web.xlsx") |>
+  read_xlsx("data/Initial_Data/Output Gap DH Web.xlsx") |>
   select(...1, last_col()) |>
   mutate(year_quarter = yearquarter(yq(...1))) |>
   select(-...1) |>
@@ -224,14 +241,16 @@ expected_output_gap_ts <-
   tsibble(index = year_quarter)
 
 expected_output_gap_raw <-
-  read_xlsx("data/Output Gap DH Web.xlsx") |>
+  read_xlsx("data/Initial_Data/Output Gap DH Web.xlsx") |>
   mutate(year_quarter = yearquarter(yq(...1))) |> relocate(year_quarter) |>
   select(-...1)
 
 expected_output_gap_tr <-
   as_tibble(cbind(event = names(expected_output_gap_raw), t(expected_output_gap_raw)))[-1,]
+
 names(expected_output_gap_tr) <-
   c("event", as.character(expected_output_gap_raw$year_quarter))
+
 expected_output_gap_tr_1 <-
   expected_output_gap_tr |>
   mutate(event_quarter = as.character(yearquarter(ymd(substr(
@@ -254,6 +273,8 @@ expected_gap_long <-
   )
 
 
+
+
 expected_gap_96 <-
   expected_gap_long |>
   filter(projection_quarter == event_quarter + 1 |
@@ -262,8 +283,10 @@ expected_gap_96 <-
   summarise(expected_gap = mean(value)) |>
   rename(year_quarter = event_quarter)
 
+
+
 expected_gap_87 <-
-  read_xlsx("data/Output Gap Greenbook.xlsx",
+  read_xlsx("data/Initial_Data/Output Gap Greenbook.xlsx",
             sheet = "Output Gap",
             skip = 2) |>
   select(3, `T+1`, `T+2`) |>
@@ -293,6 +316,7 @@ expected_gap_ts <-
             as_tibble(expected_gap_96)) |>
   tsibble()
 
+write.csv(as_tibble(expected_gap_ts), file = "data/expected_gap.csv")
 
 
 # Final Dataset Compilation ------
