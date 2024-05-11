@@ -61,6 +61,8 @@ rec_data_2 <-
   start <= yq("2018 Q4"))
 
 
+
+
 # Expected Inflation Plot -----
 expected_deflator_inflation_plot <-
   full_dataset_ts |> 
@@ -229,17 +231,46 @@ ggplot(irf_by_chair_long, aes(x = quarter, y = value,  color = name)) +
   geom_line() +
   theme(legend.position = "bottom")
 
+library(ggridges)
+
+
+ggplot(
+  irfs_shorter|>
+    mutate(period = as.factor(quart)),
+  aes(x = irf, 
+      y = period, 
+      fill = after_stat(x))
+) +
+  geom_density_ridges_gradient(scale = 1.5, rel_min_height = 0.025) +
+  theme_ridges() +
+  theme(legend.position = "none")
+
+
+
 #heatmap(t(as.matrix(irf_wide_1))[-1,], scale ="row", Rowv = NA, Colv = NA)
 
-
-irfs_plot_3d <- plot_ly(z = t(as.matrix(irf_wide))[-1,], type = "surface")
+#library(plotly)
+#irfs_plot_3d <- plot_ly(z = t(as.matrix(irf_wide_1))[-1,], type = "surface")
 #irfs_plot_3d
 
 
-size_vs_persistence <- 
-  ggplot(size_persistence_consumption_shorter_tbl,
-       aes(x = size, y = persistence, color = year(yq(year_quarter)))) +
+
+size_vs_persistence <-
+  ggplot(
+    size_persistence_consumption_shorter_tbl,
+    aes(
+      x = size, 
+      y = persistence, 
+      color = year(yq(year_quarter)),
+    label = year(yq(year_quarter))
+  )) +
   geom_point(size = 1.3) +
+  geom_text(
+    hjust = 0,
+    vjust = 0,
+    size = 3,
+    check_overlap = T
+  ) +
   labs(x = "Size", y = "Persistence", color = "Year-Quarter") +
   theme_light()
 

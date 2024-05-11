@@ -5,8 +5,6 @@
 ##
 
 
-
-
 # Libraries -----
 required_Packages_Install <-
   c(
@@ -59,7 +57,7 @@ full_dataset_ts |> filter_index("2008Q4") |> select(delta_cpi_expected_inflation
 
 size_persistence_tbl <- tibble()
 irf_t_list <- c()
-len = 20
+len = 21
 for (t in 1:dim(full_dataset_ts)[1]) {
   irf_t = (
     coefs_cpi_inflation$estimate[1:len] +
@@ -114,3 +112,4 @@ size_persistence_consumption_tbl <-
 write.csv(size_persistence_consumption_tbl, file = "data/size_persistence_consumption_shorter.csv")
 write.csv(irfs, file = "data/irfs_shorter.csv")
 
+data.table
