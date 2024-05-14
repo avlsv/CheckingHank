@@ -1,0 +1,56 @@
+This is BibTeX, Version 0.99d (TeX Live 2021)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: CheckingHANK.aux
+The style file: ../misc/econ.bst
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: ../misc/references.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--empty institution in HIM2023
+You've used 12 entries,
+            6826 wiz_defined-function locations,
+            1400 strings with 12241 characters,
+and the built_in function-call counts, 15675 in all, are:
+= -- 2646
+> -- 626
+< -- 36
++ -- 198
+- -- 226
+* -- 900
+:= -- 2045
+add.period$ -- 12
+call.type$ -- 12
+change.case$ -- 88
+chr.to.int$ -- 12
+cite$ -- 13
+duplicate$ -- 389
+empty$ -- 707
+format.name$ -- 192
+if$ -- 4154
+int.to.chr$ -- 0
+int.to.str$ -- 0
+missing$ -- 0
+newline$ -- 49
+num.names$ -- 124
+pop$ -- 140
+preamble$ -- 1
+purify$ -- 88
+quote$ -- 0
+skip$ -- 1147
+stack$ -- 0
+substring$ -- 1231
+swap$ -- 80
+text.length$ -- 44
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 209
+warning$ -- 1
+while$ -- 106
+width$ -- 0
+write$ -- 199
+(There was 1 warning)

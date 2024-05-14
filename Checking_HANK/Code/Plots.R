@@ -59,6 +59,10 @@ rec_data_1 <-
 rec_data_2 <-
   recession.df |> filter(end >=yq("1986 Q1") ,
   start <= yq("2018 Q4"))
+rec_data_3 <-
+  recession.df |> filter(end >=yq("1963 Q1") ,
+                         start <= yq("2018 Q4"))
+
 
 
 
@@ -70,7 +74,7 @@ expected_deflator_inflation_plot <-
   theme_light() +
   labs(x = "", y = "Expected Inflation (Deflator)") +
   geom_rect(
-    data = rec_data_1,
+    data = rec_data_3,
     inherit.aes = F,
     aes(
       xmin = start,
@@ -90,7 +94,7 @@ expected_unemployment_plot <-
   theme_light() +
   labs(x = "", y = "Expected Unemployment") +
   geom_rect(
-    data = rec_data_1,
+    data = rec_data_3,
     inherit.aes = F,
     aes(
       xmin = start,
@@ -106,8 +110,10 @@ expected_unemployment_plot <-
 
 # Expected CPI Inflation Plot -----
 expected_cpi_inflation_plot <-
-  full_dataset_ts|> filter(!is.na(expected_CPI_inflation)) |>
-  autoplot(expected_CPI_inflation) +
+  full_dataset_ts|>
+  select(expected_cpi_inflation) |>
+  na.omit()|>
+  autoplot(expected_cpi_inflation) +
   theme_light() +
   labs(x = "", y = "Expected Inflation (CPI)") +
   geom_rect(
@@ -123,6 +129,7 @@ expected_cpi_inflation_plot <-
     alpha = 0.2
   )
 
+
 expected_gap_plot <-
   full_dataset_ts |> 
   select(expected_gap) |> 
@@ -131,7 +138,7 @@ expected_gap_plot <-
   theme_light() +
   labs(x = "", y = "Expected Output Gap") +
   geom_rect(
-    data = rec_data,
+    data = rec_data_2,
     inherit.aes = F,
     aes(
       xmin = start,
@@ -160,6 +167,8 @@ irfs_longer_plot <-
   labs(y = "Percentage Points", x = "Quarter", color = "Year-Quarter") +  
   scale_x_continuous(breaks = pretty_breaks())
 irfs_longer_plot
+
+
 
 irfs_shorter_plot <-
   ggplot(irfs_shorter, aes(

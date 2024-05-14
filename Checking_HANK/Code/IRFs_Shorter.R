@@ -62,10 +62,10 @@ for (t in 1:dim(full_dataset_ts)[1]) {
   irf_t = (
     coefs_cpi_inflation$estimate[1:len] +
       full_dataset_ts$demeaned_HAWK[t] * coefs_HAWK_cpi_inflation$estimate[1:len]
-  ) *  (0.85) + (
+  ) *  (1.45) + (
     coefs_gap$estimate[1:len] +
       full_dataset_ts$demeaned_HAWK[t] * coefs_HAWK_gap$estimate[1:len]
-  ) *  (2.14)
+  ) *  (3.03)
   
   
   
