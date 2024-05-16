@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.3.6)  14 MAY 2024 22:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.3.6)  16 MAY 2024 17:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -855,84 +855,94 @@ Underfull \hbox (badness 8019) in paragraph at lines 14--14
 [1
 
 {/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-<./../Figures/average_cpi_inflation_short.pdf, id=159, 316.18124pt x 223.83624pt>
+<./../Figures/average_cpi_inflation_short.pdf, id=164, 316.18124pt x 223.83624pt>
 File: ./../Figures/average_cpi_inflation_short.pdf Graphic file (type pdf)
 <use ./../Figures/average_cpi_inflation_short.pdf>
-Package pdftex.def Info: ./../Figures/average_cpi_inflation_short.pdf  used on input line 172.
+Package pdftex.def Info: ./../Figures/average_cpi_inflation_short.pdf  used on input line 177.
 (pdftex.def)             Requested size: 215.48335pt x 152.55159pt.
-<./../Figures/differential_cpi_inflation_short.pdf, id=160, 316.18124pt x 223.83624pt>
+<./../Figures/differential_cpi_inflation_short.pdf, id=165, 316.18124pt x 223.83624pt>
 File: ./../Figures/differential_cpi_inflation_short.pdf Graphic file (type pdf)
 <use ./../Figures/differential_cpi_inflation_short.pdf>
-Package pdftex.def Info: ./../Figures/differential_cpi_inflation_short.pdf  used on input line 179.
+Package pdftex.def Info: ./../Figures/differential_cpi_inflation_short.pdf  used on input line 184.
 (pdftex.def)             Requested size: 215.48335pt x 152.55159pt.
-<./../Figures/average_gap_short.pdf, id=161, 316.18124pt x 223.83624pt>
+<./../Figures/average_gap_short.pdf, id=166, 316.18124pt x 223.83624pt>
 File: ./../Figures/average_gap_short.pdf Graphic file (type pdf)
 <use ./../Figures/average_gap_short.pdf>
-Package pdftex.def Info: ./../Figures/average_gap_short.pdf  used on input line 184.
+Package pdftex.def Info: ./../Figures/average_gap_short.pdf  used on input line 189.
 (pdftex.def)             Requested size: 215.48335pt x 152.55159pt.
-<./../Figures/differential_gap_short.pdf, id=162, 316.18124pt x 223.83624pt>
+<./../Figures/differential_gap_short.pdf, id=167, 316.18124pt x 223.83624pt>
 File: ./../Figures/differential_gap_short.pdf Graphic file (type pdf)
 <use ./../Figures/differential_gap_short.pdf>
-Package pdftex.def Info: ./../Figures/differential_gap_short.pdf  used on input line 189.
+Package pdftex.def Info: ./../Figures/differential_gap_short.pdf  used on input line 194.
 (pdftex.def)             Requested size: 215.48335pt x 152.55159pt.
-<./../Figures/average_deflator_inflation_long.pdf, id=186, 316.18124pt x 223.83624pt>
+<./../Figures/average_deflator_inflation_long.pdf, id=194, 316.18124pt x 223.83624pt>
 File: ./../Figures/average_deflator_inflation_long.pdf Graphic file (type pdf)
 <use ./../Figures/average_deflator_inflation_long.pdf>
-Package pdftex.def Info: ./../Figures/average_deflator_inflation_long.pdf  used on input line 265.
+Package pdftex.def Info: ./../Figures/average_deflator_inflation_long.pdf  used on input line 270.
 (pdftex.def)             Requested size: 215.48335pt x 152.55159pt.
-<./../Figures/differential_deflator_inflation_long.pdf, id=187, 316.18124pt x 223.83624pt>
+<./../Figures/differential_deflator_inflation_long.pdf, id=195, 316.18124pt x 223.83624pt>
 File: ./../Figures/differential_deflator_inflation_long.pdf Graphic file (type pdf)
 <use ./../Figures/differential_deflator_inflation_long.pdf>
-Package pdftex.def Info: ./../Figures/differential_deflator_inflation_long.pdf  used on input line 272.
+Package pdftex.def Info: ./../Figures/differential_deflator_inflation_long.pdf  used on input line 277.
 (pdftex.def)             Requested size: 215.48335pt x 152.55159pt.
-<./../Figures/average_unemployment_long.pdf, id=188, 316.18124pt x 223.83624pt>
+<./../Figures/average_unemployment_long.pdf, id=196, 316.18124pt x 223.83624pt>
 File: ./../Figures/average_unemployment_long.pdf Graphic file (type pdf)
 <use ./../Figures/average_unemployment_long.pdf>
-Package pdftex.def Info: ./../Figures/average_unemployment_long.pdf  used on input line 277.
+Package pdftex.def Info: ./../Figures/average_unemployment_long.pdf  used on input line 282.
 (pdftex.def)             Requested size: 213.31125pt x 151.01463pt.
-<./../Figures/differential_unemployment_long.pdf, id=189, 316.18124pt x 223.83624pt>
+<./../Figures/differential_unemployment_long.pdf, id=197, 316.18124pt x 223.83624pt>
 File: ./../Figures/differential_unemployment_long.pdf Graphic file (type pdf)
 <use ./../Figures/differential_unemployment_long.pdf>
-Package pdftex.def Info: ./../Figures/differential_unemployment_long.pdf  used on input line 283.
+Package pdftex.def Info: ./../Figures/differential_unemployment_long.pdf  used on input line 288.
 (pdftex.def)             Requested size: 213.31125pt x 151.01463pt.
- [4 <./../Figures/average_cpi_inflation_short.pdf> <./../Figures/differential_cpi_inflation_short.pdf> <./../Figures/average_gap_short.pdf> <./../Figures/differential_gap_short.pdf>] [5] [6 <./../Figures/average_deflator_inflation_long.pdf> <./../Figures/differential_deflator_inflation_long.pdf> <./../Figures/average_unemployment_long.pdf> <./../Figures/differential_unemployment_long.pdf>]
-<./../Figures/predicted_paths_short.pdf, id=303, 421.575pt x 298.11375pt>
+
+
+pdfTeX warning: pdflatex (file ./../Figures/r_squares_plot.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<./../Figures/r_squares_plot.pdf, id=208, 458.71375pt x 324.21124pt>
+File: ./../Figures/r_squares_plot.pdf Graphic file (type pdf)
+<use ./../Figures/r_squares_plot.pdf>
+Package pdftex.def Info: ./../Figures/r_squares_plot.pdf  used on input line 344.
+(pdftex.def)             Requested size: 241.84843pt x 170.93571pt.
+[4] [5 <./../Figures/average_cpi_inflation_short.pdf> <./../Figures/differential_cpi_inflation_short.pdf> <./../Figures/average_gap_short.pdf> <./../Figures/differential_gap_short.pdf>] [6] [7 <./../Figures/average_deflator_inflation_long.pdf> <./../Figures/differential_deflator_inflation_long.pdf> <./../Figures/average_unemployment_long.pdf> <./../Figures/differential_unemployment_long.pdf> <./../Figures/r_squares_plot.pdf>]
+<./../Figures/predicted_paths_short.pdf, id=336, 421.575pt x 298.11375pt>
 File: ./../Figures/predicted_paths_short.pdf Graphic file (type pdf)
 <use ./../Figures/predicted_paths_short.pdf>
-Package pdftex.def Info: ./../Figures/predicted_paths_short.pdf  used on input line 355.
+Package pdftex.def Info: ./../Figures/predicted_paths_short.pdf  used on input line 369.
 (pdftex.def)             Requested size: 239.42758pt x 169.3125pt.
-<./../Figures/predicted_paths_long.pdf, id=304, 421.575pt x 298.11375pt>
+<./../Figures/predicted_paths_long.pdf, id=337, 421.575pt x 298.11375pt>
 File: ./../Figures/predicted_paths_long.pdf Graphic file (type pdf)
 <use ./../Figures/predicted_paths_long.pdf>
-Package pdftex.def Info: ./../Figures/predicted_paths_long.pdf  used on input line 360.
+Package pdftex.def Info: ./../Figures/predicted_paths_long.pdf  used on input line 374.
 (pdftex.def)             Requested size: 239.42758pt x 169.3125pt.
-<./../Figures/actual_size_persistence_short.pdf, id=307, 458.71375pt x 324.21124pt>
+<./../Figures/actual_size_persistence_short.pdf, id=340, 458.71375pt x 324.21124pt>
 File: ./../Figures/actual_size_persistence_short.pdf Graphic file (type pdf)
 <use ./../Figures/actual_size_persistence_short.pdf>
-Package pdftex.def Info: ./../Figures/actual_size_persistence_short.pdf  used on input line 378.
+Package pdftex.def Info: ./../Figures/actual_size_persistence_short.pdf  used on input line 392.
 (pdftex.def)             Requested size: 241.84843pt x 170.93571pt.
-<./../Figures/actual_size_persistence_long.pdf, id=308, 458.71375pt x 324.21124pt>
+<./../Figures/actual_size_persistence_long.pdf, id=341, 458.71375pt x 324.21124pt>
 File: ./../Figures/actual_size_persistence_long.pdf Graphic file (type pdf)
 <use ./../Figures/actual_size_persistence_long.pdf>
-Package pdftex.def Info: ./../Figures/actual_size_persistence_long.pdf  used on input line 382.
+Package pdftex.def Info: ./../Figures/actual_size_persistence_long.pdf  used on input line 396.
 (pdftex.def)             Requested size: 241.84843pt x 170.93571pt.
- [7 <./../Figures/predicted_paths_short.pdf> <./../Figures/predicted_paths_long.pdf> <./../Figures/actual_size_persistence_short.pdf> <./../Figures/actual_size_persistence_long.pdf>] (./CheckingHANK.bbl<<ot1tt.cmap>>) [8] [9]
-Overfull \hbox (1.07294pt too wide) in paragraph at lines 530--608
+ [8 <./../Figures/predicted_paths_short.pdf> <./../Figures/predicted_paths_long.pdf> <./../Figures/actual_size_persistence_short.pdf> <./../Figures/actual_size_persistence_long.pdf>] [9] (./CheckingHANK.bbl<<ot1tt.cmap>>) [10] [11]
+Overfull \hbox (1.07294pt too wide) in paragraph at lines 545--623
  [] 
  []
 
-[10] [11] [12] [13] (./CheckingHANK.aux)
+[12] [13] [14] [15] (./CheckingHANK.aux)
 Package rerunfilecheck Info: File `CheckingHANK.out' has not changed.
 (rerunfilecheck)             Checksum: 774474CE1220639AC439B8486966AD9A;2143.
  ) 
 Here is how much of TeX's memory you used:
- 39235 strings out of 478276
- 909187 string characters out of 5846497
- 1444393 words of memory out of 5000000
- 56618 multiletter control sequences out of 15000+600000
+ 39263 strings out of 478276
+ 909812 string characters out of 5846497
+ 1444775 words of memory out of 5000000
+ 56639 multiletter control sequences out of 15000+600000
  489653 words of font info for 103 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 104i,17n,106p,948b,738s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 104i,17n,106p,955b,738s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{Hfootnote.7} has been referenced but does not exist, replaced by a fixed one
+
 pdfTeX warning (dest): name{Hfootnote.6} has been referenced but does not exist, replaced by a fixed one
 
 pdfTeX warning (dest): name{Hfootnote.5} has been referenced but does not exist, replaced by a fixed one
@@ -946,10 +956,10 @@ pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist,
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist, replaced by a fixed one
 
 {/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb>
-Output written on CheckingHANK.pdf (13 pages, 437336 bytes).
+Output written on CheckingHANK.pdf (15 pages, 452981 bytes).
 PDF statistics:
- 527 PDF objects out of 1000 (max. 8388607)
- 443 compressed objects within 5 object streams
- 65 named destinations out of 1000 (max. 500000)
- 189 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 565 PDF objects out of 1000 (max. 8388607)
+ 476 compressed objects within 5 object streams
+ 71 named destinations out of 1000 (max. 500000)
+ 194 words of extra memory for PDF output out of 10000 (max. 10000000)
 

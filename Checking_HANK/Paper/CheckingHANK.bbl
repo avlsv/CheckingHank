@@ -50,6 +50,12 @@ Istrefi, Klodiana (2019) ``{In Fed Watchers’ Eyes: Hawks, Doves and Monetary
   Policy},'' Working papers 725, Banque de France,
   \url{https://ideas.repec.org/p/bfr/banfra/725.html}.
 
+\harvarditem[Jorda]{Jorda}{2005}{Jorda2005}
+Jorda, Oscar (2005) ``Estimation and Inference of Impulse Responses by Local
+  Projections,'' \textit{American Economic Review}, 95 (1),  161--182,
+  \href{http://dx.doi.org/10.1257/0002828053828518}{\urlstyle{rm}
+  \nolinkurl{10.1257/0002828053828518}}.
+
 \harvarditem[Jorda and Hoover]{Jorda and Hoover}{2000}{JordaHoover2000}
 Jorda, Oscar and Kevin Hoover (2000) ``{Measuring Systematic Monetary
   Policy},'' Working Papers 203, University of California, Davis, Department of
@@ -65,6 +71,14 @@ Kaplan, Greg, Benjamin Moll, and Giovanni~L. Violante (2018) ``Monetary Policy
 Laubach, Thomas and John~C. Williams (2003) ``Measuring the Natural Rate of
   Interest,'' \textit{The Review of Economics and Statistics}, 85 (4),
   1063--1070, \url{http://www.jstor.org/stable/3211826}.
+
+\harvarditem[Plagborg-Møller and Wolf]{Plagborg-Møller and
+  Wolf}{2021}{PlagborgMollerWolf2021}
+Plagborg-Møller, Mikkel and Christian~K. Wolf (2021) ``Local Projections and
+  VARs Estimate the Same Impulse Responses,'' \textit{Econometrica}, 89 (2),
+  955--980,
+  \href{http://dx.doi.org/https://doi.org/10.3982/ECTA17813}{\urlstyle{rm}
+  \nolinkurl{https://doi.org/10.3982/ECTA17813}}.
 
 \harvarditem[Romer and Romer]{Romer and Romer}{2004}{RomerRomer2004}
 Romer, Christina~D. and David~H. Romer (2004) ``A New Measure of Monetary

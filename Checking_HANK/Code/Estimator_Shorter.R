@@ -139,7 +139,7 @@ coefs_gap <-
 coefs_HAWK_gap <-
   coefs_HAWK_gap |> mutate(quarter = row_number() - 1)
 
-r_squares_short_tbl <- tibble(r_squares = r_squares,
+r_squares_short_tbl <- tibble(r_squares = r_squares_short,
                               horizon = 1:length(r_squares) - 1)
 
 
@@ -580,6 +580,7 @@ LP_12 |> summary(diagnostics = T, vcov = vcovHAC(LP_12))
 
 
 horizon_max <- 16
+
 predicted_paths_short <-
   ggplot(
     predicted_short_tbl |>
@@ -613,20 +614,22 @@ ggsave(
 
 size_persistence_short_tbl <-
   predicted_short_tbl |>
-  filter(horizon <= horizon_max) |>
+  filter(horizon <= 16) |>
   group_by(quarter) |>
   summarize(size = mean(fitted),
-            persistence = acf(fitted, plot = F)$acf[2])
+            persistence = exp(lm(I(log(fitted/fitted[1]))~horizon)$coef[2]))
+ 
+
 
 
 actual_size_persistence_short <-
   ggplot(
     size_persistence_short_tbl,
     aes(
-      x = size,
+      x = size/100,
       y = persistence,
       color = yq(quarter),
-      label = yearquarter(yq(quarter))
+      label = quarter
     )
   ) +
   geom_point(size = 1.3) +
@@ -637,6 +640,8 @@ actual_size_persistence_short <-
     check_overlap = T
   ) +
   labs(x = "Size", y = "Persistence", color = "") +
+  scale_x_continuous(labels = label_percent(), n.breaks = 8) +
+  scale_y_continuous( n.breaks = 8) +
   theme_light()
 
 
@@ -649,4 +654,6 @@ ggsave(
   height = 148.5 / 1.3 ,
   units = "mm"
 )
+
+
 

@@ -107,7 +107,7 @@ for (i in 0:20) {
   
   
   
-  r_long_squares <- c(r_long_squares, summary(reg, vcov. = vcovHAC(reg))$r.squared)
+  r_squares_long <- c(r_squares_long, summary(reg, vcov. = vcovHAC(reg))$r.squared)
   
   
   predicted_i <-
@@ -153,8 +153,8 @@ coefs_HAWK_unemployment <-
   coefs_HAWK_unemployment |> mutate(quarter = row_number() - 1)
 
 r_squares_long_tbl <-
-  tibble(r_squares = r_long_squares,
-         horizon = 1:length(r_long_squares) - 1)
+  tibble(r_squares = r_squares_long,
+         horizon = 1:length(r_squares_long) - 1)
 
 
 save(
@@ -303,7 +303,10 @@ average_unemployment_responce_plot <-
     fill = "#477998"
   ) +
   geom_ribbon(
-    aes(ymin = -estimate - std_error, ymax = -estimate + std_error),
+    aes(
+      ymin = -estimate - std_error,
+      ymax = -estimate + std_error
+    ),
     alpha = 0.13,
     linetype = 0,
     fill = "#477998"
@@ -331,10 +334,10 @@ differential_unemployment_responce_plot <-
   geom_ribbon(
     aes(
       ymin =
-        - 2 / 12 * estimate -
+        -2 / 12 * estimate -
         2 / 12 * qnorm(1 - 0.05 / 2) * std_error,
       ymax =
-        - 2 / 12 * estimate +
+        -2 / 12 * estimate +
         2 / 12 * qnorm(1 - 0.05 / 2) * std_error
     ),
     alpha = 0.13,
@@ -360,7 +363,7 @@ differential_unemployment_responce_plot <-
         -2 / 12 * estimate -
         2 / 12 * qnorm(1 - .10 / 2) * std_error,
       ymax =
-       - 2 / 12 * estimate +
+        -2 / 12 * estimate +
         2 / 12 * qnorm(1 - .10 / 2) * std_error
     ),
     alpha = 0.123,
@@ -636,28 +639,28 @@ LP_12 |> summary(diagnostics = T)
 
 
 ## Predictive plots  ------
-##  
+##
 
-horizon_max <- 16
+horizon_max <- 13
 
 
 predicted_paths_long <-
   ggplot(
-    predicted_long_tbl |> 
-      filter(horizon <= horizon_max, 
-             quarter >= yearquarter("1988 Q3")),
+    predicted_long_tbl |>
+      filter(horizon <= horizon_max, quarter >= yearquarter("1988 Q3")),
     aes(
       x = horizon,
       y = fitted / 100,
       group = quarter,
       color = yq(quarter),
       label = yearquarter(yq(quarter))
-    )) +
+    )
+  ) +
   geom_line() +
   labs(color = "") +
   scale_y_continuous("Predicted FFR", labels = label_percent(), n.breaks = 8) +
-  scale_x_continuous("Horizon [1Q]", breaks=seq(0, horizon_max, by=2))+
-  geom_hline(aes(yintercept=0), color="darkred")+
+  scale_x_continuous("Horizon [1Q]", breaks = seq(0, horizon_max, by = 2)) +
+  geom_hline(aes(yintercept = 0), color = "darkred") +
   theme_light()
 
 
@@ -665,8 +668,8 @@ ggsave(
   "predicted_paths_long.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   predicted_paths_long,
-  width = 148.5 / 2*2  ,
-  height = 210 / 4 *2,
+  width = 148.5 / 2 * 2  ,
+  height = 210 / 4 * 2,
   units = "mm"
 )
 
@@ -674,21 +677,24 @@ ggsave(
 
 size_persistence_long_tbl <-
   predicted_long_tbl |>
-  filter(horizon <= horizon_max, 
-         quarter >= yearquarter("1988 Q3")) |>
+  filter(horizon <= 13, quarter >= yearquarter("1988 Q3")) |>
   group_by(quarter) |>
   summarize(size = mean(fitted),
-            persistence = acf(fitted, plot = F)$acf[2])
+            persistence = exp(lm(I(log(fitted/fitted[1]))~horizon)$coef[2]))
+
+
 
 
 actual_size_persistence_long <-
-  ggplot(size_persistence_long_tbl,
-         aes(
-           x = size,
-           y = persistence,
-           color = yq(quarter),
-           label = yearquarter(yq(quarter))
-         )) +
+  ggplot(
+    size_persistence_long_tbl,
+    aes(
+      x = size/100,
+      y = persistence,
+      color = yq(quarter),
+      label = quarter
+    )
+  ) +
   geom_point(size = 1.3) +
   geom_text(
     hjust = 0,
@@ -697,6 +703,8 @@ actual_size_persistence_long <-
     check_overlap = T
   ) +
   labs(x = "Size", y = "Persistence", color = "") +
+  scale_x_continuous(labels = label_percent(), n.breaks = 8) +
+  scale_y_continuous( n.breaks = 8) +
   theme_light()
 
 
@@ -705,8 +713,8 @@ ggsave(
   "actual_size_persistence_long.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   actual_size_persistence_long,
-  width = 210/1.3  ,
-  height = 148.5/1.3 ,
+  width = 210 / 1.3  ,
+  height = 148.5 / 1.3 ,
   units = "mm"
 )
 

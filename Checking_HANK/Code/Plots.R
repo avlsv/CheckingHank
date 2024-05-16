@@ -8,6 +8,8 @@
 library(tidyverse)
 library(scales)
 library(tsibble)
+library(latex2exp)
+
 
 # Datasets -----
 full_dataset_tbl <- read_csv("data/full_dataset.csv")
@@ -32,6 +34,16 @@ irfs_shorter <- read.csv("data/irfs_shorter.csv") |> tibble()|> select(-X) |>
 
 size_persistence_consumption_ts <-
   size_persistence_consumption_tbl  |> tsibble()
+
+
+load("data/intermediate_data/coefs_short.RData")
+load("data/intermediate_data/coefs_long.RData")
+
+r_squares_full <- rows_append(
+  r_squares_long_tbl |> mutate(type = "Long Specification"),
+  r_squares_short_tbl |> mutate(type = "Short Specification")
+)
+
 
 
 # Recessions -----
@@ -444,3 +456,25 @@ ggsave(
 
 
 
+
+
+
+r_squares_plot <-
+  ggplot(r_squares_full, aes(x = horizon, y = r_squares, colour = type)) +
+  geom_line() +
+  theme_light() +
+  scale_y_continuous(TeX("$R^2$"), n.breaks = 8) +
+  scale_x_continuous("Horizon [1Q]", breaks = seq(0, 20, by = 2)) +
+  labs(color = "")+
+
+
+
+ggsave(
+  "r_squares_plot.pdf",
+  r_squares_plot,
+  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
+  width = 210 / 1.3  ,
+  height = 148.5 / 1.3 ,
+  units = "mm",
+  device=cairo_pdf
+)
