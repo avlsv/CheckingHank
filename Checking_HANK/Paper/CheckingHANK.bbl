@@ -10,11 +10,18 @@
 
 \begin{thebibliography}{xxx}
 
-\harvarditem[Auclert]{Auclert}{2019}{Auclert2019}
-Auclert, Adrien (2019) ``Monetary Policy and the Redistribution Channel,''
-  \textit{American Economic Review}, 109 (6),  2333--67,
-  \href{http://dx.doi.org/10.1257/aer.20160137}{\urlstyle{rm}
-  \nolinkurl{10.1257/aer.20160137}}.
+\harvarditem[Aguiar-Conraria et~al.]{Aguiar-Conraria, Martins and
+  Soares}{2018}{Aguiar2018}
+Aguiar-Conraria, Luis, Manuel~M.F. Martins, and Maria~Joana Soares (2018)
+  ``Estimating the Taylor rule in the time-frequency domain,'' \textit{Journal
+  of Macroeconomics}, 57,  122--137,
+  \href{http://dx.doi.org/https://doi.org/10.1016/j.jmacro.2018.05.008}{\urlstyle{rm}
+  \nolinkurl{https://doi.org/10.1016/j.jmacro.2018.05.008}}.
+
+\harvarditem[Andrews]{Andrews}{1991}{Andrews1991}
+Andrews, Donald W~K (1991) ``{Heteroskedasticity and Autocorrelation Consistent
+  Covariance Matrix Estimation},'' \textit{Econometrica}, 59 (3),  817--858,
+  \url{http://www.jstor.org/stable/2938229}.
 
 \harvarditem[Bordo and Istrefi]{Bordo and Istrefi}{2023}{BordoIstrefi2023}
 Bordo, Michael and Klodiana Istrefi (2023) ``Perceived FOMC: The making of
@@ -23,25 +30,12 @@ Bordo, Michael and Klodiana Istrefi (2023) ``Perceived FOMC: The making of
   \href{http://dx.doi.org/https://doi.org/10.1016/j.jmoneco.2023.03.001}{\urlstyle{rm}
   \nolinkurl{https://doi.org/10.1016/j.jmoneco.2023.03.001}}.
 
-\harvarditem[Campbell and Mankiw]{Campbell and Mankiw}{1989}{Campbell1989}
-Campbell, John~Y. and N.~Gregory Mankiw (1989) ``Consumption, Income, and
-  Interest Rates: Reinterpreting the Time Series Evidence,'' \textit{NBER
-  Macroeconomics Annual}, 4,  185--216,
-  \href{http://dx.doi.org/10.1086/654107}{\urlstyle{rm}
-  \nolinkurl{10.1086/654107}}.
-
-\harvarditem[Canzoneri et~al.]{Canzoneri, Cumby and Diba}{2007}{Canzoneri2007}
-Canzoneri, Matthew~B., Robert~E. Cumby, and Behzad~T. Diba (2007) ``{Euler
-  equations and money market interest rates: A challenge for monetary policy
-  models},'' \textit{Journal of Monetary Economics}, 54 (7),  1863--1881,
-  \url{https://ideas.repec.org/a/eee/moneco/v54y2007i7p1863-1881.html}.
-
-\harvarditem[Cloyne et~al.]{Cloyne, Ferreira and Surico}{2019}{Cloyne2019}
-Cloyne, James, Clodomiro Ferreira, and Paolo Surico (2019) ``{Monetary Policy
-  when Households have Debt: New Evidence on the Transmission Mechanism},''
-  \textit{The Review of Economic Studies}, 87 (1),  102--129,
-  \href{http://dx.doi.org/10.1093/restud/rdy074}{\urlstyle{rm}
-  \nolinkurl{10.1093/restud/rdy074}}.
+\harvarditem[Carvalho et~al.]{Carvalho, Nechio and
+  Tristão}{2021}{Carvalho2021}
+Carvalho, Carlos, Fernanda Nechio, and Tiago Tristão (2021) ``Taylor rule
+  estimation by OLS,'' \textit{Journal of Monetary Economics}, 124,  140--154,
+  \href{http://dx.doi.org/https://doi.org/10.1016/j.jmoneco.2021.10.010}{\urlstyle{rm}
+  \nolinkurl{https://doi.org/10.1016/j.jmoneco.2021.10.010}}.
 
 \harvarditem[Coibion and Gorodnichenko]{Coibion and
   Gorodnichenko}{2011}{CoibionGorodnichenko2011}
@@ -50,30 +44,9 @@ Coibion, Olivier and Yuriy Gorodnichenko (2011) ``Monetary Policy, Trend
   \textit{The American Economic Review}, 101 (1),  341--370,
   \url{http://www.jstor.org/stable/41038791}.
 
-\harvarditem[Gali]{Gali}{2018}{Gali2018}
-Gali, Jordi (2018) ``The State of New Keynesian Economics: A Partial
-  Assessment,'' \textit{Journal of Economic Perspectives}, 32 (3),  87--112,
-  \href{http://dx.doi.org/10.1257/jep.32.3.87}{\urlstyle{rm}
-  \nolinkurl{10.1257/jep.32.3.87}}.
-
-\harvarditem[Gross et~al.]{Gross, Notowidigdo and Wang}{2020}{Gross2020}
-Gross, Tal, Matthew~J. Notowidigdo, and Jialan Wang (2020) ``The Marginal
-  Propensity to Consume over the Business Cycle,'' \textit{American Economic
-  Journal: Macroeconomics}, 12 (2),  351--84,
-  \href{http://dx.doi.org/10.1257/mac.20160287}{\urlstyle{rm}
-  \nolinkurl{10.1257/mac.20160287}}.
-
 \harvarditem[Hack et~al.]{Hack, Istrefi and Meier}{2023}{HIM2023}
 Hack, Lukas, Klodiana Istrefi, and Matthias Meier (2023) ``Identification of
   Systematic Monetary Policy,'' CEPR Discussion Paper 17999.
-
-\harvarditem[Holm et~al.]{Holm, Paul and
-  Tischbirek}{2020}{HolmPaulTischbirek2020}
-Holm, Martin, Pascal Paul, and Andreas Tischbirek (2020) ``{The Transmission of
-  Monetary Policy under the Microscope},'' Working Paper Series 2020-03,
-  Federal Reserve Bank of San Francisco,
-  \href{http://dx.doi.org/10.24148/wp2020-03}{\urlstyle{rm}
-  \nolinkurl{10.24148/wp2020-03}}.
 
 \harvarditem[Holston et~al.]{Holston, Laubach and Williams}{2023}{HLW2023}
 Holston, Kathryn, Thomas Laubach, and John~C. Williams (2023) ``{Measuring the
@@ -85,40 +58,35 @@ Istrefi, Klodiana (2019) ``{In Fed Watchers’ Eyes: Hawks, Doves and Monetary
   Policy},'' Working papers 725, Banque de France,
   \url{https://ideas.repec.org/p/bfr/banfra/725.html}.
 
+\harvarditem[Jorda]{Jorda}{2005}{Jorda2005}
+Jorda, Oscar (2005) ``Estimation and Inference of Impulse Responses by Local
+  Projections,'' \textit{American Economic Review}, 95 (1),  161--182,
+  \href{http://dx.doi.org/10.1257/0002828053828518}{\urlstyle{rm}
+  \nolinkurl{10.1257/0002828053828518}}.
+
+\harvarditem[Jorda and Hoover]{Jorda and Hoover}{2000}{JordaHoover2000}
+Jorda, Oscar and Kevin Hoover (2000) ``{Measuring Systematic Monetary
+  Policy},'' Working Papers 203, University of California, Davis, Department of
+  Economics, \url{https://ideas.repec.org/p/cda/wpaper/203.html}.
+
 \harvarditem[Kaplan et~al.]{Kaplan, Moll and Violante}{2018}{KMV2018}
 Kaplan, Greg, Benjamin Moll, and Giovanni~L. Violante (2018) ``Monetary Policy
   According to HANK,'' \textit{American Economic Review}, 108 (3),  697--743,
   \href{http://dx.doi.org/10.1257/aer.20160042}{\urlstyle{rm}
   \nolinkurl{10.1257/aer.20160042}}.
 
-\harvarditem[Kaplan et~al.]{Kaplan, Violante and Weidner}{2014}{KVW2014}
-Kaplan, Greg, Giovanni~L. Violante, and Justin Weidner (2014) ``{The Wealthy
-  Hand-to-Mouth},'' \textit{Brookings Papers on Economic Activity}, 45 (1),
-  77--153,
-  \url{https://ideas.repec.org/a/bin/bpeajo/v45y2014i2014-01p77-153.html}.
-
-\harvarditem[Krusell and Smith]{Krusell and Smith}{1998}{Krusell1998}
-Krusell, Per and Anthony A.~Jr. Smith (1998) ``Income and Wealth Heterogeneity
-  in the Macroeconomy,'' \textit{Journal of Political Economy}, 106 (5),
-  867--896, \url{http://www.jstor.org/stable/10.1086/250034}.
-
 \harvarditem[Laubach and Williams]{Laubach and Williams}{2003}{LW2003}
 Laubach, Thomas and John~C. Williams (2003) ``Measuring the Natural Rate of
   Interest,'' \textit{The Review of Economics and Statistics}, 85 (4),
   1063--1070, \url{http://www.jstor.org/stable/3211826}.
 
-\harvarditem[Luetticke]{Luetticke}{2021}{Luetticke2021}
-Luetticke, Ralph (2021) ``Transmission of Monetary Policy with Heterogeneity in
-  Household Portfolios,'' \textit{American Economic Journal: Macroeconomics},
-  13 (2),  1--25, \href{http://dx.doi.org/10.1257/mac.20190064}{\urlstyle{rm}
-  \nolinkurl{10.1257/mac.20190064}}.
-
-\harvarditem[McKay and Wolf]{McKay and Wolf}{2023}{McKayWolf2023}
-McKay, Alisdair and Christian~K. Wolf (2023) ``What Can Time-Series Regressions
-  Tell Us About Policy Counterfactuals?'' \textit{Econometrica}, 91 (5),
-  1695--1725,
-  \href{http://dx.doi.org/https://doi.org/10.3982/ECTA21045}{\urlstyle{rm}
-  \nolinkurl{https://doi.org/10.3982/ECTA21045}}.
+\harvarditem[Plagborg-Møller and Wolf]{Plagborg-Møller and
+  Wolf}{2021}{PlagborgMollerWolf2021}
+Plagborg-Møller, Mikkel and Christian~K. Wolf (2021) ``Local Projections and
+  VARs Estimate the Same Impulse Responses,'' \textit{Econometrica}, 89 (2),
+  955--980,
+  \href{http://dx.doi.org/https://doi.org/10.3982/ECTA17813}{\urlstyle{rm}
+  \nolinkurl{https://doi.org/10.3982/ECTA17813}}.
 
 \harvarditem[Romer and Romer]{Romer and Romer}{2004}{RomerRomer2004}
 Romer, Christina~D. and David~H. Romer (2004) ``A New Measure of Monetary

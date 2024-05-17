@@ -1,6 +1,5 @@
-
 \usepackage[utf8]{inputenc}
-\usepackage[english, russian]{babel}
+% \usepackage[english, russian]{babel}
 \usepackage[colorlinks=true,urlcolor=darkgray,citecolor=darkgray,linkcolor=darkgray,bookmarks=true]{hyperref}
 % \usepackage{ccaption}
 \usepackage{authblk}
@@ -21,7 +20,8 @@
 \usepackage{threeparttable}
 \usepackage{etoolbox}
 \usepackage{cmap}	
-\usepackage{varioref}	
+\usepackage[nospace]{varioref}	
+\usepackage{cleveref}
 \usepackage{multirow}
 \usepackage{fullpage} 
 \usepackage{geometry}
@@ -79,8 +79,8 @@ every node/.style={color=black},
 % \addbibresource{references.bib}
 
 \def\references{
-    \bibliography{{../references.bib}}
-    \bibliographystyle{econ}
+    \bibliography{misc/references.bib}
+    \bibliographystyle{misc/econ}
 }
 
 
@@ -143,3 +143,4 @@ every node/.style={color=black},
 
 
 \usepackage{makecell}
+\usepackage{dcolumn}
