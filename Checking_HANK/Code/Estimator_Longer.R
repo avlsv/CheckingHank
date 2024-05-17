@@ -50,12 +50,12 @@ coefs_unemployment <- tibble()
 coefs_HAWK_unemployment <- tibble()
 predicted_long_tbl <- tibble()
 r_squares_long <- c()
-
+hausman_list_long <- c()
 #coefs_intercept <- tibble()
 #coefs_HAWK <- tibble()
 for (i in 0:20) {
   reg <-
-    AER::ivreg(
+    ivreg(
       lead(dR, i) ~
         expected_inflation * demeaned_HAWK +  expected_unemployment_gap * demeaned_HAWK +
         lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
@@ -119,7 +119,7 @@ for (i in 0:20) {
   
   predicted_long_tbl <- bind_rows(predicted_long_tbl, predicted_i)
   
-  x <- summary(reg)$wald[1]
+  hausman_list_long <- c(hausman_list_long, summary(reg)$diagnostics[4, 3])
 }
 
 
@@ -157,64 +157,20 @@ r_squares_long_tbl <-
          horizon = 1:length(r_squares_long) - 1)
 
 
+hausman_long_tbl <- tibble(hausman = hausman_list_long,
+                                horizon = 1:length(hausman_list_long) - 1)
+
+
 save(
   coefs_inflation,
   coefs_HAWK_inflation,
   coefs_unemployment,
   coefs_HAWK_unemployment,
   r_squares_long_tbl,
+  hausman_long_tbl,
   file = "data/intermediate_data/coefs_long.RData"
 )
 
-
-
-
-
-predicted_paths_long <-
-  ggplot(
-    predicted_long_tbl |>
-      filter(horizon <= 15),
-    aes(
-      x = horizon,
-      y = fitted / 100,
-      group = quarter,
-      color = yq(quarter),
-      label = yearquarter(yq(quarter))
-    )
-  ) +
-  geom_line() +
-  labs(color = "") +
-  scale_y_continuous("Predicted FFR", labels = label_percent(), n.breaks = 8) +
-  theme_light()
-
-
-
-
-size_persistence_long_tbl <-
-  predicted_long_tbl |>
-  filter(horizon <= 13) |>
-  group_by(quarter) |>
-  summarize(size = sum(fitted),
-            persistence = acf(fitted, plot = F)$acf[2])
-
-ggplot(
-  size_persistence_long_tbl,
-  aes(
-    x = size,
-    y = persistence,
-    color = yq(quarter),
-    label = yearquarter(yq(quarter))
-  )
-) +
-  geom_point(size = 1.3) +
-  geom_text(
-    hjust = 0,
-    vjust = 0,
-    size = 3,
-    check_overlap = T
-  ) +
-  labs(x = "Size", y = "Persistence", color = "") +
-  theme_light()
 
 
 
@@ -247,7 +203,8 @@ average_inflation_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +  geom_line() +
-  labs(x = "Quarter", y = "Percentage Points") +
+  scale_x_continuous("Horizon [1Q]") +
+  scale_y_continuous("Percentage Points") +
   theme_light()
 
 
@@ -281,7 +238,8 @@ differential_inflation_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +
-  labs(x = "Quarter", y = "Percentage Points") +
+  scale_x_continuous("Horizon [1Q]") +
+  scale_y_continuous("Percentage Points") +
   geom_hline(aes(yintercept = 0), color = "darkred") +  geom_line() +
   theme_light()
 
@@ -320,7 +278,8 @@ average_unemployment_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +  geom_line() +
-  labs(x = "Quarter", y = "Percentage Points") +
+  scale_x_continuous("Horizon [1Q]") +
+  scale_y_continuous("Percentage Points") +
   theme_light()
 
 average_unemployment_responce_plot
@@ -370,7 +329,8 @@ differential_unemployment_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +  geom_line() +
-  labs(x = "Quarter", y = "Percentage Points") +
+  scale_x_continuous("Horizon [1Q]") +
+  scale_y_continuous("Percentage Points") +
   theme_light()
 
 differential_unemployment_responce_plot
@@ -641,13 +601,13 @@ LP_12 |> summary(diagnostics = T)
 ## Predictive plots  ------
 ##
 
-horizon_max <- 13
+
 
 
 predicted_paths_long <-
   ggplot(
     predicted_long_tbl |>
-      filter(horizon <= horizon_max, quarter >= yearquarter("1988 Q3")),
+      filter(quarter >= yearquarter("1988 Q3")),
     aes(
       x = horizon,
       y = fitted / 100,
@@ -659,28 +619,33 @@ predicted_paths_long <-
   geom_line() +
   labs(color = "") +
   scale_y_continuous("Predicted FFR", labels = label_percent(), n.breaks = 8) +
-  scale_x_continuous("Horizon [1Q]", breaks = seq(0, horizon_max, by = 2)) +
+  scale_x_continuous("Horizon [1Q]") +
   geom_hline(aes(yintercept = 0), color = "darkred") +
   theme_light()
+
+
 
 
 ggsave(
   "predicted_paths_long.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   predicted_paths_long,
-  width = 148.5 / 2 * 2  ,
-  height = 210 / 4 * 2,
+  width = 210 / 1.5  ,
+  height = 148.5 / 1.5 ,
   units = "mm"
 )
 
 
 
+
 size_persistence_long_tbl <-
   predicted_long_tbl |>
-  filter(horizon <= 13, quarter >= yearquarter("1988 Q3")) |>
+  filter(horizon <= 12, quarter >=
+           yearquarter("1988 Q3")) |>
   group_by(quarter) |>
   summarize(size = mean(fitted),
-            persistence = exp(lm(I(log(fitted/fitted[1]))~horizon)$coef[2]))
+            persistence =
+              lm(I(log(fitted / fitted[1])) ~-1+ horizon)$coef[1] |> exp())
 
 
 
@@ -689,23 +654,26 @@ actual_size_persistence_long <-
   ggplot(
     size_persistence_long_tbl,
     aes(
-      x = size/100,
+      x = size / 100,
       y = persistence,
       color = yq(quarter),
       label = quarter
     )
   ) +
+  geom_hline(aes(yintercept=1), color="darkred")+
+  geom_vline(aes(xintercept=0), color="darkred")+
   geom_point(size = 1.3) +
   geom_text(
     hjust = 0,
     vjust = 0,
-    size = 2.5,
+    size = 2.4,
     check_overlap = T
   ) +
   labs(x = "Size", y = "Persistence", color = "") +
   scale_x_continuous(labels = label_percent(), n.breaks = 8) +
-  scale_y_continuous( n.breaks = 8) +
-  theme_light()
+  scale_y_continuous(n.breaks = 8) +
+  theme_light() +
+  theme(legend.position = "none")
 
 
 
@@ -713,8 +681,23 @@ ggsave(
   "actual_size_persistence_long.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   actual_size_persistence_long,
-  width = 210 / 1.3  ,
-  height = 148.5 / 1.3 ,
+  width = 210 /  1.7  ,
+  height = 148.5 /  1.7 ,
   units = "mm"
 )
 
+
+size_persistence_long_tbl |> filter(size > 0, persistence > 1, quarter >=
+                                      yearquarter("1988 Q3")) |> count() /
+  size_persistence_long_tbl|> filter( quarter >= yearquarter("1988 Q3")) |> count()
+
+
+size_persistence_long_tbl|> filter(size<0, persistence>1, quarter >=
+                                     yearquarter("1988 Q3"))|> count()/
+  size_persistence_long_tbl|>filter( quarter >= yearquarter("1988 Q3")) |>count()
+size_persistence_long_tbl|> filter(size>0, persistence<1, quarter >=
+                                     yearquarter("1988 Q3"))|> count()/
+  size_persistence_long_tbl|> filter( quarter >= yearquarter("1988 Q3"))|>count()
+size_persistence_long_tbl|> filter(size<0, persistence<1, quarter >=
+                                     yearquarter("1988 Q3"))|> count()/
+  size_persistence_long_tbl|>filter( quarter >= yearquarter("1988 Q3"))|> count()

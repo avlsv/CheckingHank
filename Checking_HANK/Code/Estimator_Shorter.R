@@ -51,11 +51,12 @@ coefs_gap <- tibble()
 coefs_HAWK_gap <- tibble()
 r_squares_short <- c()
 predicted_short_tbl <- tibble()
+hausman_list_short<-c()
 #coefs_intercept <- tibble()
 #coefs_HAWK <- tibble()
 for (i in 0:20) {
   reg <-
-    AER::ivreg(
+    ivreg(
       lead(dR, i) ~
         expected_cpi_inflation * demeaned_HAWK +  expected_gap * demeaned_HAWK +
         lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
@@ -117,6 +118,10 @@ for (i in 0:20) {
   
   predicted_short_tbl <- bind_rows(predicted_short_tbl, predicted_i)
   
+  hausman_list_short<-
+    c(hausman_list_short,
+                  summary(reg, vcov. = vcovHAC(reg))$diagnostics[4,3])
+  
 }
 
 
@@ -140,15 +145,19 @@ coefs_HAWK_gap <-
   coefs_HAWK_gap |> mutate(quarter = row_number() - 1)
 
 r_squares_short_tbl <- tibble(r_squares = r_squares_short,
-                              horizon = 1:length(r_squares) - 1)
+                              horizon = 1:length(r_squares_short) - 1)
 
 
+
+hausman_short_tbl<- tibble(hausman = hausman_list_short,
+                                horizon = 1:length(hausman_list_short) - 1)
 save(
   coefs_cpi_inflation,
   coefs_HAWK_cpi_inflation,
   coefs_gap,
   coefs_HAWK_gap,
   r_squares_short_tbl,
+  hausman_short_tbl,
   file = "data/intermediate_data/coefs_short.RData"
 )
 
@@ -181,7 +190,8 @@ average_inflation_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +  geom_line() +
-  labs(x = "Quarter", y = "Percentage Points") +
+  scale_x_continuous("Horizon [1Q]") +
+  scale_y_continuous("Percentage Points") +
   theme_light()
 
 
@@ -215,7 +225,8 @@ differential_inflation_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +
-  labs(x = "Quarter", y = "Percentage Points") +
+  scale_x_continuous("Horizon [1Q]") +
+  scale_y_continuous("Percentage Points") +
   geom_hline(aes(yintercept = 0), color = "darkred") +  geom_line() +
   theme_light()
 
@@ -251,7 +262,8 @@ average_gap_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +  geom_line() +
-  labs(x = "Quarter", y = "Percentage Points") +
+  scale_x_continuous("Horizon [1Q]") +
+  scale_y_continuous("Percentage Points") +
   theme_light()
 
 average_gap_responce_plot
@@ -301,7 +313,8 @@ differential_gap_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +  geom_line() +
-  labs(x = "Quarter", y = "Percentage Points") +
+  scale_x_continuous("Horizon [1Q]") +
+  scale_y_continuous("Percentage Points") +
   theme_light()
 
 differential_gap_responce_plot
@@ -579,12 +592,10 @@ LP_12 |> summary(diagnostics = T, vcov = vcovHAC(LP_12))
 ##
 
 
-horizon_max <- 16
 
 predicted_paths_short <-
   ggplot(
-    predicted_short_tbl |>
-      filter(horizon <= horizon_max),
+    predicted_short_tbl,
     aes(
       x = horizon,
       y = fitted / 100,
@@ -594,9 +605,9 @@ predicted_paths_short <-
     )
   ) +
   geom_line() +
-  labs(color = "", x = "Horizon [1Q]") +
+  labs(color = "") +
   scale_y_continuous("Predicted FFR", labels = label_percent(), n.breaks = 8) +
-  scale_x_continuous("Horizon [1Q]", breaks = seq(0, horizon_max, by = 2)) +
+  scale_x_continuous("Horizon [1Q]") +
   geom_hline(aes(yintercept = 0), color = "darkred") +
   theme_light()
 
@@ -605,8 +616,8 @@ ggsave(
   "predicted_paths_short.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   predicted_paths_short,
-  width = 148.5 / 2 * 2  ,
-  height = 210 / 4 * 2,
+  height =  148.5/1.5,
+  width = 210/1.5,
   units = "mm"
 )
 
@@ -614,11 +625,13 @@ ggsave(
 
 size_persistence_short_tbl <-
   predicted_short_tbl |>
-  filter(horizon <= 16) |>
+  filter(horizon <= 12) |>
   group_by(quarter) |>
-  summarize(size = mean(fitted),
-            persistence = exp(lm(I(log(fitted/fitted[1]))~horizon)$coef[2]))
- 
+  summarize(size = mean(fitted), 
+            persistence = lm(I(log(fitted / fitted[1])) ~-1+ horizon)$coef[1]|> 
+              exp()
+            )
+
 
 
 
@@ -626,23 +639,26 @@ actual_size_persistence_short <-
   ggplot(
     size_persistence_short_tbl,
     aes(
-      x = size/100,
+      x = size / 100,
       y = persistence,
       color = yq(quarter),
       label = quarter
     )
-  ) +
+  ) +  
+  geom_hline(aes(yintercept=1), color="darkred")+
+  geom_vline(aes(xintercept=0), color="darkred")+
   geom_point(size = 1.3) +
   geom_text(
     hjust = 0,
     vjust = 0,
-    size = 2.5,
+    size = 2.4,
     check_overlap = T
   ) +
   labs(x = "Size", y = "Persistence", color = "") +
   scale_x_continuous(labels = label_percent(), n.breaks = 8) +
-  scale_y_continuous( n.breaks = 8) +
-  theme_light()
+  scale_y_continuous(n.breaks = 8) +
+  theme_light() +
+  theme(legend.position = "none")
 
 
 
@@ -650,10 +666,32 @@ ggsave(
   "actual_size_persistence_short.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   actual_size_persistence_short,
-  width = 210 / 1.3  ,
-  height = 148.5 / 1.3 ,
+  width = 210 / 1.7  ,
+  height = 148.5 / 1.7 ,
   units = "mm"
 )
 
 
+library(strucchange)
 
+
+sctest(LP_0)
+sctest(LP_2)
+sctest(LP_4)
+sctest(LP_6)
+sctest(LP_8)
+sctest(LP_10)
+sctest(LP_12, type="supF")
+
+
+
+
+
+size_persistence_short_tbl|> filter(size>0, persistence>1)|> count()/
+  size_persistence_short_tbl|> count()*100
+size_persistence_short_tbl|> filter(size<0, persistence>1)|> count()/
+  size_persistence_short_tbl|> count()
+size_persistence_short_tbl|> filter(size>0, persistence<1)|> count()/
+  size_persistence_short_tbl|> count()
+size_persistence_short_tbl|> filter(size<0, persistence<1)|> count()/
+  size_persistence_short_tbl|> count()

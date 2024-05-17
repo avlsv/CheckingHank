@@ -16,20 +16,20 @@ full_dataset_tbl <- read_csv("data/full_dataset.csv")
 full_dataset_ts <-
   full_dataset_tbl |> mutate(year_quarter = yearquarter(year_quarter)) |> tsibble()
 size_persistence_consumption_shorter_tbl <-
-  read.csv("data/size_persistence_consumption_shorter.csv") |> 
-  tibble() |> 
+  read.csv("data/size_persistence_consumption_shorter.csv") |>
+  tibble() |>
   mutate(year_quarter = yearquarter(year_quarter))
 size_persistence_consumption_shorter_ts <-
   size_persistence_consumption_shorter_tbl |> tsibble()
 
 size_persistence_consumption_longer_tbl <-
-  read.csv("data/size_persistence_consumption_longer.csv") |> 
-  tibble() |> 
+  read.csv("data/size_persistence_consumption_longer.csv") |>
+  tibble() |>
   mutate(year_quarter = yearquarter(year_quarter))
 
-irfs_longer <- read.csv("data/irfs_longer.csv") |> tibble()|> select(-X) |> 
+irfs_longer <- read.csv("data/irfs_longer.csv") |> tibble() |> select(-X) |>
   mutate(time = yearquarter(time))
-irfs_shorter <- read.csv("data/irfs_shorter.csv") |> tibble()|> select(-X) |> 
+irfs_shorter <- read.csv("data/irfs_shorter.csv") |> tibble() |> select(-X) |>
   mutate(time = yearquarter(time))
 
 size_persistence_consumption_ts <-
@@ -40,8 +40,13 @@ load("data/intermediate_data/coefs_short.RData")
 load("data/intermediate_data/coefs_long.RData")
 
 r_squares_full <- rows_append(
-  r_squares_long_tbl |> mutate(type = "Long Specification"),
-  r_squares_short_tbl |> mutate(type = "Short Specification")
+  r_squares_long_tbl |> mutate(specification = "Long"),
+  r_squares_short_tbl |> mutate(specification = "Short")
+)
+
+hausman_full <- rows_append(
+  hausman_long_tbl |> mutate(specification = "Long"),
+  hausman_short_tbl |> mutate(specification = "Short")
 )
 
 
@@ -49,7 +54,7 @@ r_squares_full <- rows_append(
 # Recessions -----
 
 
-getSymbols('USREC',  src = 'FRED')
+getSymbols('USREC', src = 'FRED')
 recession <- USREC
 drecession <- diff(recession)
 recession.start <- time(drecession[drecession == 1])
@@ -62,18 +67,15 @@ recession.df
 rec_data_1 <-
   recession.df |> filter(end >= head(yq(
     size_persistence_consumption_longer_tbl$year_quarter
-  ), 1),
-  start <= tail(yq(
+  ), 1), start <= tail(yq(
     size_persistence_consumption_longer_tbl$year_quarter
   ), 1))
 
 
 rec_data_2 <-
-  recession.df |> filter(end >=yq("1986 Q1") ,
-  start <= yq("2018 Q4"))
+  recession.df |> filter(end >= yq("1986 Q1") , start <= yq("2018 Q4"))
 rec_data_3 <-
-  recession.df |> filter(end >=yq("1963 Q1") ,
-                         start <= yq("2018 Q4"))
+  recession.df |> filter(end >= yq("1963 Q1") , start <= yq("2018 Q4"))
 
 
 
@@ -81,7 +83,7 @@ rec_data_3 <-
 
 # Expected Inflation Plot -----
 expected_deflator_inflation_plot <-
-  full_dataset_ts |> 
+  full_dataset_ts |>
   autoplot(expected_inflation) +
   theme_light() +
   labs(x = "", y = "Expected Inflation (Deflator)") +
@@ -99,9 +101,9 @@ expected_deflator_inflation_plot <-
   )
 
 expected_unemployment_plot <-
-  full_dataset_ts |> 
-  select(expected_unemployment) |> 
-  na.omit() |> 
+  full_dataset_ts |>
+  select(expected_unemployment) |>
+  na.omit() |>
   autoplot() +
   theme_light() +
   labs(x = "", y = "Expected Unemployment") +
@@ -122,9 +124,9 @@ expected_unemployment_plot <-
 
 # Expected CPI Inflation Plot -----
 expected_cpi_inflation_plot <-
-  full_dataset_ts|>
+  full_dataset_ts |>
   select(expected_cpi_inflation) |>
-  na.omit()|>
+  na.omit() |>
   autoplot(expected_cpi_inflation) +
   theme_light() +
   labs(x = "", y = "Expected Inflation (CPI)") +
@@ -143,9 +145,9 @@ expected_cpi_inflation_plot <-
 
 
 expected_gap_plot <-
-  full_dataset_ts |> 
-  select(expected_gap) |> 
-  na.omit() |> 
+  full_dataset_ts |>
+  select(expected_gap) |>
+  na.omit() |>
   autoplot() +
   theme_light() +
   labs(x = "", y = "Expected Output Gap") +
@@ -173,10 +175,10 @@ irfs_longer_plot <-
     color = date(time),
     group = date(time)
   )) +
-  geom_hline(aes(yintercept = 0),  color = "darkred") +
+  geom_hline(aes(yintercept = 0), color = "darkred") +
   geom_line() +
-  theme_light() + 
-  labs(y = "Percentage Points", x = "Quarter", color = "Year-Quarter") +  
+  theme_light() +
+  labs(y = "Percentage Points", x = "Quarter", color = "Year-Quarter") +
   scale_x_continuous(breaks = pretty_breaks())
 irfs_longer_plot
 
@@ -189,16 +191,16 @@ irfs_shorter_plot <-
     color = date(time),
     group = date(time)
   )) +
-  geom_hline(aes(yintercept = 0),  color = "darkred") +
+  geom_hline(aes(yintercept = 0), color = "darkred") +
   geom_line() +
-  theme_light() + 
-  labs(y = "Percentage Points", x = "Quarter", color = "Year-Quarter") +  
+  theme_light() +
+  labs(y = "Percentage Points", x = "Quarter", color = "Year-Quarter") +
   scale_x_continuous(breaks = pretty_breaks())
 irfs_shorter_plot
 
 
 irf_wide_1 <- irfs |> pivot_wider(names_from = time, values_from = irf)
-irf_wide_2 <- irfs |> pivot_wider(names_from = quart, values_from = irf)|> group_by(time)
+irf_wide_2 <- irfs |> pivot_wider(names_from = quart, values_from = irf) |> group_by(time)
 
 irf_wide_2_ts <- irf_wide_2 |> as_tsibble()
 
@@ -241,27 +243,23 @@ irf_by_chair <-
     greenspan = irf_greenspan |> t() |> c(),
     bernanke = irf_bernanke |> t() |> c(),
     post_bernanke = irf_post_bernanke |> t() |> c()
-  ) |> 
-  mutate(quarter=row_number())
+  ) |>
+  mutate(quarter = row_number())
 
 
 
-irf_by_chair_long <- irf_by_chair |> pivot_longer(cols=-quarter)
+irf_by_chair_long <- irf_by_chair |> pivot_longer(cols = -quarter)
 
-ggplot(irf_by_chair_long, aes(x = quarter, y = value,  color = name)) +
+ggplot(irf_by_chair_long, aes(x = quarter, y = value, color = name)) +
   geom_line() +
   theme(legend.position = "bottom")
 
 library(ggridges)
 
 
-ggplot(
-  irfs_shorter|>
-    mutate(period = as.factor(quart)),
-  aes(x = irf, 
-      y = period, 
-      fill = after_stat(x))
-) +
+ggplot(irfs_shorter |>
+         mutate(period = as.factor(quart)),
+       aes(x = irf, y = period, fill = after_stat(x))) +
   geom_density_ridges_gradient(scale = 1.5, rel_min_height = 0.025) +
   theme_ridges() +
   theme(legend.position = "none")
@@ -280,11 +278,12 @@ size_vs_persistence <-
   ggplot(
     size_persistence_consumption_shorter_tbl,
     aes(
-      x = size, 
-      y = persistence, 
+      x = size,
+      y = persistence,
       color = year(yq(year_quarter)),
-    label = year(yq(year_quarter))
-  )) +
+      label = year(yq(year_quarter))
+    )
+  ) +
   geom_point(size = 1.3) +
   geom_text(
     hjust = 0,
@@ -371,7 +370,7 @@ HAWK_plot <-
   scale_y_continuous(breaks = breaks_extended()) +
   theme_bw() +
   theme(legend.position = "bottom") +
-  scale_x_date(breaks = breaks_pretty(n = 6)) 
+  scale_x_date(breaks = breaks_pretty(n = 6))
 
 
 
@@ -419,8 +418,8 @@ ggsave(
   "size_vs_persistence.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   size_vs_persistence,
-  width = 220/1.2,
-  height = 140/1.2,
+  width = 220 / 1.2,
+  height = 140 / 1.2,
   units = "mm"
 )
 
@@ -428,8 +427,8 @@ ggsave(
   "size_plot.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   size_plot,
-  width = 220/1.7,
-  height = 140/1.7,
+  width = 220 / 1.7,
+  height = 140 / 1.7,
   units = "mm"
 )
 
@@ -438,8 +437,8 @@ ggsave(
   "persistence_plot.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   persistence_plot,
-  width = 220/1.7,
-  height = 140/1.7,
+  width = 220 / 1.7,
+  height = 140 / 1.7,
   units = "mm"
 )
 
@@ -448,8 +447,8 @@ ggsave(
   "HAWK_plot.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   HAWK_plot,
-  width = 220/1.7,
-  height = 140/1.7,
+  width = 220 / 1.7,
+  height = 140 / 1.7,
   units = "mm"
 )
 
@@ -459,13 +458,16 @@ ggsave(
 
 
 
+
 r_squares_plot <-
-  ggplot(r_squares_full, aes(x = horizon, y = r_squares, colour = type)) +
+  ggplot(r_squares_full, aes(x = horizon, y = r_squares, colour = specification)) +
   geom_line() +
   theme_light() +
   scale_y_continuous(TeX("$R^2$"), n.breaks = 8) +
-  scale_x_continuous("Horizon [1Q]", breaks = seq(0, 20, by = 2)) +
-  labs(color = "")+
+  scale_x_continuous("Horizon [1Q]", minor_breaks = (0:20)) +
+  labs(color = "Specification") +
+  theme(legend.position = c(0.95, 0.95), 
+        legend.justification = c(1,1))
 
 
 
@@ -473,8 +475,49 @@ ggsave(
   "r_squares_plot.pdf",
   r_squares_plot,
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  width = 210 / 1.3  ,
-  height = 148.5 / 1.3 ,
-  units = "mm",
-  device=cairo_pdf
-)
+  width = 210 / 1.7  ,
+  height = 148.5 / 1.7 ,
+  units = "mm")
+
+
+
+
+
+
+hausman_plot <-
+  ggplot(hausman_full, aes(x = horizon, y = hausman, colour = specification)) +
+  geom_line() +
+  theme_light() +
+  scale_y_continuous("Wu-Hausman Statistic",n.breaks = 8) +
+  scale_x_continuous("Horizon [1Q]", minor_breaks = (0:20)) +
+  labs(color = "Specification") +
+  theme(
+    legend.position = c(0.95, 0.95), 
+    legend.justification = c(1,1),
+    legend.frame  = element_blank()
+  ) +
+  geom_ribbon(
+    aes(ymin = 0, ymax = qchisq(1 - 0.05, df = 3) / 3, ),
+    alpha = 0.12,
+    linetype = 0,
+    fill = "#477998"
+  ) +
+  geom_ribbon(
+    aes(ymin = 0, ymax = qchisq(1 - 0.01, df = 3) / 3, ),
+    alpha = 0.12,
+    linetype = 0,
+    fill = "#477998"
+  ) +
+  guides(color = guide_legend(override.aes = list(fill = NA)))
+
+
+ggsave(
+  "hausman_plot.pdf",
+  hausman_plot,
+  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
+  width = 210 / 1.7  ,
+  height = 148.5 / 1.7 ,
+  units = "mm")
+
+
+
