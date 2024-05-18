@@ -12,7 +12,7 @@ library(latex2exp)
 
 
 # Datasets -----
-full_dataset_tbl <- read_csv("data/full_dataset.csv")
+full_dataset_tbl <- read_csv("data/intermediate_data/full_dataset.csv")
 full_dataset_ts <-
   full_dataset_tbl |> mutate(year_quarter = yearquarter(year_quarter)) |> tsibble()
 size_persistence_consumption_shorter_tbl <-
@@ -354,9 +354,9 @@ HAWK_plot <-
   geom_line(aes(y = HAWK, color = "HAWK")) +
   geom_line(aes(y = HAWK_IV, color = "HAWK IV")) +
   theme_light() +
-  labs(x = "", y = "HAWK", color = "") +
+  labs(x = "", y = "Hawk", color = "Type:") +
   geom_rect(
-    data = rec_data_1,
+    data = rec_data_3,
     inherit.aes = F,
     aes(
       xmin = start,
@@ -369,8 +369,12 @@ HAWK_plot <-
   ) +
   scale_y_continuous(breaks = breaks_extended()) +
   theme_bw() +
-  theme(legend.position = "bottom") +
-  scale_x_date(breaks = breaks_pretty(n = 6))
+  scale_x_date(breaks = breaks_pretty(n = 6))+
+  theme(
+    legend.position = c(0.98, 0.98), 
+    legend.justification = c(1,1),
+    legend.frame  = element_blank()
+  )
 
 
 

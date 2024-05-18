@@ -3,9 +3,9 @@
 
 \title{Systematic Monetary Policy Approach to Taylor Rule}
 
-\author{Alexander I. Vlasov\thanks{Email: avlasov@nes.ru. For supplementary materials, code and datasets, see the repository \href{https://github.com/alvlsv/CheckingHank}{github.com/alvlsv/CheckingHank}. I thank Valery Charnavoki and Konstantin Styrin for helpful comments.}}
+\author{Alexander I. Vlasov\thanks{Email: avlasov@nes.ru. For supplementary materials, code and datasets, see the repository on \href{https://github.com/alvlsv/CheckingHank}{github.com}. I thank Valery Charnavoki and Konstantin Styrin for helpful comments.}}
 
-\date{\normalsize First version: January, 2024\\\vspace{1ex} This version: May, 2024\\ \vspace{1ex}
+\date{\normalsize First version: May, 2024\\\vspace{1ex} This version: May, 2024\\ \vspace{1ex}
 \href{https://github.com/alvlsv/CheckingHank/blob/main/Checking_HANK/Paper/CheckingHANK.pdf}{Click here for the most recent draft}}
 
 
@@ -22,7 +22,7 @@
     \\
     \noindent\textbf{Keywords:} Systematic Monetary Policy, Taylor Rule, FOMC
     \\
-    \noindent\textbf{JEL Codes:} E21, E52, E12 \\
+    \noindent\textbf{JEL Codes:} E52, E58, E43\\
     \bigskip
 \end{abstract}
 
@@ -57,12 +57,14 @@
 % Intuitively, persistence of highly autocorrelated shock is indifferent to non-HtMs, as it is in RANK, since the only channel of monetary transmission is intertemporal substitution, but it matters for HtM households, whose response may be dampened by the persistence of monetary shock. 
 % This effect stems from failure of Ricaridan equivalence, since when it fails, then ``not only timing of fiscal policy but timing of monetary policy matters as well'' \cite{KMV2018}.
 
-The conduct of monetary policy can be divided via two axis (see \vref{tab:taxonomy}), the systematicality of a policy and the expectations of the market from the actions of monetary authority. 
-The examples of monetary policy cells along the main diagonal of \vref{tab:taxonomy} are the most frequent uses of systematic and unsystematic monetary policies, but note that the off diagonal elements are not empty. 
-This work makes an attempt to estimate the time-varying monetary policy function assuming that the time dimension is guided by a FOMC preferences. 
-That is, we try to estimate both the anticipated and unanticipated parts of the systematic monetary policy by using a FOMC preferences augmented Taylor Rule.
+The conduct of monetary policy can be divided via two axis (see \vref{tab:taxonomy}), whether the policy is systematic or unsystematic and whether the market expected the actions of monetary authority. 
+The examples of monetary policy cells along the main diagonal of \vref{tab:taxonomy} are the most frequently of systematic and unsystematic monetary policies -- systematic policy is mostly anticipated and unsystematic is mostly not.
+But note that the off diagonal elements are not empty. 
 
-\begin{table}[h!]\centering 
+This work makes an attempt to estimate the time-varying monetary policy function assuming that the time dimension is guided by a FOMC preferences. 
+That is, this works tries to estimate both the anticipated and unanticipated parts of the systematic monetary policy by using a FOMC preferences augmented Taylor Rule.
+
+\begin{table}[h!]\centering \footnotesize
   \begin{threeparttable}
   \caption{Monetary Policy Taxonomy}
   \label{tab:taxonomy}
@@ -76,18 +78,39 @@ That is, we try to estimate both the anticipated and unanticipated parts of the 
     \\[-1.8ex]\hline 
     \hline
   \end{tabular}
-  \begin{tablenotes}[flushleft]\footnotesize
-    \item[]\textit{Notes:} The table is from \citet{JordaHoover2000}, who use it with regards to central bank's policy of money supply.
+  \begin{tablenotes}[flushleft]\scriptsize
+    \item[]\textit{Notes:} The distinction and table is from \citet{JordaHoover2000}, who use it with regards to central bank's money supply policy.
   \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
 
+
+
 \subsection{Related literature}
 
-\citet{Carvalho2021} argues for estimation of Taylor rule using the OLS because the monetary policy shocks tend to explain only a small fraction of the overall variation of monetary instruments (i.e. Fed Funds rate, FFR).
+My work relates to several strands of literature. 
+First, this work relates to the attempts of estimation of systematic monetary policy, and, the theme which is connected, Taylor rules estimation, which is a particular form of the anticipated systematic monetary policy. 
 
-\citet{Aguiar2018}
+\subsubsection{Systematic Monetary Policy}
+
+The recent literature about systematic monetary policy identification focuses on measuring the distance between monetary policies (loss function), counterfactuals and optimal monetary policy functions. 
+For example, a recent work by \citet{McKayWolf2023} provides a methodology that uses many identified shocks and estimated responses to them, which, combined with structural assumptions and assumptions on stability of non-policy sector, allows them to estimate the monetary policy counterfactuals. 
+\citet{BarnichonMesters2023} using the similar methodology, are able to identify non-optimal policies without any structural assumptions. 
+
+
+Another approach to systematic monetary policy identification is \citet{HIM2023}, who propose the usage of FOMC preferences to estimate the spectrum of estimates of propagation of government spending shock. 
+This allow \citeauthor{HIM2023} to estimate the government spending multiplier conditional on the monetary authority's preferences towards inflation.
+In my work I follow the similar approach, i.e. I use the FOMC preferences to estimate the Taylor rule-like policy with time-varying (state-varying, where state is indexed by FOMC preferences) effects of projected inflation/output gap.
+
+
+
+\subsubsection{Taylor Rules}
+
+
+Recent literature that specifies on Taylor rules is rather small. I would like to note \citet{Carvalho2021}, who argue for estimation of Taylor rule using the OLS because the monetary policy shocks tend to explain only a small fraction of the overall variation of monetary instruments (i.e. Fed Funds rate, FFR). 
+That is why the possible endogeneity bias caused by OLS estimate, they claim, will not be large.
+\citet{Aguiar2018} use wavelet techniques (partial wavelet gain) to estimate the Taylor rule. They find a substantial changes in the Taylor Rule estimate throughout the time and frequencies.
 
 % First, this work provides additional indirect empirical support for models focused on the role of heterogeneity in household portfolio in MTM, for example \citet{KMV2018}, \citet{Auclert2019}, \citet{Luetticke2021} and successors.
 % There were several studies, which empirically support HANK. 
@@ -99,13 +122,11 @@ That is, we try to estimate both the anticipated and unanticipated parts of the 
 % Another empirical contribution to of literature is done by \citet{Gross2020}, they document the MPC change over economic cycle, specifically its change through GFC.
 
 %add
-This work contribute to. Additionally we this work is one of the first, that uses newly developed way of identification of systematic monetary policy  by , which allows us to estimate the aforementioned overall effect of the monetary shock, without controlling for any income related covariates -- without possible .
 
 
-
-The remainder of the paper proceeds as follows: 
-the next section thoroughly discloses the empirical strategy for estimating time-varying (or FOMC preference dependent) Taylor rule.
-Than I describe and the results and conclude.
+The paper proceeds as follows.
+The next section thoroughly discloses the empirical strategy for estimating time-varying (or FOMC preference dependent) Taylor rule.
+Than I describe and the results and construct historical size and persistence estimates.
 
 
 
@@ -120,12 +141,13 @@ where $r_t$ is the real rate of interest, $r_t^*$ is the natural rate of interes
 
 The assumed monetary policy rule is essentially a Taylor rule, but also it can be viewed as a simplified time-varying version of \citet{RomerRomer2004} regression rule.
 
-I estimate the following state-dependent local projection augmented with IV model \citep{Jorda2005,PlagborgMollerWolf2021}
+I estimate the following state-dependent local projection augmented with IV model\footnote{See \citet{Jorda2005,PlagborgMollerWolf2021,Jorda2023} for theory on Local Projection, and specifically the latter on LP-IV.}
 \begin{multline}
     r_{t+h}-r^*_{t+h}=\alpha^h+\delta^h\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)\\ +\beta_\pi^h \pi_{t}^e+\gamma_\pi^h \pi_{t}^e\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)+\beta_x^h x_{t}^e+\gamma_x^h x_{t}^e\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)\\+\zeta^hZ_t+e_{t+h}^h,\label{eq:LP1}
 \end{multline}
 where $h=0,\dots, H$ are the forecast horizons. $r_{t+h}$ is federal funds rate (bridged with \citet{WuXia2016} for the ZLB period) and $r^*_{t+h}$ is the \citet{LW2003} natural interest rate.\footnote{I use \citet{HLW2023} updated version of the \citet{LW2003} natural rate.}
-$\pi_t^e$ is the measure of the FED expectation of future inflation. I use the average of the one- and two-quarters  tealbook inflation forecast following the approach by \citet{CoibionGorodnichenko2011}. 
+$\pi_t^e$ is the measure of the FED expectation of future inflation. 
+I use the average of T+1 and T+2 quarters tealbook forecasts following the approach by \citet{CoibionGorodnichenko2011}. 
 $\mathit{Hawk}_t$ is the quarterly Hawk-Dove index of \citet{HIM2023}, which is based on the \citet{Istrefi2019} and \citet{BordoIstrefi2023} estimation of individual policy preference of FOMC members expressed before each of the FOMC meeting in press; $\overline{\mathit{Hawk}}$ stand for the mean of this variable. 
 
 The vector of controls, $Z_t$, consists of the 4 lags of the dependent variable, $\left(r-r^*\right)_t$, 4 lags of the expected inflation, $\pi_t^e$, and 4 lags of expected gdp gap, $x_t$.
@@ -157,35 +179,36 @@ That is, for the robustness to model misspecification and semi-parametric nature
 Note that, ideally, in order to estimate \vref{eq:LP1} we want to instrument not only $\mathit{Hawk}_{t}$ but also the other main variables of interest, namely FOMC inflation and output gap projections. 
 In order to find some orthogonal variation in projection of inflation/output gap one would need to identify the exogenous shocks to the information of the central bank. 
 That is, we want to find the episodes of drastic change in economic projection of central bank, that were not caused by the underlying economic conditions. 
-This remains the 
-
+This remains the unsolved issue.
 
 At the same time \citet{Carvalho2021} argues that because the monetary policy shocks tend to explain a small fraction\footnote{Also note that due to the increasing use of policies that rely on expectations management (i.e. forward guidance), central banks have become more opened, what leads to decrease in share of movement in rates due to monetary policy shocks.} of the variance of regressors typically included in monetary policy rules, the endogeneity bias in Taylor Rule estimation with OLS is supposed be small.
 
-\section{Results}
+\section{Response of Monetary Policy to Projected Inflation and Output gap}
 
-\subsection{Response of Monetary Policy to Projected Inflation and Output gap}
 
-\subsubsection{Short Specification}
+
+\subsection{Short Specification}
 
 The estimated coefficients of interest of the short regression can be found in \vref{fig:LP_short,tab:LP_short}. 
 They are mean and differential response to a unit increase in tealbook projected CPI inflation and GDP gap. 
 The differential responses is shown under the deviation of $\mathit{Hawk}_t$ from its mean equal to $2/12$, which is slightly higher than one standard deviation of $\mathit{Hawk}_t$. 
+This corresponds to a replacement of 2 of FOMC members with 2 consistent hawks.\footnote{Consistent hawk is a FRB governor that was not classified as dove priorly, additional consistent hawk increases $\mathit{Hawk}$ index by 1/12. For detailed discussion of $\mathit{Hawk}$ index construction see \vref{seq:data}.}
 The coefficients (without scaling) for for the main regressors of interest can be seen in \vref{tab:LP_short}. 
 
-The average response (i.e. the the response for average FOMC hawkishness) of the $\left(r-r^*\right)$ are larger than zero up on 95\% confidence to 11th quarter. The point estimate of the immediate response (T) of $\left(r-r^*\right)$ to the increase of tealbook projected of CPI inflation is an increase by 0.175 percentage point. The response rises peak of 0.923 p.p. in the T+4 quarter, and then diminishes .
+The average response (i.e. the the response for average FOMC hawkishness) of the $\left(r-r^*\right)$ are larger than zero up on 95\% confidence to 11th quarter. The point estimate of the immediate response (T) of $\left(r-r^*\right)$ to the increase of tealbook projected of CPI inflation is an increase by 0.175 percentage point. The response rises peak of 0.923 p.p. in the T+4 quarter, and then diminishes and becomes not significantly different from zero at T+11.
+
 
 The impact of hawkishness of FOMC on the effect of a change in projected inflation becomes prominent after 3rd quarter and is negative. If the 2 FOMC members out of 12 were changed for hawkish FRB heads, it would reduce the response to inflation by 0.266 percentage in the T+3rd quarter, and the effect increases to 0.370 p.p in T+6th quarter. 
 Note that the effect of hawks on response to inflation becomes not distinguishable from zero (at 10\% significance level) starting from the T+7th quarter.
 
-The average response of $\left(r-r^*\right)$ to the increase in tealbook projected gdp gap of 1 p.p. is 0.177 on impact (at T) and it increases a peak of 0.815 in T+6. The influence of FOMC preferences appears only on impact (T) -- additional 2/12 hawks in FOMC increase the responce by 0.015 p.p., and since T+17, and I treat the latter as a result attributed to the variance of estimator. 
+The average response of $\left(r-r^*\right)$ to the increase in tealbook projected gdp gap of 1 p.p. is 0.177 on impact (at T) and it increases a peak of 0.815 in T+6. The influence of FOMC preferences appears only on impact (T) -- additional 2/12 hawks in FOMC increase the response by 0.015 p.p., and since T+17, and I treat the latter as a result attributed to the variance of estimator. 
 
-So, the FOMC hawkishness (measured by $\mathit{Hawk}$ index) does decrease both the 
+So, the FOMC hawkishness does decrease the response to projected CPI inflation (by doing so it shrinks the period of response of monetary authority to an positive shock of expected inflation), but has little to no effect on the response to an increase in projected GDP gap.
 
 
 \begin{figure}[!htbp]\centering
-  \begin{minipage}{1\textwidth}
-    \caption{Policy Response to Inflation and FOMC Hawkishness. Short Specification}\vspace{2ex}
+  \begin{minipage}{.9\textwidth}
+    \caption{Policy Response to Inflation and FOMC Hawkishness. Short Specification}\vspace{1ex}
     \label{fig:LP_short}
     \begin{subfigure}[b]{0.495\textwidth}
         \centering
@@ -230,13 +253,13 @@ So, the FOMC hawkishness (measured by $\mathit{Hawk}$ index) does decrease both 
       \\[-1.8ex] & $h=0$ & $h=2$ & $h=4$ & $h=6$ & $h=8$ & $h=10$ & $h=12$ \\ 
       \\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6) & (7)\\ 
       \hline \\[-1.8ex] 
-       Expected CPI Inflation, & 0.175$^{**}$ & 0.570$^{***}$ & 0.923$^{***}$ & 0.856$^{***}$ & 0.791$^{***}$ & 0.738$^{**}$ & 0.596 \\ 
+      Projected CPI Inflation, & 0.175$^{**}$ & 0.570$^{***}$ & 0.923$^{***}$ & 0.856$^{***}$ & 0.791$^{***}$ & 0.738$^{**}$ & 0.596 \\ 
         $\Delta\mathit{CPI}_t^e$ & (0.073) & (0.157) & (0.263) & (0.308) & (0.281) & (0.342) & (0.448) \\ 
        & & & & & & & \\ 
        $\quad \times \left(\mathit{Hawk}_t-\overline{\mathit{Hawk}}\right)$ & 0.170 & $-$0.191 & $-$1.600$^{**}$ & $-$2.224$^{**}$ & $-$1.741 & $-$2.091$^{*}$ & $-$2.070$^{*}$ \\ 
        & (0.186) & (0.530) & (0.749) & (1.094) & (1.122) & (1.193) & (1.193) \\ 
        & & & & & & & \\ 
-       Expected GDP Gap, $x_t^e$ & 0.177$^{***}$ & 0.483$^{***}$ & 0.709$^{***}$ & 0.815$^{***}$ & 0.733$^{***}$ & 0.653$^{**}$ & 0.633$^{*}$ \\ 
+       Projected GDP Gap, $x_t^e$ & 0.177$^{***}$ & 0.483$^{***}$ & 0.709$^{***}$ & 0.815$^{***}$ & 0.733$^{***}$ & 0.653$^{**}$ & 0.633$^{*}$ \\ 
        & (0.058) & (0.180) & (0.157) & (0.160) & (0.176) & (0.271) & (0.325) \\ 
        & & & & & & & \\ 
        $\quad \times \left(\mathit{Hawk}_t-\overline{\mathit{Hawk}}\right)$ & 0.089$^{*}$ & 0.158 & 0.002 & $-$0.122 & $-$0.013 & 0.217 & 0.263 \\ 
@@ -247,16 +270,16 @@ So, the FOMC hawkishness (measured by $\mathit{Hawk}$ index) does decrease both 
        R$^{2}$ & 0.983 & 0.912 & 0.784 & 0.647 & 0.528 & 0.416 & 0.373 \\ 
        Adjusted R$^{2}$ & 0.981 & 0.898 & 0.749 & 0.590 & 0.451 & 0.318 & 0.266 \\ 
        Residual Std. Error & 0.322 & 0.716 & 1.063 & 1.295 & 1.457 & 1.582 & 1.622 \\ 
-       Wu-Hausman & 0.395& 0.352& 0.718& 1.891& $6.496^{***}$ &$15.97^{***}$& $15.05^{***}$ \\ 
+       Wu-Hausman F & 0.395& 0.352& 0.718& 1.891& $6.496^{***}$ &$15.97^{***}$& $15.05^{***}$ \\ 
        & [0.757] & [0.788]& [0.543] & [0.136] &[0.001] & [0.000] & [0.000]\\ \hline 
        \hline 
     \end{tabular}
     \begin{tablenotes}[flushleft]\scriptsize
       \item \textit{Notes:} 
-      This table reports the estimates of the coefficients of interest in model in \vref{eq:LP1} with projected inflation measured as a projected change in CPI. 
+      This table reports the estimates of the coefficients of interest in model in \vref{eq:LP1} with projected inflation measured as a projected change in CPI and projected output gap is measured by projected GDP gap.
       The \citet{Andrews1991} HAC standard errors are in parenthesis. 
       All of the coefficients can be seen in \vref{tab:LP_short_full}. 
-      Weak Instrument F-statistics (for $h=0$) are HAWK: $53.5^{***}$; interaction with CPI inflation: $42.2^{***}$, interaction with GDP gap: $51.4^{***}$. Wu-Hausman is a 2SLS test for endogeneity, p-value is in brackets below. $^{*}p<0.1$; $^{**}p<0.05$; $^{***}p<0.01$.
+      Weak Instrument F-statistics (for $h=0$) are HAWK: $53.5^{***}$; interaction with CPI inflation: $42.2^{***}$, interaction with GDP gap: $51.4^{***}$. Wu-Hausman stands for a test statistic that corresponds to 2SLS test for endogeneity, p-value is in brackets below.  The period of estimation is from 1987 Q3 to 2018 Q4. $^{*}p<0.1$; $^{**}p<0.05$; $^{***}p<0.01$.
     \end{tablenotes}
     \end{threeparttable}  
     \end{table}
@@ -267,19 +290,24 @@ So, the FOMC hawkishness (measured by $\mathit{Hawk}$ index) does decrease both 
 
 
 
-  \subsubsection{Long Specification}
+  \subsection{Long Specification}
 
-  The main Taylor Rule coefficients of interest can be found in \vref{tab:LP_long} and impulse responses can be found in \vref{fig:LP_long}. Note that, in order to look similar to the short specification, the IRFs of deviation of rate from its natural level, $r-r^*$, are calculated with for a shock of decrease in unemployment gap.
+  The coefficients of interest of long specification of Taylor Rule can be found in \vref{tab:LP_long} and impulse responses can be found in \vref{fig:LP_long}. 
+  Note that, in order to look similar to the short specification, the IRFs of deviation of rate from its natural level are calculated with for a shock of decrease (signified by down pointing arrow, $\downarrow$) in unemployment gap.
 
-  The 
+  The point estimate of response of the $r-r^*$ to a 1 p.p. increase in projected deflator inflation under $\mathit{Hawk}_t=\overline{\mathit{Hawk}}$ in period T is not significantly different from 0, and it rises to 0.518 in period T+2 and quickly becomes insignificant at T+4.
+
+  The estimate of impact of hawkishness of FOMC on the response of $r-r^*$ is significant in period T and equal to additional 0.12 p.p. for a change in Hawk index by 2/12. The impact steadily increases and reaches addition of 0.58 in period T+6 for 2/12 FOMC hawks to a response to projected deflator inflation. The effect declines and becomes not significantly different from zero at T+7 quarter.
+
+  The point estimate of immediate (T) response of $r-r^*$ to decrease in unemployment gap,assuming the average hawkishness of FOMC, is equal to 1.19 p.p. The estimate of IRF increases to the maximum of 1.99 p.p. in period T+6, and looses the significance at T+10.
   
-  \citet{HIM2023} (in appendix named ``Validation Exercise'') estimates the model similar to \vref{eq:LP1} under long specification, but under assumption that the systematic monetary policy responds only to inflation. My estimates in \vref{fig:LP_long} and \vref{tab:LP_long} average and differential responses of $r_t-r_t^*$ to CPI inflation tend to be smaller compared to the estimations of \citet{HIM2023}. 
-  The difference is due to the fact that \citet{HIM2023} 1) do not correct the fed funds rate for the natural rate of interest, i.e. estimate the response of $r_t$, and 2) assume that the monetary authority systematic policy respond only to inflation. 
+  The estimate of differential impact is significant at 10\% only on impact (at T), the point estimate is equal to 0.015 percentage point, and not significant for other horizons.
+
 
 
 \begin{figure}[!htbp]\centering
   \begin{minipage}{.9\textwidth}
-  \caption{Policy Response to Projected Deflator Inflation and Unemployment Gap and FOMC Hawkishness. Long Specification}\vspace{2ex}
+  \caption{Policy Response to Projected Deflator Inflation and Unemployment Gap and FOMC Hawkishness. Long Specification}\vspace{1ex}
   \label{fig:LP_long}
   \begin{subfigure}[b]{0.495\textwidth}
       \centering
@@ -305,7 +333,7 @@ So, the FOMC hawkishness (measured by $\mathit{Hawk}$ index) does decrease both 
     \label{fig:LP_long:differential_gap}
     \includegraphics[width=\linewidth]{differential_unemployment_long.pdf}
   \end{subfigure}
-      {\begin{flushleft}\scriptsize\textit{Notes}: This figure reports the responses of the $(r-r^*)_t$ to an increase in the Tealbook deflator inflation forecast and \emph{decrease} unemployment gap forecast of 1 p.p.
+      {\begin{flushleft}\scriptsize~\textit{Notes:} This figure reports the responses of the $(r-r^*)_t$ to an increase in the Tealbook deflator inflation forecast and \emph{decrease} unemployment gap forecast of 1 p.p.
       The subfigure \ref{fig:LP_long:average_inflation} reports the response of $(r-r^*)_t$ to projected deflator inflation for the $\mathit{HAWK}$ index equal to the sample average; 
       \ref{fig:LP_long:differential_inflation} is the addition to the response in case there are 2 (out of 12 in total) additional consistent hawks in the FOMC. 
       Subfigures \ref{fig:LP_long:average_gap} and \ref{fig:LP_long:differential_gap} report the same for the decrease in projected unemployment gap for 1p.p. 
@@ -330,46 +358,60 @@ So, the FOMC hawkishness (measured by $\mathit{Hawk}$ index) does decrease both 
       \\[-1.8ex] & $h=0$ & $h=2$ & $h=4$ & $h=6$ & $h=8$ & $h=10$ & $h=12$ \\ 
       \\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6) & (7)\\ 
       \hline \\[-1.8ex] 
-      Expected Deflator   & 0.235 & 0.518$^{**}$ & 0.691$^{*}$ & 0.718 & 0.681 & 0.331 & 0.178 \\ 
-      Inflation, $\Delta\mathit{Deflator}_t^e$ & (0.235) & (0.235) & (0.354) & (0.587) & (0.613) & (0.455) & (0.353) \\ 
+      Projected Deflator & 0.235 & 0.518$^{**}$ & 0.691$^{*}$ & 0.718 & 0.681 & 0.331 & 0.178 \\ 
+      Inflation, $\Delta\mathit{Deflator}_t^e$  & (0.146) & (0.235) & (0.354) & (0.587) & (0.613) & (0.455) & (0.353) \\
       & & & & & & & \\ 
-      $\quad \times \left(\mathit{Hawk}_t-\overline{\mathit{Hawk}}\right)$ & 0.716 & 1.554$^{**}$ & 2.216$^{***}$ & 3.466$^{***}$ & 2.588$^{**}$ & 1.612 & 0.507 \\ 
-      & (0.654) & (0.654) & (0.510) & (1.105) & (1.306) & (1.347) & (1.320) \\ 
+      $\quad \times \left(\mathit{Hawk}_t-\overline{\mathit{Hawk}}\right)$  & 0.716$^{**}$ & 1.554$^{**}$ & 2.216$^{***}$ & 3.466$^{***}$ & 2.588$^{**}$ & 1.612 & 0.507 \\ 
+      & (0.292) & (0.654) & (0.510) & (1.105) & (1.306) & (1.347) & (1.320) \\ 
       & & & & & & & \\ 
-      Expected Unemployment & $-$1.192$^{**}$ & $-$1.268$^{**}$ & $-$1.908$^{***}$ & $-$1.991$^{***}$ & $-$1.267$^{**}$ & $-$1.012$^{*}$ & $-$0.871 \\ 
-      Gap, $\left(u-u^*\right)_t^e$ & (0.597) & (0.597) & (0.420) & (0.462) & (0.627) & (0.573) & (0.591) \\ 
+      Projected Unemployment  &  $-$1.192$^{***}$ & $-$1.268$^{**}$ & $-$1.908$^{***}$ & $-$1.991$^{***}$ & $-$1.267$^{**}$ & $-$1.012$^{*}$ & $-$0.871 \\
+      Gap, $\left(u-u^*\right)_t^e$  & (0.275) & (0.597) & (0.420) & (0.462) & (0.627) & (0.573) & (0.591) \\ 
       & & & & & & & \\ 
       $\quad \times \left(\mathit{Hawk}_t-\overline{\mathit{Hawk}}\right)$& $-$0.168 & $-$0.621$^{*}$ & $-$0.541 & $-$0.109 & $-$0.074 & $-$0.495 & $-$0.345 \\ 
-      & (0.338) & (0.338) & (0.430) & (0.615) & (0.716) & (0.746) & (0.808) \\ 
+      & (0.198) & (0.338) & (0.430) & (0.615) & (0.716) & (0.746) & (0.808) \\
       & & & & & & & \\ 
       \hline \\[-1.8ex] 
       Observations & 200 & 200 & 200 & 200 & 200 & 198 & 196 \\ 
       R$^{2}$ & 0.960 & 0.848 & 0.768 & 0.650 & 0.606 & 0.609 & 0.634 \\ 
       Adjusted R$^{2}$ & 0.956 & 0.833 & 0.746 & 0.618 & 0.569 & 0.572 & 0.600 \\ 
       Residual Std. Error & 0.741 & 1.438 & 1.775 & 2.183 & 2.332 & 2.331 & 2.265 \\ 
-      Wu-Hausman & $2.268^{*}$& $6.267^{***}$ & $6.322^{***}$ & $16.09^{***}$ & $9.765^{***}$ & $5.584^{***}$ & $2.04$\\
+      Wu-Hausman F & $2.268^{*}$& $6.267^{***}$ & $6.322^{***}$ & $16.09^{***}$ & $9.765^{***}$ & $5.584^{***}$ & $2.04$\\
        &[0.082]& [0.000] & [0.000]& [0.000] & [0.000] & [0.001]& [0.11]\\
       \hline 
       \hline
     \end{tabular} 
     \begin{tablenotes}[flushleft]\scriptsize
       \item[] \textit{Notes:} 
-      This table reports the estimates of the coefficients of interest in model in \vref{eq:LP1} with projected inflation measured as a projected change in GDP deflator and projected gap is the gap in unemployment. The \citet{Andrews1991} HAC standard errors  are in parenthesis. Weak Instrument statistics (for $h=0$) are the following, hawk: $64.8$; interaction with deflator inflation: $64.2$, interaction with unemployment gap: $79.5$. Wu-Hausman is a 2SLS test for endogeneity, p-value is in brackets below. $^{*}p<0.1$; $^{**}p<0.05$; $^{***}p<0.01$.
+      This table reports the estimates of the coefficients of interest in model in \vref{eq:LP1} with projected inflation measured as a projected change in GDP deflator and projected gap is the gap in unemployment. The \citet{Andrews1991} HAC standard errors  are in parenthesis. Weak Instrument statistics (for $h=0$) are the following, hawk: $64.8$; interaction with deflator inflation: $64.2$, interaction with unemployment gap: $79.5$. Wu-Hausman F is a F-form statistic for 2SLS test for endogeneity, p-value is in brackets below. The period of estimation is from 1968 Q1 to 2018 Q4.
+      $^{*}p<0.1$; $^{**}p<0.05$; $^{***}p<0.01$.
     \end{tablenotes}
   \end{threeparttable}
   \end{table} 
   
 
-
-
-\subsubsection{Endogeneity Test}
-
-To test the endogeneity (the fact that 3 instruments change the coefficients on variables of interest) I calculate Wu-Hausman statistic (see \vref{fig:WuHausman} for the statistic for each horizon). 
-We can reject the null of equivalence of LP and LP-IV for short specification starting from $h=8$ and for long specification from the contemporaneous prediction up to $h=11$ at 5\% significance level.
+  
+  \citet{HIM2023} (in appendix named ``Validation Exercise'') estimates the model similar to \vref{eq:LP1} under long specification, but under assumption that the systematic monetary policy responds only to inflation. My estimates in \vref{fig:LP_long} and \vref{tab:LP_long} average and differential responses of $r_t-r_t^*$ to CPI inflation tend to be smaller compared to the estimations of \citet{HIM2023}. 
+  The difference is due to the fact that \citet{HIM2023} 1) do not correct the fed funds rate for the natural rate of interest, i.e. estimate the response of $r_t$, and 2) assume that the monetary authority systematic policy respond only to inflation. 
 
 
 
-\begin{figure}\centering 
+  The essential difference in dynamics between short and long specification is in the responses to inflation, specifically in the balance between average and differential responses. 
+  In short specification the FOMC hawkishness plays less important role, it quickly looses the significance compared to the long specification. 
+  Additionally, the fact that hawkishness of FOMC does not increase the response to the CPI inflation, but does increase the response to deflator inflation is disturbing.
+
+
+
+
+\subsection{Endogeneity Test}
+
+
+To test the endogeneity (i.e. the fact that 3 instruments change the coefficients on instrumented variables) I calculate Wu-Hausman F statistic (see \vref{fig:WuHausman} for the statistic for each horizon). 
+We can reject the null of equivalence of LP and LP-IV for short specification starting from $h=8$ and for long specification from the contemporaneous prediction up to $h=11$ at 5\% significance level. 
+Note that this is a sequential test, so one need to be careful in result interpretation.
+
+
+
+\begin{figure}[!htbp]\centering 
   \begin{minipage}{1\textwidth}\centering
     \caption{Additional Statistics for LP Models}
     \vspace{1ex}
@@ -383,7 +425,7 @@ We can reject the null of equivalence of LP and LP-IV for short specification st
     \label{fig:WuHausman}
   \includegraphics[width=\textwidth]{hausman_plot.pdf}
     \end{subfigure}
-  {\begin{flushleft}\scriptsize\textit{Notes}: This figure reports the $R^2$ and Wu-Hausman F statistic of the short and long specifications of \vref{eq:LP1} model. The shaded area correspond to the 5\% and 1\% not-rejection regions for the Wu-Hausman endogeneity F statistic. \end{flushleft}}
+  {\begin{flushleft}\scriptsize~\textit{Notes:} This figure reports the $R^2$ and Wu-Hausman F statistic (for 2SLS test for endogeneity) of the short and long specifications of \vref{eq:LP1} model. The shaded area correspond to the 5\% and 1\% not-rejection regions for the Wu-Hausman endogeneity F statistic. \end{flushleft}}
   \end{minipage}
 \end{figure}
 
@@ -396,16 +438,18 @@ The \vref{fig:pathes_predictions} shows the point-predictions made using the mod
 
 The \vref{fig:r_square} show $R^2$ for different prediction horizons. 
 One can note that the LP-IV model has good predictive abilities in short horizons.\footnote{This result is similar to the result of \citet{Carvalho2021} for specification with projection of CPI inflation and projection GDP gap.}
-The $R^2$ for $h=0$ is 0.98 and 0.96 for short and long specifications respectively. And it remains larger than 0.8 for the 3 quarters after the monetary policy decision.
-The in-sample predictive ability deteriorates quickly after the 3rd quarter after the quarter of decision and stabilizes on the levels around 0.4 for short specification, and around 0.625 for long specification.
+The $R^2$ for $h=0$ is 0.98 and 0.96 for short and long specifications respectively. 
+It remains larger than 0.8 for the 3 quarters after the monetary policy decision.
+In-sample predictive ability deteriorates quickly after the 3rd quarter after the quarter of decision and stabilizes on the levels around 0.4 for short specification, and around 0.625 for long specification.
+The difference in $R^2$ between two specification is probably due to the stability of predictions in the period before 1988 Q3.
 
 
 
 \begin{figure}[!htbp]\centering
   \begin{minipage}{1\textwidth}\centering
-    \caption{Predictions of FFR Paths Made in Each of the Period.} 
+    \caption{Predictions of FFR Paths Made in Each of the Period} 
     \label{fig:pathes_predictions}
-    \vspace{2ex}
+    \vspace{1ex}
     \begin{subfigure}[b]{0.495\textwidth}\centering
       \caption{Short Specification}
       \label{fig:pathes_predictions_short}
@@ -417,7 +461,7 @@ The in-sample predictive ability deteriorates quickly after the 3rd quarter afte
       \includegraphics[width=\linewidth]{predicted_paths_long.pdf}
     \end{subfigure}
     {\begin{flushleft}
-      \scriptsize \textit{Notes:} This figure shows the \vref{eq:LP1} model predictions of FFR rate paths made in each period of time for 2 specifications. The prediction period is 1988 Q3 to 2018 Q4 for both specifications.
+      \scriptsize ~\textit{Notes:} This figure shows the \vref{eq:LP1} model predictions of FFR rate paths made in each period of time for 2 specifications. The prediction period is 1988 Q3 to 2018 Q4 for both specifications.
     \end{flushleft}} 
     \end{minipage}
 
@@ -430,165 +474,109 @@ The in-sample predictive ability deteriorates quickly after the 3rd quarter afte
 
 The predicted interest rate paths are naturally hard to analyze, so one of the ways to look at them, which is inspired by the size-persistence tradeoff in heterogeneous agent new keynesian model (HANK) by \citet{KMV2018}, is to estimate the size and persistence of monetary policy. 
 
-First, I restrict the prediction horizon to $H=12$ quarters ahead, because after T+12 there is no significant coefficients of interest, and predictive abilities plateaued. 
-Essentially, I assume that in 3 years after the shock of projected inflation/output gap happened the monetary policy has fully reacted and the cycle of contractionary/expansionary of policy has finished.
+First, I restrict the prediction horizon to $H=16$ quarters ahead, because after T+12 there is no significant coefficients of interest, and predictive abilities plateaued. 
+Essentially, $H=16$ is equivalent to assumption that in 4 years after the shock of projected inflation/output gap happened the monetary policy has fully reacted and the cycle of contractionary/expansionary of policy has finished.
 
 Deviating from \citet{KMV2018}, I define the size as a mean of predicted rate path.\footnote{\citet{KMV2018} define size as a integral of deviation of rate of interest from natural rate for the whole duration of the policy, i.e. $\int_0^T \left(r_t-r^*\right)\,dt$. If we discretize it, it can be written as a sum, the size in my definition is a sum scaled by $1/(T+1)$.} 
-The persistence is calculated by fitting the model 
+The persistence can be calculated by fitting the model 
 \[\left(r-r^*\right)_t=\exp(\mu t)\left(r-r^*\right)_0\exp(\varepsilon_t),\]
-and persistence is then equal to $\exp(\mu)$. Note that it can be rewritten as
+and persistence is then equal to $\exp(\mu)$.\footnote{Note that in HANK model by \citet{KMV2018} the $\mu$ was assumed to be negative and $r_0-r_0^*$ was assumed to be positive, that is \citet{KMV2018} was focused on contractionary shock of $r_0$ which follow the $\left(r-r^*\right)_t=\exp(\mu t)\left(r-r^*\right)_0$ process.} Note that it can be rewritten as
 \[\log\left(\frac{\left(r-r^*\right)_t}{\left(r-r^*\right)_0}\right)=\mu t+\varepsilon_t,\]
 which can be estimated with OLS. 
-Note that in HANK model by \citet{KMV2018} the $\mu$ was assumed to be negative
-
-You can find the estimates of size and persistence in \vref{fig:size_persistence}. If size is greater than 0 then the model in \vref{eq:LP1} predicts the contractionary monetary policy, and vice versa. If persistence is larger than 1 then the model predicts the increase in rate for future horizons. Most of the quarter-points (about 71\% for short and 75\% for long specifications, see \vref{tab:size_persistence_quadrants}) are have persistence below 1, that is in most states the estimated model predicted a rate path to be a decline in rates.  
 
 
-We can see 2 clusters of points that can be roughly divided by the year 2000. 
-Since 2000 the monetary policy paths have a reduced size and a larger variation in persistence, which correlates with decrease in hawkishness of FOMC.
+You can find the estimates of size and persistence in \vref{fig:size_persistence} (on size-persistence as x-y axis) and in \vref{fig:size_persistence_plot} (on size-quarter, persistence-quarter axes).
+If size is greater than 0 then the model in \vref{eq:LP1} predicts the contractionary monetary policy in the future, and vice versa. 
+If persistence is larger than 1 then the model predicts the increase in rate for future horizons. 
+Most of the points-quarters (about 42\% for short and 41\% for long specifications in period between 1988 Q3 and 2018 Q4, see \vref{tab:size_persistence_quadrants}) are observe persistence below 1 and size above zero, that is in most periods the estimated model projects a a future decline in $r_t-r_t^*$.  
 
 
 
 \begin{figure}[!hpbt]\centering
-  \begin{minipage}{1\textwidth}\centering
+  \begin{minipage}{\textwidth}\centering
     \caption{Historical Estimates of Size and Persistence} 
     \label{fig:size_persistence}
     \vspace{1ex}
-    \begin{subfigure}[b]{0.49\textwidth}\centering
+    \begin{subfigure}[b]{0.494\textwidth}\centering
       \caption{Short Specification}
       \includegraphics[width=\linewidth]{actual_size_persistence_short.pdf}
     \end{subfigure}\hfill
-    \begin{subfigure}[b]{0.49\textwidth}\centering
+    \begin{subfigure}[b]{0.494\textwidth}\centering
       \caption{Long Specification}
       \includegraphics[width=\linewidth]{actual_size_persistence_long.pdf}
     \end{subfigure}
-    {\begin{flushleft}\scriptsize \textit{Notes:} This figure shows the size and persistence calculated as described in \vref{sec:size_persistence} for 2 specifications for period from 1988 Q3 to 2018 Q4 (the period of estimation of short specification).\end{flushleft}} 
+    {\begin{flushleft}\scriptsize ~\textit{Notes:} This figure shows the size and persistence calculated as described in \vref{sec:size_persistence} for 2 specifications for period from 1988 Q3 to 2018 Q4 (the period of estimation of short specification).\end{flushleft}} 
     \end{minipage}
     
 \end{figure}
 
 
-\begin{table}[h!]\centering 
+
+
+\begin{table}[!htbp]\centering \footnotesize
   \begin{threeparttable}
-  \caption{Shares of Periods for Different Size and Persistence Quadrants}
+  \caption{Shares of Quarters in Size-Persistence Quadrants}
   \label{tab:size_persistence_quadrants}
-  \begin{tabular}{@{\extracolsep{5pt}}lcc} 
+  \begin{tabular}{@{\extracolsep{5pt}}lcccc} 
     \\[-1.8ex]\hline 
     \hline \\[-1.8ex] 
-    & $\mathrm{Size}<0$ & $\mathrm{Size}>0$\\ 
+    & \multicolumn{2}{c}{Short Specification} & \multicolumn{2}{c}{Long Specification}\\ 
+    \cline{2-3} \cline{4-5} \\[-1.8ex]
+    & $\mathrm{Size}_t<0$& $\mathrm{Size}_t>0$& $\mathrm{Size}_t<0$ & $\mathrm{Size}_t>0$\\
     \hline \\[-1.8ex] 
-   $\mathrm{Persistence}>1$&  \makecell[c]{11.47\% \\ 9.02\%}& \makecell[c]{16.39\% \\ 15.57\%}\\ \\
-    $\mathrm{Persistence}<1$ & \makecell[c]{29.50\%\\ 34.42\%} &\makecell[c]{41.80\%\\ 40.98\%} \\
-    \\[-1.8ex]\hline 
-    \hline
+   $\mathrm{Persistence}_t>1$&  11.47\%& 16.39\%   & 9.02\%& 15.57\%\\ \\
+    $\mathrm{Persistence}_t<1$ & 29.50\%&  41.80\% &  34.42\%& 40.98\% \\ \\[-1.8ex]
+   \hline \hline
   \end{tabular}
   \begin{tablenotes}[flushleft]\scriptsize
-    \item[]\textit{Notes:} Shares of size and persistence estimates for short and long specifications (short specification above, long -- below) for period from 1988 Q3 to 2018 Q4 in different quadrants of size-persistence plane.
+    \item[]\textit{Notes:} This table presents shares of size and persistence estimates for short and long specifications for period from 1988 Q3 to 2018 Q4 in different quadrants of size-persistence plane in \vref{fig:size_persistence}. If in $t$ $\mathrm{Size}_t>0$ then the prediction of monetary policy path is contractionary (and vice versa), if $\mathrm{Persistence}_t>1$ then the predicted rate path in increasing (and vice versa).
   \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
 
-% Based on the impulse responses above I restrict the horizon for the size and persistence calculation to the 8th quarter, i.e. in equation \eqref{eq:pred_policy} I set $H$ to be equal to 8. The estimates of coefficients of the models \vref{eq:linear,eq:quadratic} can be seen in \vref{tab:Size-Persistence}.
+Note that for both specifications the size plots and persistence plots (\vref{fig:size_persistence_plot}) the dynamics generally look quite similar in the region of intersection (starting from 1988), but the peak points of estimates of persistence do seem to be quite different, even if peaks timing is similar.
+Additionally, we see that the size decreases in time of recessions, the persistence estimate is are less than 1 at the start of the crisis and it sometimes grow to the end of the recession. This statement about persistence  applies to GFC (2008 Q1 -- 2009 Q3), 1990 Q3 -- 1991 Q2 recession and 1973-1975 recession, but not to 2001 recession, 1981 Q3 -- 1982 Q4 recession. 
+
+\begin{figure}[!hptb]\centering
+  \caption{Size and Persistence Dynamics}
+  \label{fig:size_persistence_plot}
+  \vspace{1ex}
+  \begin{minipage}{0.92\textwidth}
+    \begin{subfigure}[b]{0.494\textwidth}\centering
+      \caption{Estimates of Size for Short Specification}
+    \includegraphics[width=\textwidth]{size_short_plot.pdf}
+    \end{subfigure}\hfill   \begin{subfigure}[b]{0.494\textwidth}\centering
+      \caption{Estimates of Size for Long Specification}
+    \includegraphics[width=\textwidth]{size_long_plot.pdf}
+    \end{subfigure}
+    \vspace{1ex}
+    \begin{subfigure}[b]{0.494\textwidth}\centering
+      \caption{Estimates of Persistence for Short Specification}
+    \includegraphics[width=\textwidth]{persistence_short_plot.pdf}
+    \end{subfigure}\hfill
+    \begin{subfigure}[b]{0.494\textwidth}\centering      \caption{Estimates of Persistence for Long Specification}
+    \includegraphics[width=\textwidth]{persistence_long_plot.pdf}
+    \end{subfigure}
+    \begin{flushleft}\scriptsize
+    ~\textit{Notes:} This figure shows the size and persistence for long and short specifications plotted against quarter they formed in. The size and persistence calculation is described in \vref{sec:size_persistence}. 
+    NBER recessions are shaded.
+    \end{flushleft}
+  \end{minipage}  
+\end{figure}
+
+\section{Conclusion}
+
+This work estimates the state-dependent local projection model augmented with instrument, where state is indexed by preferences of FOMC board. 
+I find that the more hawkish FOMC decreases the life-span of response to  projected inflation, 
 
 
 
-
-% \begin{table}[!htb] \centering \footnotesize
-%     \begin{threeparttable}
-%     \caption{Size-Persistence Tradeoff} 
-%     \label{tab:Size-Persistence} 
-%     \begin{tabular}{@{\extracolsep{10pt}}lcc} 
-%       \\[-1.8ex]\hline 
-%       \hline \\[-1.8ex] 
-%        & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
-%       \cline{2-3} 
-%       \\[-1.8ex] & \multicolumn{2}{c}{$\log(\mathit{consumption})$} \\  \\[-1.8ex]   &\multicolumn{2}{c}{$H=8$}\\
-%       \\[-1.8ex] & (1) & (2)\\ 
-%       \hline \\[-1.8ex] 
-%        Size $(R_0)$  & $-$0.687 & $-$0.451 \\ 
-%         & ($-$1.149, $-$0.133) & ($-$1.495, 1.078)    \\ 
-%         &[0.011]\{0.997\} & [0.857]\{0.578\}\\ 
-%         & & \\ 
-%        Persistence $(\nu)$ & $-$0.100 & 1.223 \\ 
-%         & ($-$0.693,  0.691)   & ($-$3.598, 4.968)    \\ 
-%         &[0.746]\{0.673\} & [0.517]\{0.246\}\\ 
-%         & & \\ 
-%         $\nu^2$ &  & $-$1.042 \\ 
-%         &  &  ($-$4.271, 4.336) \\ 
-%         & &[0.517]\{0.766\} \\ 
-%         & & \\ 
-%        $R_0\times \nu$ & 0.765 & $-$1.628 \\ 
-%         & ($-$0.177,  1.526)    &   ($-$3.159,  2.748)     \\ 
-%         &[0.0754]\{0.0247\} & [0.522]\{0.759\}\\ 
-%         & & \\ 
-%         $R_0\times \nu^2$ &  & 2.435 \\ 
-%         &  &  ($-$1.852, 3.838) \\ 
-%         & & [0.340]\{0.145\}\\ 
-%         & & \\ 
-%        Constant & 10.6 &10.5 \\ 
-%         & (10.1, 11.0) & (9.8, 11.0)    \\ 
-%         & [0.0]\{0.0\}& [0.0]\{0.0\}\\ 
-%         & & \\[-1.8ex] 
-%       \hline \\[-1.8ex] 
-%       Observations & 198 & 198 \\ 
-%       R$^{2}$ & 0.338 & 0.343 \\ 
-%       Adjusted R$^{2}$ & 0.328 & 0.326 \\ 
-%       \hline 
-%       \hline \\[-1.8ex] 
-%       \end{tabular} 
-%     \begin{tablenotes}[flushleft]
-%     \item[] \scriptsize \textit{Note:} The inference is derived from Block bootstrap with 10,000 replications and block lengths geometrically distributed with mean $16$. 95\% percentile intervals are in parenthesis. Bootstrap p-values for the two-sided hypothesis ($\mathbb{H}_0:\theta=0$ vs $\mathbb{H}_a:\theta\ne 0$) are in square brackets, p-values for the one-sided hypothesis ($\mathbb{H}_0:\theta=0$ vs $\mathbb{H}_a:\theta>0$) are in curly brackets. 
-%   \end{tablenotes}
-% \end{threeparttable}
-%   \end{table} 
-
-
-
-
-
-
-
-
-% \begin{figure}[!htbp]\centering
-%   \caption{Size and Persistence Dynamics}
-%   \vspace{2ex}
-%   \label{fig:Size_Persistence_Dynamics}
-%   \begin{subfigure}[b]{0.495\textwidth}
-%       \centering
-%       \caption{Size Dynamics}
-%       \label{fig:size}
-%       \includegraphics[width=\linewidth]{size_plot.pdf}
-%   \end{subfigure}
-%   \hfill
-%   \begin{subfigure}[b]{0.495\textwidth}
-%       \centering
-%       \caption{Persistence Dynamics}
-%       \label{fig:DifferentialResponce}
-%       \includegraphics[width=\linewidth]{persistence_plot.pdf}
-%   \end{subfigure}
-%       {\begin{flushleft}\scriptsize\textit{Notes}: This figure presents the size and persistence, calculated as mean and the first autocorrelation of impulse-response function in each state, constructed as described in , over time. \end{flushleft}}
-% \end{figure}
-
-
-
-
-
-
-
-% \section{Robustness}
-% tba
-
-
-
-
-
-
-% \newpage~
-\newpage
 \bibliography{../misc/references.bib}
 \bibliographystyle{../misc/econ}
+
 \newpage
+
 \appendix
 
 \numberwithin{equation}{section}
@@ -596,9 +584,13 @@ Since 2000 the monetary policy paths have a reduced size and a larger variation 
 \numberwithin{figure}{section}
 
 \section{Appendix. Data and Data Sources} 
+\label{seq:data}
 
 
-\noindent\textbf{HAWK and HAWK IV Indexes.} \citet{Istrefi2019} classifies each FOMC member as hawk or dove based on more than 20,000 historical media articles.\citet{Istrefi2019} categorizes FOMC member for each FOMC meeting based on the news information available up to the meeting. Hawks are perceived to be more concerned about inflation, while doves are more concerned with employment and growth. \citet{BordoIstrefi2023} show that educational background (Freshwater vs. Saltwater) and crises experience of FOMC member predict their policy preferences.
+\noindent\textbf{HAWK and HAWK IV Indexes.} \citet{Istrefi2019} classifies each FOMC member as hawk or dove based on more than 20,000 historical media articles. 
+\citet{Istrefi2019} categorizes FOMC member for each FOMC meeting based on the news information available up to the meeting. 
+Hawks are perceived to be more concerned about inflation, while doves are more concerned with employment and growth. 
+\citet{BordoIstrefi2023} show that educational background (Freshwater vs. Saltwater) and crises experience of FOMC member predict their policy preferences.
 
 \citet{HIM2023} aggregate this classification as follows. First, they define the policy preferences of each FOMC member $i$ at meeting $\tau$, $\mathit{Hawk}_{i\tau}$, as 
 \[\textit{Hawk}_{i\tau}=\begin{cases}
@@ -613,22 +605,39 @@ Then $\textit{Hawk}_{\tau}$ is aggregated to the quarterly level into $\mathit{H
 
 $\mathit{Hawk}_t^\mathit{IV}$ is constructed the similar way but on the portion of the FOMC memberships that is rotated each year. Each year 4/12 FOMC memberships rotate among 11 FRB presidents (Cleveland and Chicago get a seat every second year and Philadelphia, Richmond, Boston, Dallas, Atlanta, St. Louis, Minneapolis, San Francisco, Kansas City -- every third year) and this rotation is independent of cycle.
 
+
+\begin{figure}[hbtp]\centering
+  \begin{minipage}{0.6\textwidth}\centering
+  \caption{Hawk Index}
+  \includegraphics[width=\textwidth]{HAWK_plot.pdf}
+  \begin{flushleft}\scriptsize
+    \textit{Notes:} Hawk and Hawk IV indices from \citet{HIM2023}. NBER recessions are shaded.
+  \end{flushleft}
+\end{minipage}
+\end{figure}
+
+
 \noindent\textbf{Federal Funds Rate.}
 To measure $r_t$ I take the minimum of the effective federal funds rate (DFF) and shadow federal funds rate by \citet{WuXia2016}. This approach allows me to deal the zero lower bound episode and have a measure of the the estimate by \citet{WuXia2016} to periods earlier than (1990 Q1) zero lower bound episodes. 
 
 \noindent\textbf{Natural Rate Estimates.}
 Natural rate of interest used is estimated by \citet{LW2003} and re-estimated by \citet{HLW2023} to bridge the Covid period.
 
-\noindent\textbf{Tealbook Projections.}  
+\noindent\textbf{Tealbook Projections.}  Tealbook Projections are from Federal Reserve Bank of Philadelphia, the projection of CPI inflation is named \emph{gPCPI} (Greenbook projections for Q/Q headline CPI inflation); 
+the projection of GDP deflator inflation is named \emph{gPGDP} (Greenbook projections for Q/Q growth in price index for GDP, chain weight); 
+unemployment projection series is named \emph{UNEMP} (Greenbook projections for the unemployment rate); 
+natural unemployment projection is named ``NAIRU Estimates from the Board of Governors'' and 
+GDP gap projection is named ``real-time estimates and projections of the output gap used by the staff of the Board of Governors of the Federal Reserve System.''
 
 
 
 \newpage
-\section{Appendix. Regression Tables}
+
+\section{Appendix. Full Regression Tables}
 
 \begin{table}[!htbp] \centering \scriptsize
     \begin{threeparttable}
-    \caption{Estimates of Short LP Taylor Rule} 
+    \caption{Estimates of LP Taylor Rule. Short Specification} 
     \label{tab:LP_short_full} 
     \begin{tabular}{@{\extracolsep{3pt}}lccccccc} 
       \\[-1.8ex]\hline 
@@ -639,13 +648,13 @@ Natural rate of interest used is estimated by \citet{LW2003} and re-estimated by
       \\[-1.8ex] & $h=0$ & $h=2$ & $h=4$ & $h=6$ & $h=8$ & $h=10$ & $h=12$ \\ 
       \\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6) & (7)\\ 
       \hline \\[-1.8ex] 
-       Expected CPI Inflation, $\Delta\mathit{CPI}_t^e$ & 0.175$^{**}$ & 0.570$^{***}$ & 0.923$^{***}$ & 0.856$^{***}$ & 0.791$^{***}$ & 0.738$^{**}$ & 0.596 \\ 
-       & (0.073) & (0.157) & (0.263) & (0.308) & (0.281) & (0.342) & (0.448) \\ 
+       Projected CPI Inflation, & 0.175$^{**}$ & 0.570$^{***}$ & 0.923$^{***}$ & 0.856$^{***}$ & 0.791$^{***}$ & 0.738$^{**}$ & 0.596 \\ 
+       $\Delta\mathit{CPI}_t^e$& (0.073) & (0.157) & (0.263) & (0.308) & (0.281) & (0.342) & (0.448) \\ 
         & & & & & & & \\ 
         $\quad \times \left(\mathit{Hawk}_t-\overline{\mathit{Hawk}}\right)$ & 0.170 & $-$0.191 & $-$1.600$^{**}$ & $-$2.224$^{**}$ & $-$1.741 & $-$2.091$^{*}$ & $-$2.070 \\ 
         & (0.186) & (0.530) & (0.749) & (1.094) & (1.122) & (1.193) & (1.473) \\ 
         & & & & & & & \\ 
-       Expected GDP Gap, $x_{t}^e$ & 0.177$^{***}$ & 0.483$^{***}$ & 0.709$^{***}$ & 0.815$^{***}$ & 0.733$^{***}$ & 0.653$^{**}$ & 0.633$^{*}$ \\ 
+        Projected GDP Gap, $x_{t}^e$ & 0.177$^{***}$ & 0.483$^{***}$ & 0.709$^{***}$ & 0.815$^{***}$ & 0.733$^{***}$ & 0.653$^{**}$ & 0.633$^{*}$ \\ 
        & (0.058) & (0.180) & (0.157) & (0.160) & (0.176) & (0.271) & (0.325) \\ 
         & & & & & & & \\ 
        $\quad \times \left(\mathit{HAWK}-\overline{\mathit{HAWK}}\right)_t$ & 0.089$^{*}$ & 0.158 & 0.002 & $-$0.122 & $-$0.013 & 0.217 & 0.263 \\ 
@@ -698,19 +707,19 @@ Natural rate of interest used is estimated by \citet{LW2003} and re-estimated by
       R$^{2}$ & 0.983 & 0.912 & 0.784 & 0.647 & 0.528 & 0.416 & 0.373 \\ 
       Adjusted R$^{2}$ & 0.981 & 0.898 & 0.749 & 0.590 & 0.451 & 0.318 & 0.266 \\ 
       Residual Std. Error & 0.322 & 0.716 & 1.063 & 1.295 & 1.457 & 1.582 & 1.622 \\
-      Wu-Hausman & 0.395& 0.352& 0.718& 1.891& $6.496^{***}$ &$15.97^{***}$& $15.05^{***}$ \\
+      Wu-Hausman F& 0.395& 0.352& 0.718& 1.891& $6.496^{***}$ &$15.97^{***}$& $15.05^{***}$ \\
       \hline 
       \hline
       \end{tabular} 
   \begin{tablenotes}[flushleft]\scriptsize
-\item[] \textit{Notes:} This table reports the estimates of the coefficients of interest in model in \vref{eq:LP1} with projected inflation measured as a projected change in CPI. The \citet{Andrews1991} HAC standard errors are in parenthesis. Weak Instrument statistics (for $h=0$) are HAWK: $53.5$; interaction with CPI inflation: $42.2$, interaction with GDP gap: $51.4$. $^{*}p<0.1$; $^{**}p<0.05$; $^{***}p<0.01$.
+\item[] \textit{Notes:} This table reports the estimates of all of the coefficient in model in \vref{eq:LP1} with projected inflation measured as a projected change in CPI and projected output gap is measured by projected GDP gap. The \citet{Andrews1991} HAC standard errors are in parenthesis. Weak Instrument statistics (for $h=0$) are HAWK: $53.5$; interaction with CPI inflation: $42.2$, interaction with GDP gap: $51.4$. $^{*}p<0.1$; $^{**}p<0.05$; $^{***}p<0.01$.
 \end{tablenotes}
 \end{threeparttable}
   \end{table} 
 
   \begin{table}[!htbp] \centering \scriptsize
     \begin{threeparttable}
-    \caption{First Stage of the Short LP Model} 
+    \caption{First Stage of the Short Specification of LP Model \eqref{eq:LP1}} 
     \label{tab:fs_short} 
   \begin{tabular}{@{\extracolsep{5pt}}lccc} 
   \\[-1.8ex]\hline 
@@ -787,7 +796,7 @@ Natural rate of interest used is estimated by \citet{LW2003} and re-estimated by
   \hline
 \end{tabular} 
   \begin{tablenotes}[flushleft]
-    \item[]\textit{Notes:} The \citet{Andrews1991} HAC standard errors are in parenthesis. $^{*}p<0.1$; $^{**}p<0.05$; $^{***}p<0.01$.
+    \item[]\textit{Notes:} This table presents the first stage of LP-IV model estimation in \vref{eq:LP1} with projected inflation measured as a projected change in CPI and projected output gap is measured by projected GDP gap. The \citet{Andrews1991} HAC standard errors are in parenthesis. $^{*}p<0.1$; $^{**}p<0.05$; $^{***}p<0.01$.
   \end{tablenotes}
 \end{threeparttable}
   \end{table} 
@@ -795,8 +804,8 @@ Natural rate of interest used is estimated by \citet{LW2003} and re-estimated by
   \begin{table}[!htbp] \centering \scriptsize
     \begin{threeparttable}
     \caption{Estimates of Long LP Taylor Rule} 
-    \label{} 
-  \begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+    \label{tab:LP_long_full} 
+  \begin{tabular}{@{\extracolsep{3pt}}lccccccc} 
   \\[-1.8ex]\hline 
   \hline \\[-1.8ex] 
   & \multicolumn{7}{c}{\textit{Dependent variable:} $\left(r-r^*\right)_{t+h}$} \\ \\[-1.8ex] 
@@ -804,73 +813,72 @@ Natural rate of interest used is estimated by \citet{LW2003} and re-estimated by
   \\[-1.8ex] & $h=0$ & $h=2$ & $h=4$ & $h=6$ & $h=8$ & $h=10$ & $h=12$ \\ 
   \\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6) & (7)\\ 
   \hline \\[-1.8ex] 
-  Expected Deflator Inflation,  & 0.235 & 0.518$^{**}$ & 0.691$^{*}$ & 0.718 & 0.681 & 0.331 & 0.178 \\ 
+  Projected Deflator Inflation,  & 0.235 & 0.518$^{**}$ & 0.691$^{*}$ & 0.718 & 0.681 & 0.331 & 0.178 \\ 
   $\Delta\mathit{Deflator}_t^e$ & (0.235) & (0.235) & (0.354) & (0.587) & (0.613) & (0.455) & (0.353) \\ 
     & & & & & & & \\ 
-   $\quad \times \left(\mathit{Hawk}_t-\overline{\mathit{Hawk}}\right)$ & 0.716 & 1.554$^{**}$ & 2.216$^{***}$ & 3.466$^{***}$ & 2.588$^{**}$ & 1.612 & 0.507 \\ 
-    & (0.654) & (0.654) & (0.510) & (1.105) & (1.306) & (1.347) & (1.320) \\ 
+   $\quad \times \left(\mathit{Hawk}_t-\overline{\mathit{Hawk}}\right)$ & 0.716$^{**}$ & 1.554$^{**}$ & 2.216$^{***}$ & 3.466$^{***}$ & 2.588$^{**}$ & 1.612 & 0.507 \\ 
+   & (0.292) & (0.654) & (0.510) & (1.105) & (1.306) & (1.347) & (1.320) \\ 
+   & & & & & & & \\ 
+   Projected Unemployment Gap, &  $-$1.192$^{***}$ & $-$1.268$^{**}$ & $-$1.908$^{***}$ & $-$1.991$^{***}$ & $-$1.267$^{**}$ & $-$1.012$^{*}$ & $-$0.871 \\ 
+   $\left(u-u^*\right)_t$  & (0.275) & (0.597) & (0.420) & (0.462) & (0.627) & (0.573) & (0.591) \\ 
+   & & & & & & & \\ 
+    $\quad \times \left(\mathit{Hawk}_t-\overline{\mathit{Hawk}}\right)$ & $-$0.168 & $-$0.621$^{*}$ & $-$0.541 & $-$0.109 & $-$0.074 & $-$0.495 & $-$0.345 \\ 
+    & (0.198) & (0.338) & (0.430) & (0.615) & (0.716) & (0.746) & (0.808) \\ 
     & & & & & & & \\ 
-   Expected Unemployment Gap, & $-$1.192$^{**}$ & $-$1.268$^{**}$ & $-$1.908$^{***}$ & $-$1.991$^{***}$ & $-$1.267$^{**}$ & $-$1.012$^{*}$ & $-$0.871 \\ 
-    $\left(u-u^*\right)_t$ & (0.597) & (0.597) & (0.420) & (0.462) & (0.627) & (0.573) & (0.591) \\ 
-    & & & & & & & \\ 
-    $\quad \times \left(\mathit{Hawk}_t-\overline{\mathit{Hawk}}\right)$& $-$0.168 & $-$0.621$^{*}$ & $-$0.541 & $-$0.109 & $-$0.074 & $-$0.495 & $-$0.345 \\ 
-    & (0.338) & (0.338) & (0.430) & (0.615) & (0.716) & (0.746) & (0.808) \\ 
-    & & & & & & & \\ 
-    $\left(\mathit{Hawk}_t-\overline{\mathit{Hawk}}\right)$ & $-$1.797 & $-$3.636$^{**}$ & $-$4.432$^{***}$ & $-$6.435$^{**}$ & $-$3.606 & $-$1.688 & 0.305 \\ 
-    & (1.477) & (1.477) & (1.431) & (2.614) & (3.186) & (3.162) & (2.740) \\ 
+    $\left(\mathit{Hawk}_t-\overline{\mathit{Hawk}}\right)$ & $-$1.797$^{***}$ & $-$3.636$^{**}$ & $-$4.432$^{***}$ & $-$6.435$^{**}$ & $-$3.606 & $-$1.688 & 0.305 \\ 
+    & (0.684) & (1.477) & (1.431) & (2.614) & (3.186) & (3.162) & (2.740) \\ 
     & & & & & & & \\ 
     $\left(r-r^*\right)_{t-1}$ & 1.005$^{***}$ & 0.485$^{***}$ & 0.485$^{**}$ & $-$0.056 & 0.043 & $-$0.355$^{*}$ & $-$0.416$^{**}$ \\ 
-    & (0.176) & (0.176) & (0.208) & (0.232) & (0.184) & (0.186) & (0.177) \\ 
+    & (0.112) & (0.176) & (0.208) & (0.232) & (0.184) & (0.186) & (0.177) \\  
     & & & & & & & \\ 
     $\left(r-r^*\right)_{t-2}$ & $-$0.169 & 0.146 & 0.101 & 0.466$^{***}$ & 0.261 & 0.198$^{**}$ & 0.088 \\ 
-    & (0.202) & (0.202) & (0.212) & (0.166) & (0.210) & (0.085) & (0.229) \\ 
+    & (0.175) & (0.202) & (0.212) & (0.166) & (0.210) & (0.085) & (0.229) \\ 
     & & & & & & & \\ 
     $\left(r-r^*\right)_{t-3}$ & 0.147 & 0.411$^{**}$ & 0.024 & 0.273$^{*}$ & $-$0.186 & $-$0.071 & $-$0.186 \\ 
-    & (0.180) & (0.180) & (0.146) & (0.162) & (0.199) &  & (0.161) \\ 
+    & (0.207) & (0.180) & (0.146) & (0.162) & (0.199) &  & (0.161) \\ 
     & & & & & & & \\ 
     $\left(r-r^*\right)_{t-4}$ & 0.054 & $-$0.113 & 0.168 & $-$0.030 & 0.171 & 0.195 & 0.208 \\ 
-    & (0.160) & (0.160) & (0.216) & (0.259) & (0.291) & (0.311) & (0.281) \\ 
+    & (0.099) & (0.160) & (0.216) & (0.259) & (0.291) & (0.311) & (0.281) \\ 
     & & & & & & & \\ 
     $\Delta\mathit{Deflator}_{t-1}^e$ & 0.038 & 0.157 & $-$0.116 & 0.030 & $-$0.367 & $-$0.019 & $-$0.0005 \\ 
-    & (0.196) & (0.196) & (0.215) & (0.240) & (0.377) & (0.252) & (0.334) \\ 
+    & (0.204) & (0.196) & (0.215) & (0.240) & (0.377) & (0.252) & (0.334) \\ 
     & & & & & & & \\ 
     $\Delta\mathit{Deflator}_{t-2}^e$ & $-$0.138 & $-$0.160 & $-$0.052 & $-$0.155 & 0.042 & 0.107 & 0.323$^{**}$ \\ 
-    & (0.367) & (0.367) & (0.221) & (0.256) & (0.311) & (0.216) & (0.161) \\ 
+    & (0.157) & (0.367) & (0.221) & (0.256) & (0.311) & (0.216) & (0.161) \\ 
     & & & & & & & \\ 
     $\Delta\mathit{Deflator}_{t-3}^e$ & 0.109 & $-$0.410 & $-$0.237 & $-$0.814$^{**}$ & $-$0.337 & $-$0.176 & 0.150 \\ 
-    & (0.262) & (0.262) & (0.277) & (0.358) & (0.306) & (0.262) & (0.104) \\ 
+    & (0.207) & (0.262) & (0.277) & (0.358) & (0.306) & (0.262) & (0.104) \\ 
     & & & & & & & \\ 
-    $\Delta\mathit{Deflator}_{t-4}^e$ & $-$0.346 & $-$0.143 & $-$0.357 & $-$0.112 & 0.194 & 0.708$^{**}$ & 0.917$^{***}$ \\ 
-    & (0.247) & (0.247) & (0.413) & (0.419) & (0.371) & (0.344) & (0.354) \\ 
+    $\Delta\mathit{Deflator}_{t-4}^e$ & $-$0.346$^{**}$ & $-$0.143 & $-$0.357 & $-$0.112 & 0.194 & 0.708$^{**}$ & 0.917$^{***}$ \\ 
+    & (0.138) & (0.247) & (0.413) & (0.419) & (0.371) & (0.344) & (0.354) \\ 
     & & & & & & & \\ 
-   $\left(u-u^*\right)_{t-1}$ & 1.220 & 0.244 & 1.011$^{**}$ & 0.763 & 0.088 & $-$0.269 & $-$0.244 \\ 
-    & (0.799) & (0.799) & (0.441) & (0.639) & (1.096) & (1.009) & (0.780) \\ 
-    & & & & & & & \\ 
+   $\left(u-u^*\right)_{t-1}$ & 1.220$^{***}$ & 0.244 & 1.011$^{**}$ & 0.763 & 0.088 & $-$0.269 & $-$0.244 \\ 
+   & (0.390) & (0.799) & (0.441) & (0.639) & (1.096) & (1.009) & (0.780) \\ 
+   & & & & & & & \\ 
     $\left(u-u^*\right)_{t-2}$ & 0.057 & 0.248 & $-$0.074 & 0.589 & 0.779 & 0.289 & 0.029 \\ 
-    & (0.178) & (0.178) & (0.320) & (0.572) & (0.882) & (0.569) & (0.491) \\ 
+    & (0.440) & (0.178) & (0.320) & (0.572) & (0.882) & (0.569) & (0.491) \\ 
     & & & & & & & \\ 
-    $\left(u-u^*\right)_{t-3}$ & $-$0.615$^{*}$ & 0.474 & 0.963$^{*}$ & 0.847 & 0.088 & 0.190 & 0.180 \\ 
-    & (0.320) & (0.320) & (0.510) & (0.722) & (0.728) & (0.523) & (0.620) \\ 
+    $\left(u-u^*\right)_{t-3}$ & $-$0.615 & 0.474 & 0.963$^{*}$ & 0.847 & 0.088 & 0.190 & 0.180 \\ 
+    & (0.465) & (0.320) & (0.510) & (0.722) & (0.728) & (0.523) & (0.620) \\ 
     & & & & & & & \\ 
-    $\left(u-u^*\right)_{t-4}$ & 0.333 & $-$0.138 & $-$0.448 & $-$0.626 & 0.045 & 0.396 & 0.558 \\ 
-    & (0.298) & (0.298) & (0.569) & (0.676) & (0.582) & (0.484) & (0.597) \\ 
+    $\left(u-u^*\right)_{t-4}$  & 0.333 & $-$0.138 & $-$0.448 & $-$0.626 & 0.045 & 0.396 & 0.558 \\ 
+    & (0.253) & (0.298) & (0.569) & (0.676) & (0.582) & (0.484) & (0.597) \\ 
     & & & & & & & \\ 
-
   
    Constant & 0.082 & $-$0.111 & 0.051 & 0.663 & $-$0.095 & $-$1.352 & $-$2.355$^{**}$ \\ 
-    & (0.555) & (0.555) & (0.656) & (0.968) & (1.074) & (1.174) & (1.090) \\ 
-    & & & & & & & \\ 
+   & (0.196) & (0.555) & (0.656) & (0.968) & (1.074) & (1.174) & (1.090) \\ 
+   & & & & & & & \\ 
   \hline \\[-1.8ex] 
   Observations & 200 & 200 & 200 & 200 & 200 & 198 & 196 \\ 
   R$^{2}$ & 0.960 & 0.848 & 0.768 & 0.650 & 0.606 & 0.609 & 0.634 \\ 
   Adjusted R$^{2}$ & 0.956 & 0.833 & 0.746 & 0.618 & 0.569 & 0.572 & 0.600 \\ 
   Residual Std. Error & 0.741 & 1.438 & 1.775 & 2.183 & 2.332 & 2.331 & 2.265 \\ 
-  Wu-Hausman & $2.268^{*}$& $6.267^{***}$ & $6.322^{***}$ & $16.09^{***}$ & $9.765^{***}$ & $5.584^{***}$ & $2.04$\\
+  Wu-Hausman F& $2.268^{*}$& $6.267^{***}$ & $6.322^{***}$ & $16.09^{***}$ & $9.765^{***}$ & $5.584^{***}$ & $2.04$\\
   \hline 
   \hline
   \end{tabular} 
   \begin{tablenotes}[flushleft]
-    \item[] \textit{Notes:} The \citet{Andrews1991} HAC standard errors are in parenthesis. Weak Instrument statistics (for $h=0$) are HAWK: $64.8$; interaction with deflator inflation: $64.2$, interaction with unemployment gap: $79.5$. $^{*}p<0.1$; $^{**}p<0.05$; $^{***}p<0.01$.
+    \item[] \textit{Notes:} This table reports the estimates of all of the coefficient in model in \vref{eq:LP1} with projected inflation measured as a projected change in GDP deflator and projected output gap is measured by projected unemployment gap. The \citet{Andrews1991} HAC standard errors are in parenthesis. Weak Instrument statistics (for $h=0$) are HAWK: $64.8$; interaction with deflator inflation: $64.2$, interaction with unemployment gap: $79.5$. $^{*}p<0.1$; $^{**}p<0.05$; $^{***}p<0.01$.
   \end{tablenotes}
 \end{threeparttable}
     \end{table} 
@@ -878,7 +886,7 @@ Natural rate of interest used is estimated by \citet{LW2003} and re-estimated by
 
     \begin{table}[!htbp] \centering \scriptsize 
       \begin{threeparttable}
-      \caption{First-Stage of the Long LP Model} 
+      \caption{First-Stage of the Long Specification of LP Model \eqref{eq:LP1}} 
       \label{tab:fs_long} 
     \begin{tabular}{@{\extracolsep{5pt}}lccc} 
     \\[-1.8ex]\hline 
@@ -953,12 +961,10 @@ Natural rate of interest used is estimated by \citet{LW2003} and re-estimated by
     \hline 
     \end{tabular} 
     \begin{tablenotes}[flushleft]
-      \item[]\textit{Notes:} The \citet{Andrews1991} HAC standard errors are in parenthesis. $^{*}p<0.1$; $^{**}p<0.05$; $^{***}p<0.01$.
+      \item[]\textit{Notes:} This table presents the first stage of LP-IV model estimation in \vref{eq:LP1} with projected inflation measured as a projected change in GDP deflator and projected output gap is measured by projected unemployment gap. The \citet{Andrews1991} HAC standard errors are in parenthesis. $^{*}p<0.1$; $^{**}p<0.05$; $^{***}p<0.01$.
     \end{tablenotes}
   \end{threeparttable}
     \end{table} 
-
-
 
 
 

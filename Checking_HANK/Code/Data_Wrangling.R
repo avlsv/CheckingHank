@@ -230,8 +230,7 @@ nairu_expected_tbl <- bind_rows(nairu_expected_97, nairu_expected_before)
 nairu_expected_ts <- nairu_expected_tbl |> as_tsibble()
 
 ### CPI Inflation ------
-### gRGDP	Greenbook projections for Q/Q growth in real GDP, chain weight (annualized percentage points)
-
+### gPCPI Greenbook projections for Q/Q headline CPI inflation
 
 expected_cpi_inflation_raw <-
   read_xlsx("data/Initial_Data/Tealbook Row Format.xlsx", sheet = "gPCPI") |>
