@@ -11,46 +11,44 @@ Database file #1: ../misc/references.bib
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-Warning--empty institution in HIM2023
-You've used 15 entries,
+You've used 18 entries,
             6826 wiz_defined-function locations,
-            1426 strings with 12972 characters,
-and the built_in function-call counts, 19669 in all, are:
-= -- 3317
-> -- 770
-< -- 45
-+ -- 243
-- -- 277
-* -- 1129
-:= -- 2560
-add.period$ -- 15
-call.type$ -- 15
-change.case$ -- 109
-chr.to.int$ -- 15
-cite$ -- 16
-duplicate$ -- 494
-empty$ -- 897
-format.name$ -- 236
-if$ -- 5216
+            1452 strings with 13668 characters,
+and the built_in function-call counts, 23621 in all, are:
+= -- 3994
+> -- 910
+< -- 54
++ -- 288
+- -- 323
+* -- 1350
+:= -- 3075
+add.period$ -- 18
+call.type$ -- 18
+change.case$ -- 131
+chr.to.int$ -- 18
+cite$ -- 18
+duplicate$ -- 597
+empty$ -- 1076
+format.name$ -- 276
+if$ -- 6257
 int.to.chr$ -- 0
 int.to.str$ -- 0
 missing$ -- 0
-newline$ -- 58
-num.names$ -- 155
-pop$ -- 171
+newline$ -- 67
+num.names$ -- 188
+pop$ -- 204
 preamble$ -- 1
-purify$ -- 109
+purify$ -- 131
 quote$ -- 0
-skip$ -- 1450
+skip$ -- 1747
 stack$ -- 0
-substring$ -- 1567
-swap$ -- 107
-text.length$ -- 55
+substring$ -- 1897
+swap$ -- 130
+text.length$ -- 82
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 260
-warning$ -- 1
-while$ -- 134
+type$ -- 312
+warning$ -- 0
+while$ -- 162
 width$ -- 0
-write$ -- 247
-(There was 1 warning)
+write$ -- 297

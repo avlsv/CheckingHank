@@ -560,7 +560,11 @@ stargazer(
   LP_12,
   se =
     list(
+<<<<<<< HEAD
       summary(LP_0, vcov = vcovHAC(LP_2, weights = weightsLumley))$coef[, 2],
+=======
+      summary(LP_0, vcov = vcovHAC(LP_0, weights = weightsLumley))$coef[, 2],
+>>>>>>> Monetary-Policy-Rules
       summary(LP_2, vcov = vcovHAC(LP_2, weights = weightsLumley))$coef[, 2],
       summary(LP_4, vcov = vcovHAC(LP_4, weights = weightsLumley))$coef[, 2],
       summary(LP_6, vcov = vcovHAC(LP_6, weights = weightsLumley))$coef[, 2],
@@ -640,8 +644,12 @@ ggsave(
 
 size_persistence_long_tbl <-
   predicted_long_tbl |>
+<<<<<<< HEAD
   filter(horizon <= 12, quarter >=
            yearquarter("1988 Q3")) |>
+=======
+  filter(horizon <= 16) |>
+>>>>>>> Monetary-Policy-Rules
   group_by(quarter) |>
   summarize(size = mean(fitted),
             persistence =
@@ -650,9 +658,17 @@ size_persistence_long_tbl <-
 
 
 
+<<<<<<< HEAD
 actual_size_persistence_long <-
   ggplot(
     size_persistence_long_tbl,
+=======
+
+actual_size_persistence_long <-
+  ggplot(
+    size_persistence_long_tbl |> filter(quarter >=
+                                          yearquarter("1988 Q3")),
+>>>>>>> Monetary-Policy-Rules
     aes(
       x = size / 100,
       y = persistence,
@@ -660,8 +676,13 @@ actual_size_persistence_long <-
       label = quarter
     )
   ) +
+<<<<<<< HEAD
   geom_hline(aes(yintercept=1), color="darkred")+
   geom_vline(aes(xintercept=0), color="darkred")+
+=======
+  geom_hline(aes(yintercept = 1), color = "darkred") +
+  geom_vline(aes(xintercept = 0), color = "darkred") +
+>>>>>>> Monetary-Policy-Rules
   geom_point(size = 1.3) +
   geom_text(
     hjust = 0,
@@ -687,6 +708,7 @@ ggsave(
 )
 
 
+<<<<<<< HEAD
 size_persistence_long_tbl |> filter(size > 0, persistence > 1, quarter >=
                                       yearquarter("1988 Q3")) |> count() /
   size_persistence_long_tbl|> filter( quarter >= yearquarter("1988 Q3")) |> count()
@@ -701,3 +723,92 @@ size_persistence_long_tbl|> filter(size>0, persistence<1, quarter >=
 size_persistence_long_tbl|> filter(size<0, persistence<1, quarter >=
                                      yearquarter("1988 Q3"))|> count()/
   size_persistence_long_tbl|>filter( quarter >= yearquarter("1988 Q3"))|> count()
+=======
+
+size_persistence_long_tbl |> filter(size > 0, persistence > 1, quarter >=
+                                      yearquarter("1988 Q3")) |> count() /
+  size_persistence_long_tbl |> filter(quarter >= yearquarter("1988 Q3")) |> count()
+
+
+size_persistence_long_tbl |> filter(size < 0, persistence > 1, quarter >=
+                                      yearquarter("1988 Q3")) |> count() /
+  size_persistence_long_tbl |> filter(quarter >= yearquarter("1988 Q3")) |>
+  count()
+size_persistence_long_tbl |> filter(size > 0, persistence < 1, quarter >=
+                                      yearquarter("1988 Q3")) |> count() /
+  size_persistence_long_tbl |> filter(quarter >= yearquarter("1988 Q3")) |>
+  count()
+size_persistence_long_tbl |> filter(size < 0, persistence < 1, quarter >=
+                                      yearquarter("1988 Q3")) |> count() /
+  size_persistence_long_tbl |> filter(quarter >= yearquarter("1988 Q3")) |> count()
+
+
+
+size_long_plot <-
+  ggplot(size_persistence_long_tbl, aes(x = yq(quarter), y = size / 100)) +
+  geom_line() + theme_light() +
+  scale_x_date(
+    NULL,
+    breaks = scales::breaks_width("5 years"),
+    labels = scales::label_date("'%y")
+  ) +
+  scale_y_continuous("Size", labels = label_percent()) +
+  geom_rect(
+    data = rec_data_3,
+    inherit.aes = F,
+    aes(
+      xmin = start,
+      xmax = end,
+      ymin = -Inf,
+      ymax = Inf
+    ),
+    fill = '#155F83FF' ,
+    alpha = 0.2
+  ) +
+  geom_hline(aes(yintercept = 0), color="darkred")
+
+ggsave(
+  "size_long_plot.pdf",
+  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
+  size_long_plot,
+  width = 210 /  1.7  ,
+  height = 148.5 /  1.7 ,
+  units = "mm"
+)
+
+
+
+
+persistence_long_plot <-
+  ggplot(size_persistence_long_tbl, aes(x=yq(quarter), y=persistence)) +
+  geom_line()+theme_light()+
+  scale_x_date(
+    NULL,
+    breaks = scales::breaks_width("5 years"), 
+    labels = scales::label_date("'%y")
+  )+ 
+  scale_y_continuous("Persistence", n.breaks = 10) +
+  geom_rect(
+    data = rec_data_3,
+    inherit.aes = F,
+    aes(
+      xmin = start,
+      xmax = end,
+      ymin = -Inf,
+      ymax = Inf
+    ),
+    fill = '#155F83FF' ,
+    alpha = 0.2
+  ) +
+  geom_hline(aes(yintercept = 1), color="darkred")
+
+ggsave(
+  "persistence_long_plot.pdf",
+  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
+  persistence_long_plot,
+  width = 210 /  1.7  ,
+  height = 148.5 /  1.7 ,
+  units = "mm"
+)
+
+>>>>>>> Monetary-Policy-Rules
