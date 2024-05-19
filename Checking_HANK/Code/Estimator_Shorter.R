@@ -51,11 +51,7 @@ coefs_gap <- tibble()
 coefs_HAWK_gap <- tibble()
 r_squares_short <- c()
 predicted_short_tbl <- tibble()
-<<<<<<< HEAD
-hausman_list_short<-c()
-=======
 hausman_list_short <- c()
->>>>>>> Monetary-Policy-Rules
 #coefs_intercept <- tibble()
 #coefs_HAWK <- tibble()
 for (i in 0:20) {
@@ -122,15 +118,9 @@ for (i in 0:20) {
   
   predicted_short_tbl <- bind_rows(predicted_short_tbl, predicted_i)
   
-<<<<<<< HEAD
-  hausman_list_short<-
-    c(hausman_list_short,
-                  summary(reg, vcov. = vcovHAC(reg))$diagnostics[4,3])
-=======
   hausman_list_short <-
     c(hausman_list_short,
       summary(reg, vcov. = vcovHAC(reg))$diagnostics[4, 3])
->>>>>>> Monetary-Policy-Rules
   
 }
 
@@ -159,13 +149,8 @@ r_squares_short_tbl <- tibble(r_squares = r_squares_short,
 
 
 
-<<<<<<< HEAD
-hausman_short_tbl<- tibble(hausman = hausman_list_short,
-                                horizon = 1:length(hausman_list_short) - 1)
-=======
 hausman_short_tbl <- tibble(hausman = hausman_list_short,
                             horizon = 1:length(hausman_list_short) - 1)
->>>>>>> Monetary-Policy-Rules
 save(
   coefs_cpi_inflation,
   coefs_HAWK_cpi_inflation,
@@ -631,13 +616,8 @@ ggsave(
   "predicted_paths_short.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   predicted_paths_short,
-<<<<<<< HEAD
-  height =  148.5/1.5,
-  width = 210/1.5,
-=======
   height =  148.5 / 1.5,
   width = 210 / 1.5,
->>>>>>> Monetary-Policy-Rules
   units = "mm"
 )
 
@@ -645,47 +625,33 @@ ggsave(
 
 size_persistence_short_tbl <-
   predicted_short_tbl |>
-<<<<<<< HEAD
   filter(horizon <= 12) |>
   group_by(quarter) |>
-  summarize(size = mean(fitted), 
-            persistence = lm(I(log(fitted / fitted[1])) ~-1+ horizon)$coef[1]|> 
-              exp()
-            )
-=======
-  filter(horizon <= 16) |>
-  group_by(quarter) |>
-  summarize(size = mean(fitted),
-            persistence = lm(I(log(fitted / fitted[1])) ~ -1 + horizon)$coef[1] |>
-              exp())
->>>>>>> Monetary-Policy-Rules
+  summarize(size =  mean(fitted, na.rm = T),
+            persistence = lm(I(log(fitted / fitted[2])) ~  horizon)$coef[2] |>
+              exp(), 
+            persistence_1= ar(fitted, order.max = 1)$ar[1])
 
 
 
 
 actual_size_persistence_short <-
   ggplot(
-    size_persistence_short_tbl,
+    size_persistence_short_tbl|> filter(persistence<3),
     aes(
       x = size / 100,
       y = persistence,
       color = yq(quarter),
       label = quarter
     )
-<<<<<<< HEAD
-  ) +  
-  geom_hline(aes(yintercept=1), color="darkred")+
-  geom_vline(aes(xintercept=0), color="darkred")+
-=======
   ) +
   geom_hline(aes(yintercept = 1), color = "darkred") +
   geom_vline(aes(xintercept = 0), color = "darkred") +
->>>>>>> Monetary-Policy-Rules
   geom_point(size = 1.3) +
   geom_text(
     hjust = 0,
     vjust = 0,
-    size = 2.4,
+    size = 2.2,
     check_overlap = T
   ) +
   labs(x = "Size", y = "Persistence", color = "") +
@@ -715,34 +681,20 @@ sctest(LP_4)
 sctest(LP_6)
 sctest(LP_8)
 sctest(LP_10)
-<<<<<<< HEAD
-sctest(LP_12, type="supF")
-=======
 sctest(LP_12, type = "supF")
->>>>>>> Monetary-Policy-Rules
 
 
 
 
 
-<<<<<<< HEAD
-size_persistence_short_tbl|> filter(size>0, persistence>1)|> count()/
-  size_persistence_short_tbl|> count()*100
-size_persistence_short_tbl|> filter(size<0, persistence>1)|> count()/
-  size_persistence_short_tbl|> count()
-size_persistence_short_tbl|> filter(size>0, persistence<1)|> count()/
-  size_persistence_short_tbl|> count()
-size_persistence_short_tbl|> filter(size<0, persistence<1)|> count()/
-  size_persistence_short_tbl|> count()
-=======
 size_persistence_short_tbl |> filter(size > 0, persistence > 1) |> count() /
   size_persistence_short_tbl |> count() * 100
 size_persistence_short_tbl |> filter(size < 0, persistence > 1) |> count() /
-  size_persistence_short_tbl |> count()
+  size_persistence_short_tbl |> count() * 100
 size_persistence_short_tbl |> filter(size > 0, persistence < 1) |> count() /
-  size_persistence_short_tbl |> count()
+  size_persistence_short_tbl |> count() * 100
 size_persistence_short_tbl |> filter(size < 0, persistence < 1) |> count() /
-  size_persistence_short_tbl |> count()
+  size_persistence_short_tbl |> count() * 100
 
 
 
@@ -752,7 +704,7 @@ size_short_plot <-
   geom_line() + theme_light() +
   scale_x_date(
     NULL,
-    breaks = scales::breaks_width("5 years"),
+    breaks = scales::breaks_width("4 years"),
     labels = scales::label_date("'%y")
   ) +
   scale_y_continuous("Size", labels = label_percent()) +
@@ -787,10 +739,10 @@ persistence_short_plot <-
   geom_line() + theme_light() +
   scale_x_date(
     NULL,
-    breaks = scales::breaks_width("5 years"),
+    breaks = scales::breaks_width("4 years"),
     labels = scales::label_date("'%y")
   ) +
-  scale_y_continuous("Persistence", n.breaks = 8) +
+  scale_y_continuous("Persistence", n.breaks = 10) +
   geom_rect(
     data = rec_data_2,
     inherit.aes = F,
@@ -813,4 +765,51 @@ ggsave(
   height = 148.5 /  1.7 ,
   units = "mm"
 )
->>>>>>> Monetary-Policy-Rules
+
+
+
+
+ggplot(size_persistence_short_tbl, aes(x = yq(quarter), y = size_1 / 100)) +
+  geom_line() + theme_light() +
+  scale_x_date(
+    NULL,
+    breaks = scales::breaks_width("4 years"),
+    labels = scales::label_date("'%y")
+  ) +
+  scale_y_continuous("Size", labels = label_percent()) +
+  geom_rect(
+    data = rec_data_2,
+    inherit.aes = F,
+    aes(
+      xmin = start,
+      xmax = end,
+      ymin = -Inf,
+      ymax = Inf
+    ),
+    fill = '#155F83FF' ,
+    alpha = 0.2
+  ) +
+  geom_hline(aes(yintercept = 0), color = "darkred")
+
+ggplot(size_persistence_short_tbl, aes(x = yq(quarter), y = persistence_1)) +
+  geom_line() + theme_light() +
+  scale_x_date(
+    NULL,
+    breaks = scales::breaks_width("4 years"),
+    labels = scales::label_date("'%y")
+  ) +
+  scale_y_continuous("Size") +
+  geom_rect(
+    data = rec_data_2,
+    inherit.aes = F,
+    aes(
+      xmin = start,
+      xmax = end,
+      ymin = -Inf,
+      ymax = Inf
+    ),
+    fill = '#155F83FF' ,
+    alpha = 0.2
+  ) +
+  geom_hline(aes(yintercept = 1), color = "darkred")
+

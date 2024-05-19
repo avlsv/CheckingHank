@@ -1423,7 +1423,10 @@ INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 =======
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti8.tfm
+<<<<<<< HEAD
 INPUT /usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+>>>>>>> Monetary-Policy-Rules
+=======
 >>>>>>> Monetary-Policy-Rules
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
@@ -1436,6 +1439,7 @@ INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbsy10.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/euler/eurm10.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/rsfs/rsfs10.tfm
 <<<<<<< HEAD
+<<<<<<< HEAD
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti9.tfm
 INPUT /usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
@@ -1445,6 +1449,12 @@ INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti7.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti7.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti9.tfm
+>>>>>>> Monetary-Policy-Rules
+=======
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti9.tfm
+INPUT /usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti7.tfm
 >>>>>>> Monetary-Policy-Rules
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti7.tfm
 INPUT ./../Figures/average_cpi_inflation_short.pdf
