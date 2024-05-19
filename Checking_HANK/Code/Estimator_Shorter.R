@@ -625,18 +625,19 @@ ggsave(
 
 size_persistence_short_tbl <-
   predicted_short_tbl |>
-  filter(horizon <= 16) |>
+  filter(horizon <= 12) |>
   group_by(quarter) |>
-  summarize(size = mean(fitted),
-            persistence = lm(I(log(fitted / fitted[1])) ~ -1 + horizon)$coef[1] |>
-              exp())
+  summarize(size =  mean(fitted, na.rm = T),
+            persistence = lm(I(log(fitted / fitted[2])) ~  horizon)$coef[2] |>
+              exp(), 
+            persistence_1= ar(fitted, order.max = 1)$ar[1])
 
 
 
 
 actual_size_persistence_short <-
   ggplot(
-    size_persistence_short_tbl,
+    size_persistence_short_tbl|> filter(persistence<3),
     aes(
       x = size / 100,
       y = persistence,
@@ -650,7 +651,7 @@ actual_size_persistence_short <-
   geom_text(
     hjust = 0,
     vjust = 0,
-    size = 2.4,
+    size = 2.2,
     check_overlap = T
   ) +
   labs(x = "Size", y = "Persistence", color = "") +
@@ -689,11 +690,11 @@ sctest(LP_12, type = "supF")
 size_persistence_short_tbl |> filter(size > 0, persistence > 1) |> count() /
   size_persistence_short_tbl |> count() * 100
 size_persistence_short_tbl |> filter(size < 0, persistence > 1) |> count() /
-  size_persistence_short_tbl |> count()
+  size_persistence_short_tbl |> count() * 100
 size_persistence_short_tbl |> filter(size > 0, persistence < 1) |> count() /
-  size_persistence_short_tbl |> count()
+  size_persistence_short_tbl |> count() * 100
 size_persistence_short_tbl |> filter(size < 0, persistence < 1) |> count() /
-  size_persistence_short_tbl |> count()
+  size_persistence_short_tbl |> count() * 100
 
 
 
@@ -703,7 +704,7 @@ size_short_plot <-
   geom_line() + theme_light() +
   scale_x_date(
     NULL,
-    breaks = scales::breaks_width("5 years"),
+    breaks = scales::breaks_width("4 years"),
     labels = scales::label_date("'%y")
   ) +
   scale_y_continuous("Size", labels = label_percent()) +
@@ -738,10 +739,10 @@ persistence_short_plot <-
   geom_line() + theme_light() +
   scale_x_date(
     NULL,
-    breaks = scales::breaks_width("5 years"),
+    breaks = scales::breaks_width("4 years"),
     labels = scales::label_date("'%y")
   ) +
-  scale_y_continuous("Persistence", n.breaks = 8) +
+  scale_y_continuous("Persistence", n.breaks = 10) +
   geom_rect(
     data = rec_data_2,
     inherit.aes = F,
@@ -764,3 +765,51 @@ ggsave(
   height = 148.5 /  1.7 ,
   units = "mm"
 )
+
+
+
+
+ggplot(size_persistence_short_tbl, aes(x = yq(quarter), y = size_1 / 100)) +
+  geom_line() + theme_light() +
+  scale_x_date(
+    NULL,
+    breaks = scales::breaks_width("4 years"),
+    labels = scales::label_date("'%y")
+  ) +
+  scale_y_continuous("Size", labels = label_percent()) +
+  geom_rect(
+    data = rec_data_2,
+    inherit.aes = F,
+    aes(
+      xmin = start,
+      xmax = end,
+      ymin = -Inf,
+      ymax = Inf
+    ),
+    fill = '#155F83FF' ,
+    alpha = 0.2
+  ) +
+  geom_hline(aes(yintercept = 0), color = "darkred")
+
+ggplot(size_persistence_short_tbl, aes(x = yq(quarter), y = persistence_1)) +
+  geom_line() + theme_light() +
+  scale_x_date(
+    NULL,
+    breaks = scales::breaks_width("4 years"),
+    labels = scales::label_date("'%y")
+  ) +
+  scale_y_continuous("Size") +
+  geom_rect(
+    data = rec_data_2,
+    inherit.aes = F,
+    aes(
+      xmin = start,
+      xmax = end,
+      ymin = -Inf,
+      ymax = Inf
+    ),
+    fill = '#155F83FF' ,
+    alpha = 0.2
+  ) +
+  geom_hline(aes(yintercept = 1), color = "darkred")
+

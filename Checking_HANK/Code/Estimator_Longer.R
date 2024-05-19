@@ -158,7 +158,7 @@ r_squares_long_tbl <-
 
 
 hausman_long_tbl <- tibble(hausman = hausman_list_long,
-                                horizon = 1:length(hausman_list_long) - 1)
+                           horizon = 1:length(hausman_list_long) - 1)
 
 
 save(
@@ -640,13 +640,13 @@ ggsave(
 
 size_persistence_long_tbl <-
   predicted_long_tbl |>
-  filter(horizon <= 16) |>
+  filter(horizon <= 12) |>
   group_by(quarter) |>
-  summarize(size = mean(fitted),
+  summarize(size = mean(fitted , na.rm = T), 
             persistence =
-              lm(I(log(fitted / fitted[1])) ~-1+ horizon)$coef[1] |> exp())
-
-
+              exp(lm(I(
+                log(fitted / fitted[2])
+              ) ~  horizon)$coef[2]))
 
 
 
@@ -667,7 +667,7 @@ actual_size_persistence_long <-
   geom_text(
     hjust = 0,
     vjust = 0,
-    size = 2.4,
+    size = 2.2,
     check_overlap = T
   ) +
   labs(x = "Size", y = "Persistence", color = "") +
@@ -689,23 +689,36 @@ ggsave(
 
 
 
-size_persistence_long_tbl |> filter(size > 0, persistence > 1, quarter >=
-                                      yearquarter("1988 Q3")) |> count() /
-  size_persistence_long_tbl |> filter(quarter >= yearquarter("1988 Q3")) |> count()
+size_persistence_long_tbl |>
+  filter(size > 0, persistence > 1, quarter >= yearquarter("1988 Q3")) |>
+  count() /
+  size_persistence_long_tbl |>
+  filter(quarter >= yearquarter("1988 Q3")) |>
+  count() * 100
 
 
-size_persistence_long_tbl |> filter(size < 0, persistence > 1, quarter >=
-                                      yearquarter("1988 Q3")) |> count() /
-  size_persistence_long_tbl |> filter(quarter >= yearquarter("1988 Q3")) |>
-  count()
-size_persistence_long_tbl |> filter(size > 0, persistence < 1, quarter >=
-                                      yearquarter("1988 Q3")) |> count() /
-  size_persistence_long_tbl |> filter(quarter >= yearquarter("1988 Q3")) |>
-  count()
-size_persistence_long_tbl |> filter(size < 0, persistence < 1, quarter >=
-                                      yearquarter("1988 Q3")) |> count() /
-  size_persistence_long_tbl |> filter(quarter >= yearquarter("1988 Q3")) |> count()
 
+size_persistence_long_tbl |>
+  filter(size < 0, persistence > 1, quarter >= yearquarter("1988 Q3")) |>
+  count() /
+  size_persistence_long_tbl |>
+  filter(quarter >= yearquarter("1988 Q3")) |>
+  count() * 100
+
+size_persistence_long_tbl |>
+  filter(size > 0, persistence < 1, quarter >= yearquarter("1988 Q3")) |>
+  count() /
+  size_persistence_long_tbl |>
+  filter(quarter >= yearquarter("1988 Q3")) |>
+  count() * 100
+
+
+size_persistence_long_tbl |>
+  filter(size < 0, persistence < 1, quarter >= yearquarter("1988 Q3")) |>
+  count() /
+  size_persistence_long_tbl |>
+  filter(quarter >= yearquarter("1988 Q3")) |>
+  count() * 100
 
 
 size_long_plot <-
@@ -713,7 +726,7 @@ size_long_plot <-
   geom_line() + theme_light() +
   scale_x_date(
     NULL,
-    breaks = scales::breaks_width("5 years"),
+    breaks = scales::breaks_width("4 years"),
     labels = scales::label_date("'%y")
   ) +
   scale_y_continuous("Size", labels = label_percent()) +
@@ -729,7 +742,7 @@ size_long_plot <-
     fill = '#155F83FF' ,
     alpha = 0.2
   ) +
-  geom_hline(aes(yintercept = 0), color="darkred")
+  geom_hline(aes(yintercept = 0), color = "darkred")
 
 ggsave(
   "size_long_plot.pdf",
@@ -744,13 +757,13 @@ ggsave(
 
 
 persistence_long_plot <-
-  ggplot(size_persistence_long_tbl, aes(x=yq(quarter), y=persistence)) +
-  geom_line()+theme_light()+
+  ggplot(size_persistence_long_tbl, aes(x = yq(quarter), y = persistence)) +
+  geom_line() + theme_light() +
   scale_x_date(
     NULL,
-    breaks = scales::breaks_width("5 years"), 
+    breaks = scales::breaks_width("4 years"),
     labels = scales::label_date("'%y")
-  )+ 
+  ) +
   scale_y_continuous("Persistence", n.breaks = 10) +
   geom_rect(
     data = rec_data_3,
@@ -764,7 +777,7 @@ persistence_long_plot <-
     fill = '#155F83FF' ,
     alpha = 0.2
   ) +
-  geom_hline(aes(yintercept = 1), color="darkred")
+  geom_hline(aes(yintercept = 1), color = "darkred")
 
 ggsave(
   "persistence_long_plot.pdf",
