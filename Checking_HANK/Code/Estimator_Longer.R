@@ -788,3 +788,5 @@ ggsave(
   units = "mm"
 )
 
+library(modelsummary)
+modelsummary(LP_2, output="latex_tabular")
