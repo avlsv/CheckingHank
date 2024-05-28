@@ -231,6 +231,10 @@ nairu_expected_ts <- nairu_expected_tbl |> as_tsibble()
 
 ### CPI Inflation ------
 ### gPCPI Greenbook projections for Q/Q headline CPI inflation
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
 expected_cpi_inflation_raw <-
   read_xlsx("data/Initial_Data/Tealbook Row Format.xlsx", sheet = "gPCPI") |>
@@ -360,16 +364,14 @@ full_dataset_ts <-
     dR = fed_funds_rate - r_star,
     demeaned_HAWK = HAWK - mean(HAWK, na.rm = T),
     demeaned_HAWK_IV = HAWK_IV - mean(HAWK_IV, na.rm = T),
-    demeaned_expected_inflation = expected_inflation - mean(expected_inflation, na.rm = T),
-    demeaned_expected_unemployment = expected_unemployment - mean(expected_unemployment, na.rm = T),
     stance = dR >= 0,
+    expected_unemployment_gap = expected_unemployment - expected_nairu,
     log_consumption = log(consumption),
     delta_log_consumption = difference(log_consumption),
     delta_expected_inflation = difference(expected_inflation),
-    delta_expected_unemployment = difference(expected_unemployment),
-    delta_cpi_expected_inflation = difference(expected_cpi_inflation),
+    delta_expected_unemployment_gap = difference(expected_unemployment_gap),
+    delta_expected_cpi_inflation = difference(expected_cpi_inflation),
     delta_expected_gap = difference(expected_gap),
-    expected_unemployment_gap = expected_unemployment - expected_nairu
   )
 
 

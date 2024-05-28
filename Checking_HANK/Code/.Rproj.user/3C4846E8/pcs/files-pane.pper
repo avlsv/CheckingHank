@@ -5,5 +5,9 @@
             "ascending": true
         }
     ],
+<<<<<<< Updated upstream
     "path": "~/Documents/CheckingHank/Checking_HANK/Code/Data"
+=======
+    "path": "~/Documents/CheckingHank/Checking_HANK/Code"
+>>>>>>> Stashed changes
 }

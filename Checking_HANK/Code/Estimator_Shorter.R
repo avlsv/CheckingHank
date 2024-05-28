@@ -22,7 +22,10 @@ required_packages_install <-
     "broom",
     "stargazer",
     "ivreg",
-    "car"
+    "car",
+    "scales",
+    "viridis",
+    "ggrepel"
   )
 
 
@@ -113,7 +116,10 @@ for (i in 0:20) {
     tibble(
       horizon = i,
       fitted = reg$fitted.values,
-      quarter = full_dataset_ts$year_quarter[reg$fitted.values |> names() |> as.numeric()]
+      quarter = full_dataset_ts$year_quarter[reg$fitted.values |> names() |> as.numeric()],
+      standard_error = predict(reg, se = T)[, 2],
+      ci_lower = predict(reg, interval = "confidence")[, 2],
+      ci_upper = predict(reg, interval = "confidence")[, 3]
     )
   
   predicted_short_tbl <- bind_rows(predicted_short_tbl, predicted_i)
@@ -160,6 +166,12 @@ save(
   hausman_short_tbl,
   file = "data/intermediate_data/coefs_short.RData"
 )
+
+write_csv(coefs_cpi_inflation, "data/intermediate_data/coefficients_estimates/short_coefs_cpi_inflation.csv")
+write_csv(coefs_HAWK_cpi_inflation, "data/intermediate_data/coefficients_estimates/short_coefs_HAWK_cpi_inflation.csv")
+write_csv(coefs_gap, "data/intermediate_data/coefficients_estimates/short_coefs_gap.csv")
+write_csv(coefs_HAWK_gap, "data/intermediate_data/coefficients_estimates/short_coefs_HAWK_gap.csv")
+
 
 ## LP-IV coefficient plots -----
 
@@ -591,6 +603,7 @@ LP_12 |> summary(diagnostics = T, vcov = vcovHAC(LP_12))
 ## Predictive plots  ------
 ##
 
+write_csv(predicted_short_tbl, "data/Intermediate_Data/predicted_short.csv")
 
 
 predicted_paths_short <-
@@ -601,16 +614,18 @@ predicted_paths_short <-
       y = fitted / 100,
       group = quarter,
       color = yq(quarter),
-      label = yearquarter(yq(quarter))
+      label = yq(quarter)
     )
   ) +
   geom_line() +
   labs(color = "") +
   scale_y_continuous("Predicted FFR", labels = label_percent(), n.breaks = 8) +
   scale_x_continuous("Horizon [1Q]") +
+  scale_colour_viridis_c(trans = "date", end = .85) +
   geom_hline(aes(yintercept = 0), color = "darkred") +
   theme_light()
 
+predicted_paths_short
 
 ggsave(
   "predicted_paths_short.pdf",
@@ -627,49 +642,53 @@ size_persistence_short_tbl <-
   predicted_short_tbl |>
   filter(horizon <= 12) |>
   group_by(quarter) |>
-  summarize(size =  mean(fitted, na.rm = T),
-            persistence = lm(I(log(fitted / fitted[2])) ~  horizon)$coef[2] |>
-              exp(), 
-            persistence_1= ar(fitted, order.max = 1)$ar[1])
+  summarize(
+    size =  mean(fitted, na.rm = T),
+    persistence = lm(I(log(fitted / fitted[2])) ~  horizon)$coef[2] |>
+      exp()
+  ) |> 
+  left_join(fedhead_quarterly, by=join_by(quarter == year_quarter))
 
 
-
+library(ggrepel)
 
 actual_size_persistence_short <-
   ggplot(
-    size_persistence_short_tbl|> filter(persistence<3),
+    size_persistence_short_tbl,
     aes(
       x = size / 100,
       y = persistence,
       color = yq(quarter),
-      label = quarter
+      label = as.character(format(quarter, "'%yq%q")),
+      shape = fed_head
     )
   ) +
   geom_hline(aes(yintercept = 1), color = "darkred") +
   geom_vline(aes(xintercept = 0), color = "darkred") +
-  geom_point(size = 1.3) +
-  geom_text(
-    hjust = 0,
-    vjust = 0,
-    size = 2.2,
-    check_overlap = T
-  ) +
-  labs(x = "Size", y = "Persistence", color = "") +
-  scale_x_continuous(labels = label_percent(), n.breaks = 8) +
-  scale_y_continuous(n.breaks = 8) +
-  theme_light() +
-  theme(legend.position = "none")
+  geom_point(size = 1.4) +
+  geom_text_repel(size = 2.1, 
+                  segment.size = 0.2, 
+                  box.padding = 0.2) +
+  scale_shape_manual(values=c(15, 16, 17))+
+  scale_x_continuous("Size", labels = label_percent(), n.breaks = 8) +
+  scale_y_continuous("Persistence", n.breaks = 8) +
+  scale_colour_viridis_c("Date", trans = "date", end = .85) +
+  theme_light() + 
+  labs(shape="Chair")
 
+actual_size_persistence_short
 
 
 ggsave(
   "actual_size_persistence_short.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   actual_size_persistence_short,
-  width = 210 / 1.7  ,
-  height = 148.5 / 1.7 ,
+  width = 210 / 1.4  ,
+  height = 148.5 / 1.4 ,
   units = "mm"
 )
+
+
 
 
 library(strucchange)
@@ -701,7 +720,7 @@ size_persistence_short_tbl |> filter(size < 0, persistence < 1) |> count() /
 
 size_short_plot <-
   ggplot(size_persistence_short_tbl, aes(x = yq(quarter), y = size / 100)) +
-  geom_line() + theme_light() +
+  geom_line()  +
   scale_x_date(
     NULL,
     breaks = scales::breaks_width("4 years"),
@@ -717,10 +736,11 @@ size_short_plot <-
       ymin = -Inf,
       ymax = Inf
     ),
-    fill = '#155F83FF' ,
+    fill = '#155F83FF',
     alpha = 0.2
   ) +
-  geom_hline(aes(yintercept = 0), color = "darkred")
+  geom_hline(aes(yintercept = 0), color = "darkred")+ 
+  theme_bw()
 
 ggsave(
   "size_short_plot.pdf",

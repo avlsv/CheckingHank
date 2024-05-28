@@ -23,7 +23,9 @@ required_Packages_Install <-
     "stargazer",
     "ivreg",
     "car",
-    "scales"
+    "scales",
+    "viridis",
+    "ggrepel"
   )
 
 
@@ -114,7 +116,10 @@ for (i in 0:20) {
     tibble(
       horizon = i,
       fitted = reg$fitted.values,
-      quarter = full_dataset_ts$year_quarter[reg$fitted.values |> names() |> as.numeric()]
+      quarter = full_dataset_ts$year_quarter[reg$fitted.values |> names() |> as.numeric()],
+      standard_error = predict(reg, se = T)[, 2],
+      ci_lower = predict(reg, interval = "confidence")[, 2],
+      ci_upper = predict(reg, interval = "confidence")[, 3]
     )
   
   predicted_long_tbl <- bind_rows(predicted_long_tbl, predicted_i)
@@ -169,6 +174,26 @@ save(
   r_squares_long_tbl,
   hausman_long_tbl,
   file = "data/intermediate_data/coefs_long.RData"
+)
+
+
+
+
+write_csv(
+  coefs_inflation,
+  "data/intermediate_data/coefficients_estimates/long_coefs_inflation.csv"
+)
+write_csv(
+  coefs_HAWK_inflation,
+  "data/intermediate_data/coefficients_estimates/long_coefs_HAWK_inflation.csv"
+)
+write_csv(
+  coefs_unemployment,
+  "data/intermediate_data/coefficients_estimates/long_coefs_unemployment.csv"
+)
+write_csv(
+  coefs_HAWK_unemployment,
+  "data/intermediate_data/coefficients_estimates/long_coefs_HAWK_unemployment.csv"
 )
 
 
@@ -601,6 +626,8 @@ LP_12 |> summary(diagnostics = T)
 ## Predictive plots  ------
 ##
 
+write_csv(predicted_long_tbl, "data/Intermediate_Data/predicted_long.csv")
+
 
 
 
@@ -620,8 +647,8 @@ predicted_paths_long <-
   labs(color = "") +
   scale_y_continuous("Predicted FFR", labels = label_percent(), n.breaks = 8) +
   scale_x_continuous("Horizon [1Q]") +
-  geom_hline(aes(yintercept = 0), color = "darkred") +
-  theme_light()
+  scale_colour_viridis_c("Date", trans = "date", end = .85) +
+  geom_hline(aes(yintercept = 0), color = "darkred") + theme_light()
 
 
 
@@ -637,53 +664,60 @@ ggsave(
 
 
 
-
 size_persistence_long_tbl <-
   predicted_long_tbl |>
   filter(horizon <= 12) |>
   group_by(quarter) |>
-  summarize(size = mean(fitted , na.rm = T), 
+  summarize(size = mean(fitted , na.rm = T),
             persistence =
               exp(lm(I(
                 log(fitted / fitted[2])
-              ) ~  horizon)$coef[2]))
+              ) ~  horizon)$coef[2])) |>
+  left_join(fedhead_quarterly, by = join_by(quarter == year_quarter))
 
 
+size_persistence_long_tbl_restr <-
+  size_persistence_long_tbl |> filter(quarter >= yearquarter("1988Q3"))
 
 actual_size_persistence_long <-
   ggplot(
-    size_persistence_long_tbl |> filter(quarter >=
-                                          yearquarter("1988 Q3")),
+    size_persistence_long_tbl_restr
+    ,
     aes(
       x = size / 100,
       y = persistence,
       color = yq(quarter),
-      label = quarter
+      label = as.character(format(quarter, "'%yq%q")),
+      shape = fed_head
     )
   ) +
   geom_hline(aes(yintercept = 1), color = "darkred") +
   geom_vline(aes(xintercept = 0), color = "darkred") +
-  geom_point(size = 1.3) +
-  geom_text(
-    hjust = 0,
-    vjust = 0,
-    size = 2.2,
-    check_overlap = T
+  geom_point(size = 1.4) +
+  geom_text_repel(
+    size = 2.1,
+    segment.size = 0.2,
+    max.time = 3,
+    max.iter = 100000,
+    force = 1.4,
+    max.overlaps = 8
   ) +
-  labs(x = "Size", y = "Persistence", color = "") +
-  scale_x_continuous(labels = label_percent(), n.breaks = 8) +
-  scale_y_continuous(n.breaks = 8) +
-  theme_light() +
-  theme(legend.position = "none")
+  scale_shape_manual(values = c(15, 16, 17)) +
+  labs(shape = "Chair", color = "Date") +
+  scale_x_continuous("Size", labels = label_percent(), n.breaks = 8) +
+  scale_y_continuous("Persistence", n.breaks = 8) +
+  scale_colour_viridis_c(trans = "date", end = .85) +
+  theme_light()
 
+actual_size_persistence_long
 
 
 ggsave(
   "actual_size_persistence_long.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   actual_size_persistence_long,
-  width = 210 /  1.7  ,
-  height = 148.5 /  1.7 ,
+  width = 210 /  1.4  ,
+  height = 148.5 /  1.4 ,
   units = "mm"
 )
 
@@ -721,8 +755,15 @@ size_persistence_long_tbl |>
   count() * 100
 
 
+
 size_long_plot <-
-  ggplot(size_persistence_long_tbl, aes(x = yq(quarter), y = size / 100)) +
+  ggplot(size_persistence_long_tbl,
+         aes(
+           x = yq(quarter),
+           y = size / 100,
+           color = fed_head,
+           group = NA
+         )) +
   geom_line() + theme_light() +
   scale_x_date(
     NULL,
@@ -742,7 +783,8 @@ size_long_plot <-
     fill = '#155F83FF' ,
     alpha = 0.2
   ) +
-  geom_hline(aes(yintercept = 0), color = "darkred")
+  geom_hline(aes(yintercept = 0), color = "darkred") +
+  labs(color = "Chaiman")
 
 ggsave(
   "size_long_plot.pdf",
@@ -756,9 +798,15 @@ ggsave(
 
 
 
+
 persistence_long_plot <-
-  ggplot(size_persistence_long_tbl, aes(x = yq(quarter), y = persistence)) +
-  geom_line() + theme_light() +
+  ggplot(size_persistence_long_tbl,
+         aes(
+           x = yq(quarter),
+           y = persistence
+         )) +
+  geom_line() + 
+  theme_light() +
   scale_x_date(
     NULL,
     breaks = scales::breaks_width("4 years"),
@@ -777,7 +825,10 @@ persistence_long_plot <-
     fill = '#155F83FF' ,
     alpha = 0.2
   ) +
-  geom_hline(aes(yintercept = 1), color = "darkred")
+  geom_hline(aes(yintercept = 1), color = "darkred") 
+
+
+persistence_long_plot
 
 ggsave(
   "persistence_long_plot.pdf",
