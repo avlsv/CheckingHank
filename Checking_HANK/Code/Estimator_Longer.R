@@ -50,6 +50,7 @@ coefs_inflation <- tibble()
 coefs_HAWK_inflation <- tibble()
 coefs_unemployment <- tibble()
 coefs_HAWK_unemployment <- tibble()
+predicted_i<- tibble()
 predicted_long_tbl <- tibble()
 r_squares_long <- c()
 hausman_list_long <- c()
@@ -75,7 +76,7 @@ for (i in 0:20) {
     )
   
   output <-
-    summary(reg, vcov. = vcovHAC(reg, weights = weightsLumley))$coefficients |> as_tibble() |>
+    summary(reg, vcov. = vcovHAC(reg))$coefficients |> as_tibble() |>
     slice(c(
       1,
       2,
@@ -110,6 +111,25 @@ for (i in 0:20) {
   
   
   r_squares_long <- c(r_squares_long, summary(reg, vcov. = vcovHAC(reg))$r.squared)
+
+
+  
+  lm_reg<- 
+    lm(lead(dR, i) ~
+         expected_inflation * demeaned_HAWK +  expected_unemployment_gap * demeaned_HAWK +
+         lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+         lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+         lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+         lag(expected_unemployment_gap, 1) + lag(expected_unemployment_gap, 2) +
+         lag(expected_unemployment_gap, 3) + lag(expected_unemployment_gap, 4) , 
+       data=full_dataset_ts)
+  
+  
+  lm_reg$coefficients<-reg$coefficients
+  lm_reg$residuals <- reg$residuals
+  lm_reg$rank <- reg$rank
+  reg$residuals2
+  
   
   
   predicted_i <-
@@ -117,9 +137,9 @@ for (i in 0:20) {
       horizon = i,
       fitted = reg$fitted.values,
       quarter = full_dataset_ts$year_quarter[reg$fitted.values |> names() |> as.numeric()],
-      standard_error = predict(reg, se = T)[, 2],
-      ci_lower = predict(reg, interval = "confidence")[, 2],
-      ci_upper = predict(reg, interval = "confidence")[, 3]
+      standard_error = Predict(lm_reg, se = T, vcov=vcovHAC(reg))$se,
+      ci_lower = Predict(lm_reg, interval = "confidence", vcov = vcovHAC(reg))[, 2],
+      ci_upper = Predict(lm_reg, interval = "confidence", vcov = vcovHAC(reg))[, 3]
     )
   
   predicted_long_tbl <- bind_rows(predicted_long_tbl, predicted_i)
@@ -196,6 +216,8 @@ write_csv(
   "data/intermediate_data/coefficients_estimates/long_coefs_HAWK_unemployment.csv"
 )
 
+write_csv(predicted_long_tbl, 
+          "data/Intermediate_Data/predicted_long.csv")
 
 
 
@@ -228,7 +250,9 @@ average_inflation_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +  geom_line() +
-  scale_x_continuous("Horizon [1Q]") +
+  scale_x_continuous("Horizon [1Q]",  
+                     breaks=seq(0, 20, by=4),
+                       minor_breaks = (0:20)) +
   scale_y_continuous("Percentage Points") +
   theme_light()
 
@@ -263,7 +287,9 @@ differential_inflation_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +
-  scale_x_continuous("Horizon [1Q]") +
+  scale_x_continuous("Horizon [1Q]",  
+                     breaks=seq(0, 20, by=4),
+                     minor_breaks = (0:20)) +
   scale_y_continuous("Percentage Points") +
   geom_hline(aes(yintercept = 0), color = "darkred") +  geom_line() +
   theme_light()
@@ -303,7 +329,9 @@ average_unemployment_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +  geom_line() +
-  scale_x_continuous("Horizon [1Q]") +
+  scale_x_continuous("Horizon [1Q]",  
+                     breaks=seq(0, 20, by=4), 
+                     minor_breaks = (0:20)) +
   scale_y_continuous("Percentage Points") +
   theme_light()
 
@@ -354,7 +382,9 @@ differential_unemployment_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +  geom_line() +
-  scale_x_continuous("Horizon [1Q]") +
+  scale_x_continuous("Horizon [1Q]", 
+                     breaks=seq(0, 20, by=4), 
+                     minor_breaks = (0:20)) +
   scale_y_continuous("Percentage Points") +
   theme_light()
 
@@ -626,133 +656,8 @@ LP_12 |> summary(diagnostics = T)
 ## Predictive plots  ------
 ##
 
-write_csv(predicted_long_tbl, "data/Intermediate_Data/predicted_long.csv")
 
 
-
-
-predicted_paths_long <-
-  ggplot(
-    predicted_long_tbl |>
-      filter(quarter >= yearquarter("1988 Q3")),
-    aes(
-      x = horizon,
-      y = fitted / 100,
-      group = quarter,
-      color = yq(quarter),
-      label = yearquarter(yq(quarter))
-    )
-  ) +
-  geom_line() +
-  labs(color = "") +
-  scale_y_continuous("Predicted FFR", labels = label_percent(), n.breaks = 8) +
-  scale_x_continuous("Horizon [1Q]") +
-  scale_colour_viridis_c("Date", trans = "date", end = .85) +
-  geom_hline(aes(yintercept = 0), color = "darkred") + theme_light()
-
-
-
-
-ggsave(
-  "predicted_paths_long.pdf",
-  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  predicted_paths_long,
-  width = 210 / 1.5  ,
-  height = 148.5 / 1.5 ,
-  units = "mm"
-)
-
-
-
-size_persistence_long_tbl <-
-  predicted_long_tbl |>
-  filter(horizon <= 12) |>
-  group_by(quarter) |>
-  summarize(size = mean(fitted , na.rm = T),
-            persistence =
-              exp(lm(I(
-                log(fitted / fitted[2])
-              ) ~  horizon)$coef[2])) |>
-  left_join(fedhead_quarterly, by = join_by(quarter == year_quarter))
-
-
-size_persistence_long_tbl_restr <-
-  size_persistence_long_tbl |> filter(quarter >= yearquarter("1988Q3"))
-
-actual_size_persistence_long <-
-  ggplot(
-    size_persistence_long_tbl_restr
-    ,
-    aes(
-      x = size / 100,
-      y = persistence,
-      color = yq(quarter),
-      label = as.character(format(quarter, "'%yq%q")),
-      shape = fed_head
-    )
-  ) +
-  geom_hline(aes(yintercept = 1), color = "darkred") +
-  geom_vline(aes(xintercept = 0), color = "darkred") +
-  geom_point(size = 1.4) +
-  geom_text_repel(
-    size = 2.1,
-    segment.size = 0.2,
-    max.time = 3,
-    max.iter = 100000,
-    force = 1.4,
-    max.overlaps = 8
-  ) +
-  scale_shape_manual(values = c(15, 16, 17)) +
-  labs(shape = "Chair", color = "Date") +
-  scale_x_continuous("Size", labels = label_percent(), n.breaks = 8) +
-  scale_y_continuous("Persistence", n.breaks = 8) +
-  scale_colour_viridis_c(trans = "date", end = .85) +
-  theme_light()
-
-actual_size_persistence_long
-
-
-ggsave(
-  "actual_size_persistence_long.pdf",
-  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  actual_size_persistence_long,
-  width = 210 /  1.4  ,
-  height = 148.5 /  1.4 ,
-  units = "mm"
-)
-
-
-
-size_persistence_long_tbl |>
-  filter(size > 0, persistence > 1, quarter >= yearquarter("1988 Q3")) |>
-  count() /
-  size_persistence_long_tbl |>
-  filter(quarter >= yearquarter("1988 Q3")) |>
-  count() * 100
-
-
-
-size_persistence_long_tbl |>
-  filter(size < 0, persistence > 1, quarter >= yearquarter("1988 Q3")) |>
-  count() /
-  size_persistence_long_tbl |>
-  filter(quarter >= yearquarter("1988 Q3")) |>
-  count() * 100
-
-size_persistence_long_tbl |>
-  filter(size > 0, persistence < 1, quarter >= yearquarter("1988 Q3")) |>
-  count() /
-  size_persistence_long_tbl |>
-  filter(quarter >= yearquarter("1988 Q3")) |>
-  count() * 100
-
-
-size_persistence_long_tbl |>
-  filter(size < 0, persistence < 1, quarter >= yearquarter("1988 Q3")) |>
-  count() /
-  size_persistence_long_tbl |>
-  filter(quarter >= yearquarter("1988 Q3")) |>
-  count() * 100
 
 
 
@@ -838,6 +743,7 @@ ggsave(
   height = 148.5 /  1.7 ,
   units = "mm"
 )
+
 
 library(modelsummary)
 modelsummary(LP_2, output="latex_tabular")

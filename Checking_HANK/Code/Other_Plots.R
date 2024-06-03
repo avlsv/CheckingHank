@@ -2,6 +2,9 @@
 
 
 
+
+
+
 # Libraries -----
 required_Packages_Install <-
   c(
@@ -21,7 +24,10 @@ required_Packages_Install <-
     "car",
     "scales",
     "viridis",
-    "ggrepel"
+    "ggrepel",
+    "latex2exp",
+    "patchwork",
+    "vistime"
   )
 
 
@@ -54,9 +60,6 @@ rec_data_long <-
 
 
 
-width_chosen = 210 / 1.7 
-height_chosen = 148.5 / 1.7
-
 # Rates -----
 
 
@@ -65,15 +68,34 @@ rate_plot <-
            select(fed_funds_rate, r_star, dR) |>
            na.omit(),
          aes(x = yq(year_quarter))) +
-  geom_line(aes(y = fed_funds_rate / 100, color = "Fed Funds Rate")) +
-  geom_line(aes(y = r_star / 100, color = "Natural Rate of Interest")) +
-  geom_line(aes(y = dR / 100, color = "Excess Rate")) +
+  geom_line(aes(y = fed_funds_rate / 100, color = "A")) +
+  geom_line(aes(y = r_star / 100, color = "B")) +
+  geom_line(aes(y = dR / 100, color = "C")) +
   geom_hline(aes(yintercept = 0), color = "darkred") +
   scale_x_date(date_breaks = "5 years", labels = label_date("'%y")) +
   scale_y_continuous(labels = label_percent()) +
   theme_light() +
+  scale_color_discrete(labels = unname(TeX(
+    c(
+      "Fed Funds Rate, $r_t$",
+      "Natural Rate of Interest, $r_t^*$",
+      "Excess Rate, $r_t-r_t^*$"
+    )
+  ))) +
+  geom_rect(
+    data = rec_data_long,
+    inherit.aes = F,
+    aes(
+      xmin = start,
+      xmax = end,
+      ymin = -Inf,
+      ymax = Inf
+    ),
+    fill = '#155F83FF' ,
+    alpha = 0.2
+  ) +
   theme(legend.position = "bottom") +
-  labs(x = "", y = "", color = "Rate")
+  labs(x = NULL, y = NULL, color = "Rate")
 
 
 ggsave(
@@ -101,7 +123,7 @@ expected_deflator_inflation_plot <-
   ) +
   geom_line() +
   theme_light() +
-  labs(x = "", y = "Tealbook Projection of GDP Deflator Inflation") +
+  labs(x = NULL, y = "Tealbook Projection of GDP Deflator Inflation") +
   scale_x_date(date_breaks = "5 years", labels = label_date("'%y")) +
   scale_y_continuous(labels = label_percent()) +
   geom_rect(
@@ -150,7 +172,7 @@ expected_unemployment_plot <-
   theme(legend.position = "bottom") +
   scale_x_date(date_breaks = "5 years", labels = label_date("'%y")) +
   scale_y_continuous(labels = label_percent()) +
-  labs(x = "", y = "", color = "Tealbook Projected ...") +
+  labs(x = NULL, y = NULL, color = "Tealbook Projected ...") +
   geom_rect(
     data = rec_data_long,
     inherit.aes = F,
@@ -188,8 +210,9 @@ expected_cpi_inflation_plot <-
   ) +
   geom_line() +
   theme_light() +
-  labs(x = "", y = "CPI Inflation") +
-  scale_y_continuous("Expected CPI Inflation", labels = label_percent()) +
+  labs(x = NULL) +
+  scale_y_continuous(TeX("Tealbook Projected CPI Inflation"), labels = label_percent()) +
+  scale_x_date(date_breaks = "5 years", labels = label_date("'%y")) +
   geom_rect(
     data = rec_data_long |> filter(start > yq("1980 Q1")),
     inherit.aes = F,
@@ -226,7 +249,7 @@ expected_gap_plot <-
   scale_x_date(date_breaks = "5 years", labels = label_date("'%y")) +
   scale_y_continuous(labels = label_percent()) +
   theme_light() +
-  labs(x = "", y = "GDP Gap") +
+  labs(x = NULL, y = TeX("GDP Gap, $x$")) +
   geom_rect(
     data = rec_data_short,
     inherit.aes = F,
@@ -255,15 +278,28 @@ ggsave(
 # Hawk plot --------
 
 
+fedhead_start_end_hawk <- fedhead_start_end
+fedhead_start_end_hawk$start[1] <- yq("1968 Q1 ")
+fedhead_start_end_hawk$end[length(fedhead_start_end_hawk$end)] <- yq("2020 Q4")
+fedhead_start_end_hawk$fed_head_1[5] <- "Post-Ber"
+
 HAWK_plot <-
-  ggplot(full_dataset_ts |>
-           select(HAWK, HAWK_IV) |>
-           na.omit(),
-         aes(x = yq(year_quarter))) +
-  geom_line(aes(y = HAWK, color = "HAWK")) +
-  geom_line(aes(y = HAWK_IV, color = "HAWK IV")) +
+  ggplot(
+    full_dataset_ts |>
+      select(HAWK, HAWK_IV) |>
+      na.omit() |>
+      as_tibble() |>
+      pivot_longer(!year_quarter) |>
+      mutate(name = str_replace(name, "_", " ")),
+    aes(
+      x = yq(year_quarter),
+      color = name,
+      y = value
+    )
+  ) +
+  geom_line(aes()) +
   theme_light() +
-  labs(x = "", y = "HAWK Indices", color = "Type:") +
+  labs(x = NULL, y = NULL, color = "Index:") +
   geom_rect(
     data = recession.df |>
       filter(start > yq("1965 Q1"), end < yq("2021 Q1")) ,
@@ -279,18 +315,43 @@ HAWK_plot <-
   ) +
   scale_y_continuous(breaks = breaks_extended()) +
   theme_bw() +
-  theme(legend.position = "bottom") +
+  facet_wrap(
+    ~ fct_rev(name),
+    ncol = 1,
+    strip.position = "right",
+    scales = "free_y"
+  ) +
   scale_x_date(date_breaks = "4 years", labels = label_date("'%y")) +
-  theme(
-    legend.position = c(0.1, 0.01),
-    legend.justification = c(0, 0),
-    legend.frame  = element_blank()
-  )
+  theme(legend.position = "none")
+
+
+hawk_heads <-
+  gg_vistime(fedhead_start_end_hawk,
+             col.event = "fed_head_1",
+             optimize_y = T) + scale_x_datetime(NULL, date_breaks = "4 years", labels = label_date("'%y"))
+
+
+HAWK_plot_w_heads <-
+  HAWK_plot + hawk_heads + plot_layout(ncol = 1, heights = c(0.96, .04))
+
+
 
 
 ggsave(
   "HAWK_plot.pdf",
   HAWK_plot,
+  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
+  width = 210 / 1.7  ,
+  height = 148.5 / 1.7 ,
+  units = "mm"
+)
+
+
+
+
+ggsave(
+  "HAWK_plot_w_heads.pdf",
+  HAWK_plot_w_heads,
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   width = 210 / 1.7  ,
   height = 148.5 / 1.7 ,

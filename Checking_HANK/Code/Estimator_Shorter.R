@@ -111,15 +111,32 @@ for (i in 0:20) {
   
   r_squares_short <- c(r_squares_short, summary(reg, vcov. = vcovHAC(reg))$r.squared)
   
+  lm_reg <-
+    lm(
+      lead(dR, i) ~
+        expected_cpi_inflation * demeaned_HAWK +  expected_gap * demeaned_HAWK +
+        lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+        lag(expected_cpi_inflation, 1) + lag(expected_cpi_inflation, 2) +
+        lag(expected_cpi_inflation, 3)  + lag(expected_cpi_inflation, 4) +
+        lag(expected_gap, 1) + lag(expected_gap, 2) +
+        lag(expected_gap, 3) + lag(expected_gap, 4),
+      data = full_dataset_ts
+    )
+  
+  
+  lm_reg$coefficients <- reg$coefficients
+  lm_reg$residuals <- reg$residuals
+  lm_reg$rank <- reg$rank
+  
   
   predicted_i <-
     tibble(
       horizon = i,
       fitted = reg$fitted.values,
       quarter = full_dataset_ts$year_quarter[reg$fitted.values |> names() |> as.numeric()],
-      standard_error = predict(reg, se = T)[, 2],
-      ci_lower = predict(reg, interval = "confidence")[, 2],
-      ci_upper = predict(reg, interval = "confidence")[, 3]
+      standard_error = Predict(lm_reg, se = T, vcov. = vcovHAC(reg))$se.fit,
+      ci_lower = Predict(lm_reg, interval = "confidence", vcov. = vcovHAC(reg))[, 2],
+      ci_upper = Predict(lm_reg, interval = "confidence", vcov. = vcovHAC(reg))[, 3]
     )
   
   predicted_short_tbl <- bind_rows(predicted_short_tbl, predicted_i)
@@ -167,10 +184,27 @@ save(
   file = "data/intermediate_data/coefs_short.RData"
 )
 
-write_csv(coefs_cpi_inflation, "data/intermediate_data/coefficients_estimates/short_coefs_cpi_inflation.csv")
-write_csv(coefs_HAWK_cpi_inflation, "data/intermediate_data/coefficients_estimates/short_coefs_HAWK_cpi_inflation.csv")
-write_csv(coefs_gap, "data/intermediate_data/coefficients_estimates/short_coefs_gap.csv")
-write_csv(coefs_HAWK_gap, "data/intermediate_data/coefficients_estimates/short_coefs_HAWK_gap.csv")
+write_csv(
+  coefs_cpi_inflation,
+  "data/intermediate_data/coefficients_estimates/short_coefs_cpi_inflation.csv"
+)
+
+write_csv(
+  coefs_HAWK_cpi_inflation,
+  "data/intermediate_data/coefficients_estimates/short_coefs_HAWK_cpi_inflation.csv"
+)
+
+write_csv(coefs_gap,
+          "data/intermediate_data/coefficients_estimates/short_coefs_gap.csv")
+
+write_csv(
+  coefs_HAWK_gap,
+  "data/intermediate_data/coefficients_estimates/short_coefs_HAWK_gap.csv"
+)
+
+
+write_csv(predicted_short_tbl,
+          "data/Intermediate_Data/predicted_short.csv")
 
 
 ## LP-IV coefficient plots -----
@@ -600,93 +634,13 @@ LP_12 |> summary(diagnostics = T, vcov = vcovHAC(LP_12))
 
 
 
+
+
 ## Predictive plots  ------
 ##
 
-write_csv(predicted_short_tbl, "data/Intermediate_Data/predicted_short.csv")
 
 
-predicted_paths_short <-
-  ggplot(
-    predicted_short_tbl,
-    aes(
-      x = horizon,
-      y = fitted / 100,
-      group = quarter,
-      color = yq(quarter),
-      label = yq(quarter)
-    )
-  ) +
-  geom_line() +
-  labs(color = "") +
-  scale_y_continuous("Predicted FFR", labels = label_percent(), n.breaks = 8) +
-  scale_x_continuous("Horizon [1Q]") +
-  scale_colour_viridis_c(trans = "date", end = .85) +
-  geom_hline(aes(yintercept = 0), color = "darkred") +
-  theme_light()
-
-predicted_paths_short
-
-ggsave(
-  "predicted_paths_short.pdf",
-  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  predicted_paths_short,
-  height =  148.5 / 1.5,
-  width = 210 / 1.5,
-  units = "mm"
-)
-
-
-
-size_persistence_short_tbl <-
-  predicted_short_tbl |>
-  filter(horizon <= 12) |>
-  group_by(quarter) |>
-  summarize(
-    size =  mean(fitted, na.rm = T),
-    persistence = lm(I(log(fitted / fitted[2])) ~  horizon)$coef[2] |>
-      exp()
-  ) |> 
-  left_join(fedhead_quarterly, by=join_by(quarter == year_quarter))
-
-
-library(ggrepel)
-
-actual_size_persistence_short <-
-  ggplot(
-    size_persistence_short_tbl,
-    aes(
-      x = size / 100,
-      y = persistence,
-      color = yq(quarter),
-      label = as.character(format(quarter, "'%yq%q")),
-      shape = fed_head
-    )
-  ) +
-  geom_hline(aes(yintercept = 1), color = "darkred") +
-  geom_vline(aes(xintercept = 0), color = "darkred") +
-  geom_point(size = 1.4) +
-  geom_text_repel(size = 2.1, 
-                  segment.size = 0.2, 
-                  box.padding = 0.2) +
-  scale_shape_manual(values=c(15, 16, 17))+
-  scale_x_continuous("Size", labels = label_percent(), n.breaks = 8) +
-  scale_y_continuous("Persistence", n.breaks = 8) +
-  scale_colour_viridis_c("Date", trans = "date", end = .85) +
-  theme_light() + 
-  labs(shape="Chair")
-
-actual_size_persistence_short
-
-
-ggsave(
-  "actual_size_persistence_short.pdf",
-  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  actual_size_persistence_short,
-  width = 210 / 1.4  ,
-  height = 148.5 / 1.4 ,
-  units = "mm"
-)
 
 
 
@@ -700,136 +654,4 @@ sctest(LP_4)
 sctest(LP_6)
 sctest(LP_8)
 sctest(LP_10)
-sctest(LP_12, type = "supF")
-
-
-
-
-
-size_persistence_short_tbl |> filter(size > 0, persistence > 1) |> count() /
-  size_persistence_short_tbl |> count() * 100
-size_persistence_short_tbl |> filter(size < 0, persistence > 1) |> count() /
-  size_persistence_short_tbl |> count() * 100
-size_persistence_short_tbl |> filter(size > 0, persistence < 1) |> count() /
-  size_persistence_short_tbl |> count() * 100
-size_persistence_short_tbl |> filter(size < 0, persistence < 1) |> count() /
-  size_persistence_short_tbl |> count() * 100
-
-
-
-
-size_short_plot <-
-  ggplot(size_persistence_short_tbl, aes(x = yq(quarter), y = size / 100)) +
-  geom_line()  +
-  scale_x_date(
-    NULL,
-    breaks = scales::breaks_width("4 years"),
-    labels = scales::label_date("'%y")
-  ) +
-  scale_y_continuous("Size", labels = label_percent()) +
-  geom_rect(
-    data = rec_data_2,
-    inherit.aes = F,
-    aes(
-      xmin = start,
-      xmax = end,
-      ymin = -Inf,
-      ymax = Inf
-    ),
-    fill = '#155F83FF',
-    alpha = 0.2
-  ) +
-  geom_hline(aes(yintercept = 0), color = "darkred")+ 
-  theme_bw()
-
-ggsave(
-  "size_short_plot.pdf",
-  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  size_short_plot,
-  width = 210 /  1.7  ,
-  height = 148.5 /  1.7 ,
-  units = "mm"
-)
-
-
-
-
-persistence_short_plot <-
-  ggplot(size_persistence_short_tbl, aes(x = yq(quarter), y = persistence)) +
-  geom_line() + theme_light() +
-  scale_x_date(
-    NULL,
-    breaks = scales::breaks_width("4 years"),
-    labels = scales::label_date("'%y")
-  ) +
-  scale_y_continuous("Persistence", n.breaks = 10) +
-  geom_rect(
-    data = rec_data_2,
-    inherit.aes = F,
-    aes(
-      xmin = start,
-      xmax = end,
-      ymin = -Inf,
-      ymax = Inf
-    ),
-    fill = '#155F83FF' ,
-    alpha = 0.2
-  ) +
-  geom_hline(aes(yintercept = 1), color = "darkred")
-
-ggsave(
-  "persistence_short_plot.pdf",
-  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  persistence_short_plot,
-  width = 210 /  1.7  ,
-  height = 148.5 /  1.7 ,
-  units = "mm"
-)
-
-
-
-
-ggplot(size_persistence_short_tbl, aes(x = yq(quarter), y = size_1 / 100)) +
-  geom_line() + theme_light() +
-  scale_x_date(
-    NULL,
-    breaks = scales::breaks_width("4 years"),
-    labels = scales::label_date("'%y")
-  ) +
-  scale_y_continuous("Size", labels = label_percent()) +
-  geom_rect(
-    data = rec_data_2,
-    inherit.aes = F,
-    aes(
-      xmin = start,
-      xmax = end,
-      ymin = -Inf,
-      ymax = Inf
-    ),
-    fill = '#155F83FF' ,
-    alpha = 0.2
-  ) +
-  geom_hline(aes(yintercept = 0), color = "darkred")
-
-ggplot(size_persistence_short_tbl, aes(x = yq(quarter), y = persistence_1)) +
-  geom_line() + theme_light() +
-  scale_x_date(
-    NULL,
-    breaks = scales::breaks_width("4 years"),
-    labels = scales::label_date("'%y")
-  ) +
-  scale_y_continuous("Size") +
-  geom_rect(
-    data = rec_data_2,
-    inherit.aes = F,
-    aes(
-      xmin = start,
-      xmax = end,
-      ymin = -Inf,
-      ymax = Inf
-    ),
-    fill = '#155F83FF' ,
-    alpha = 0.2
-  ) +
-  geom_hline(aes(yintercept = 1), color = "darkred")
-
+sctest(LP_4, type = "supF")

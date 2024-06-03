@@ -4,7 +4,7 @@ library(tsibble)
 fedhead <-
   tsibble(date = seq(
     from = date("1950-01-01"),
-    to = date("2020-01-01"),
+    to = date("2024-01-01"),
     by = 1
   ))
 
@@ -26,10 +26,10 @@ fedhead_miller <-
   mutate(fed_head = "Miller") |>
   as_tibble()
 
-fedhead_volchker <-
+fedhead_volcker <-
   fedhead |>
   filter_index("August 6, 1979" ~ "August 11, 1987") |>
-  mutate(fed_head = "Volchker") |>
+  mutate(fed_head = "Volcker") |>
   as_tibble()
 
 fedhead_greenspan <-
@@ -62,7 +62,7 @@ fedhead_bind <-
     fedhead_martin,
     fedhead_burns,
     fedhead_miller,
-    fedhead_volchker,
+    fedhead_volcker,
     fedhead_greenspan,
     fedhead_bernanke,
     fedhead_yellen,
@@ -82,6 +82,16 @@ fedhead_daily <-
         .default = fed_head
       )
   )
+
+fedhead_start_end <-
+  fedhead_daily |>
+  as_tibble() |>
+  group_by(fed_head_1) |>
+  summarize(start = min(date), end = max(date))|> 
+  arrange(start)
+
+vistime::gg_vistime(fedhead_start_end, col.event="fed_head_1", optimize_y = T)
+
 
 
 fedhead_monthly <-
