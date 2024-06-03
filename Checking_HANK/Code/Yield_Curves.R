@@ -162,7 +162,7 @@ estimates_of_liquidity_premia_plot <-
   scale_y_continuous("Predicted Liquidity Premia",
                      labels = percent_format(),
                      n.breaks = 8) +
-  scale_x_date(NULL, date_breaks = "5 years", labels = label_date("'%y")) +
+  scale_x_date(NULL, date_breaks = "4 years", labels = label_date("'%y")) +
   labs(fill = "Model", linetype = "Model") +
   geom_hline(aes(yintercept = 0), color = "darkred") +
   theme_light() +
@@ -212,7 +212,7 @@ share_inverted_plot <-
     alpha = 0.2
   ) +
   scale_y_continuous("Share of Days per Quarter with Inverted Yeld Curves", labels = label_percent()) +
-  scale_x_date(NULL, date_breaks = "5 years", labels = label_date("'%y")) +
+  scale_x_date(NULL, date_breaks = "4 years", labels = label_date("'%y")) +
   theme_light()
 
 
@@ -222,7 +222,7 @@ share_inverted_plot <-
 
 # Plot of Yield Curves -----
 
-starting_quarter =  yearquarter("2007q1")
+starting_quarter =  yearquarter("2014q1")
 number_of_years = 3
 
 
@@ -259,7 +259,7 @@ yield_prediction_plot <-
             aes(
               x = horizon / 4,
               y = ffr_hat / 100,
-              linetype = model
+              linetype = fct_rev(model)
             )) +
   geom_ribbon(
     data = predicted_ffr_tbl |>
@@ -271,7 +271,7 @@ yield_prediction_plot <-
       ymin = ci_lower / 100,
       ymax = ci_upper / 100,
       y = ffr_hat / 100,
-      fill = model
+      fill = fct_rev(model)
     ),
     alpha = 0.2
   ) +

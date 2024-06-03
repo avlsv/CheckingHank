@@ -236,7 +236,9 @@ average_inflation_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +  geom_line() +
-  scale_x_continuous("Horizon [1Q]") +
+  scale_x_continuous("Horizon [1Q]",
+                     breaks = seq(0, 20, by = 4),
+                     minor_breaks = (0:20)) +
   scale_y_continuous("Percentage Points") +
   theme_light()
 
@@ -271,7 +273,9 @@ differential_inflation_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +
-  scale_x_continuous("Horizon [1Q]") +
+  scale_x_continuous("Horizon [1Q]",
+                     breaks = seq(0, 20, by = 4),
+                     minor_breaks = (0:20)) +
   scale_y_continuous("Percentage Points") +
   geom_hline(aes(yintercept = 0), color = "darkred") +  geom_line() +
   theme_light()
@@ -308,7 +312,9 @@ average_gap_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +  geom_line() +
-  scale_x_continuous("Horizon [1Q]") +
+  scale_x_continuous("Horizon [1Q]",
+                     breaks = seq(0, 20, by = 4),
+                     minor_breaks = (0:20)) +
   scale_y_continuous("Percentage Points") +
   theme_light()
 
@@ -359,7 +365,9 @@ differential_gap_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +  geom_line() +
-  scale_x_continuous("Horizon [1Q]") +
+  scale_x_continuous("Horizon [1Q]",
+                     breaks = seq(0, 20, by = 4),
+                     minor_breaks = (0:20)) +
   scale_y_continuous("Percentage Points") +
   theme_light()
 

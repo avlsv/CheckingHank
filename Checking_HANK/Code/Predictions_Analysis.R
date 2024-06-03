@@ -24,7 +24,7 @@ required_Packages_Install <-
     "car",
     "scales",
     "viridis",
-    "ggrepel", 
+    "ggrepel",
     "patchwork"
   )
 
@@ -89,8 +89,8 @@ predicted_ffr_short_tbl <-
   mutate(
     ffr_hat = r_star + fitted,
     ci_lower = ci_lower + r_star,
-    ci_upper = ci_upper + r_star, 
-    model="Short"
+    ci_upper = ci_upper + r_star,
+    model = "Short"
   ) |> select(-fitted, -r_star) |>
   relocate(ffr_hat, .after = quarter)
 
@@ -112,20 +112,24 @@ predicted_ffr_long_tbl <-
     ffr_hat = r_star + fitted,
     ci_lower = ci_lower + r_star,
     ci_upper = ci_upper + r_star,
-    model="Long"
+    model = "Long"
   ) |> select(-fitted, -r_star) |>
   relocate(ffr_hat, .after = quarter)
 
 
 
-predicted_ffr_tbl <- 
-  bind_rows(predicted_ffr_short_tbl,predicted_ffr_long_tbl)
+predicted_ffr_tbl <-
+  bind_rows(predicted_ffr_short_tbl, predicted_ffr_long_tbl)
 
 ## Short Specification FFR Predictive Plot --------
 
 predicted_ffr_paths_short <-
   ggplot(
-    left_join(predicted_ffr_short_tbl, full_dataset_ts, by=join_by(quarter==year_quarter)),
+    left_join(
+      predicted_ffr_short_tbl,
+      full_dataset_ts,
+      by = join_by(quarter == year_quarter)
+    ),
     aes(
       x = horizon,
       y = ffr_hat / 100,
@@ -135,8 +139,12 @@ predicted_ffr_paths_short <-
     )
   ) +
   geom_line() +
-  scale_y_continuous(TeX("Predicted FFR"), labels = label_percent(), n.breaks = 8) +
-  scale_x_continuous("Horizon [1Q]") +
+  scale_y_continuous(TeX("Predicted FFR"),
+                     labels = label_percent(),
+                     n.breaks = 8) +
+  scale_x_continuous("Horizon [1Q]",
+                     breaks = seq(0, 20, by = 4),
+                     minor_breaks = (0:20)) +
   scale_colour_viridis_c("Date", trans = "date", end = .9) +
   geom_hline(aes(yintercept = 0), color = "darkred") +
   theme_light()
@@ -158,7 +166,8 @@ ggsave(
 ## Long Specification FFR Predictive Plot  --------
 
 predicted_ffr_paths_long <-
-  ggplot(predicted_ffr_long_tbl |>
+  ggplot(
+    predicted_ffr_long_tbl |>
       filter(quarter >= yearquarter("1988 Q3")),
     aes(
       x = horizon,
@@ -170,7 +179,9 @@ predicted_ffr_paths_long <-
   ) +
   geom_line() +
   scale_y_continuous("Predicted FFR", labels = label_percent(), n.breaks = 8) +
-  scale_x_continuous("Horizon [1Q]") +
+  scale_x_continuous("Horizon [1Q]",
+                     breaks = seq(0, 20, by = 4),
+                     minor_breaks = (0:20))+
   scale_colour_viridis_c("Date", trans = "date", end = .9) +
   geom_hline(aes(yintercept = 0), color = "darkred") +
   theme_light() + theme(legend.position = "right")
@@ -187,11 +198,16 @@ ggsave(
   units = "mm"
 )
 
+## Short Specification Deviation Predictive Plot  --------
 
 
 predicted_paths_short <-
   ggplot(
-    left_join(predicted_short_tbl, full_dataset_ts, by=join_by(quarter==year_quarter)),
+    left_join(
+      predicted_short_tbl,
+      full_dataset_ts,
+      by = join_by(quarter == year_quarter)
+    ),
     aes(
       x = horizon,
       y = fitted / 100,
@@ -201,8 +217,12 @@ predicted_paths_short <-
     )
   ) +
   geom_line() +
-  scale_y_continuous(TeX("Predicted $r-r^*$"), labels = label_percent(), n.breaks = 8) +
-  scale_x_continuous("Horizon [1Q]") +
+  scale_y_continuous(TeX("Predicted $r-r^*$"),
+                     labels = label_percent(),
+                     n.breaks = 8) +
+  scale_x_continuous("Horizon [1Q]",
+                     breaks = seq(0, 20, by = 4),
+                     minor_breaks = (0:20))+
   scale_colour_viridis_c("Date", trans = "date", end = .9) +
   geom_hline(aes(yintercept = 0), color = "darkred") +
   theme_light()
@@ -219,11 +239,17 @@ ggsave(
 )
 
 
+## Long Specification Deviation Predictive Plot  --------
 
 
 predicted_paths_long <-
   ggplot(
-    left_join(predicted_long_tbl, full_dataset_ts, by=join_by(quarter==year_quarter)),
+    left_join(
+      predicted_long_tbl,
+      full_dataset_ts,
+      by = join_by(quarter == year_quarter)
+    ) |>
+      filter(quarter >= yearquarter("1988 Q3")),
     aes(
       x = horizon,
       y = fitted / 100,
@@ -233,8 +259,12 @@ predicted_paths_long <-
     )
   ) +
   geom_line() +
-  scale_y_continuous(TeX("Predicted $r-r^*$"), labels = label_percent(), n.breaks = 8) +
-  scale_x_continuous("Horizon [1Q]") +
+  scale_y_continuous(TeX("Predicted $r-r^*$"),
+                     labels = label_percent(),
+                     n.breaks = 8) +
+  scale_x_continuous("Horizon [1Q]",
+                     breaks = seq(0, 20, by = 4),
+                     minor_breaks = (0:20))+
   scale_colour_viridis_c("Date", trans = "date", end = .9) +
   geom_hline(aes(yintercept = 0), color = "darkred") +
   theme_light()
@@ -253,41 +283,6 @@ ggsave(
 
 
 
-## Short Specification Deviation Predictive Plot  --------
-
-predicted_ffr_paths_long <-
-  ggplot(predicted_ffr_long_tbl |>
-           filter(quarter >= yearquarter("1988 Q3")),
-         aes(
-           x = horizon,
-           y = ffr_hat / 100,
-           group = quarter,
-           color = yq(quarter),
-           label = yearquarter(yq(quarter))
-         )
-  ) +
-  geom_line() +
-  scale_y_continuous("Predicted FFR", labels = label_percent(), n.breaks = 8) +
-  scale_x_continuous("Horizon [1Q]") +
-  scale_colour_viridis_c("Date", trans = "date", end = .9) +
-  geom_hline(aes(yintercept = 0), color = "darkred") +
-  theme_light() + theme(legend.position = "right")
-
-
-
-
-ggsave(
-  "predicted_ffr_paths_long.pdf",
-  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  predicted_ffr_paths_long,
-  width = 210 / 1.5  ,
-  height = 148.5 / 1.5 ,
-  units = "mm"
-)
-
-
-
-
 
 # Size-Persistence  -----
 
@@ -297,7 +292,7 @@ ggsave(
 
 size_persistence_short_tbl <-
   predicted_short_tbl |>
-  filter(horizon <= 12 ) |>
+  filter(horizon <= 12) |>
   group_by(quarter) |>
   summarize(
     size =  mean(fitted, na.rm = T),
@@ -339,7 +334,7 @@ size_persistence_tbl <-
 
 
 size_persistence_long_tbl_restr <-
-  size_persistence_long_tbl |> 
+  size_persistence_long_tbl |>
   filter(quarter >= yearquarter("1988Q3"))
 
 
@@ -374,7 +369,7 @@ actual_size_persistence_short <-
   scale_y_continuous("Persistence", n.breaks = 8) +
   scale_colour_viridis_c("Date", trans = "date", end = .85) +
   theme_light() +
-  labs(shape = "Chair")
+  labs(shape = "Chairman")
 
 actual_size_persistence_short
 
@@ -383,8 +378,8 @@ ggsave(
   "actual_size_persistence_short.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   actual_size_persistence_short,
-  width = 210 / 1.4  ,
-  height = 148.5 / 1.4 ,
+  width = 210 / 1.2  ,
+  height = 148.5 / 1.2 ,
   units = "mm"
 )
 
@@ -413,16 +408,9 @@ actual_size_persistence_long <-
   geom_hline(aes(yintercept = 1), color = "darkred") +
   geom_vline(aes(xintercept = 0), color = "darkred") +
   geom_point(size = 1.4) +
-  geom_text_repel(
-    size = 2.1,
-    segment.size = 0.2,
-    max.time = 3,
-    max.iter = 100000,
-    force = 1.4,
-    max.overlaps = 8
-  ) +
+  geom_text_repel(size = 2.1, segment.size = 0.2) +
   scale_shape_manual(values = c(15, 16, 17)) +
-  labs(shape = "Chair", color = "Date") +
+  labs(shape = "Chairman", color = "Date") +
   scale_x_continuous("Size", labels = label_percent(), n.breaks = 8) +
   scale_y_continuous("Persistence", n.breaks = 8) +
   scale_colour_viridis_c(trans = "date", end = .85) +
@@ -435,8 +423,8 @@ ggsave(
   "actual_size_persistence_long.pdf",
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   actual_size_persistence_long,
-  width = 210 /  1.4  ,
-  height = 148.5 /  1.4 ,
+  width = 210 /  1.2  ,
+  height = 148.5 /  1.2 ,
   units = "mm"
 )
 
@@ -453,7 +441,7 @@ quarters_short <-
     third_quarter = sum(size < 0 & persistence < 1) / n(),
     fourth_quarter = sum(size > 0 & persistence < 1) / n()
   ) |> pivot_longer(everything()) |>
-  rename(quarter = name) |> 
+  rename(quarter = name) |>
   mutate(model = "Short")
 
 quarters_long_restr <-
@@ -464,8 +452,8 @@ quarters_long_restr <-
     third_quarter = sum(size < 0 & persistence < 1) / n(),
     fourth_quarter = sum(size > 0 & persistence < 1) / n()
   ) |> pivot_longer(everything()) |>
-  rename(quarter = name)|>
-  mutate(model = "Long (from 1988 Q3)")
+  rename(quarter = name) |>
+  mutate(model = "Long (1988 Q3 — 2018Q4)")
 
 
 
@@ -477,8 +465,8 @@ quarters_long <-
     third_quarter = sum(size < 0 & persistence < 1) / n(),
     fourth_quarter = sum(size > 0 & persistence < 1) / n()
   ) |> pivot_longer(everything()) |>
-  rename(quarter = name)|>
-  mutate(model = "Long (from 1969 Q1)")
+  rename(quarter = name) |>
+  mutate(model = "Long (1969 Q1 — 2018Q4)")
 
 
 
@@ -498,13 +486,17 @@ quarter_stats <-
     aes(x = model, y = value, fill = quarter)
   ) +
   geom_col(position = "dodge2") +
-  scale_y_continuous(NULL, 
-                     labels = percent_format(), 
-                     n.breaks = 8, 
-                     sec.axis = sec_axis(transform = ~.*122, 
-                                         name = "Number of Quarters", 
-                                         breaks = seq(0,60, by = 10)) ) +
-  scale_fill_viridis_d(begin = .2,end = .9) +
+  scale_y_continuous(
+    NULL,
+    labels = percent_format(),
+    n.breaks = 8,
+    sec.axis = sec_axis(
+      transform = ~ . * 122,
+      name = "Number of Quarters",
+      breaks = seq(0, 60, by = 10)
+    )
+  ) +
+  scale_fill_viridis_d(begin = .2, end = .9) +
   labs(x = "Specification", fill = "Quarter") +
   theme_light() +
   theme(legend.position = "bottom")
@@ -537,8 +529,7 @@ ggsave(
 size_plot <-
   ggplot(
     size_persistence_tbl |>
-      filter(type == "size", 
-             quarter >= yearquarter("1988Q3")),
+      filter(type == "size", quarter >= yearquarter("1988Q3")),
     aes(
       x = yq(quarter),
       y = value / 100,
@@ -566,11 +557,13 @@ size_plot <-
     alpha = 0.2
   ) +
   geom_hline(aes(yintercept = 0), color = "darkred") +
-  theme_light()+  
-  labs(color="Model")+
-  theme(legend.position = c(0.99, 0.99),
-         legend.justification = c(1, 1),
-         legend.frame  = element_blank())
+  theme_light() +
+  labs(color = "Model") +
+  theme(
+    legend.position = c(0.99, 0.99),
+    legend.justification = c(1, 1),
+    legend.frame  = element_blank()
+  )
 
 size_plot
 
@@ -581,7 +574,8 @@ ggsave(
   size_plot,
   width = 210 /  1.5  ,
   height = 148.5 /  1.5 ,
-  units = "mm"
+  units = "mm", 
+  device=cairo_pdf
 )
 
 
@@ -654,20 +648,18 @@ r_squares_full <- rows_append(
 
 r_squares_plot <-
   ggplot(r_squares_full,
-         aes(x = horizon/4, y = r_squares, colour = specification)) +
+         aes(x = horizon / 4, y = r_squares, colour = specification)) +
   geom_line() +
   theme_light() +
   scale_y_continuous(TeX("$R^2$"), n.breaks = 8) +
   scale_x_continuous(
     "Horizon [1Y]",
-    minor_breaks = seq(0, 20/4, by = 1/4),
-    breaks = seq(0, 20/4, by = 4/4)
-    ) +
+    minor_breaks = seq(0, 20 / 4, by = 1 / 4),
+    breaks = seq(0, 20 / 4, by = 4 / 4)
+  ) +
   labs(color = "Specification") +
-  theme(
-    legend.position = c(0.95, 0.95),
-    legend.justification = c(1, 1)
-  )
+  theme(legend.position = c(0.95, 0.95),
+        legend.justification = c(1, 1))
 
 
 
@@ -695,11 +687,12 @@ hausman_full <- rows_append(
 
 
 hausman_plot <-
-  ggplot(hausman_full, aes(x = horizon/4, y = hausman, colour = specification)) +
+  ggplot(hausman_full,
+         aes(x = horizon / 4, y = hausman, colour = specification)) +
   geom_line() +
   theme_light() +
   scale_y_continuous("Wu-Hausman Statistic", n.breaks = 8) +
-  scale_x_continuous("Horizon [1Y]", minor_breaks = (0:20)/4) +
+  scale_x_continuous("Horizon [1Y]", minor_breaks = (0:20) / 4) +
   labs(color = "Specification") +
   theme(
     legend.position = c(0.95, 0.95),
@@ -729,4 +722,3 @@ ggsave(
   height = 148.5 / 1.7 ,
   units = "mm"
 )
-

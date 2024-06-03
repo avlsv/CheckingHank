@@ -249,7 +249,7 @@ expected_gap_plot <-
   scale_x_date(date_breaks = "5 years", labels = label_date("'%y")) +
   scale_y_continuous(labels = label_percent()) +
   theme_light() +
-  labs(x = NULL, y = TeX("GDP Gap, $x$")) +
+  labs(x = NULL, y = TeX("Tealbook Projected GDP Gap, $x$")) +
   geom_rect(
     data = rec_data_short,
     inherit.aes = F,
@@ -281,7 +281,7 @@ ggsave(
 fedhead_start_end_hawk <- fedhead_start_end
 fedhead_start_end_hawk$start[1] <- yq("1968 Q1 ")
 fedhead_start_end_hawk$end[length(fedhead_start_end_hawk$end)] <- yq("2020 Q4")
-fedhead_start_end_hawk$fed_head_1[5] <- "Post-Ber"
+fedhead_start_end_hawk$fed_head_1[5] <- "Post-B"
 
 HAWK_plot <-
   ggplot(
@@ -332,7 +332,7 @@ hawk_heads <-
 
 
 HAWK_plot_w_heads <-
-  HAWK_plot + hawk_heads + plot_layout(ncol = 1, heights = c(0.96, .04))
+  HAWK_plot + hawk_heads + plot_layout(ncol = 1, heights = c(0.94, .06))
 
 
 
@@ -341,8 +341,8 @@ ggsave(
   "HAWK_plot.pdf",
   HAWK_plot,
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  width = 210 / 1.7  ,
-  height = 148.5 / 1.7 ,
+  width = 210 / 1.5  ,
+  height = 148.5 / 1.5 ,
   units = "mm"
 )
 
@@ -353,7 +353,7 @@ ggsave(
   "HAWK_plot_w_heads.pdf",
   HAWK_plot_w_heads,
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  width = 210 / 1.7  ,
-  height = 148.5 / 1.7 ,
+  width = 210 / 1.4  ,
+  height = 148.5 / 1.4 ,
   units = "mm"
 )
