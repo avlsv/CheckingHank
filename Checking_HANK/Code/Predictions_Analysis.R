@@ -511,7 +511,7 @@ quarter_stats <-
 
 quarter_stats
 
-colorBlindness::displayAllColors(viridis(4, begin = .2, end=.9))
+
 
 ggsave(
   "quarter_stats.pdf",

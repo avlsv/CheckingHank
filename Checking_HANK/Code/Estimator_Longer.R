@@ -50,7 +50,7 @@ coefs_inflation <- tibble()
 coefs_HAWK_inflation <- tibble()
 coefs_unemployment <- tibble()
 coefs_HAWK_unemployment <- tibble()
-predicted_i<- tibble()
+predicted_i <- tibble()
 predicted_long_tbl <- tibble()
 r_squares_long <- c()
 hausman_list_long <- c()
@@ -111,21 +111,23 @@ for (i in 0:20) {
   
   
   r_squares_long <- c(r_squares_long, summary(reg, vcov. = vcovHAC(reg))$r.squared)
-
-
-  
-  lm_reg<- 
-    lm(lead(dR, i) ~
-         expected_inflation * demeaned_HAWK +  expected_unemployment_gap * demeaned_HAWK +
-         lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
-         lag(expected_inflation, 1) + lag(expected_inflation, 2) +
-         lag(expected_inflation, 3) + lag(expected_inflation, 4) +
-         lag(expected_unemployment_gap, 1) + lag(expected_unemployment_gap, 2) +
-         lag(expected_unemployment_gap, 3) + lag(expected_unemployment_gap, 4) , 
-       data=full_dataset_ts)
   
   
-  lm_reg$coefficients<-reg$coefficients
+  
+  lm_reg <-
+    lm(
+      lead(dR, i) ~
+        expected_inflation * demeaned_HAWK +  expected_unemployment_gap * demeaned_HAWK +
+        lag(dR, 1) + lag(dR, 2) + lag(dR, 3) + lag(dR, 4) +
+        lag(expected_inflation, 1) + lag(expected_inflation, 2) +
+        lag(expected_inflation, 3) + lag(expected_inflation, 4) +
+        lag(expected_unemployment_gap, 1) + lag(expected_unemployment_gap, 2) +
+        lag(expected_unemployment_gap, 3) + lag(expected_unemployment_gap, 4) ,
+      data = full_dataset_ts
+    )
+  
+  
+  lm_reg$coefficients <- reg$coefficients
   lm_reg$residuals <- reg$residuals
   lm_reg$rank <- reg$rank
   reg$residuals2
@@ -137,7 +139,7 @@ for (i in 0:20) {
       horizon = i,
       fitted = reg$fitted.values,
       quarter = full_dataset_ts$year_quarter[reg$fitted.values |> names() |> as.numeric()],
-      standard_error = Predict(lm_reg, se = T, vcov=vcovHAC(reg))$se,
+      standard_error = Predict(lm_reg, se = T, vcov = vcovHAC(reg))$se,
       ci_lower = Predict(lm_reg, interval = "confidence", vcov = vcovHAC(reg))[, 2],
       ci_upper = Predict(lm_reg, interval = "confidence", vcov = vcovHAC(reg))[, 3]
     )
@@ -216,7 +218,7 @@ write_csv(
   "data/intermediate_data/coefficients_estimates/long_coefs_HAWK_unemployment.csv"
 )
 
-write_csv(predicted_long_tbl, 
+write_csv(predicted_long_tbl,
           "data/Intermediate_Data/predicted_long.csv")
 
 
@@ -250,9 +252,9 @@ average_inflation_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +  geom_line() +
-  scale_x_continuous("Horizon [1Q]",  
-                     breaks=seq(0, 20, by=4),
-                       minor_breaks = (0:20)) +
+  scale_x_continuous("Horizon [1Q]",
+                     breaks = seq(0, 20, by = 4),
+                     minor_breaks = (0:20)) +
   scale_y_continuous("Percentage Points") +
   theme_light()
 
@@ -287,8 +289,8 @@ differential_inflation_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +
-  scale_x_continuous("Horizon [1Q]",  
-                     breaks=seq(0, 20, by=4),
+  scale_x_continuous("Horizon [1Q]",
+                     breaks = seq(0, 20, by = 4),
                      minor_breaks = (0:20)) +
   scale_y_continuous("Percentage Points") +
   geom_hline(aes(yintercept = 0), color = "darkred") +  geom_line() +
@@ -329,8 +331,8 @@ average_unemployment_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +  geom_line() +
-  scale_x_continuous("Horizon [1Q]",  
-                     breaks=seq(0, 20, by=4), 
+  scale_x_continuous("Horizon [1Q]",
+                     breaks = seq(0, 20, by = 4),
                      minor_breaks = (0:20)) +
   scale_y_continuous("Percentage Points") +
   theme_light()
@@ -382,8 +384,8 @@ differential_unemployment_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +  geom_line() +
-  scale_x_continuous("Horizon [1Q]", 
-                     breaks=seq(0, 20, by=4), 
+  scale_x_continuous("Horizon [1Q]",
+                     breaks = seq(0, 20, by = 4),
                      minor_breaks = (0:20)) +
   scale_y_continuous("Percentage Points") +
   theme_light()
@@ -705,12 +707,8 @@ ggsave(
 
 
 persistence_long_plot <-
-  ggplot(size_persistence_long_tbl,
-         aes(
-           x = yq(quarter),
-           y = persistence
-         )) +
-  geom_line() + 
+  ggplot(size_persistence_long_tbl, aes(x = yq(quarter), y = persistence)) +
+  geom_line() +
   theme_light() +
   scale_x_date(
     NULL,
@@ -730,7 +728,7 @@ persistence_long_plot <-
     fill = '#155F83FF' ,
     alpha = 0.2
   ) +
-  geom_hline(aes(yintercept = 1), color = "darkred") 
+  geom_hline(aes(yintercept = 1), color = "darkred")
 
 
 persistence_long_plot
@@ -746,4 +744,4 @@ ggsave(
 
 
 library(modelsummary)
-modelsummary(LP_2, output="latex_tabular")
+modelsummary(LP_2, output = "latex_tabular")
