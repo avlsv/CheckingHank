@@ -52,20 +52,23 @@ full_dataset_ts |> filter_index("2007"~"2011") |> autoplot(vars(expected_inflati
 full_dataset_ts |> filter_index("2007"~"2011") |> autoplot(vars(delta_expected_inflation, delta_expected_unemployment_gap))
 
 # 2008Q4
-shock_inflation <- 
-  full_dataset_ts |> 
-  filter_index("2008Q1"~"2009Q1") |>
-  as_tibble()|> 
-  select(delta_expected_inflation)|>
-  min()
+
+shock_deflator_inflation <-
+  full_dataset_ts |>
+  filter_index("2008Q4") |>
+  as_tibble() |>
+  select(delta_expected_inflation) |>
+  as.numeric()
 
 
-shock_gap <-
-full_dataset_ts |> 
-  filter_index("2008Q1"~"2009Q1") |>
-  as_tibble()|> 
-  select(delta_expected_unemployment_gap)|> 
-  max()
+shock_unemployment_gap <-
+  full_dataset_ts |>
+  filter_index("2008Q4") |>
+  as_tibble() |>
+  select(expected_unemployment_gap) |>
+  as.numeric()
+
+
 
 #  2.01 -0.0950 
 #

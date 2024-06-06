@@ -54,6 +54,7 @@ predicted_i <- tibble()
 predicted_long_tbl <- tibble()
 r_squares_long <- c()
 hausman_list_long <- c()
+vcov_long_tbl <- tibble()
 #coefs_intercept <- tibble()
 #coefs_HAWK <- tibble()
 for (i in 0:20) {
@@ -147,6 +148,17 @@ for (i in 0:20) {
   predicted_long_tbl <- bind_rows(predicted_long_tbl, predicted_i)
   
   hausman_list_long <- c(hausman_list_long, summary(reg)$diagnostics[4, 3])
+  
+  vcov_long_tbl_t <- 
+    as.data.frame(vcovHAC(reg)) |> 
+    rownames_to_column(var = "var_1") |> 
+    as_tibble() |> 
+    pivot_longer(-var_1, names_to = 'var_2') |> 
+    mutate(model = "long", horizon = i)  
+  
+  
+  vcov_long_tbl <- bind_rows(vcov_long_tbl, vcov_long_tbl_t)
+  
 }
 
 
@@ -195,6 +207,7 @@ save(
   coefs_HAWK_unemployment,
   r_squares_long_tbl,
   hausman_long_tbl,
+  vcov_long_tbl,
   file = "data/intermediate_data/coefs_long.RData"
 )
 
@@ -221,7 +234,8 @@ write_csv(
 write_csv(predicted_long_tbl,
           "data/Intermediate_Data/predicted_long.csv")
 
-
+write_csv(vcov_long_tbl,
+          "data/Intermediate_Data/vcov_long.csv")
 
 ## LP-IV coefficient plots -----
 
