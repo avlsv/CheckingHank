@@ -130,7 +130,7 @@ estimates_of_liquidity_premia_plot <-
     filter(
       estimates_of_liquidity_premia,
       horizon < 20,
-      quarter >= yearquarter("1980")
+      quarter >= yearquarter("1990")
     ),
     aes(
       x = yq(quarter),
@@ -147,7 +147,7 @@ estimates_of_liquidity_premia_plot <-
   alpha = 0.3) +
   geom_rect(
     data = rec_data_long |> 
-      slice_tail(n = -2),
+      slice_tail(n = -4),
     inherit.aes = F,
     aes(
       xmin = start,
@@ -161,13 +161,14 @@ estimates_of_liquidity_premia_plot <-
   facet_wrap(~ horizon_years, ncol=2) +
   scale_y_continuous("Predicted Liquidity Premia",
                      labels = percent_format(),
-                     n.breaks = 8) +
+                     n.breaks = 5) +
   scale_x_date(NULL, date_breaks = "4 years", labels = label_date("'%y")) +
   labs(fill = "Model", linetype = "Model") +
   geom_hline(aes(yintercept = 0), color = "darkred") +
   theme_light() +
   theme(legend.position = "bottom")
 
+estimates_of_liquidity_premia_plot
 
 ggsave(
   "estimates_of_liquidity_premia_plot.pdf",
@@ -222,7 +223,7 @@ share_inverted_plot <-
 
 # Plot of Yield Curves -----
 
-starting_quarter =  yearquarter("2014q1")
+starting_quarter =  yearquarter("2010q1")
 number_of_years = 3
 
 
@@ -231,7 +232,7 @@ yield_prediction_plot <-
   ggplot(yield_curve_restr |>
            filter(between(
              quarter - starting_quarter, 0 , 4 * number_of_years - 1
-           ))) +
+           ), horizon<=12)) +
   geom_point(
     alpha = 0.3,
     size = .7,
@@ -255,7 +256,7 @@ yield_prediction_plot <-
   geom_line(data = predicted_ffr_tbl |>
               filter(between(
                 quarter - starting_quarter, 0 , 4 * number_of_years - 1
-              )),
+              ),  horizon<=12),
             aes(
               x = horizon / 4,
               y = ffr_hat / 100,
@@ -265,7 +266,7 @@ yield_prediction_plot <-
     data = predicted_ffr_tbl |>
       filter(between(
         quarter - starting_quarter, 0 , 4 * number_of_years - 1
-      )),
+      ),  horizon<=12),
     aes(
       x = horizon / 4,
       ymin = ci_lower / 100,
@@ -273,7 +274,7 @@ yield_prediction_plot <-
       y = ffr_hat / 100,
       fill = fct_rev(model)
     ),
-    alpha = 0.2
+    alpha = 0.3
   ) +
   scale_y_continuous("Interest Rate", labels = percent_format(), n.breaks =
                        6) +
