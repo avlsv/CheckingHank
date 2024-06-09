@@ -33,7 +33,7 @@ for (Package in required_Packages_Install) {
 ## HAWK and HAWK_IV data from Hack, Isterfi, Meier (2024) ------
 HAWK <- full_join(
   read_csv("Data/Initial_Data/HAWK.csv", col_names = F),
-  read_csv("Data/Initial_Data/HAWKIV.csv", col_names = F)
+  read_csv("Data/Initial_Data/HAWKIV.csv", col_names = F), by = join_by(X1)
 ) 
 
 names(HAWK) <- c("point_date", "HAWK", "HAWK_IV")
@@ -231,10 +231,7 @@ nairu_expected_ts <- nairu_expected_tbl |> as_tsibble()
 
 ### CPI Inflation ------
 ### gPCPI Greenbook projections for Q/Q headline CPI inflation
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 
 expected_cpi_inflation_raw <-
   read_xlsx("data/Initial_Data/Tealbook Row Format.xlsx", sheet = "gPCPI") |>
@@ -346,6 +343,10 @@ expected_gap_ts <-
 
 
 
+fedhead_quarterly_ts <- 
+  read_csv("data/Intermediate_Data/fedhead_quarterly.csv")|> 
+  mutate(year_quarter=yearquarter(year_quarter))|> as_tsibble()
+
 # Final Dataset Compilation ------
 
 full_dataset_ts <-
@@ -358,6 +359,7 @@ full_dataset_ts <-
   full_join(expected_cpi_inflation_ts, by = "year_quarter") |>
   full_join(expected_gap_ts, by = "year_quarter") |>
   full_join(nairu_expected_ts, by = "year_quarter") |>
+  full_join(fedhead_quarterly_ts,  by = "year_quarter") |>
   filter_index("1968 Q1" ~ "2020 Q4") |>
   mutate(
     row_number = row_number(),

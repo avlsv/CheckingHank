@@ -56,6 +56,7 @@ r_squares_short <- c()
 predicted_short_tbl <- tibble()
 hausman_list_short <- c()
 vcov_short_tbl <- tibble()
+reg_list_short<- list()
 #coefs_intercept <- tibble()
 #coefs_HAWK <- tibble()
 for (i in 0:20) {
@@ -145,16 +146,8 @@ for (i in 0:20) {
   hausman_list_short <-
     c(hausman_list_short,
       summary(reg, vcov. = vcovHAC(reg))$diagnostics[4, 3])
-  
-  vcov_short_tbl_t <- 
-    as.data.frame(vcovHAC(reg)) |> 
-    rownames_to_column(var = "var_1") |> 
-    as_tibble() |> 
-    pivot_longer(-var_1, names_to = 'var_2') |> 
-    mutate(model = "short", horizon = i)  
-  
-  
-  vcov_short_tbl <- bind_rows(vcov_short_tbl, vcov_short_tbl_t)
+
+  reg_list_short[[i+1]] <- reg
 }
 
 
@@ -188,7 +181,7 @@ save(
   coefs_HAWK_gap,
   r_squares_short_tbl,
   hausman_short_tbl,
-  vcov_short_tbl,
+  reg_list_short,
   file = "data/intermediate_data/coefs_short.RData"
 )
 

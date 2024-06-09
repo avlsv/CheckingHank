@@ -18,7 +18,9 @@ getSymbols(
   src = 'FRED'
 )
 
-
+predicted_ffr_tbl <-
+  read_csv("data/Intermediate_data/predicted_ffr.csv") |>
+  mutate(quarter = yearquarter(quarter))
 
 
 
@@ -118,7 +120,7 @@ estimates_of_liquidity_premia <-
       ) |>
       as_factor() |>
       fct_relevel("T+3 Month", after = 1) |>
-      fct_relevel("T+6 Month", after = 2)|>
+      fct_relevel("T+6 Month", after = 2) |>
       fct_relevel("T+2 Years", after = 4)
   )
 
@@ -146,7 +148,7 @@ estimates_of_liquidity_premia_plot <-
   ),
   alpha = 0.3) +
   geom_rect(
-    data = rec_data_long |> 
+    data = rec_data_long |>
       slice_tail(n = -4),
     inherit.aes = F,
     aes(
@@ -158,7 +160,7 @@ estimates_of_liquidity_premia_plot <-
     fill = '#155F83FF' ,
     alpha = 0.1
   ) +
-  facet_wrap(~ horizon_years, ncol=2) +
+  facet_wrap( ~ horizon_years, ncol = 2) +
   scale_y_continuous("Predicted Liquidity Premia",
                      labels = percent_format(),
                      n.breaks = 5) +
@@ -230,9 +232,10 @@ number_of_years = 3
 
 yield_prediction_plot <-
   ggplot(yield_curve_restr |>
-           filter(between(
-             quarter - starting_quarter, 0 , 4 * number_of_years - 1
-           ), horizon<=12)) +
+           filter(
+             between(quarter - starting_quarter, 0 , 4 * number_of_years - 1),
+             horizon <= 12
+           )) +
   geom_point(
     alpha = 0.3,
     size = .7,
@@ -253,20 +256,24 @@ yield_prediction_plot <-
       color = day_of_quarter
     )
   ) +
-  geom_line(data = predicted_ffr_tbl |>
-              filter(between(
-                quarter - starting_quarter, 0 , 4 * number_of_years - 1
-              ),  horizon<=12),
-            aes(
-              x = horizon / 4,
-              y = ffr_hat / 100,
-              linetype = fct_rev(model)
-            )) +
+  geom_line(
+    data = predicted_ffr_tbl |>
+      filter(
+        between(quarter - starting_quarter, 0 , 4 * number_of_years - 1),
+        horizon <= 12
+      ),
+    aes(
+      x = horizon / 4,
+      y = ffr_hat / 100,
+      linetype = fct_rev(model)
+    )
+  ) +
   geom_ribbon(
     data = predicted_ffr_tbl |>
-      filter(between(
-        quarter - starting_quarter, 0 , 4 * number_of_years - 1
-      ),  horizon<=12),
+      filter(
+        between(quarter - starting_quarter, 0 , 4 * number_of_years - 1),
+        horizon <= 12
+      ),
     aes(
       x = horizon / 4,
       ymin = ci_lower / 100,
@@ -281,7 +288,7 @@ yield_prediction_plot <-
   scale_color_viridis_c("Day in Quarter", option = "D") +
   scale_x_continuous("Horizon [1Y]", breaks = seq(0, 5, by = 1)) +
   geom_hline(aes(yintercept = 0), color = "darkred") +
-  facet_wrap(~ quarter, scales = "fixed", ncol = 4) +
+  facet_wrap( ~ quarter, scales = "fixed", ncol = 4) +
   labs(linetype = "Model", fill = "Model") +
   theme_light()
 
@@ -325,7 +332,7 @@ predicted_ffr_path_plot <-
   scale_color_viridis_c("Day in Quarter", option = "D") +
   scale_x_continuous("Horizon [1Y]", breaks = seq(0, 5, by = 1)) +
   geom_hline(aes(yintercept = 0), color = "darkred") +
-  facet_wrap( ~ quarter, scales = "fixed", ncol = 4) +
+  facet_wrap(~ quarter, scales = "fixed", ncol = 4) +
   theme_light()
 
 

@@ -54,7 +54,7 @@ predicted_i <- tibble()
 predicted_long_tbl <- tibble()
 r_squares_long <- c()
 hausman_list_long <- c()
-vcov_long_tbl <- tibble()
+reg_list_long<-list()
 #coefs_intercept <- tibble()
 #coefs_HAWK <- tibble()
 for (i in 0:20) {
@@ -149,17 +149,11 @@ for (i in 0:20) {
   
   hausman_list_long <- c(hausman_list_long, summary(reg)$diagnostics[4, 3])
   
-  vcov_long_tbl_t <- 
-    as.data.frame(vcovHAC(reg)) |> 
-    rownames_to_column(var = "var_1") |> 
-    as_tibble() |> 
-    pivot_longer(-var_1, names_to = 'var_2') |> 
-    mutate(model = "long", horizon = i)  
+  reg_list_long[[i+1]] <- reg
   
-  
-  vcov_long_tbl <- bind_rows(vcov_long_tbl, vcov_long_tbl_t)
   
 }
+
 
 
 
@@ -207,7 +201,7 @@ save(
   coefs_HAWK_unemployment,
   r_squares_long_tbl,
   hausman_long_tbl,
-  vcov_long_tbl,
+  reg_list_long,
   file = "data/intermediate_data/coefs_long.RData"
 )
 

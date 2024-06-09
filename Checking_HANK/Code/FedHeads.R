@@ -77,7 +77,7 @@ fedhead_daily <-
   mutate(
     fed_head_1 =
       case_when(
-        fed_head %in% c("Martin", "Burns", "Miller") ~ "Pre-Volchker",
+        fed_head %in% c("Martin", "Burns", "Miller") ~ "Pre-Volcker",
         fed_head %in% c("Yellen", "Powell") ~ "Post-Bernanke",
         .default = fed_head
       )
@@ -90,23 +90,28 @@ fedhead_start_end <-
   summarize(start = min(date), end = max(date))|> 
   arrange(start)
 
+write_csv(fedhead_start_end, file = "data/Intermediate_Data/fedhead_start_end.csv")
+
 vistime::gg_vistime(fedhead_start_end, col.event="fed_head_1", optimize_y = T)
 
 
 
 fedhead_monthly <-
   fedhead_daily |> index_by(year_month = ~ yearmonth(.)) |>
-  summarise(fed_head = factor(fed_head[1]))
+  summarise(fed_head_1 = factor(fed_head_1[1]),
+            fed_head = factor(fed_head[1]))
 
 
 fedhead_quarterly <-
   fedhead_daily |> index_by(year_quarter = ~ yearquarter(.))|>
-  summarise(fed_head = factor(fed_head_1[1]))
+  summarise(fed_head_1 = factor(fed_head_1[1]),
+            fed_head = factor(fed_head[1]))
 
 
 fedhead_yearly <-
   fedhead_daily |> index_by(year = ~ year(.)) |>
-  summarise(fed_head = fed_head[1])
+  summarise(fed_head_1 = factor(fed_head_1[1]),
+            fed_head = factor(fed_head[1]))
 
 
 write_csv(fedhead_quarterly, file = "data/Intermediate_Data/fedhead_quarterly.csv")

@@ -121,6 +121,10 @@ predicted_ffr_long_tbl <-
 predicted_ffr_tbl <-
   bind_rows(predicted_ffr_short_tbl, predicted_ffr_long_tbl)
 
+
+write_csv(predicted_ffr_tbl, "data/Intermediate_data/predicted_ffr.csv")
+
+
 ## Short Specification FFR Predictive Plot --------
 
 predicted_ffr_paths_short <-

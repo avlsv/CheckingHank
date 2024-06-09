@@ -325,6 +325,10 @@ HAWK_plot <-
   theme(legend.position = "none")
 
 
+fedhead_start_end<-
+  read_csv("data/Intermediate_Data/fedhead_start_end.csv")
+
+
 hawk_heads <-
   gg_vistime(fedhead_start_end_hawk,
              col.event = "fed_head_1",
