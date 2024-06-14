@@ -1,5 +1,7 @@
 \beamer@sectionintoc {1}{Research question}{2}{0}{1}
-\beamer@sectionintoc {2}{Empirical Approach}{8}{0}{2}
-\beamer@sectionintoc {3}{Data}{13}{0}{3}
-\beamer@sectionintoc {4}{Results}{15}{0}{4}
-\beamer@sectionintoc {5}{Conclusion}{24}{0}{5}
+\beamer@sectionintoc {2}{Empirical Approach}{5}{0}{2}
+\beamer@sectionintoc {3}{Data}{9}{0}{3}
+\beamer@sectionintoc {4}{Results}{10}{0}{4}
+\beamer@sectionintoc {5}{Size-Persistence Estimates}{16}{0}{5}
+\beamer@sectionintoc {6}{Conclusion}{21}{0}{6}
+\beamer@sectionintoc {7}{Data}{23}{1}{7}

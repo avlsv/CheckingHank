@@ -52,7 +52,7 @@ coefs_cpi_inflation <- tibble()
 coefs_HAWK_cpi_inflation <- tibble()
 coefs_gap <- tibble()
 coefs_HAWK_gap <- tibble()
-r_squares_short <- c()
+
 predicted_short_tbl <- tibble()
 hausman_list_short <- c()
 vcov_short_tbl <- tibble()
@@ -111,7 +111,7 @@ for (i in 0:20) {
   coefs_HAWK_gap <-
     bind_rows(coefs_HAWK_gap, output |> slice(6))
   
-  r_squares_short <- c(r_squares_short, summary(reg, vcov. = vcovHAC(reg))$r.squared)
+
   
   lm_reg <-
     lm(

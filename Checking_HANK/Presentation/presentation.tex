@@ -78,45 +78,6 @@
 \end{frame}
 
 
-\begin{frame}\frametitle{Size-Persistence in RANK}
-Rate path:
-    \begin{equation*}
-        r_t=\rho+e^{-\eta t}(r_0-\rho).\label{eq:InterestRatePath}
-    \end{equation*}
-
-NK policy    
-\[C_0=\bar C\exp\left(-\frac{1}{\gamma}\int_0^\infty \left(r_s-\rho\right)\,ds\right).\]
-
-Size:
-\begin{equation*}
-    R_0=\int_0^\infty \left(r_s-\rho\right)\,ds,\label{eq:KMVsize}
-\end{equation*}
-
-
-\[\frac{-d \log C_0}{dR_0}=\frac{1}{\gamma},\]
-
-
-\end{frame}
-
-\begin{frame}\frametitle{Picture of Size-Persistence trade-off}
-    \begin{figure}\centering
-        \includegraphics[scale=0.47]{Size_Persistence_KMV.png}
-        \caption{The difference between the New Keynesian models from \citet{KMV2018}}
-    \end{figure}
-\end{frame}
-
-
-\begin{frame}{Size-Persistent tradeoff by \citet{KMV2018}, formally}
-    \begin{align}
-        \textit{RANK:}&\quad& \frac{d}{d\nu}\frac{-d\log C_0}{dR_0}&=0     \label{eq:SizePersistenceRANK}\\
-    \textit{TANK with $B^g$ adjustment:}&\quad& \frac{d}{d\nu}\frac{-d\log C_0}{dR_0}&= 0     \label{eq:SizePersistenceTANK_B}\\
-    \textit{TANK with $T$ adjustment:}&\quad& \frac{d}{d\nu}\frac{-d\log C_0}{dR_0}&< 0     \label{eq:SizePersistenceTANK_T}\\
-    \textit{HANK:}& \quad& 
-        \frac{d^2}{d\nu ^2}\frac{-d\log C_0}{dR_0}&<0
-        \label{eq:SizePersistenceHANK}
-    \end{align}
-    
-\end{frame}
 
 
 \section{Empirical Approach}
@@ -158,22 +119,11 @@ I estimate the following State-Dependent LP-IV.
 \begin{frame}{}
     \begin{figure}[h!]
         \caption{HAWK and HAWK IV indexes from \citet{HIM2023}}
-        \includegraphics[width=0.8\textwidth]{HAWK_plot.pdf}
+        \includegraphics[width=0.8\textwidth]{HAWK_plot_w_heads.pdf}
     \end{figure}
 \end{frame}
 
-\begin{frame}{Empirical approach }
 
-    \begin{multline*}\hat \phi_{t+h}=\left(\hat \beta_\pi^h+\hat\gamma^h_\pi \left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)\right)\bar\pi\\ +\left(\hat \beta_u^h+\hat\gamma^h_u \left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)\right)\bar u\\+\hat\delta^h\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)
-    \end{multline*}
-    \[R_{0t}=\sum_{h=1}^{H} \hat \phi_{t+h}\]
-    \[\nu_t=\mathbb{E}_{h}\left[\left(\hat\phi_{t+h}-\bar \phi\right)\left(\hat \phi_{t+h-1}-\bar \phi\right)\right]\]
-
-    \begin{align}
-        \log \mathit{Consumption}&=\alpha_0+\alpha_1 R_0+\beta_1 R_0\nu \label{eq:linear}\\
-        \log \mathit{Consumption}&=\alpha_0'+\alpha_1' R_0+\beta_1' R_0\nu + \beta_2' R_0\nu^2\label{eq:quadratic}
-    \end{align} 
-\end{frame}
 
 
 \section{Data}
@@ -183,15 +133,7 @@ I estimate the following State-Dependent LP-IV.
 \end{frame}
 
 
-\begin{frame}\frametitle{Data}
-\begin{itemize}\setlength\itemsep{1em}
-    \item FED inflation (deflator) and unemployment forecast is from Tealbook (average of 1 and 2 quarter ahead + averaging per quarter).
-    \item HAWK index from \citet{HIM2023}.
-    \item Natural rate of interest by \citet{HLW2017,HLW2023}
-    \item Short-term rate ($r$) is by \citet{WuXia2016} and Fed Funds Rate 
-    \item Consumption is U.S. Bureau of Economic Analysis``Real personal consumption expenditures per capita ''  (FRED A794RX0Q048SBEA)
-    \end{itemize}
-\end{frame}
+
 
 % \begin{frame}{Summary Statistics}
     
@@ -210,24 +152,38 @@ I estimate the following State-Dependent LP-IV.
 
 \begin{frame}{Results I}{Policy Response to Tealbook GDP Deflator Inflation and FOMC Hawkishness}
 
+
     \begin{figure}[!htbp]\centering
-        \label{fig:LP}
-        \begin{subfigure}[b]{0.48\textwidth}
-            \centering
-            \caption{Average Response to Inflation $\left(\beta_\pi^h\right)$}
-            \label{fig:average_inflation}
-            \includegraphics[width=\linewidth]{average_deflator_inflation_longer.pdf}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}[b]{0.48\textwidth}
-            \centering 
-            \caption{Differential Response to Inflation $\left(\gamma_\pi^h\right)$}
-            \label{fig:differential_inflation}
-            \includegraphics[width=\linewidth]{differential_deflator_inflation_longer.pdf}
-        \end{subfigure}\vspace{-4ex}
-            {\begin{flushleft}\tiny\textit{Notes}: This figure reports the responses of the $r_t-\rho_t$ to an increase in the Tealbook inflation forecast of 1 p.p. (calculated as a predicted change in GDP deflator). 
-            The subfigure \ref{fig:average_inflation} reports the response for the $\mathit{HAWK}$ index equal to the sample average and \ref{fig:differential_inflation} is the addition to the response in case there are 2 (out of 12 in total) additional consistent hawks in the FOMC. The shaded areas correspond to 68\%, 90\% and 95\% confidence bands calculated with Newey-West HAC estimator with Andrews-selected truncation parameter.\end{flushleft}}
-    \end{figure}
+        \begin{minipage}{.9\textwidth}
+          \caption{Policy Response to Inflation and FOMC Hawkishness. Short Specification}\vspace{1ex}
+          \label{fig:LP_short}
+          \begin{subfigure}[b]{0.495\textwidth}
+              \centering
+              \caption{Average Resp. to Projected CPI Inflation}
+              \label{fig:LP_short:average_inflation}
+              \includegraphics[width=\linewidth]{average_cpi_inflation_short.pdf}
+          \end{subfigure}
+          \hfill
+          \begin{subfigure}[b]{0.495\textwidth}
+              \centering
+              \caption{Differential  Resp. to Projected CPI Inflation}
+              \label{fig:LP_short:differential_inflation}
+              \includegraphics[width=\linewidth]{differential_cpi_inflation_short.pdf}
+          \end{subfigure}\vspace{2ex}
+          \begin{subfigure}[b]{0.495\textwidth}\centering
+            \caption{Average Resp. to Projected GDP Gap}
+            \label{fig:LP_short:average_gap}
+            \includegraphics[width=\linewidth]{average_gap_short.pdf}
+          \end{subfigure} \hfill
+          \begin{subfigure}[b]{0.495\textwidth}\centering
+            \caption{Differential Resp. to Projected GDP Gap}
+            \label{fig:LP_short:differential_gap}
+            \includegraphics[width=\linewidth]{differential_gap_short.pdf}
+          \end{subfigure}
+              {\begin{flushleft}\scriptsize\textit{Notes}: This figure reports the responses of the $(r-r^*)_t$ to an increase in the Tealbook CPI inflation forecast and GDP gap forecast of 1 p.p. The subfigure \ref{fig:LP_short:average_inflation} reports the response of $(r-r^*)_t$ to projected CPI inflation for the $\mathit{HAWK}$ index equal to the sample average; \ref{fig:LP_short:differential_inflation} is the addition to the response in case there are 2 (out of 12 in total) additional consistent hawks in the FOMC. Subfigures \ref{fig:LP_short:average_gap} and \ref{fig:LP_short:differential_gap} report the same for the increase in projected GDP gap for 1p.p. The shaded areas correspond to 68\%, 90\% and 95\% confidence bands calculated with \citet{Andrews1991} HAC estimator.\end{flushleft}}
+                  
+        \end{minipage}
+      \end{figure}
     
 \end{frame}
 
@@ -316,7 +272,49 @@ I estimate the following State-Dependent LP-IV.
 \end{frame}
 
 
-\begin{frame}{Results}{}
+\section{Size-Persistence Estimates}
+
+\begin{frame}\frametitle{Size-Persistence in RANK}
+    Rate path:
+        \begin{equation*}
+            r_t=\rho+e^{-\eta t}(r_0-\rho).\label{eq:InterestRatePath}
+        \end{equation*}
+    
+    NK policy    
+    \[C_0=\bar C\exp\left(-\frac{1}{\gamma}\int_0^\infty \left(r_s-\rho\right)\,ds\right).\]
+    
+    Size:
+    \begin{equation*}
+        R_0=\int_0^\infty \left(r_s-\rho\right)\,ds,\label{eq:KMVsize}
+    \end{equation*}
+    
+    
+    \[\frac{-d \log C_0}{dR_0}=\frac{1}{\gamma},\]
+    
+    
+    \end{frame}
+    
+    \begin{frame}\frametitle{Picture of Size-Persistence trade-off}
+        \begin{figure}\centering
+            \includegraphics[scale=0.47]{Size_Persistence_KMV.png}
+            \caption{The difference between the New Keynesian models from \citet{KMV2018}}
+        \end{figure}
+    \end{frame}
+    
+    
+    \begin{frame}{Size-Persistent tradeoff by \citet{KMV2018}, formally}
+        \begin{align}
+            \textit{RANK:}&\quad& \frac{d}{d\nu}\frac{-d\log C_0}{dR_0}&=0     \label{eq:SizePersistenceRANK}\\
+        \textit{TANK with $B^g$ adjustment:}&\quad& \frac{d}{d\nu}\frac{-d\log C_0}{dR_0}&= 0     \label{eq:SizePersistenceTANK_B}\\
+        \textit{TANK with $T$ adjustment:}&\quad& \frac{d}{d\nu}\frac{-d\log C_0}{dR_0}&< 0     \label{eq:SizePersistenceTANK_T}\\
+        \textit{HANK:}& \quad& 
+            \frac{d^2}{d\nu ^2}\frac{-d\log C_0}{dR_0}&<0
+            \label{eq:SizePersistenceHANK}
+        \end{align}
+        
+    \end{frame}
+
+\begin{frame}{Size-Persistence }{}
     \begin{figure}[!hpbt]\centering
         \begin{minipage}{0.8\textwidth}
           \caption{Estimates of Size and Persistence} 
@@ -330,7 +328,7 @@ I estimate the following State-Dependent LP-IV.
 \end{frame}
 
 
-\begin{frame}{Results}{Size and Persistence over time}
+\begin{frame}{Size and Persistence Over Time}
     \begin{figure}[!htbp]\centering
         \vspace{-2ex}
         \label{fig:Size_Persistence_Dynamics}
@@ -352,53 +350,10 @@ I estimate the following State-Dependent LP-IV.
       
 \end{frame}
 
-\begin{frame}{Results:}{Size-Persistence Tradeoff}\tiny\vspace{-2ex}
-\begin{table}[!htb] \centering 
-    \begin{threeparttable}
-    \begin{tabular}{@{\extracolsep{10pt}}lcc} 
-      \\[-1.8ex]\hline 
-      \hline \\[-1.8ex] 
-       & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
-      \cline{2-3} 
-      \\[-1.8ex] & \multicolumn{2}{c}{$\log(\mathit{consumption})$} \\  \\[-1.8ex]   &\multicolumn{2}{c}{$H=8$}\\
-      \\[-1.8ex] & (1) & (2)\\ 
-      \hline \\[-1.8ex] 
-       Size $(R_0)$  & $-$0.687 & $-$0.451 \\ 
-        & ($-$1.149, $-$0.133) & ($-$1.495, 1.078)    \\ 
-        &[0.011]\{0.997\} & [0.857]\{0.578\}\\ 
-        & & \\ 
-       Persistence $(\nu)$ & $-$0.100 & 1.223 \\ 
-        & ($-$0.693,  0.691)   & ($-$3.598, 4.968)    \\ 
-        &[0.746]\{0.673\} & [0.517]\{0.246\}\\ 
-        & & \\ 
-        $\nu^2$ &  & $-$1.042 \\ 
-        &  &  ($-$4.271, 4.336) \\ 
-        & &[0.517]\{0.766\} \\ 
-        & & \\ 
-       $R_0\times \nu$ & 0.765 & $-$1.628 \\ 
-        & ($-$0.177,  1.526)    &   ($-$3.159,  2.748)     \\ 
-        &[0.0754]\{0.0247\} & [0.522]\{0.759\}\\ 
-        & & \\ 
-        $R_0\times \nu^2$ &  & 2.435 \\ 
-        &  &  ($-$1.852, 3.838) \\ 
-        & & [0.340]\{0.145\}\\ 
-        & & \\ 
-       Constant & 10.6 &10.5 \\ 
-        & (10.1, 11.0) & (9.8, 11.0)    \\ 
-        & [0.0]\{0.0\}& [0.0]\{0.0\}\\ 
-        & & \\[-1.8ex] 
-      \hline \\[-1.8ex] 
-      Observations & 198 & 198 \\ 
-      \hline 
-      \hline \\[-1.8ex] 
-      \end{tabular} 
-    \begin{tablenotes}[flushleft]
-    \item[] \tiny \textit{Note:} The inference is derived from Block bootstrap with 10,000 replications and block lengths geometrically distributed with mean $16$. 95\% percentile intervals are in parenthesis. Bootstrap p-values for the two-sided hypothesis ($\mathbb{H}_0:\theta=0$ vs $\mathbb{H}_a:\theta\ne 0$) are in square brackets, p-values for the one-sided hypothesis ($\mathbb{H}_0:\theta=0$ vs $\mathbb{H}_a:\theta>0$) are in curly brackets. 
-  \end{tablenotes}
-\end{threeparttable}
-  \end{table} 
 
-\end{frame}
+
+
+
 
 
 \section{Conclusion}
@@ -427,6 +382,47 @@ If you have any other suggestions/comments  please write \href{mailto://avlasov@
 
 \end{frame}
 
+
+
+
+
+\appendix
+\section{Data}
+
+\begin{frame}
+    \frametitle{Apendixes}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}\frametitle{Data}
+    \begin{itemize}\setlength\itemsep{1em}
+        \item FED inflation (deflator, and CPI), GDP gap, unemployment forecast and NAIRU are from Tealbook (average of 1 and 2 quarter quarters ahead + averaging of FOMC meetings per quarter).
+        \item HAWK index from \citet{HIM2023}.
+        \item Natural rate of interest by \citet{HLW2017,HLW2023}
+        \item Short-term rate ($r$) is by \citet{WuXia2016} and Fed Funds Rate 
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}
+        \begin{figure}[h!]\centering 
+            \caption{Rates}\vspace{-4ex}
+            \includegraphics[width=.7\textwidth]{rate_plot.pdf}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}
+        \begin{figure}\centering
+            \begin{subfigure}[b]{0.46\textwidth}\centering
+            \includegraphics[width=\textwidth]{expected_unemployment_plot.pdf}
+            \end{subfigure}%
+            \begin{subfigure}[b]{0.46\textwidth}\centering
+            \includegraphics[width=\textwidth]{expected_gap_plot.pdf}
+            \end{subfigure}
+            \begin{subfigure}[b]{0.46\textwidth}\centering
+            \includegraphics[width=\textwidth]{expected_inflation_plot.pdf}
+            \end{subfigure}
+        \end{figure}
+    \end{frame}
 
 
 \begin{frame}[t, allowframebreaks]

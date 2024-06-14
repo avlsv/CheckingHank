@@ -114,18 +114,17 @@ ggsave(
 
 ## Expected Inflation Plot -----
 
-expected_deflator_inflation_plot <-
-  ggplot(
-    full_dataset_ts |>
-      select(expected_inflation) |>
-      na.omit(),
-    aes(y = expected_inflation / 100, x = yq(year_quarter))
-  ) +
-  geom_line() +
+
+expected_inflation_plot <-
+  ggplot(full_dataset_ts |>
+           select(expected_inflation, expected_cpi_inflation),
+         aes(x = yq(year_quarter))) +
+  geom_line(aes(y = expected_inflation / 100, color = "A")) +
+  geom_line(aes(y = expected_cpi_inflation / 100, color = "B")) +
   theme_light() +
-  labs(x = NULL, y = "Tealbook Projection of GDP Deflator Inflation") +
+  labs(x = NULL, y = NULL, color = "Tealbook Projected ... Inflation") +
   scale_x_date(date_breaks = "5 years", labels = label_date("'%y")) +
-  scale_y_continuous(labels = label_percent()) +
+  scale_y_continuous(labels = label_percent(), n.breaks = 7) +
   geom_rect(
     data = rec_data_long,
     inherit.aes = F,
@@ -137,13 +136,15 @@ expected_deflator_inflation_plot <-
     ),
     fill = '#155F83FF' ,
     alpha = 0.2
-  )
+  ) +
+  scale_color_discrete(labels = c("Deflator", "CPI")) +  
+  theme(legend.position = "bottom")
 
 
 
 ggsave(
-  "expected_deflator_inflation_plot.pdf",
-  expected_deflator_inflation_plot,
+  "expected_inflation_plot.pdf",
+  expected_inflation_plot,
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   width = 210 / 1.7  ,
   height = 148.5 / 1.7 ,
@@ -171,7 +172,7 @@ expected_unemployment_plot <-
   theme_light() +
   theme(legend.position = "bottom") +
   scale_x_date(date_breaks = "5 years", labels = label_date("'%y")) +
-  scale_y_continuous(labels = label_percent()) +
+  scale_y_continuous(labels = label_percent(), n.breaks = 7) +
   labs(x = NULL, y = NULL, color = "Tealbook Projected ...") +
   geom_rect(
     data = rec_data_long,
@@ -246,6 +247,7 @@ expected_gap_plot <-
            na.omit(),
          aes(y = expected_gap / 100, x = yq(year_quarter))) +
   geom_line() +
+  geom_hline(aes(yintercept = 0), color = "darkred") +
   scale_x_date(date_breaks = "5 years", labels = label_date("'%y")) +
   scale_y_continuous(labels = label_percent()) +
   theme_light() +

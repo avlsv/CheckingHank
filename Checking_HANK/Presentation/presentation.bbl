@@ -10,9 +10,14 @@
 
 \begin{thebibliography}{xxx}
 
+\harvarditem[Andrews]{Andrews}{1991}{Andrews1991}
+Andrews, Donald W~K (1991) ``{Heteroskedasticity and Autocorrelation Consistent
+  Covariance Matrix Estimation},'' \textit{Econometrica}, 59 (3),  817--858,
+  \url{http://www.jstor.org/stable/2938229}.
+
 \harvarditem[Barnichon and Mesters]{Barnichon and
   Mesters}{2023}{BarnichonMesters2023}
-Barnichon, Régis and Geert Mesters (2023) ``A Sufficient Statistics Approach
+Barnichon, Regis and Geert Mesters (2023) ``A Sufficient Statistics Approach
   for Macro Policy,'' \textit{American Economic Review}, 113 (11),  2809--45,
   \href{http://dx.doi.org/10.1257/aer.20220581}{\urlstyle{rm}
   \nolinkurl{10.1257/aer.20220581}}.
@@ -24,8 +29,9 @@ Gali, Jordi (2018) ``The State of New Keynesian Economics: A Partial
   \nolinkurl{10.1257/jep.32.3.87}}.
 
 \harvarditem[Hack et~al.]{Hack, Istrefi and Meier}{2023}{HIM2023}
-Hack, Lukas, Klodiana Istrefi, and Matthias Meier (2023) ``Identification of
-  Systematic Monetary Policy,'' CEPR Discussion Paper 17999.
+Hack, Lukas, Klodiana Istrefi, and Matthias Meier (2023) ``{Identification of
+  systematic monetary policy},'' Working Paper Series 2851, European Central
+  Bank, \url{https://ideas.repec.org/p/ecb/ecbwps/20232851.html}.
 
 \harvarditem[Holston et~al.]{Holston, Laubach and Williams}{2017}{HLW2017}
 Holston, Kathryn, Thomas Laubach, and John~C. Williams (2017) ``Measuring the

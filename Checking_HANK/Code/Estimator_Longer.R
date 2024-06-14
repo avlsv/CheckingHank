@@ -52,7 +52,8 @@ coefs_unemployment <- tibble()
 coefs_HAWK_unemployment <- tibble()
 predicted_i <- tibble()
 predicted_long_tbl <- tibble()
-r_squares_long <- c()
+
+
 hausman_list_long <- c()
 reg_list_long<-list()
 #coefs_intercept <- tibble()
@@ -111,7 +112,6 @@ for (i in 0:20) {
   
   
   
-  r_squares_long <- c(r_squares_long, summary(reg, vcov. = vcovHAC(reg))$r.squared)
   
   
   
@@ -185,9 +185,6 @@ coefs_unemployment <-
 coefs_HAWK_unemployment <-
   coefs_HAWK_unemployment |> mutate(quarter = row_number() - 1)
 
-r_squares_long_tbl <-
-  tibble(r_squares = r_squares_long,
-         horizon = 1:length(r_squares_long) - 1)
 
 
 hausman_long_tbl <- tibble(hausman = hausman_list_long,
@@ -228,8 +225,7 @@ write_csv(
 write_csv(predicted_long_tbl,
           "data/Intermediate_Data/predicted_long.csv")
 
-write_csv(vcov_long_tbl,
-          "data/Intermediate_Data/vcov_long.csv")
+
 
 ## LP-IV coefficient plots -----
 
@@ -260,10 +256,10 @@ average_inflation_responce_plot <-
     linetype = 0,
     fill = "#477998"
   ) +  geom_line() +
-  scale_x_continuous("Horizon [1Q]",
+  scale_x_continuous("Horizon [1Y]",
                      breaks = seq(0, 20, by = 4),
                      minor_breaks = (0:20)) +
-  scale_y_continuous("Percentage Points") +
+  scale_y_continuous("Percentage Points", n.breaks=6) +
   theme_light()
 
 
@@ -300,7 +296,7 @@ differential_inflation_responce_plot <-
   scale_x_continuous("Horizon [1Q]",
                      breaks = seq(0, 20, by = 4),
                      minor_breaks = (0:20)) +
-  scale_y_continuous("Percentage Points") +
+  scale_y_continuous("Percentage Points", n.breaks = 8) +
   geom_hline(aes(yintercept = 0), color = "darkred") +  geom_line() +
   theme_light()
 
@@ -310,12 +306,13 @@ differential_inflation_responce_plot
 
 
 average_unemployment_responce_plot <-
-  ggplot(coefs_unemployment, aes(x = quarter, y = -estimate)) +
+  ggplot(coefs_unemployment, aes(x = quarter, y = estimate)) +
   geom_hline(aes(yintercept = 0), color = "darkred") +
   geom_ribbon(
     aes(
-      ymin = -estimate - qnorm(1 - 0.05 / 2) * std_error,
-      ymax = -estimate + qnorm(1 - 0.05 / 2) * std_error
+      x = quarter,
+      ymin = estimate - qnorm(1 - 0.05 / 2) * std_error,
+      ymax = estimate + qnorm(1 - 0.05 / 2) * std_error
     ),
     alpha = 0.13,
     linetype = 0,
@@ -323,17 +320,19 @@ average_unemployment_responce_plot <-
   ) +
   geom_ribbon(
     aes(
-      ymin = -estimate - std_error,
-      ymax = -estimate + std_error
+      x = quarter,
+      ymin = estimate - std_error,
+      ymax = estimate + std_error
     ),
     alpha = 0.13,
     linetype = 0,
     fill = "#477998"
   ) +
   geom_ribbon(
-    aes(
-      ymin = -estimate - qnorm(1 - .10 / 2) * std_error,
-      ymax = -estimate + qnorm(1 - .10 / 2) * std_error
+    aes( 
+      x = quarter,
+      ymin = estimate - qnorm(1 - .10 / 2) * std_error,
+      ymax = estimate + qnorm(1 - .10 / 2) * std_error
     ),
     alpha = 0.123,
     linetype = 0,
@@ -342,7 +341,7 @@ average_unemployment_responce_plot <-
   scale_x_continuous("Horizon [1Q]",
                      breaks = seq(0, 20, by = 4),
                      minor_breaks = (0:20)) +
-  scale_y_continuous("Percentage Points") +
+  scale_y_reverse("Percentage Points", n.breaks = 8)+
   theme_light()
 
 average_unemployment_responce_plot
@@ -351,15 +350,15 @@ average_unemployment_responce_plot
 
 
 differential_unemployment_responce_plot <-
-  ggplot(coefs_HAWK_unemployment, aes(x = quarter, y =  -2 / 12 * estimate)) +
+  ggplot(coefs_HAWK_unemployment, aes(x = quarter, y =  2 / 12 * estimate)) +
   geom_hline(aes(yintercept = 0), color = "darkred") +
   geom_ribbon(
     aes(
       ymin =
-        -2 / 12 * estimate -
+        2 / 12 * estimate -
         2 / 12 * qnorm(1 - 0.05 / 2) * std_error,
       ymax =
-        -2 / 12 * estimate +
+        2 / 12 * estimate +
         2 / 12 * qnorm(1 - 0.05 / 2) * std_error
     ),
     alpha = 0.13,
@@ -369,10 +368,10 @@ differential_unemployment_responce_plot <-
   geom_ribbon(
     aes(
       ymin =
-        -2 / 12 * estimate -
+        2 / 12 * estimate -
         2 / 12 * std_error,
       ymax =
-        -2 / 12 * estimate +
+        2 / 12 * estimate +
         2 / 12 * std_error
     ),
     alpha = 0.13,
@@ -382,10 +381,10 @@ differential_unemployment_responce_plot <-
   geom_ribbon(
     aes(
       ymin =
-        -2 / 12 * estimate -
+        2 / 12 * estimate -
         2 / 12 * qnorm(1 - .10 / 2) * std_error,
       ymax =
-        -2 / 12 * estimate +
+        2 / 12 * estimate +
         2 / 12 * qnorm(1 - .10 / 2) * std_error
     ),
     alpha = 0.123,
@@ -395,7 +394,7 @@ differential_unemployment_responce_plot <-
   scale_x_continuous("Horizon [1Q]",
                      breaks = seq(0, 20, by = 4),
                      minor_breaks = (0:20)) +
-  scale_y_continuous("Percentage Points") +
+  scale_y_reverse("Percentage Points", n.breaks = 7)+
   theme_light()
 
 differential_unemployment_responce_plot
@@ -669,86 +668,6 @@ LP_12 |> summary(diagnostics = T)
 
 
 
-
-
-size_long_plot <-
-  ggplot(size_persistence_long_tbl,
-         aes(
-           x = yq(quarter),
-           y = size / 100,
-           color = fed_head,
-           group = NA
-         )) +
-  geom_line() + theme_light() +
-  scale_x_date(
-    NULL,
-    breaks = scales::breaks_width("4 years"),
-    labels = scales::label_date("'%y")
-  ) +
-  scale_y_continuous("Size", labels = label_percent()) +
-  geom_rect(
-    data = rec_data_3,
-    inherit.aes = F,
-    aes(
-      xmin = start,
-      xmax = end,
-      ymin = -Inf,
-      ymax = Inf
-    ),
-    fill = '#155F83FF' ,
-    alpha = 0.2
-  ) +
-  geom_hline(aes(yintercept = 0), color = "darkred") +
-  labs(color = "Chaiman")
-
-ggsave(
-  "size_long_plot.pdf",
-  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  size_long_plot,
-  width = 210 /  1.7  ,
-  height = 148.5 /  1.7 ,
-  units = "mm"
-)
-
-
-
-
-
-persistence_long_plot <-
-  ggplot(size_persistence_long_tbl, aes(x = yq(quarter), y = persistence)) +
-  geom_line() +
-  theme_light() +
-  scale_x_date(
-    NULL,
-    breaks = scales::breaks_width("4 years"),
-    labels = scales::label_date("'%y")
-  ) +
-  scale_y_continuous("Persistence", n.breaks = 10) +
-  geom_rect(
-    data = rec_data_3,
-    inherit.aes = F,
-    aes(
-      xmin = start,
-      xmax = end,
-      ymin = -Inf,
-      ymax = Inf
-    ),
-    fill = '#155F83FF' ,
-    alpha = 0.2
-  ) +
-  geom_hline(aes(yintercept = 1), color = "darkred")
-
-
-persistence_long_plot
-
-ggsave(
-  "persistence_long_plot.pdf",
-  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  persistence_long_plot,
-  width = 210 /  1.7  ,
-  height = 148.5 /  1.7 ,
-  units = "mm"
-)
 
 
 library(modelsummary)
