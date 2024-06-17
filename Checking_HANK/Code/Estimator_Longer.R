@@ -55,7 +55,7 @@ predicted_long_tbl <- tibble()
 
 
 hausman_list_long <- c()
-reg_list_long<-list()
+reg_list_long <- list()
 #coefs_intercept <- tibble()
 #coefs_HAWK <- tibble()
 for (i in 0:20) {
@@ -149,7 +149,7 @@ for (i in 0:20) {
   
   hausman_list_long <- c(hausman_list_long, summary(reg)$diagnostics[4, 3])
   
-  reg_list_long[[i+1]] <- reg
+  reg_list_long[[i + 1]] <- reg
   
   
 }
@@ -259,7 +259,7 @@ average_inflation_responce_plot <-
   scale_x_continuous("Horizon [1Y]",
                      breaks = seq(0, 20, by = 4),
                      minor_breaks = (0:20)) +
-  scale_y_continuous("Percentage Points", n.breaks=6) +
+  scale_y_continuous("Percentage Points", n.breaks = 6) +
   theme_light()
 
 
@@ -329,7 +329,7 @@ average_unemployment_responce_plot <-
     fill = "#477998"
   ) +
   geom_ribbon(
-    aes( 
+    aes(
       x = quarter,
       ymin = estimate - qnorm(1 - .10 / 2) * std_error,
       ymax = estimate + qnorm(1 - .10 / 2) * std_error
@@ -341,7 +341,7 @@ average_unemployment_responce_plot <-
   scale_x_continuous("Horizon [1Q]",
                      breaks = seq(0, 20, by = 4),
                      minor_breaks = (0:20)) +
-  scale_y_reverse("Percentage Points", n.breaks = 8)+
+  scale_y_reverse("Percentage Points", n.breaks = 8) +
   theme_light()
 
 average_unemployment_responce_plot
@@ -394,7 +394,7 @@ differential_unemployment_responce_plot <-
   scale_x_continuous("Horizon [1Q]",
                      breaks = seq(0, 20, by = 4),
                      minor_breaks = (0:20)) +
-  scale_y_reverse("Percentage Points", n.breaks = 7)+
+  scale_y_reverse("Percentage Points", n.breaks = 7) +
   theme_light()
 
 differential_unemployment_responce_plot
@@ -624,13 +624,13 @@ stargazer(
   LP_12,
   se =
     list(
-      summary(LP_0, vcov = vcovHAC(LP_0, weights = weightsLumley))$coef[, 2],
-      summary(LP_2, vcov = vcovHAC(LP_2, weights = weightsLumley))$coef[, 2],
-      summary(LP_4, vcov = vcovHAC(LP_4, weights = weightsLumley))$coef[, 2],
-      summary(LP_6, vcov = vcovHAC(LP_6, weights = weightsLumley))$coef[, 2],
-      summary(LP_8, vcov = vcovHAC(LP_8, weights = weightsLumley))$coef[, 2],
-      summary(LP_10, vcov = vcovHAC(LP_10, weights = weightsLumley))$coef[, 2],
-      summary(LP_12, vcov = vcovHAC(LP_12, weights = weightsLumley))$coef[, 2]
+      summary(LP_0, vcov = vcovHAC(LP_0))$coef[, 2],
+      summary(LP_2, vcov = vcovHAC(LP_2))$coef[, 2],
+      summary(LP_4, vcov = vcovHAC(LP_4))$coef[, 2],
+      summary(LP_6, vcov = vcovHAC(LP_6))$coef[, 2],
+      summary(LP_8, vcov = vcovHAC(LP_8))$coef[, 2],
+      summary(LP_10, vcov = vcovHAC(LP_10))$coef[, 2],
+      summary(LP_12, vcov = vcovHAC(LP_12))$coef[, 2]
     ),
   df = F
 )

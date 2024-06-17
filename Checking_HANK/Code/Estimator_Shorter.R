@@ -56,7 +56,7 @@ coefs_HAWK_gap <- tibble()
 predicted_short_tbl <- tibble()
 hausman_list_short <- c()
 vcov_short_tbl <- tibble()
-reg_list_short<- list()
+reg_list_short <- list()
 #coefs_intercept <- tibble()
 #coefs_HAWK <- tibble()
 for (i in 0:20) {
@@ -111,7 +111,7 @@ for (i in 0:20) {
   coefs_HAWK_gap <-
     bind_rows(coefs_HAWK_gap, output |> slice(6))
   
-
+  
   
   lm_reg <-
     lm(
@@ -146,8 +146,8 @@ for (i in 0:20) {
   hausman_list_short <-
     c(hausman_list_short,
       summary(reg, vcov. = vcovHAC(reg))$diagnostics[4, 3])
-
-  reg_list_short[[i+1]] <- reg
+  
+  reg_list_short[[i + 1]] <- reg
 }
 
 
@@ -208,8 +208,7 @@ write_csv(predicted_short_tbl,
           "data/Intermediate_Data/predicted_short.csv")
 
 
-write_csv(vcov_short_tbl,
-          "data/Intermediate_Data/vcov_long.csv")
+write_csv(vcov_short_tbl, "data/Intermediate_Data/vcov_long.csv")
 
 ## LP-IV coefficient plots -----
 

@@ -102,8 +102,8 @@ ggsave(
   "rate_plot.pdf",
   rate_plot,
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  width = 210 / 1.7  ,
-  height = 148.5 / 1.7 ,
+  width = 210 / 1.3  ,
+  height = 148.5 / 1.3 ,
   units = "mm"
 )
 
@@ -146,8 +146,8 @@ ggsave(
   "expected_inflation_plot.pdf",
   expected_inflation_plot,
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  width = 210 / 1.7  ,
-  height = 148.5 / 1.7 ,
+  width = 210 / 1.3  ,
+  height = 148.5 / 1.3 ,
   units = "mm"
 )
 
@@ -192,8 +192,8 @@ ggsave(
   "expected_unemployment_plot.pdf",
   expected_unemployment_plot,
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  width = 210 / 1.7  ,
-  height = 148.5 / 1.7 ,
+  width = 210 / 1.3  ,
+  height = 148.5 / 1.3 ,
   units = "mm"
 )
 
@@ -233,8 +233,8 @@ ggsave(
   "expected_cpi_inflation_plot.pdf",
   expected_cpi_inflation_plot,
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  width = 210 / 1.7  ,
-  height = 148.5 / 1.7 ,
+  width = 210 / 1.3  ,
+  height = 148.5 / 1.3 ,
   units = "mm"
 )
 
@@ -271,8 +271,8 @@ ggsave(
   "expected_gap_plot.pdf",
   expected_gap_plot,
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  width = 210 / 1.7  ,
-  height = 148.5 / 1.7 ,
+  width = 210 / 1.3  ,
+  height = 148.5 / 1.3 ,
   units = "mm"
 )
 

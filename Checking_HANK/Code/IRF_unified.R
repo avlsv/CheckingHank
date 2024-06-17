@@ -30,7 +30,7 @@ required_Packages_Install <-
     "glue"
   )
 
-# Cycle that downloads packages if they are absent 
+# Cycle that downloads packages if they are absent
 for (Package in required_Packages_Install) {
   if (!require(Package, character.only = TRUE)) {
     install.packages(Package, dependencies = TRUE)
@@ -63,11 +63,13 @@ full_dataset_ts |> filter_index("2007" ~ "2011") |> autoplot(vars(delta_expected
 
 shocks <-
   full_dataset_ts |>
-  filter_index("2008Q3"~"2009Q2") |>
-  select(delta_expected_cpi_inflation, 
-         delta_expected_gap, 
-         delta_expected_inflation, 
-         delta_expected_unemployment_gap) 
+  filter_index("2008Q3" ~ "2009Q2") |>
+  select(
+    delta_expected_cpi_inflation,
+    delta_expected_gap,
+    delta_expected_inflation,
+    delta_expected_unemployment_gap
+  )
 
 
 
@@ -132,7 +134,7 @@ hawk_by_chair_plot <-
       fill = fed_head_0,
       group = fed_head_0
     )
-  ) +  
+  ) +
   geom_half_boxplot(side = "r") +
   geom_half_point_panel(side = "l",
                         alpha = .8,
@@ -142,8 +144,8 @@ hawk_by_chair_plot <-
     begin = .2,
     end = .9,
     option = "mako",
-    breaks = 1/4 * 0:4,
-    labels = percent(1/4 * 0:4)
+    breaks = 1 / 4 * 0:4,
+    labels = percent(1 / 4 * 0:4)
   ) +
   scale_y_continuous(n.breaks = 8) +
   stat_summary(
@@ -157,10 +159,8 @@ hawk_by_chair_plot <-
   coord_flip() +
   theme_light() +
   guides(fill = "none") +
-  theme(legend.position = "bottom") +
-  labs(x = NULL, 
-       y = "Demeaned Hawk Index", 
-       color = "Time in Ofice")
+  theme(legend.position = "right") +
+  labs(x = NULL, y = "Demeaned Hawk Index", color = "Time in Ofice")
 
 
 hawk_by_chair_plot
@@ -169,7 +169,7 @@ ggsave(
   "hawk_by_chair_plot.pdf",
   hawk_by_chair_plot,
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  width = 210 / 1.1  ,
+  width = 210 / 1.1 * 1.3 ,
   height = 148.5 / 1.1 ,
   units = "mm"
 )
@@ -234,8 +234,10 @@ for (i in 1:dim(hawk_by_fedhead)[1]) {
 
 
 combined_irf_fed_head <-
-  bind_rows(short_combined_fed_head |> mutate(model = "Short"),
-            long_combined_fed_head |> mutate(model = "Long"))
+  bind_rows(
+    short_combined_fed_head |> mutate(model = "Short"),
+    long_combined_fed_head |> mutate(model = "Long")
+  )
 
 
 
@@ -246,13 +248,15 @@ combined_irf_fed_head <-
 
 
 irfs_combined_fed_head_plot <-
-  ggplot(combined_irf_fed_head,
-         aes(
-           x = horizon / 4,
-           y = estimate,
-           color = fct_rev(model),
-           group = fct_rev(model)
-         )) +
+  ggplot(
+    combined_irf_fed_head,
+    aes(
+      x = horizon / 4,
+      y = estimate,
+      color = fct_rev(model),
+      group = fct_rev(model)
+    )
+  ) +
   geom_line() +
   geom_hline(aes(yintercept = 0), color = "darkred") +
   geom_ribbon(
@@ -264,7 +268,7 @@ irfs_combined_fed_head_plot <-
     alpha = 0.13,
     linetype = 0,
   ) +
-  facet_wrap(~ c(fed_head)) +
+  facet_wrap( ~ c(fed_head)) +
   theme_light() +
   labs(y = "Percentage Points", x = "Horizon [1Y]") +
   scale_x_continuous() +
@@ -276,8 +280,8 @@ irfs_combined_fed_head_plot
 
 
 ggsave(
-  "irfs_combined_plot.pdf",
-  irfs_combined_plot,
+  "irfs_combined_fed_head_plot.pdf",
+  irfs_combined_fed_head_plot,
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
   width = 210 / 1.1  ,
   height = 148.5 / 1.1 ,
@@ -295,12 +299,10 @@ short_combined_gfc <- tibble()
 
 
 for (i in 1:dim(hawk_by_gfc)[1]) {
-  
   hawk <- hawk_by_gfc$HAWK_mean[i]
   
   for (j in 1:dim(shocks)[1]) {
     for (t in 1:21) {
-      
       shock_cpi_inflation <-  shocks$delta_expected_cpi_inflation[j]
       shock_gdp_gap <-  shocks$delta_expected_gap[j]
       combined <-
@@ -314,9 +316,11 @@ for (i in 1:dim(hawk_by_gfc)[1]) {
         summary() |>
         tidy() |>
         select(-contrast, -null.value) |>
-        mutate(horizon = t - 1, 
-               gfc = hawk_by_gfc$GFC[i], 
-               shock_date = shocks$year_quarter[j])
+        mutate(
+          horizon = t - 1,
+          gfc = hawk_by_gfc$GFC[i],
+          shock_date = shocks$year_quarter[j]
+        )
       
       short_combined_gfc <- bind_rows(short_combined_gfc, combined)
       
@@ -334,14 +338,10 @@ for (i in 1:dim(hawk_by_gfc)[1]) {
   hawk <- hawk_by_gfc$HAWK_mean[i]
   
   for (j in 1:dim(shocks)[1]) {
-    
     shock_deflator_inflation <-  shocks$delta_expected_inflation[j]
     shock_unemployment_gap <-  shocks$delta_expected_unemployment_gap[j]
     
     for (t in 1:21) {
-      
-
-      
       combined <-
         glht(
           reg_list_long[[t]],
@@ -353,9 +353,11 @@ for (i in 1:dim(hawk_by_gfc)[1]) {
         summary() |>
         tidy() |>
         select(-contrast, -null.value) |>
-        mutate(horizon = t - 1, 
-               gfc = hawk_by_gfc$GFC[i],
-               shock_date = shocks$year_quarter[j])
+        mutate(
+          horizon = t - 1,
+          gfc = hawk_by_gfc$GFC[i],
+          shock_date = shocks$year_quarter[j]
+        )
       
       long_combined_gfc <- bind_rows(long_combined_gfc, combined)
       
@@ -366,10 +368,11 @@ for (i in 1:dim(hawk_by_gfc)[1]) {
 
 
 combined_irf_gfc <-
-  bind_rows(short_combined_gfc |> mutate(model = "Short"),
-            long_combined_gfc |> mutate(model = "Long")) |> 
-  mutate(shock_date = as_factor(as.character(shock_date)), 
-         gfc = as_factor(gfc))
+  bind_rows(
+    short_combined_gfc |> mutate(model = "Short"),
+    long_combined_gfc |> mutate(model = "Long")
+  ) |>
+  mutate(shock_date = as_factor(as.character(shock_date)), gfc = as_factor(gfc))
 
 
 
@@ -399,6 +402,17 @@ irfs_combined_gfc_plot <-
   scale_x_continuous() +
   scale_y_reverse(n.breaks = 6) +
   labs(color = "Model", fill = "Model") +
-  theme(legend.position = "bottom")
+  theme(legend.position = "right")
 
 irfs_combined_gfc_plot
+
+
+
+ggsave(
+  "irfs_combined_gfc_plot.pdf",
+  irfs_combined_gfc_plot,
+  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
+  width = 210 / 1.2 * 1.3  ,
+  height = 148.5 / 1.2 ,
+  units = "mm"
+)

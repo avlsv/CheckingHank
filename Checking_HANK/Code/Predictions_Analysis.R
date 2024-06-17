@@ -1,6 +1,6 @@
 ## Checking HANK
 ## Alexander Vlasov
-## 
+##
 ## Plots creation
 ##
 
@@ -171,7 +171,7 @@ predicted_ffr_paths_short <-
       by = join_by(quarter == year_quarter)
     ),
     aes(
-      x = horizon,
+      x = horizon / 4,
       y = ffr_hat / 100,
       group = quarter,
       color = yq(quarter),
@@ -182,10 +182,13 @@ predicted_ffr_paths_short <-
   scale_y_continuous(TeX("Predicted FFR"),
                      labels = label_percent(),
                      n.breaks = 8) +
-  scale_x_continuous("Horizon [1Q]",
-                     breaks = seq(0, 20, by = 4),
-                     minor_breaks = (0:20)) +
-  scale_colour_viridis_c("Date", trans = "date", end = .9, n.breaks=8) +
+  scale_x_continuous("Horizon [1Y]",
+                     breaks = seq(0, 20, by = 4) / 4,
+                     minor_breaks = (0:20) / 4) +
+  scale_colour_viridis_c("Date",
+                         trans = "date",
+                         end = .9,
+                         n.breaks = 8) +
   geom_hline(aes(yintercept = 0), color = "darkred") +
   theme_light()
 
@@ -210,7 +213,7 @@ predicted_ffr_paths_long <-
     predicted_ffr_long_tbl |>
       filter(quarter >= yearquarter("1988 Q3")),
     aes(
-      x = horizon,
+      x = horizon / 4,
       y = ffr_hat / 100,
       group = quarter,
       color = yq(quarter),
@@ -219,10 +222,13 @@ predicted_ffr_paths_long <-
   ) +
   geom_line() +
   scale_y_continuous("Predicted FFR", labels = label_percent(), n.breaks = 8) +
-  scale_x_continuous("Horizon [1Q]",
-                     breaks = seq(0, 20, by = 4),
-                     minor_breaks = (0:20)) +
-  scale_colour_viridis_c("Date", trans = "date", end = .9, n.breaks=8) +
+  scale_x_continuous("Horizon [1Y]",
+                     breaks = seq(0, 20, by = 4) / 4,
+                     minor_breaks = (0:20) / 4) +
+  scale_colour_viridis_c("Date",
+                         trans = "date",
+                         end = .9,
+                         n.breaks = 8) +
   geom_hline(aes(yintercept = 0), color = "darkred") +
   theme_light() + theme(legend.position = "right")
 
@@ -238,7 +244,7 @@ ggsave(
   units = "mm"
 )
 
-## Short Specification Deviation Predictive Plot  --------
+## Short Specification r-r^* Predictive Plot  --------
 
 
 predicted_paths_short <-
@@ -249,7 +255,7 @@ predicted_paths_short <-
       by = join_by(quarter == year_quarter)
     ),
     aes(
-      x = horizon,
+      x = horizon / 4,
       y = fitted / 100,
       group = quarter,
       color = yq(quarter),
@@ -260,10 +266,13 @@ predicted_paths_short <-
   scale_y_continuous(TeX("Predicted $r-r^*$"),
                      labels = label_percent(),
                      n.breaks = 8) +
-  scale_x_continuous("Horizon [1Q]",
-                     breaks = seq(0, 20, by = 4),
-                     minor_breaks = (0:20)) +
-  scale_colour_viridis_c("Date", trans = "date", end = .9, n.breaks=8) +
+  scale_x_continuous("Horizon [1Y]",
+                     breaks = seq(0, 20, by = 4) / 4,
+                     minor_breaks = (0:20) / 4) +
+  scale_colour_viridis_c("Date",
+                         trans = "date",
+                         end = .9,
+                         n.breaks = 8) +
   geom_hline(aes(yintercept = 0), color = "darkred") +
   theme_light()
 
@@ -279,7 +288,7 @@ ggsave(
 )
 
 
-## Long Specification Deviation Predictive Plot  --------
+## Long Specification r-r^* Predictive Plot  --------
 
 
 predicted_paths_long <-
@@ -291,7 +300,7 @@ predicted_paths_long <-
     ) |>
       filter(quarter >= yearquarter("1988 Q3")),
     aes(
-      x = horizon,
+      x = horizon / 4,
       y = fitted / 100,
       group = quarter,
       color = yq(quarter),
@@ -302,10 +311,13 @@ predicted_paths_long <-
   scale_y_continuous(TeX("Predicted $r-r^*$"),
                      labels = label_percent(),
                      n.breaks = 8) +
-  scale_x_continuous("Horizon [1Q]",
-                     breaks = seq(0, 20, by = 4),
-                     minor_breaks = (0:20)) +
-  scale_colour_viridis_c("Date", trans = "date", end = .9) +
+  scale_x_continuous("Horizon [1Y]",
+                     breaks = seq(0, 20, by = 4) / 4,
+                     minor_breaks = (0:20) / 4) +
+  scale_colour_viridis_c("Date",
+                         trans = "date",
+                         end = .9,
+                         n.breaks = 8) +
   geom_hline(aes(yintercept = 0), color = "darkred") +
   theme_light()
 
@@ -364,7 +376,7 @@ size_persistence_tbl <-
   bind_rows(
     size_persistence_short_tbl |> mutate(model = "Short"),
     size_persistence_long_tbl |> mutate(model = "Long")
-  ) |> 
+  ) |>
   mutate(model = as_factor(model))
 
 
@@ -616,7 +628,7 @@ ggsave(
 persistence_plot <-
   ggplot(
     size_persistence_tbl |>
-      filter( quarter >= yearquarter("1988 Q3")),
+      filter(quarter >= yearquarter("1988 Q3")),
     aes(
       x = yq(quarter),
       y = persistence,
@@ -677,7 +689,11 @@ predicted_short_tbl
 
 
 r_squares_plot <-
-  ggplot(r_squared_tbl, aes(x = horizon / 4, y = r_squared, colour = fct_rev(model))) +
+  ggplot(r_squared_tbl, aes(
+    x = horizon / 4,
+    y = r_squared,
+    colour = fct_rev(model)
+  )) +
   geom_line() +
   theme_light() +
   scale_y_continuous(TeX("$R^2$"), n.breaks = 8) +
@@ -742,10 +758,9 @@ hausman_plot <-
     linetype = 0,
     fill = "#477998"
   ) +
-  guides(color = 
-           guide_legend(override.aes = 
-                          list(fill = NA))
-         )
+  guides(color =
+           guide_legend(override.aes =
+                          list(fill = NA)))
 
 
 ggsave(

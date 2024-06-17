@@ -132,7 +132,7 @@ estimates_of_liquidity_premia_plot <-
     filter(
       estimates_of_liquidity_premia,
       horizon < 20,
-      quarter >= yearquarter("1990")
+      quarter >= yearquarter("1980")
     ),
     aes(
       x = yq(quarter),
@@ -160,7 +160,7 @@ estimates_of_liquidity_premia_plot <-
     fill = '#155F83FF' ,
     alpha = 0.1
   ) +
-  facet_wrap( ~ horizon_years, ncol = 2) +
+  facet_wrap(~ horizon_years, ncol = 2) +
   scale_y_continuous("Predicted Liquidity Premia",
                      labels = percent_format(),
                      n.breaks = 5) +
@@ -168,7 +168,7 @@ estimates_of_liquidity_premia_plot <-
   labs(fill = "Model", linetype = "Model") +
   geom_hline(aes(yintercept = 0), color = "darkred") +
   theme_light() +
-  theme(legend.position = "bottom")
+  theme(legend.position = "right")
 
 estimates_of_liquidity_premia_plot
 
@@ -176,11 +176,71 @@ ggsave(
   "estimates_of_liquidity_premia_plot.pdf",
   estimates_of_liquidity_premia_plot,
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  width = 210 / 1.1  ,
+  width = 210 / 1.1  * 1.2,
   height = 148.5 / 1.1 ,
   units = "mm"
 )
 
+
+
+
+
+
+
+
+estimates_of_liquidity_premia_plot_2008 <-
+  ggplot(
+    filter(
+      estimates_of_liquidity_premia,
+      horizon < 20,
+      quarter >= yearquarter("2008")
+    ),
+    aes(
+      x = yq(quarter),
+      linetype = as_factor(model),
+      group = model
+    )
+  ) +
+  geom_line(aes(y = prediction / 100)) +
+  geom_ribbon(aes(
+    ymin = CI_lower / 100,
+    ymax = CI_upper / 100,
+    fill = as_factor(model)
+  ),
+  alpha = 0.3) +
+  geom_rect(
+    data = rec_data_long |>
+      slice_tail(n = -6),
+    inherit.aes = F,
+    aes(
+      xmin = start,
+      xmax = end,
+      ymin = -Inf,
+      ymax = Inf
+    ),
+    fill = '#155F83FF' ,
+    alpha = 0.1
+  ) +
+  facet_wrap(~ horizon_years, ncol = 2) +
+  scale_y_continuous("Predicted Liquidity Premia",
+                     labels = percent_format(),
+                     n.breaks = 5) +
+  scale_x_date(NULL, date_breaks = "1 years", labels = label_date("'%y")) +
+  labs(fill = "Model", linetype = "Model") +
+  geom_hline(aes(yintercept = 0), color = "darkred") +
+  theme_light() +
+  theme(legend.position = "right")
+
+estimates_of_liquidity_premia_plot_2008
+
+ggsave(
+  "estimates_of_liquidity_premia_plot_2008.pdf",
+  estimates_of_liquidity_premia_plot_2008,
+  path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
+  width = 210 / 1.1  * 1.2,
+  height = 148.5 / 1.1 ,
+  units = "mm"
+)
 
 
 
@@ -225,7 +285,7 @@ share_inverted_plot <-
 
 # Plot of Yield Curves -----
 
-starting_quarter =  yearquarter("2010q1")
+starting_quarter =  yearquarter("2008q1")
 number_of_years = 3
 
 
@@ -234,7 +294,7 @@ yield_prediction_plot <-
   ggplot(yield_curve_restr |>
            filter(
              between(quarter - starting_quarter, 0 , 4 * number_of_years - 1),
-             horizon <= 12
+             horizon <= 20
            )) +
   geom_point(
     alpha = 0.3,
@@ -260,7 +320,7 @@ yield_prediction_plot <-
     data = predicted_ffr_tbl |>
       filter(
         between(quarter - starting_quarter, 0 , 4 * number_of_years - 1),
-        horizon <= 12
+        horizon <= 20
       ),
     aes(
       x = horizon / 4,
@@ -272,7 +332,7 @@ yield_prediction_plot <-
     data = predicted_ffr_tbl |>
       filter(
         between(quarter - starting_quarter, 0 , 4 * number_of_years - 1),
-        horizon <= 12
+        horizon <= 20
       ),
     aes(
       x = horizon / 4,
@@ -288,7 +348,7 @@ yield_prediction_plot <-
   scale_color_viridis_c("Day in Quarter", option = "D") +
   scale_x_continuous("Horizon [1Y]", breaks = seq(0, 5, by = 1)) +
   geom_hline(aes(yintercept = 0), color = "darkred") +
-  facet_wrap( ~ quarter, scales = "fixed", ncol = 4) +
+  facet_wrap(~ quarter, scales = "fixed", ncol = 4) +
   labs(linetype = "Model", fill = "Model") +
   theme_light()
 
@@ -300,8 +360,8 @@ ggsave(
   "yield_prediction_plot.pdf",
   yield_prediction_plot,
   path = "~/Documents/CheckingHank/Checking_HANK/Figures/",
-  width = 210 / 1.1  ,
-  height = 148.5 / 1.1 ,
+  width = 210 / 1 * 1.1,
+  height = 148.5 / 1 ,
   units = "mm"
 )
 
@@ -318,8 +378,8 @@ predicted_ffr_path_plot <-
     aes(
       x = horizon / 4,
       y = ffr_hat / 100,
-      linetype = model,
-      fill = model
+      linetype = fct_rev(model),
+      fill = fct_rev(model)
     )
   ) +
   geom_line() +
@@ -330,9 +390,10 @@ predicted_ffr_path_plot <-
   ), alpha = 0.2) +
   scale_y_continuous("Interest Rate", labels = percent_format(), n.breaks = 6) +
   scale_color_viridis_c("Day in Quarter", option = "D") +
+  labs(fill = "Model", linetype = "Model") +
   scale_x_continuous("Horizon [1Y]", breaks = seq(0, 5, by = 1)) +
   geom_hline(aes(yintercept = 0), color = "darkred") +
-  facet_wrap(~ quarter, scales = "fixed", ncol = 4) +
+  facet_wrap( ~ quarter, scales = "fixed", ncol = 4) +
   theme_light()
 
 
