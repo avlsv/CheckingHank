@@ -151,11 +151,21 @@ r_squared_tbl_0 <-
 r_squared_tbl_1 <-
   predicted_dR_tbl |>
   filter(model == "Long") |>
-  group_by(horizon, model) |>
+  group_by(horizon) |>
   summarize(r_squared = 1 -
               sum((dR - fitted) ^ 2) /
               sum((dR - mean(dR)) ^ 2)) |>
   mutate(model = "Long since 1969 Q1")
+
+r_squared_tbl_2 <-
+  predicted_dR_tbl |>
+  filter(model == "Long", 
+         quarter < yearquarter("1988 Q3")) |>
+  group_by(horizon) |>
+  summarize(r_squared = 1 -
+              sum((dR - fitted) ^ 2) /
+              sum((dR - mean(dR)) ^ 2)) |>
+  mutate(model = "Long 1969 Q1 — 1988 Q3")
 
 r_squared_tbl <-
   bind_rows(r_squared_tbl_1, r_squared_tbl_0)
@@ -573,8 +583,7 @@ ggsave(
 
 size_plot <-
   ggplot(
-    size_persistence_tbl |>
-      filter(quarter >= yearquarter("1988Q3")),
+    size_persistence_tbl ,
     aes(
       x = yq(quarter),
       y = size / 100,
@@ -627,8 +636,7 @@ ggsave(
 
 persistence_plot <-
   ggplot(
-    size_persistence_tbl |>
-      filter(quarter >= yearquarter("1988 Q3")),
+    size_persistence_tbl,
     aes(
       x = yq(quarter),
       y = persistence,

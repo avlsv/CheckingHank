@@ -42,7 +42,7 @@
 
 % \institute{NES}
 
-\title{Presentation Title}
+\title{{\Large Systematic Monetary Policy Approach to Taylor Rule}}
 % Enter presentation information:
 \information%
 % Enter link to research paper (optional; comment line if not needed):
@@ -103,12 +103,20 @@
 
     I assume that the monetary policy rule is 
     \[\left(r-r^*\right)_{t+h}=\phi_t^h\mathbb{E}\left[\pi_{t+1}\mid \mathcal{I}_t\right]+\psi_t^h\mathbb{E}\left[x_{t+1}\mid \mathcal{I}_t\right]+\varepsilon_t.\]
-    $\mathbb{E}_t\pi_{t+1}$ and $\mathbb{E}_t x_{t+1}$ are the expectations of monetary authority about inflation (deflator/CPI) and output gap (or unemployment gap) at quarter $t+1$.
+    $\mathbb{E}_t\pi_{t+1}$ and $\mathbb{E}_t x_{t+1}$ are the expectations of monetary authority about inflation and output gap. 
+\end{frame}
 
-    Then assuming stimate the following State-Dependent LP-IV.
+\begin{frame}{State-Dependent LP Model [2]}
+    Then I estimate the following State-Dependent LP-IV.
     \begin{multline*}
-        \left(r-r^*\right)_{t+h}=\alpha^h+\beta_\pi^h \hat\pi_t+\gamma_\pi^h \hat\pi_t\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)\\ \beta_u^h \hat x_t+\gamma_u^h \hat u_t\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)\\ +\delta^h\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)+\zeta^hZ+e_{t+h}^h,
-    \end{multline*}
+        \left(r-r^*\right)_{t+h}=\alpha^h+\beta_\pi^h \hat\pi_t+\gamma_\pi^h \hat\pi_t\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)\\ \beta_u^h \hat x_t+\gamma_u^h \hat x_t\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)\\ +\delta^h\left(\mathit{Hawk}_{t}-\overline{\mathit{Hawk}}\right)+\zeta^hZ+e_{t+h}^h,
+    \end{multline*}   \vspace{-3ex}
+    where 
+    \begin{itemize}
+        \item $\mathit{Hawk}_t$ is the \cite{HIM2023} index of \alb{FOMC hawkishness} based on \cite{Istrefi2019} estimate of preferences of each FOMC member.
+        \item $\hat\pi_t$ is the FOMC (Tealbook) projection of future \alb{inflation}.
+        \item $\hat x_t$ is the FOMC (Tealbook) projection of future \alb{output gap}.
+    \end{itemize}
 \end{frame}
 
 
@@ -120,7 +128,23 @@
 
 
 \begin{frame}{Short and Long Models}
-    
+    \begin{itemize}
+        \item Contemporaneous Tealbook projections of \alg{CPI inflation} and \alb{GDP gap} are available starting from \alg{1979 Q4} and \alb{1987 Q3}, respectively. 
+        \item Tealbook projections are available up to \al{2018 Q4} due to the publication lag.
+        \item That leaves only 126 quarters (122 obs if one wants to include 4 quarter-lags).
+    \end{itemize}
+
+    In order to increase the number of observation, I introduce Long model.
+
+    \begin{table}[!h]\centering \small
+    \begin{tabular}{lrr}\hline\hline
+        &\multicolumn{2}{l}{Tealbook Projected ...}\\ \cline{2-3} 
+        Model &  Inflation & Output Gap\\ 
+        \hline
+        Short & CPI Inflation & GDP Gap\\ 
+        Long& Deflator Inflation & Unemployment Gap\\ \hline\hline
+    \end{tabular}
+    \end{table}
 
 \end{frame}
 
@@ -185,7 +209,7 @@
               \caption{Differential Response to Projected GDP Gap}
               \label{fig:LP_short:differential_gap}
               \includegraphics[width=\linewidth]{differential_gap_short.pdf}
-          \end{subfigure}
+          \end{subfigure}\vspace{-2ex}
               {\begin{flushleft}\tiny\textit{Notes}: This figure reports the responses of the $(r-r^*)_t$ to an increase in the Tealbook GDP gap projection of 1 p.p. The subfigure \ref{fig:LP_short:average_gap} reports the response of $(r-r^*)_t$ to projected output gap increase for the $\mathit{Hawk}$ index equal to the sample average; \ref{fig:LP_short:differential_gap} is the addition to the previous response in case there are 2 (out of 12 in total) additional consistent hawks in the FOMC. The shaded areas correspond to 68\%, 90\% and 95\% confidence intervals calculated with \cite{Andrews1991} HAC estimator.\end{flushleft}}
         \end{minipage}
       \end{figure}
@@ -195,22 +219,23 @@
 \begin{frame}{Long Model. $r-r^*$ Response to Projected Deflator Inflation}
 
     \begin{figure}[!htbp]\centering
+        \begin{minipage}{\textwidth}
         \caption{}
-        \label{fig:LP2}
         \begin{subfigure}[b]{0.48\textwidth}
             \centering
-            \caption{Average Response to Inflation}
-            \label{fig:average_inflation}
+            \caption{Average Response to Deflator Inflation}
+            \label{fig:LP_long:average_inflation}
             \includegraphics[width=\linewidth]{average_deflator_inflation_long.pdf}
         \end{subfigure}
         \hfill
         \begin{subfigure}[b]{0.48\textwidth}
             \centering 
-            \caption{Differential Response to Inflation}
-            \label{fig:differential_inflation}
+            \caption{Differential Response to Deflator Inflation}
+            \label{fig:LP_long:differential_inflation}
             \includegraphics[width=\linewidth]{differential_deflator_inflation_long.pdf}
-        \end{subfigure}\vspace{-4ex}
-            {\begin{flushleft}\tiny\textit{Notes}: This figure reports the responses of the $(r-r^*)_t$ to an increase in the Tealbook GDP gap projection of 1 p.p. The subfigure \ref{fig:LP_short:average_gap} reports the response of $(r-r^*)_t$ to projected output gap increase for the $\mathit{Hawk}$ index equal to the sample average; \ref{fig:LP_short:differential_gap} is the addition to the previous response in case there are 2 (out of 12 in total) additional consistent hawks in the FOMC. The shaded areas correspond to 68\%, 90\% and 95\% confidence intervals calculated with \cite{Andrews1991} HAC estimator. \end{flushleft}}
+        \end{subfigure}\vspace{-2ex}
+            {\begin{flushleft}\tiny\textit{Notes}: This figure reports the responses of the $(r-r^*)_t$ to an increase in the Tealbook GDP gap projection of 1 p.p. The subfigure \ref{fig:LP_long:average_inflation} reports the response of $(r-r^*)_t$ to projected deflator inflation increase of 1 p.p. for the $\mathit{Hawk}$ index equal to the sample average; \ref{fig:LP_long:differential_inflation} is the addition to the previous response in case there are 2 (out of 12 in total) additional consistent hawks in the FOMC. The shaded areas correspond to 68\%, 90\% and 95\% confidence intervals calculated with \cite{Andrews1991} HAC estimator. \end{flushleft}}
+        \end{minipage}
     \end{figure}
     
 \end{frame}
@@ -226,18 +251,18 @@
         \label{fig:LP}
         \begin{subfigure}[b]{0.49\textwidth}
             \centering
-            \caption{Average Response to Unempl. $\left(\beta_u^h\right)$}
-            \label{fig:average_unemployment}
+            \caption{Average Response to Unemployment Gap}
+            \label{fig:LP_long:average_gap}
             \includegraphics[width=\linewidth]{average_unemployment_long.pdf}
         \end{subfigure}
         \hfill
         \begin{subfigure}[b]{0.49\textwidth}
             \centering
-            \caption{Differential Response to Unempl. $\left(\gamma_u^h\right)$}
-            \label{fig:differential_unemployment}
+            \caption{Differential Response to Unemployment Gap}
+            \label{fig:LP_long:differential_gap}
             \includegraphics[width=\linewidth]{differential_unemployment_long.pdf}
         \end{subfigure}\vspace{-2ex}
-            {\begin{flushleft}\tiny\textit{Notes}: This figure reports the responses of the $(r-r^*)_t$ to an increase in the Tealbook GDP gap projection of 1 p.p. The subfigure \ref{fig:LP_short:average_gap} reports the response of $(r-r^*)_t$ to projected output gap increase for the $\mathit{Hawk}$ index equal to the sample average; \ref{fig:LP_short:differential_gap} is the addition to the previous response in case there are 2 (out of 12 in total) additional consistent hawks in the FOMC. The shaded areas correspond to 68\%, 90\% and 95\% confidence intervals calculated with \cite{Andrews1991} HAC estimator. \end{flushleft}}
+            {\begin{flushleft}\tiny\textit{Notes}: This figure reports the responses of the $(r-r^*)_t$ to an increase in the Tealbook GDP gap projection of 1 p.p. The subfigure \ref{fig:LP_long:average_gap} reports the response of $(r-r^*)_t$ to projected output gap increase for the $\mathit{Hawk}$ index equal to the sample average; \ref{fig:LP_long:differential_gap} is the addition to the previous response in case there are 2 (out of 12 in total) additional consistent hawks in the FOMC. The shaded areas correspond to 68\%, 90\% and 95\% confidence intervals calculated with \cite{Andrews1991} HAC estimator. \end{flushleft}}
         \end{minipage}
 
     \end{figure}
@@ -269,25 +294,30 @@
 
 
 
-\begin{frame}{Shocks}
+\begin{frame}{Shocks and HAWK}
     \begin{table}\centering
+        \caption{Shocks}
         \begin{tabular}{rlrrrr}
-            \hline
+            \hline\hline
            &  & $\Delta$ CPI inflation & $\Delta$ GDP gap & $\Delta$ Deflator inflation &  $\Delta$ Unemployment gap \\ 
             \hline
           1 & 2008 Q3 & \alr{--2.40} & 0.05 & \alr{--0.05} & 0.49 \\ 
             2 & 2008 Q4 & \alr{--1.45} & \alr{--3.03} & \alr{--0.57} & 1.14 \\ 
             3 & 2009 Q1 & 1.18 & \alr{--2.05} & \alr{--0.40} & 1.36 \\ 
             4 & 2009 Q2 & 1.10 & \alr{--0.21} & 0.03 & 0.87 \\ 
-             \hline
+             \hline \hline
           \end{tabular}
+    \end{table}
+
+    \begin{table}
+        
     \end{table}
 \end{frame} 
 
 
-\begin{frame}{IRF to}
+\begin{frame}{IRFs to }
     \begin{figure}
-        \begin{minipage}{.96\textwidth}
+        \begin{minipage}{.90\textwidth}
             \includegraphics[width=\textwidth]{irfs_combined_gfc_plot.pdf}
         \end{minipage}
     \end{figure}
@@ -308,7 +338,7 @@
 
 
 
-\begin{frame}{Predicted $r-r^*$ paths}
+\begin{frame}{In-Sample Predicted $r-r^*$ paths}
     \begin{figure}[!htbp]\centering
         \begin{minipage}{\textwidth}
             \caption{}
@@ -325,7 +355,7 @@
 \end{frame}
 
 
-\begin{frame}{Predicted FFR paths}
+\begin{frame}{In-Sample Predicted FFR paths}
     \begin{figure}[!htbp]\centering
         \begin{minipage}{\textwidth}
             \caption{}
@@ -369,6 +399,9 @@
     \end{figure}
 \end{frame}
 
+\begin{frame}{}
+    
+\end{frame}
 
 \begin{frame}
     \heading{Size-Persistence Estimations}
@@ -376,28 +409,11 @@
 
 
 \begin{frame}\frametitle{Outcomes of \cite{KMV2018} model}
-    \cite{KMV2018} HANK model outcomes:
+    \cite{KMV2018} Tradeoffs in HANK model:
     \begin{enumerate}
-        \item \textbf{\al{Size-Persistence trade-off:}} Cumulative elasticity of aggregate consumption declines with the increase with persistence of monetary policy path in a nonlinear manner.
-        \item \textbf{Inflation-Output Tradeoff:} the same Taylor rule shocks lead to the increased effects in Inflation-Output tradeoff.
+        \item \textbf{\al{Size-Persistence Tradeoff:}} Cumulative elasticity of aggregate consumption declines with the increase of persistence of monetary policy path in a nonlinear manner.
+        \item \color{gray}\textbf{Inflation-Output Tradeoff:} the same Taylor rule shocks lead to the increased effects in Inflation-Output tradeoff.
     \end{enumerate}  
-\end{frame}
-
-
-\begin{frame}{Predicted $r-r^*$ paths}
-    \begin{figure}[!htbp]\centering
-        \begin{minipage}{\textwidth}
-            \caption{}
-            \label{fig:predicted_paths}
-            \begin{subfigure}[b]{0.49\textwidth}
-                \includegraphics[width=\linewidth]{predicted_paths_short.pdf}
-            \end{subfigure}%
-            \begin{subfigure}[b]{0.49\textwidth}
-          \includegraphics[width=\linewidth]{predicted_paths_long.pdf}
-        \end{subfigure}
-          {\begin{flushleft}\tiny \textit{Notes:} This figure shows the predictions of $r-r^*$ paths in each state calculated by short and long models.\end{flushleft}} 
-          \end{minipage}
-      \end{figure}
 \end{frame}
 
 
@@ -405,22 +421,23 @@
 
 \section{Size-Persistence Estimates}
 
-\begin{frame}\frametitle{Size-Persistence in RANK}
+\begin{frame}\frametitle{Size-Persistence  in RANK}
     Rate path:
         \begin{equation*}
-            r_t=\rho+e^{-\eta t}(r_0-\rho).\label{eq:InterestRatePath}
+            r_t=\rho+\underbrace{\exp(-\eta}_{\textit{Persistence}} t)(r_0-\rho).\label{eq:InterestRatePath}
         \end{equation*}
     
-    NK policy    
+    NK consumption policy    
     \[C_0=\bar C\exp\left(-\frac{1}{\gamma}\int_0^\infty \left(r_s-\rho\right)\,ds\right).\]
     
     Size:
     \begin{equation*}
         R_0=\int_0^\infty \left(r_s-\rho\right)\,ds,\label{eq:KMVsize}
     \end{equation*}
+
     
-    
-    \[\frac{-d \log C_0}{dR_0}=\frac{1}{\gamma},\]
+    No Size-Persistence tradeoff in RANK:
+    \[\frac{-d \log C_0}{dR_0}=\frac{1}{\gamma}.\]
     
     
     \end{frame}
@@ -447,16 +464,32 @@
         
     % \end{frame}
 
-\begin{frame}{Size-Persistence}
-    \begin{figure}[!hpbt]\centering
-        \begin{minipage}{0.6\textwidth}
-          \caption{Estimates of Size and Persistence} 
-          \label{fig:size_persistence}
-          \includegraphics[width=\linewidth]{actual_size_persistence_long.pdf}
-        {\begin{flushleft}\tiny \textit{Notes:} \end{flushleft}} 
+
+\begin{frame}{Predicted $r-r^*$ paths}
+    \begin{figure}[!htbp]\centering
+        \begin{minipage}{\textwidth}
+            \caption{}
+            \begin{subfigure}[b]{0.49\textwidth}\centering
+                \caption{Short Model}
+                \includegraphics[width=\linewidth]{predicted_paths_short.pdf}
+            \end{subfigure}%
+            \begin{subfigure}[b]{0.49\textwidth}
+                \caption{Long Model}
+          \includegraphics[width=\linewidth]{predicted_paths_long.pdf}
+        \end{subfigure}
+          {\begin{flushleft}\tiny \textit{Notes:} This figure shows the predictions of $r-r^*$ paths in each state calculated by short and long models.\end{flushleft}} 
           \end{minipage}
       \end{figure}
-    
+\end{frame}
+
+
+\begin{frame}{Estimation of Size and Persistence}
+Size in \cite{KMV2018} is 
+\[\mathit{Size}_t=\frac{1}{H}\sum_{h=0}^H \widehat{\left(r-r^*\right)}_{t+h}\]
+\[\widehat{\left(r-r^*\right)}_{t+h}=\exp(\mu_t h)\widehat{\left(r-r^*\right)}_t\exp(\varepsilon_t)\]
+This can be rewritten as 
+\[\log\left(\frac{\widehat{\left(r-r^*\right)}_{t+h}}{\widehat{\left(r-r^*\right)}_{t}}\right)=\mu_t h+\varepsilon_{th}\]
+And persistence is $\mathit{Persistence}=\exp(\hat{\mu}_t)$.
 \end{frame}
 
 
@@ -464,14 +497,12 @@
     \begin{figure}[!htbp]\centering
         \caption{}
         \label{fig:Size_Persistence_Dynamics}
-        \begin{subfigure}[b]{0.49\textwidth}
-            \centering
+        \begin{subfigure}[b]{0.49\textwidth}\centering
             \caption{Size Dynamics}
             \label{fig:AverageResponce}
             \includegraphics[width=\linewidth]{size_plot.pdf}
         \end{subfigure}%
-        \begin{subfigure}[b]{0.49\textwidth}
-            \centering
+        \begin{subfigure}[b]{0.49\textwidth}\centering
             \caption{Persistence Dynamics}
             \label{fig:DifferentialResponce}
             \includegraphics[width=\linewidth]{persistence_plot.pdf}
@@ -483,17 +514,30 @@
 
 
 
-
-
-
-
-\section{Conclusion}
-\begin{frame}\frametitle{Conclusions}
-    \begin{block}{So, should we believe in HANK?}
-        The evidence above suggests that, we should. 
-        At least we have found that consumption behaviour in size-persistent tradeoff corresponds to the TANK model.
-    \end{block}
+\begin{frame}{Size-Persistence Estimates}
+    \begin{figure}[!hpbt]\centering
+        \begin{minipage}{0.6\textwidth}
+          \caption{Estimates of Size and Persistence} 
+          \label{fig:size_persistence_short}
+          \includegraphics[width=\linewidth]{actual_size_persistence_short.pdf}
+        {\begin{flushleft}\tiny \textit{Notes:} \end{flushleft}} 
+          \end{minipage}
+      \end{figure}
+    
 \end{frame}
+
+
+
+
+
+
+% \section{Conclusion}
+% \begin{frame}\frametitle{Conclusions}
+%     \begin{block}{So, should we believe in HANK?}
+%         The evidence above suggests that, we should. 
+%         At least we have found that consumption behaviour in size-persistent tradeoff corresponds to the TANK model.
+%     \end{block}
+% \end{frame}
 
 
 
