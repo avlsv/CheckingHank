@@ -358,7 +358,7 @@ size_persistence_short_tbl <-
   group_by(quarter) |>
   summarize(
     size =  mean(fitted, na.rm = T),
-    persistence = lm(I(log(fitted / fitted[2])) ~  horizon)$coef[2] |>
+    persistence = lm(I(log(fitted / fitted[1])) ~ -1+ horizon)$coef[1] |>
       exp()
   ) |>
   left_join(fedhead_quarterly, by = join_by(quarter == year_quarter))
@@ -377,7 +377,7 @@ size_persistence_long_tbl <-
             persistence =
               exp(lm(I(
                 log(fitted / fitted[2])
-              ) ~  horizon)$coef[2])) |>
+              ) ~ -1 +  horizon)$coef[1])) |>
   left_join(fedhead_quarterly, by = join_by(quarter == year_quarter))
 
 
@@ -491,10 +491,10 @@ ggsave(
 quarters_short <-
   size_persistence_short_tbl |>
   summarize(
-    first_quarter = sum(size > 0 & persistence > 1) / n(),
-    second_quarter = sum(size < 0 & persistence > 1) / n(),
-    third_quarter = sum(size < 0 & persistence < 1) / n(),
-    fourth_quarter = sum(size > 0 & persistence < 1) / n()
+    first_quarter = sum(size > 0 & persistence > 1, na.rm=T) / n(),
+    second_quarter = sum(size < 0 & persistence > 1, na.rm=T) / n(),
+    third_quarter = sum(size < 0 & persistence < 1, na.rm=T) / n(),
+    fourth_quarter = sum(size > 0 & persistence < 1, na.rm=T) / n()
   ) |> pivot_longer(everything()) |>
   rename(quarter = name) |>
   mutate(model = "Short")
@@ -515,10 +515,10 @@ quarters_long_restr <-
 quarters_long <-
   size_persistence_long_tbl |>
   summarize(
-    first_quarter = sum(size > 0 & persistence > 1) / n(),
-    second_quarter = sum(size < 0 & persistence > 1) / n(),
-    third_quarter = sum(size < 0 & persistence < 1) / n(),
-    fourth_quarter = sum(size > 0 & persistence < 1) / n()
+    first_quarter = sum(size > 0 & persistence > 1, na.rm = T) / n(),
+    second_quarter = sum(size < 0 & persistence > 1, na.rm = T) / n(),
+    third_quarter = sum(size < 0 & persistence < 1, na.rm = T) / n(),
+    fourth_quarter = sum(size > 0 & persistence < 1, na.rm = T) / n()
   ) |> pivot_longer(everything()) |>
   rename(quarter = name) |>
   mutate(model = "Long (1969 Q1 — 2018Q4)")
@@ -599,7 +599,7 @@ size_plot <-
   ) +
   scale_y_continuous("Size", labels = label_percent()) +
   geom_rect(
-    data = rec_data_short,
+    data = rec_data_long,
     inherit.aes = F,
     aes(
       xmin = start,
@@ -646,7 +646,7 @@ persistence_plot <-
   geom_line() +
   geom_hline(aes(yintercept = 1), color = "darkred") +
   geom_rect(
-    data = rec_data_short,
+    data = rec_data_long,
     inherit.aes = F,
     aes(
       xmin = start,

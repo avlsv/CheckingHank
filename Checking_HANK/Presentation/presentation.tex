@@ -131,10 +131,10 @@
     \begin{itemize}
         \item Contemporaneous Tealbook projections of \alg{CPI inflation} and \alb{GDP gap} are available starting from \alg{1979 Q4} and \alb{1987 Q3}, respectively. 
         \item Tealbook projections are available up to \al{2018 Q4} due to the publication lag.
-        \item That leaves only 126 quarters (122 obs if one wants to include 4 quarter-lags).
+        \item That leaves only 126 quarters (122 obs accounting for 4 quarter-lags) and 18 parameters.
     \end{itemize}
 
-    In order to increase the number of observation, I introduce Long model.
+    In order to increase the number of observation, I introduce Long model that uses Tealbook projections of Deflator inflation and unemployment gap $(u-u^*)$.
 
     \begin{table}[!h]\centering \small
     \begin{tabular}{lrr}\hline\hline
@@ -163,10 +163,10 @@
 
 
 
-
-\section{Results}
-
-
+\begin{frame}
+    \heading{IRFs}
+\end{frame}
+    
 
 \begin{frame}{Short Model. $r-r^*$ Response to Projected CPI Inflation}
 
@@ -315,7 +315,7 @@
 \end{frame} 
 
 
-\begin{frame}{IRFs to }
+\begin{frame}{IRFs to GFC}
     \begin{figure}
         \begin{minipage}{.90\textwidth}
             \includegraphics[width=\textwidth]{irfs_combined_gfc_plot.pdf}
@@ -399,9 +399,6 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}{}
-    
-\end{frame}
 
 \begin{frame}
     \heading{Size-Persistence Estimations}
@@ -488,8 +485,8 @@ Size in \cite{KMV2018} is
 \[\mathit{Size}_t=\frac{1}{H}\sum_{h=0}^H \widehat{\left(r-r^*\right)}_{t+h}\]
 \[\widehat{\left(r-r^*\right)}_{t+h}=\exp(\mu_t h)\widehat{\left(r-r^*\right)}_t\exp(\varepsilon_t)\]
 This can be rewritten as 
-\[\log\left(\frac{\widehat{\left(r-r^*\right)}_{t+h}}{\widehat{\left(r-r^*\right)}_{t}}\right)=\mu_t h+\varepsilon_{th}\]
-And persistence is $\mathit{Persistence}=\exp(\hat{\mu}_t)$.
+\[\log\left(\frac{\widehat{\left(r-r^*\right)}_{t+h}}{\widehat{\left(r-r^*\right)}_{t}}\right)=\mu_t h+\varepsilon_{th},\]
+and estimated with OLS. Persistence is then $\mathit{Persistence}=\exp(\hat{\mu}_t)$.
 \end{frame}
 
 
@@ -516,16 +513,31 @@ And persistence is $\mathit{Persistence}=\exp(\hat{\mu}_t)$.
 
 \begin{frame}{Size-Persistence Estimates}
     \begin{figure}[!hpbt]\centering
-        \begin{minipage}{0.6\textwidth}
-          \caption{Estimates of Size and Persistence} 
-          \label{fig:size_persistence_short}
-          \includegraphics[width=\linewidth]{actual_size_persistence_short.pdf}
-        {\begin{flushleft}\tiny \textit{Notes:} \end{flushleft}} 
+        \begin{minipage}{\textwidth}\centering
+            \begin{subfigure}[b]{0.5\textwidth}
+                \caption{Short Model}
+                \label{fig:size_persistence_short}
+                \includegraphics[width=\linewidth]{actual_size_persistence_short.pdf}
+            \end{subfigure}%
+          \begin{subfigure}[b]{0.5\textwidth}
+            \caption{Long Model}
+            \label{fig:size_persistence_long}
+            \includegraphics[width=\linewidth]{actual_size_persistence_long.pdf}
+          \end{subfigure}
+        % {\begin{flushleft}\tiny \textit{Notes:} \end{flushleft}} 
           \end{minipage}
       \end{figure}
     
 \end{frame}
 
+\begin{frame}{Quarters}
+    \begin{figure}[!hpbt]\centering
+        \begin{minipage}{.6\textwidth}\centering
+           \includegraphics[width=\textwidth]{quarter_stats.pdf}
+        % {\begin{flushleft}\tiny \textit{Notes:} \end{flushleft}} 
+          \end{minipage}
+      \end{figure}
+\end{frame}
 
 
 

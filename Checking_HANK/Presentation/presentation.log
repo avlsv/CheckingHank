@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.6.14)  19 JUN 2024 15:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.6.14)  20 JUN 2024 10:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1560,7 +1560,7 @@ File: mt-eus.cfg 2006/07/28 v1.2 microtype config. file: AMS Euler Script (RS)
 [6
 
 ]
-<./../Figures/HAWK_plot_w_heads.pdf, id=116, 426.59375pt x 301.125pt>
+<./../Figures/HAWK_plot_w_heads.pdf, id=112, 426.59375pt x 301.125pt>
 File: ./../Figures/HAWK_plot_w_heads.pdf Graphic file (type pdf)
 <use ./../Figures/HAWK_plot_w_heads.pdf>
 Package pdftex.def Info: ./../Figures/HAWK_plot_w_heads.pdf  used on input line 127.
@@ -1583,12 +1583,16 @@ LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/regular/n' will be
 [8
 
 ]
-<./../Figures/average_cpi_inflation_short.pdf, id=137, 316.18124pt x 223.83624pt>
+
+[9
+
+]
+<./../Figures/average_cpi_inflation_short.pdf, id=138, 316.18124pt x 223.83624pt>
 File: ./../Figures/average_cpi_inflation_short.pdf Graphic file (type pdf)
 <use ./../Figures/average_cpi_inflation_short.pdf>
 Package pdftex.def Info: ./../Figures/average_cpi_inflation_short.pdf  used on input line 191.
 (pdftex.def)             Requested size: 211.25963pt x 149.55965pt.
-<./../Figures/differential_cpi_inflation_short.pdf, id=138, 316.18124pt x 223.83624pt>
+<./../Figures/differential_cpi_inflation_short.pdf, id=139, 316.18124pt x 223.83624pt>
 File: ./../Figures/differential_cpi_inflation_short.pdf Graphic file (type pdf)
 <use ./../Figures/differential_cpi_inflation_short.pdf>
 Package pdftex.def Info: ./../Figures/differential_cpi_inflation_short.pdf  used on input line 191.
@@ -1599,56 +1603,56 @@ LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/regular/it' will be
 (Font)              scaled to size 5.0pt on input line 191.
 
 
-[9
+[10
 
  <./../Figures/average_cpi_inflation_short.pdf> <./../Figures/differential_cpi_inflation_short.pdf>]
-<./../Figures/average_gap_short.pdf, id=175, 316.18124pt x 223.83624pt>
+<./../Figures/average_gap_short.pdf, id=177, 316.18124pt x 223.83624pt>
 File: ./../Figures/average_gap_short.pdf Graphic file (type pdf)
 <use ./../Figures/average_gap_short.pdf>
 Package pdftex.def Info: ./../Figures/average_gap_short.pdf  used on input line 216.
 (pdftex.def)             Requested size: 211.25963pt x 149.55965pt.
-<./../Figures/differential_gap_short.pdf, id=176, 316.18124pt x 223.83624pt>
+<./../Figures/differential_gap_short.pdf, id=178, 316.18124pt x 223.83624pt>
 File: ./../Figures/differential_gap_short.pdf Graphic file (type pdf)
 <use ./../Figures/differential_gap_short.pdf>
 Package pdftex.def Info: ./../Figures/differential_gap_short.pdf  used on input line 216.
 (pdftex.def)             Requested size: 211.25963pt x 149.55965pt.
 
 
-[10
+[11
 
  <./../Figures/average_gap_short.pdf> <./../Figures/differential_gap_short.pdf>]
-<./../Figures/average_deflator_inflation_long.pdf, id=208, 316.18124pt x 223.83624pt>
+<./../Figures/average_deflator_inflation_long.pdf, id=209, 316.18124pt x 223.83624pt>
 File: ./../Figures/average_deflator_inflation_long.pdf Graphic file (type pdf)
 <use ./../Figures/average_deflator_inflation_long.pdf>
 Package pdftex.def Info: ./../Figures/average_deflator_inflation_long.pdf  used on input line 241.
 (pdftex.def)             Requested size: 204.85802pt x 145.02733pt.
-<./../Figures/differential_deflator_inflation_long.pdf, id=209, 316.18124pt x 223.83624pt>
+<./../Figures/differential_deflator_inflation_long.pdf, id=210, 316.18124pt x 223.83624pt>
 File: ./../Figures/differential_deflator_inflation_long.pdf Graphic file (type pdf)
 <use ./../Figures/differential_deflator_inflation_long.pdf>
 Package pdftex.def Info: ./../Figures/differential_deflator_inflation_long.pdf  used on input line 241.
 (pdftex.def)             Requested size: 204.85802pt x 145.02733pt.
 
 
-[11
+[12
 
  <./../Figures/average_deflator_inflation_long.pdf> <./../Figures/differential_deflator_inflation_long.pdf>]
-<./../Figures/average_unemployment_long.pdf, id=239, 316.18124pt x 223.83624pt>
+<./../Figures/average_unemployment_long.pdf, id=240, 316.18124pt x 223.83624pt>
 File: ./../Figures/average_unemployment_long.pdf Graphic file (type pdf)
 <use ./../Figures/average_unemployment_long.pdf>
 Package pdftex.def Info: ./../Figures/average_unemployment_long.pdf  used on input line 270.
 (pdftex.def)             Requested size: 209.1301pt x 148.05342pt.
-<./../Figures/differential_unemployment_long.pdf, id=240, 316.18124pt x 223.83624pt>
+<./../Figures/differential_unemployment_long.pdf, id=241, 316.18124pt x 223.83624pt>
 File: ./../Figures/differential_unemployment_long.pdf Graphic file (type pdf)
 <use ./../Figures/differential_unemployment_long.pdf>
 Package pdftex.def Info: ./../Figures/differential_unemployment_long.pdf  used on input line 270.
 (pdftex.def)             Requested size: 209.1301pt x 148.05342pt.
 
 
-[12
+[13
 
  <./../Figures/average_unemployment_long.pdf> <./../Figures/differential_unemployment_long.pdf>]
 
-[13
+[14
 
 ]
 File: ./../Figures/HAWK_plot_w_heads.pdf Graphic file (type pdf)
@@ -1661,10 +1665,10 @@ Overfull \vbox (5.29172pt too high) detected at line 284
 
 
 
-[14
+[15
 
 ]
-<./../Figures/hawk_by_chair_plot.pdf, id=284, 705.63625pt x 383.4325pt>
+<./../Figures/hawk_by_chair_plot.pdf, id=285, 705.63625pt x 383.4325pt>
 File: ./../Figures/hawk_by_chair_plot.pdf Graphic file (type pdf)
 <use ./../Figures/hawk_by_chair_plot.pdf>
 Package pdftex.def Info: ./../Figures/hawk_by_chair_plot.pdf  used on input line 293.
@@ -1675,14 +1679,14 @@ Overfull \vbox (10.03091pt too high) detected at line 293
 
 
 
-[15
+[16
 
  <./../Figures/hawk_by_chair_plot.pdf>]
 
-[16
+[17
 
 ]
-<./../Figures/irfs_combined_gfc_plot.pdf, id=308, 646.415pt x 351.3125pt>
+<./../Figures/irfs_combined_gfc_plot.pdf, id=309, 646.415pt x 351.3125pt>
 File: ./../Figures/irfs_combined_gfc_plot.pdf Graphic file (type pdf)
 <use ./../Figures/irfs_combined_gfc_plot.pdf>
 Package pdftex.def Info: ./../Figures/irfs_combined_gfc_plot.pdf  used on input line 324.
@@ -1693,10 +1697,10 @@ Overfull \vbox (0.79123pt too high) detected at line 324
 
 
 
-[17
+[18
 
  <./../Figures/irfs_combined_gfc_plot.pdf>]
-<./../Figures/r_squares_plot.pdf, id=322, 373.395pt x 263.98625pt>
+<./../Figures/r_squares_plot.pdf, id=323, 373.395pt x 263.98625pt>
 File: ./../Figures/r_squares_plot.pdf Graphic file (type pdf)
 <use ./../Figures/r_squares_plot.pdf>
 Package pdftex.def Info: ./../Figures/r_squares_plot.pdf  used on input line 332.
@@ -1707,26 +1711,26 @@ Overfull \vbox (3.25931pt too high) detected at line 332
 
 
 
-[18
+[19
 
  <./../Figures/r_squares_plot.pdf>]
 
-[19
+[20
 
 ]
-<./../Figures/predicted_paths_short.pdf, id=339, 397.485pt x 281.05pt>
+<./../Figures/predicted_paths_short.pdf, id=340, 397.485pt x 281.05pt>
 File: ./../Figures/predicted_paths_short.pdf Graphic file (type pdf)
 <use ./../Figures/predicted_paths_short.pdf>
 Package pdftex.def Info: ./../Figures/predicted_paths_short.pdf  used on input line 355.
 (pdftex.def)             Requested size: 209.1301pt x 147.87509pt.
-<./../Figures/predicted_paths_long.pdf, id=340, 397.485pt x 281.05pt>
+<./../Figures/predicted_paths_long.pdf, id=341, 397.485pt x 281.05pt>
 File: ./../Figures/predicted_paths_long.pdf Graphic file (type pdf)
 <use ./../Figures/predicted_paths_long.pdf>
 Package pdftex.def Info: ./../Figures/predicted_paths_long.pdf  used on input line 355.
 (pdftex.def)             Requested size: 209.1301pt x 147.87509pt.
 
 
-[20
+[21
 
  <./../Figures/predicted_paths_short.pdf> <./../Figures/predicted_paths_long.pdf>]
 pdfTeX warning (ext4): destination with the same identifier (name{fig:predicted_paths}) has been already used, duplicate ignored
@@ -1734,22 +1738,22 @@ pdfTeX warning (ext4): destination with the same identifier (name{fig:predicted_
                    \relax 
 l.372 \end{frame}
                  
-<./../Figures/predicted_ffr_paths_short.pdf, id=361, 397.485pt x 281.05pt>
+<./../Figures/predicted_ffr_paths_short.pdf, id=362, 397.485pt x 281.05pt>
 File: ./../Figures/predicted_ffr_paths_short.pdf Graphic file (type pdf)
 <use ./../Figures/predicted_ffr_paths_short.pdf>
 Package pdftex.def Info: ./../Figures/predicted_ffr_paths_short.pdf  used on input line 372.
 (pdftex.def)             Requested size: 209.1301pt x 147.87509pt.
-<./../Figures/predicted_ffr_paths_long.pdf, id=362, 397.485pt x 281.05pt>
+<./../Figures/predicted_ffr_paths_long.pdf, id=363, 397.485pt x 281.05pt>
 File: ./../Figures/predicted_ffr_paths_long.pdf Graphic file (type pdf)
 <use ./../Figures/predicted_ffr_paths_long.pdf>
 Package pdftex.def Info: ./../Figures/predicted_ffr_paths_long.pdf  used on input line 372.
 (pdftex.def)             Requested size: 209.1301pt x 147.87509pt.
 
 
-[21
+[22
 
  <./../Figures/predicted_ffr_paths_short.pdf> <./../Figures/predicted_ffr_paths_long.pdf>]
-<./../Figures/yield_prediction_plot.pdf, id=380, 656.4525pt x 421.575pt>
+<./../Figures/yield_prediction_plot.pdf, id=381, 656.4525pt x 421.575pt>
 File: ./../Figures/yield_prediction_plot.pdf Graphic file (type pdf)
 <use ./../Figures/yield_prediction_plot.pdf>
 Package pdftex.def Info: ./../Figures/yield_prediction_plot.pdf  used on input line 382.
@@ -1760,10 +1764,10 @@ Overfull \vbox (12.50023pt too high) detected at line 382
 
 
 
-[22
+[23
 
  <./../Figures/yield_prediction_plot.pdf>]
-<./../Figures/estimates_of_liquidity_premia_plot.pdf, id=396, 651.43375pt x 383.4325pt>
+<./../Figures/estimates_of_liquidity_premia_plot.pdf, id=397, 651.43375pt x 383.4325pt>
 File: ./../Figures/estimates_of_liquidity_premia_plot.pdf Graphic file (type pdf)
 <use ./../Figures/estimates_of_liquidity_premia_plot.pdf>
 Package pdftex.def Info: ./../Figures/estimates_of_liquidity_premia_plot.pdf  used on input line 391.
@@ -1774,10 +1778,10 @@ Overfull \vbox (12.63017pt too high) detected at line 391
 
 
 
-[23
+[24
 
  <./../Figures/estimates_of_liquidity_premia_plot.pdf>]
-<./../Figures/estimates_of_liquidity_premia_plot_2008.pdf, id=411, 651.43375pt x 383.4325pt>
+<./../Figures/estimates_of_liquidity_premia_plot_2008.pdf, id=412, 651.43375pt x 383.4325pt>
 File: ./../Figures/estimates_of_liquidity_premia_plot_2008.pdf Graphic file (type pdf)
 <use ./../Figures/estimates_of_liquidity_premia_plot_2008.pdf>
 Package pdftex.def Info: ./../Figures/estimates_of_liquidity_premia_plot_2008.pdf  used on input line 400.
@@ -1788,32 +1792,28 @@ Overfull \vbox (12.63017pt too high) detected at line 400
 
 
 
-[24
-
- <./../Figures/estimates_of_liquidity_premia_plot_2008.pdf>]
-
 [25
 
-]
+ <./../Figures/estimates_of_liquidity_premia_plot_2008.pdf>]
 
 [26
 
 ]
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/b/n' aliased to
-(Font)              `T1/SourceSansPro-TLF/bold/n' on input line 417.
+(Font)              `T1/SourceSansPro-TLF/bold/n' on input line 414.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/bold/n' will be
-(Font)              scaled to size 10.0pt on input line 417.
+(Font)              scaled to size 10.0pt on input line 414.
 
 
 [27
 
 ]
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/m/it' aliased to
-(Font)              `T1/SourceSansPro-TLF/regular/it' on input line 443.
+(Font)              `T1/SourceSansPro-TLF/regular/it' on input line 440.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/regular/it' will be
-(Font)              scaled to size 10.0pt on input line 443.
+(Font)              scaled to size 10.0pt on input line 440.
 
-Overfull \vbox (4.57176pt too high) detected at line 443
+Overfull \vbox (4.57176pt too high) detected at line 440
  []
 
 
@@ -1823,11 +1823,11 @@ Overfull \vbox (4.57176pt too high) detected at line 443
 ]
 File: ./../Figures/predicted_paths_short.pdf Graphic file (type pdf)
 <use ./../Figures/predicted_paths_short.pdf>
-Package pdftex.def Info: ./../Figures/predicted_paths_short.pdf  used on input line 483.
+Package pdftex.def Info: ./../Figures/predicted_paths_short.pdf  used on input line 480.
 (pdftex.def)             Requested size: 209.1301pt x 147.87509pt.
 File: ./../Figures/predicted_paths_long.pdf Graphic file (type pdf)
 <use ./../Figures/predicted_paths_long.pdf>
-Package pdftex.def Info: ./../Figures/predicted_paths_long.pdf  used on input line 483.
+Package pdftex.def Info: ./../Figures/predicted_paths_long.pdf  used on input line 480.
 (pdftex.def)             Requested size: 209.1301pt x 147.87509pt.
 
 
@@ -1840,18 +1840,18 @@ Package pdftex.def Info: ./../Figures/predicted_paths_long.pdf  used on input li
 ]
 
 pdfTeX warning: pdflatex (file ./../Figures/size_plot.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<./../Figures/size_plot.pdf, id=465, 331.2375pt x 233.87375pt>
+<./../Figures/size_plot.pdf, id=461, 331.2375pt x 233.87375pt>
 File: ./../Figures/size_plot.pdf Graphic file (type pdf)
 <use ./../Figures/size_plot.pdf>
-Package pdftex.def Info: ./../Figures/size_plot.pdf  used on input line 513.
+Package pdftex.def Info: ./../Figures/size_plot.pdf  used on input line 510.
 (pdftex.def)             Requested size: 209.1301pt x 147.65883pt.
 
 
 pdfTeX warning: pdflatex (file ./../Figures/persistence_plot.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<./../Figures/persistence_plot.pdf, id=466, 331.2375pt x 233.87375pt>
+<./../Figures/persistence_plot.pdf, id=462, 331.2375pt x 233.87375pt>
 File: ./../Figures/persistence_plot.pdf Graphic file (type pdf)
 <use ./../Figures/persistence_plot.pdf>
-Package pdftex.def Info: ./../Figures/persistence_plot.pdf  used on input line 513.
+Package pdftex.def Info: ./../Figures/persistence_plot.pdf  used on input line 510.
 (pdftex.def)             Requested size: 209.1301pt x 147.65883pt.
 
 
@@ -1861,99 +1861,114 @@ Package pdftex.def Info: ./../Figures/persistence_plot.pdf  used on input line 5
 
 pdfTeX warning: pdflatex (file ./../Figures/persistence_plot.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 >]
-<./../Figures/actual_size_persistence_short.pdf, id=493, 497.86pt x 351.3125pt>
+<./../Figures/actual_size_persistence_short.pdf, id=489, 497.86pt x 351.3125pt>
 File: ./../Figures/actual_size_persistence_short.pdf Graphic file (type pdf)
 <use ./../Figures/actual_size_persistence_short.pdf>
-Package pdftex.def Info: ./../Figures/actual_size_persistence_short.pdf  used on input line 527.
-(pdftex.def)             Requested size: 256.07741pt x 180.70012pt.
+Package pdftex.def Info: ./../Figures/actual_size_persistence_short.pdf  used on input line 531.
+(pdftex.def)             Requested size: 213.39568pt x 150.58434pt.
+<./../Figures/actual_size_persistence_long.pdf, id=490, 497.86pt x 351.3125pt>
+File: ./../Figures/actual_size_persistence_long.pdf Graphic file (type pdf)
+<use ./../Figures/actual_size_persistence_long.pdf>
+Package pdftex.def Info: ./../Figures/actual_size_persistence_long.pdf  used on input line 531.
+(pdftex.def)             Requested size: 213.39568pt x 150.58434pt.
 
 
 [32
 
- <./../Figures/actual_size_persistence_short.pdf>]
+ <./../Figures/actual_size_persistence_short.pdf> <./../Figures/actual_size_persistence_long.pdf>]
+<./../Figures/quarter_stats.pdf, id=512, 441.65pt x 312.16624pt>
+File: ./../Figures/quarter_stats.pdf Graphic file (type pdf)
+<use ./../Figures/quarter_stats.pdf>
+Package pdftex.def Info: ./../Figures/quarter_stats.pdf  used on input line 540.
+(pdftex.def)             Requested size: 256.07741pt x 181.00891pt.
+
 
 [33
 
-]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\translate ' on input line 554.
-
-
+ <./../Figures/quarter_stats.pdf>]
 
 [34
 
 ]
-<./../Figures/rate_plot.pdf, id=527, 458.71375pt x 324.21124pt>
-File: ./../Figures/rate_plot.pdf Graphic file (type pdf)
-<use ./../Figures/rate_plot.pdf>
-Package pdftex.def Info: ./../Figures/rate_plot.pdf  used on input line 572.
-(pdftex.def)             Requested size: 298.75264pt x 211.16025pt.
 
-Overfull \vbox (3.19403pt too high) detected at line 572
- []
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\translate ' on input line 566.
 
 
 
 [35
 
- <./../Figures/rate_plot.pdf>]
-<./../Figures/expected_inflation_plot.pdf, id=542, 458.71375pt x 324.21124pt>
-File: ./../Figures/expected_inflation_plot.pdf Graphic file (type pdf)
-<use ./../Figures/expected_inflation_plot.pdf>
-Package pdftex.def Info: ./../Figures/expected_inflation_plot.pdf  used on input line 580.
+]
+<./../Figures/rate_plot.pdf, id=544, 458.71375pt x 324.21124pt>
+File: ./../Figures/rate_plot.pdf Graphic file (type pdf)
+<use ./../Figures/rate_plot.pdf>
+Package pdftex.def Info: ./../Figures/rate_plot.pdf  used on input line 584.
 (pdftex.def)             Requested size: 298.75264pt x 211.16025pt.
 
-Overfull \vbox (3.19403pt too high) detected at line 580
+Overfull \vbox (3.19403pt too high) detected at line 584
  []
 
 
 
 [36
 
- <./../Figures/expected_inflation_plot.pdf>]
-<./../Figures/expected_unemployment_plot.pdf, id=556, 458.71375pt x 324.21124pt>
-File: ./../Figures/expected_unemployment_plot.pdf Graphic file (type pdf)
-<use ./../Figures/expected_unemployment_plot.pdf>
-Package pdftex.def Info: ./../Figures/expected_unemployment_plot.pdf  used on input line 588.
+ <./../Figures/rate_plot.pdf>]
+<./../Figures/expected_inflation_plot.pdf, id=559, 458.71375pt x 324.21124pt>
+File: ./../Figures/expected_inflation_plot.pdf Graphic file (type pdf)
+<use ./../Figures/expected_inflation_plot.pdf>
+Package pdftex.def Info: ./../Figures/expected_inflation_plot.pdf  used on input line 592.
 (pdftex.def)             Requested size: 298.75264pt x 211.16025pt.
 
-Overfull \vbox (3.19403pt too high) detected at line 588
+Overfull \vbox (3.19403pt too high) detected at line 592
  []
 
 
 
 [37
 
- <./../Figures/expected_unemployment_plot.pdf>]
-<./../Figures/expected_gap_plot.pdf, id=572, 458.71375pt x 324.21124pt>
-File: ./../Figures/expected_gap_plot.pdf Graphic file (type pdf)
-<use ./../Figures/expected_gap_plot.pdf>
-Package pdftex.def Info: ./../Figures/expected_gap_plot.pdf  used on input line 599.
-(pdftex.def)             Requested size: 256.07741pt x 180.99803pt.
+ <./../Figures/expected_inflation_plot.pdf>]
+<./../Figures/expected_unemployment_plot.pdf, id=575, 458.71375pt x 324.21124pt>
+File: ./../Figures/expected_unemployment_plot.pdf Graphic file (type pdf)
+<use ./../Figures/expected_unemployment_plot.pdf>
+Package pdftex.def Info: ./../Figures/expected_unemployment_plot.pdf  used on input line 600.
+(pdftex.def)             Requested size: 298.75264pt x 211.16025pt.
+
+Overfull \vbox (3.19403pt too high) detected at line 600
+ []
+
 
 
 [38
 
- <./../Figures/expected_gap_plot.pdf>]
-LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/m/sc' aliased to
-(Font)              `T1/SourceSansPro-TLF/regular/sc' on input line 604.
-LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/regular/sc' will be
-(Font)              scaled to size 10.0pt on input line 604.
-LaTeX Font Info:    Font shape `T1/SourceCodePro-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 604.
+ <./../Figures/expected_unemployment_plot.pdf>]
+<./../Figures/expected_gap_plot.pdf, id=589, 458.71375pt x 324.21124pt>
+File: ./../Figures/expected_gap_plot.pdf Graphic file (type pdf)
+<use ./../Figures/expected_gap_plot.pdf>
+Package pdftex.def Info: ./../Figures/expected_gap_plot.pdf  used on input line 611.
+(pdftex.def)             Requested size: 256.07741pt x 180.99803pt.
 
 
 [39
 
- </usr/local/texlive/2024/texmf-dist/tex/latex/beamer/beamericonarticle.pdf>]
+ <./../Figures/expected_gap_plot.pdf>]
+LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/m/sc' aliased to
+(Font)              `T1/SourceSansPro-TLF/regular/sc' on input line 616.
+LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/regular/sc' will be
+(Font)              scaled to size 10.0pt on input line 616.
+LaTeX Font Info:    Font shape `T1/SourceCodePro-TLF/m/n' will be
+(Font)              scaled to size 10.0pt on input line 616.
+
 
 [40
+
+ </usr/local/texlive/2024/texmf-dist/tex/latex/beamer/beamericonarticle.pdf>]
+
+[41
 
 
 ]
 
-[41
+[42
 
 
 ]
@@ -1976,24 +1991,24 @@ L3 programming layer <2024-05-27>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `presentation.out' has not changed.
-(rerunfilecheck)             Checksum: EE0B3A7E2E5E45ECEA1ED8DEE774C6DA;560.
+(rerunfilecheck)             Checksum: 80C1160EAF1ED0A50A7C75AEBD293A2B;482.
 Package logreq Info: Writing requests to 'presentation.run.xml'.
 \openout1 = `presentation.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 36936 strings out of 473600
- 738122 string characters out of 5728708
+ 36965 strings out of 473600
+ 739279 string characters out of 5728708
  1942905 words of memory out of 5000000
- 58744 multiletter control sequences out of 15000+600000
- 766232 words of font info for 265 fonts, out of 8000000 for 9000
+ 58766 multiletter control sequences out of 15000+600000
+ 766544 words of font info for 267 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,11n,131p,1231b,1603s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/adobe/sourcecodepro/SourceCodePro-Regular.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/adobe/sourcesanspro/SourceSansPro-Bold.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/adobe/sourcesanspro/SourceSansPro-It.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/adobe/sourcesanspro/SourceSansPro-Regular.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/euler/eusm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on presentation.pdf (41 pages, 839791 bytes).
+Output written on presentation.pdf (42 pages, 857973 bytes).
 PDF statistics:
- 742 PDF objects out of 1000 (max. 8388607)
- 570 compressed objects within 6 object streams
- 126 named destinations out of 1000 (max. 500000)
- 107811 words of extra memory for PDF output out of 128383 (max. 10000000)
+ 760 PDF objects out of 1000 (max. 8388607)
+ 582 compressed objects within 6 object streams
+ 130 named destinations out of 1000 (max. 500000)
+ 107813 words of extra memory for PDF output out of 128383 (max. 10000000)
 

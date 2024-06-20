@@ -1,3 +1,2 @@
-\beamer@sectionintoc {1}{Results}{9}{0}{1}
-\beamer@sectionintoc {2}{Size-Persistence Estimates}{28}{0}{2}
-\beamer@sectionintoc {3}{Appendix. Data}{34}{1}{3}
+\beamer@sectionintoc {1}{Size-Persistence Estimates}{28}{0}{1}
+\beamer@sectionintoc {2}{Appendix. Data}{35}{1}{2}
