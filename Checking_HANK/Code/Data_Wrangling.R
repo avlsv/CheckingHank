@@ -33,7 +33,7 @@ for (Package in required_Packages_Install) {
 ## HAWK and HAWK_IV data from Hack, Isterfi, Meier (2024) ------
 HAWK <- full_join(
   read_csv("Data/Initial_Data/HAWK.csv", col_names = F),
-  read_csv("Data/Initial_Data/HAWKIV.csv", col_names = F)
+  read_csv("Data/Initial_Data/HAWKIV.csv", col_names = F), by = join_by(X1)
 ) 
 
 names(HAWK) <- c("point_date", "HAWK", "HAWK_IV")
@@ -237,6 +237,7 @@ nairu_expected_ts <- nairu_expected_tbl |> as_tsibble()
 ### gPCPI Greenbook projections for Q/Q headline CPI inflation
 >>>>>>> Monetary-Policy-Rules
 
+
 expected_cpi_inflation_raw <-
   read_xlsx("data/Initial_Data/Tealbook Row Format.xlsx", sheet = "gPCPI") |>
   select(DATE, gPCPIF1, gPCPIF2)  |>
@@ -347,6 +348,10 @@ expected_gap_ts <-
 
 
 
+fedhead_quarterly_ts <- 
+  read_csv("data/Intermediate_Data/fedhead_quarterly.csv")|> 
+  mutate(year_quarter=yearquarter(year_quarter))|> as_tsibble()
+
 # Final Dataset Compilation ------
 
 full_dataset_ts <-
@@ -359,22 +364,21 @@ full_dataset_ts <-
   full_join(expected_cpi_inflation_ts, by = "year_quarter") |>
   full_join(expected_gap_ts, by = "year_quarter") |>
   full_join(nairu_expected_ts, by = "year_quarter") |>
+  full_join(fedhead_quarterly_ts,  by = "year_quarter") |>
   filter_index("1968 Q1" ~ "2020 Q4") |>
   mutate(
     row_number = row_number(),
     dR = fed_funds_rate - r_star,
     demeaned_HAWK = HAWK - mean(HAWK, na.rm = T),
     demeaned_HAWK_IV = HAWK_IV - mean(HAWK_IV, na.rm = T),
-    demeaned_expected_inflation = expected_inflation - mean(expected_inflation, na.rm = T),
-    demeaned_expected_unemployment = expected_unemployment - mean(expected_unemployment, na.rm = T),
     stance = dR >= 0,
+    expected_unemployment_gap = expected_unemployment - expected_nairu,
     log_consumption = log(consumption),
     delta_log_consumption = difference(log_consumption),
     delta_expected_inflation = difference(expected_inflation),
-    delta_expected_unemployment = difference(expected_unemployment),
-    delta_cpi_expected_inflation = difference(expected_cpi_inflation),
+    delta_expected_unemployment_gap = difference(expected_unemployment_gap),
+    delta_expected_cpi_inflation = difference(expected_cpi_inflation),
     delta_expected_gap = difference(expected_gap),
-    expected_unemployment_gap = expected_unemployment - expected_nairu
   )
 
 
