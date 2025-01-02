@@ -32,7 +32,7 @@ for (Package in required_Packages_Install) {
 
 ## HAWK and HAWK_IV data from Hack, Isterfi, Meier (2024) ------
 HAWK <- full_join(
-  read_csv("Data/Initial_Data/HAWK.csv", col_names = F),
+  read_csv("Data/I,nitial_Data/HAWK.csv", col_names = F),
   read_csv("Data/Initial_Data/HAWKIV.csv", col_names = F), by = join_by(X1)
 ) 
 
@@ -387,9 +387,13 @@ full_dataset_tbl <- full_dataset_ts |> as_tibble()
 
 
 
-write.csv(as_tibble(expected_gap_ts), file = "data/Intermediate_Data/expected_gap.csv")
-write.csv(as_tibble(nairu_expected_ts), file = "data/Intermediate_Data/expected_nairu.csv")
-write.csv(as_tibble(HAWK_ts), file = "data/Intermediate_Data/HAWK_Index.csv")
+write.csv(as_tibble(expected_gap_ts), 
+          file = "data/Intermediate_Data/expected_gap.csv")
+write.csv(as_tibble(nairu_expected_ts), 
+          file = "data/Intermediate_Data/expected_nairu.csv")
+write.csv(as_tibble(HAWK_ts), 
+          file = "data/Intermediate_Data/HAWK_Index.csv")
 
-write.csv(full_dataset_tbl, file = "data/Intermediate_Data/full_dataset.csv")
+write.csv(full_dataset_tbl, 
+          file = "data/Intermediate_Data/full_dataset.csv")
 
