@@ -1,6 +1,7 @@
 \usepackage[utf8]{inputenc}
 % \usepackage[english, russian]{babel}
-\usepackage[colorlinks=true,urlcolor=darkgray,citecolor=darkgray,linkcolor=darkgray,bookmarks=true]{hyperref}
+\usepackage[colorlinks=true,urlcolor=darkgray,citecolor=darkgray,linkcolor=darkgray,bookmarks=true, backref=page]{hyperref}
+\urlstyle{rm}
 % \usepackage{ccaption}
 \usepackage{authblk}
 \usepackage{indentfirst}
@@ -79,11 +80,18 @@ every node/.style={color=black},
 % \addbibresource{references.bib}
 
 \def\references{
-    \bibliography{misc/references.bib}
-    \bibliographystyle{misc/econ}
+    \bibliography{../misc/references.bib}
+    \bibliographystyle{../misc/econometrica}
 }
 
-
+\renewcommand\backreftwosep{, }
+ \renewcommand\backrefsep{, }
+ \renewcommand*{\backrefalt}[4]{%
+    \ifcase #1%
+     \or (see page:~#2)%
+     \else (see pages:~#2)%
+    \fi%
+    }
 
 \usepackage{parskip}
 

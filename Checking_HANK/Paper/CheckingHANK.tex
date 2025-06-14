@@ -1,6 +1,7 @@
 \documentclass[11pt]{article}
 \input{preamble.tex}
 
+
 \title{Systematic Monetary Policy Approach to Taylor Rule}
 
 \author{Alexander I. Vlasov\thanks{Email: avlasov@nes.ru. For supplementary materials, code and datasets, see the repository on \href{https://github.com/alvlsv/CheckingHank}{github.com}. I thank Valery Charnavoki and Konstantin Styrin for helpful comments.}}
@@ -487,7 +488,7 @@ Deviating from \citet{KMV2018}, I define the size as a mean of predicted rate pa
 The persistence can be calculated by fitting the model 
 \[\left(r-r^*\right)_h=\exp(\mu h)\left(r-r^*\right)_0\exp(\varepsilon_h),\]
 where $h$ is the projection horizon $h=0,\dots, 12$. 
-The persistence is then equal to $\exp(\mu)$.\footnote{Note that in HANK model by \citet{KMV2018} the $\mu$ was assumed to be negative and $r_0-r_0^*$ was assumed to be positive, that is \citet{KMV2018} was focused on contractionary shock of $r_0$ which follow the $\left(r-r^*\right)_t=\exp(\mu t)\left(r-r^*\right)_0$ process.} Note that it can be rewritten as
+The persistence is then equal to $\exp(\mu)$.\footnote{Note that in HANK model by \citet{KMV2018} the $\mu$ was assumed to be negative and $r_0-r_0^*$ was assumed to be positive, that is \citet{KMV2018} was focused on contractionary shock of $r_0$ which follow the $\left(r-r^*\right)_t=\exp(\mu t)\left(r-r^*\right)$ process.} Note that it can be rewritten as
 \[\log\left(\frac{\left(r-r^*\right)_h}{\left(r-r^*\right)_{0}}\right)=\mu h+\varepsilon_h,\]
 which can be estimated with OLS for each projection, and then the desired estimator of $\exp(\mu)$ is $\exp(\hat \mu)$. 
 
@@ -582,8 +583,9 @@ Additionally, based on the in-sample predictions of the monetary policy paths, I
 I find that for most of the periods $(\approx 70\%)$ in 1988 Q3 to 2018 Q4 the persistence is smaller than 1, which mean that in about 70\% of quarters the model predicts the normalization of the monetary policy.
 
 
-\bibliography{../misc/references.bib}
-\bibliographystyle{../misc/econ}
+
+
+\references
 
 
 

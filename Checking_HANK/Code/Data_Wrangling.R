@@ -32,7 +32,7 @@ for (Package in required_Packages_Install) {
 
 ## HAWK and HAWK_IV data from Hack, Isterfi, Meier (2024) ------
 HAWK <- full_join(
-  read_csv("Data/I,nitial_Data/HAWK.csv", col_names = F),
+  read_csv("Data/Initial_Data/HAWK.csv", col_names = F),
   read_csv("Data/Initial_Data/HAWKIV.csv", col_names = F), by = join_by(X1)
 ) 
 
