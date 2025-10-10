@@ -1,3 +1,3 @@
-# CheckingHank
+# CheckingHANK
 
-This is a project dedicated to the empirical verification of size-persistence tradeoff.
+This paper is dedicated to identification of systematic monetary policy
